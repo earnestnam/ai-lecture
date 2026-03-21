@@ -1,0 +1,36 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#FFF7ED" rx="12"/>
+  <!-- title -->
+  <text x="400" y="38" text-anchor="middle" font-size="18" font-weight="700" fill="#C2410C">AI 도입 전후 업무 시간 비교</text>
+  <!-- bars group -->
+  <!-- Email -->
+  <rect x="60" y="60" width="30" height="160" fill="#FCA5A5" rx="4"/>
+  <rect x="100" y="200" width="30" height="20" fill="#E85D04" rx="4"/>
+  <text x="75" y="240" text-anchor="middle" font-size="12" fill="#374151">이메일</text>
+  <text x="75" y="255" text-anchor="middle" font-size="11" fill="#6B7280">20분→3분</text>
+  <!-- Meeting -->
+  <rect x="170" y="40" width="30" height="180" fill="#FCA5A5" rx="4"/>
+  <rect x="210" y="185" width="30" height="35" fill="#E85D04" rx="4"/>
+  <text x="185" y="240" text-anchor="middle" font-size="12" fill="#374151">회의록</text>
+  <text x="185" y="255" text-anchor="middle" font-size="11" fill="#6B7280">30분→5분</text>
+  <!-- Report -->
+  <rect x="280" y="20" width="30" height="200" fill="#FCA5A5" rx="4"/>
+  <rect x="320" y="195" width="30" height="25" fill="#E85D04" rx="4"/>
+  <text x="295" y="240" text-anchor="middle" font-size="12" fill="#374151">보고서</text>
+  <text x="295" y="255" text-anchor="middle" font-size="11" fill="#6B7280">2시간→25분</text>
+  <!-- legend -->
+  <rect x="60" y="275" width="14" height="14" fill="#FCA5A5" rx="3"/>
+  <text x="80" y="286" font-size="13" fill="#374151">AI 전</text>
+  <rect x="150" y="275" width="14" height="14" fill="#E85D04" rx="3"/>
+  <text x="170" y="286" font-size="13" fill="#374151">AI 후</text>
+  <!-- right panel: tips -->
+  <rect x="430" y="55" width="330" height="280" fill="white" rx="10" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="595" y="85" text-anchor="middle" font-size="15" font-weight="700" fill="#E85D04">평균 시간 단축률</text>
+  <text x="595" y="130" text-anchor="middle" font-size="52" font-weight="800" fill="#C2410C">80%</text>
+  <text x="595" y="155" text-anchor="middle" font-size="13" fill="#6B7280">글쓰기 업무 기준</text>
+  <line x1="460" y1="175" x2="740" y2="175" stroke="#FDBA74" stroke-width="1"/>
+  <text x="595" y="200" text-anchor="middle" font-size="13" fill="#374151">절약한 시간을</text>
+  <text x="595" y="220" text-anchor="middle" font-size="13" fill="#374151">더 창의적인 업무에 투자하세요</text>
+  <text x="595" y="260" text-anchor="middle" font-size="22">🚀 💡 ✨</text>
+  <text x="595" y="300" text-anchor="middle" font-size="12" fill="#9CA3AF">* 사용자 경험 기반 추정치</text>
+</svg>

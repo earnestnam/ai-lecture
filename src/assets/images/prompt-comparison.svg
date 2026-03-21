@@ -1,0 +1,40 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#F3F4F6" rx="12"/>
+  <text x="400" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">프롬프트 비교: 나쁜 예 vs 좋은 예</text>
+  <!-- Bad prompt -->
+  <rect x="30" y="50" width="350" height="320" fill="white" rx="10" stroke="#FCA5A5" stroke-width="2"/>
+  <rect x="30" y="50" width="350" height="40" fill="#FEE2E2" rx="10"/>
+  <rect x="30" y="78" width="350" height="12" fill="#FEE2E2"/>
+  <text x="205" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#DC2626">❌ 나쁜 프롬프트</text>
+  <rect x="50" y="108" width="310" height="50" fill="#FFF5F5" rx="6" stroke="#FECACA" stroke-width="1"/>
+  <text x="70" y="128" font-size="12" fill="#374151">보고서 써줘</text>
+  <text x="70" y="148" font-size="11" fill="#9CA3AF">→ 어떤 보고서? 주제, 형식, 분량 불명확</text>
+  <rect x="50" y="172" width="310" height="50" fill="#FFF5F5" rx="6" stroke="#FECACA" stroke-width="1"/>
+  <text x="70" y="192" font-size="12" fill="#374151">이메일 작성해줘</text>
+  <text x="70" y="212" font-size="11" fill="#9CA3AF">→ 누구에게? 어떤 내용? 어떤 톤?</text>
+  <rect x="50" y="236" width="310" height="50" fill="#FFF5F5" rx="6" stroke="#FECACA" stroke-width="1"/>
+  <text x="70" y="256" font-size="12" fill="#374151">분석해줘</text>
+  <text x="70" y="276" font-size="11" fill="#9CA3AF">→ 무엇을? 어떤 관점에서?</text>
+  <rect x="50" y="300" width="310" height="55" fill="#FEE2E2" rx="6"/>
+  <text x="205" y="322" text-anchor="middle" font-size="11" fill="#DC2626">AI가 추측해서 답변 → 엉뚱한 결과</text>
+  <text x="205" y="342" text-anchor="middle" font-size="11" fill="#DC2626">재시도, 수정 반복 → 시간 낭비</text>
+  <!-- Good prompt -->
+  <rect x="420" y="50" width="350" height="320" fill="white" rx="10" stroke="#6EE7B7" stroke-width="2"/>
+  <rect x="420" y="50" width="350" height="40" fill="#D1FAE5" rx="10"/>
+  <rect x="420" y="78" width="350" height="12" fill="#D1FAE5"/>
+  <text x="595" y="75" text-anchor="middle" font-size="13" font-weight="700" fill="#059669">✅ 좋은 프롬프트</text>
+  <rect x="440" y="108" width="310" height="70" fill="#F0FDF4" rx="6" stroke="#BBF7D0" stroke-width="1"/>
+  <text x="460" y="128" font-size="11" fill="#374151" font-weight="600">역할: 마케팅 전문가로서</text>
+  <text x="460" y="145" font-size="11" fill="#374151">맥락: 신제품 출시 앞둔 중소기업</text>
+  <text x="460" y="162" font-size="11" fill="#374151">요청: SNS 홍보 문구 3가지 작성</text>
+  <text x="460" y="180" font-size="11" fill="#374151">형식: 각 50자 이내, 이모지 포함</text>
+  <rect x="440" y="192" width="310" height="60" fill="#F0FDF4" rx="6" stroke="#BBF7D0" stroke-width="1"/>
+  <text x="460" y="212" font-size="11" fill="#374151" font-weight="600">대상: 30대 직장인 여성</text>
+  <text x="460" y="229" font-size="11" fill="#374151">제품: 건강기능식품 '에너지업'</text>
+  <text x="460" y="246" font-size="11" fill="#374151">톤: 친근하고 활기차게</text>
+  <rect x="440" y="265" width="310" height="90" fill="#D1FAE5" rx="6"/>
+  <text x="595" y="287" text-anchor="middle" font-size="11" fill="#059669" font-weight="600">✓ 명확한 역할 부여</text>
+  <text x="595" y="307" text-anchor="middle" font-size="11" fill="#059669">✓ 충분한 맥락 제공</text>
+  <text x="595" y="327" text-anchor="middle" font-size="11" fill="#059669">✓ 구체적인 형식 지정</text>
+  <text x="595" y="347" text-anchor="middle" font-size="11" fill="#059669">→ 원하는 결과 즉시 획득</text>
+</svg>

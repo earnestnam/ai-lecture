@@ -1,0 +1,55 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#F3F4F6" rx="12"/>
+  <text x="400" y="32" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">AI와 함께하는 하루 업무 루틴</text>
+  <!-- Timeline line -->
+  <line x1="80" y1="200" x2="720" y2="200" stroke="#E5E7EB" stroke-width="3"/>
+  <!-- Morning -->
+  <circle cx="150" cy="200" r="30" fill="#FFF7ED" stroke="#E85D04" stroke-width="2"/>
+  <text x="150" y="196" text-anchor="middle" font-size="18">☀️</text>
+  <text x="150" y="211" text-anchor="middle" font-size="9" fill="#E85D04" font-weight="700">오전</text>
+  <rect x="90" y="58" width="120" height="105" fill="white" rx="8" stroke="#FDBA74" stroke-width="1"/>
+  <text x="150" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">업무 시작</text>
+  <text x="150" y="98" text-anchor="middle" font-size="10" fill="#6B7280">오늘 할 일 목록을</text>
+  <text x="150" y="114" text-anchor="middle" font-size="10" fill="#6B7280">Claude에게 붙여넣기</text>
+  <text x="150" y="134" text-anchor="middle" font-size="10" fill="#E85D04">→ 우선순위 정리</text>
+  <text x="150" y="150" text-anchor="middle" font-size="10" fill="#E85D04">→ 시간 배분 제안</text>
+  <line x1="150" y1="163" x2="150" y2="170" stroke="#FDBA74" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Midday -->
+  <circle cx="340" cy="200" r="30" fill="#FFF7ED" stroke="#E85D04" stroke-width="2"/>
+  <text x="340" y="196" text-anchor="middle" font-size="18">💼</text>
+  <text x="340" y="211" text-anchor="middle" font-size="9" fill="#E85D04" font-weight="700">업무중</text>
+  <rect x="280" y="240" width="120" height="105" fill="white" rx="8" stroke="#FDBA74" stroke-width="1"/>
+  <text x="340" y="262" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">작업 보조</text>
+  <text x="340" y="280" text-anchor="middle" font-size="10" fill="#6B7280">이메일 초안 작성</text>
+  <text x="340" y="296" text-anchor="middle" font-size="10" fill="#6B7280">보고서 요약·정리</text>
+  <text x="340" y="316" text-anchor="middle" font-size="10" fill="#E85D04">→ 초안 10분 완성</text>
+  <text x="340" y="332" text-anchor="middle" font-size="10" fill="#E85D04">→ 내가 검토·수정</text>
+  <line x1="340" y1="230" x2="340" y2="237" stroke="#FDBA74" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Afternoon -->
+  <circle cx="530" cy="200" r="30" fill="#FFF7ED" stroke="#E85D04" stroke-width="2"/>
+  <text x="530" y="196" text-anchor="middle" font-size="18">📊</text>
+  <text x="530" y="211" text-anchor="middle" font-size="9" fill="#E85D04" font-weight="700">오후</text>
+  <rect x="470" y="58" width="120" height="105" fill="white" rx="8" stroke="#FDBA74" stroke-width="1"/>
+  <text x="530" y="80" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">분석·리서치</text>
+  <text x="530" y="98" text-anchor="middle" font-size="10" fill="#6B7280">자료 붙여넣고</text>
+  <text x="530" y="114" text-anchor="middle" font-size="10" fill="#6B7280">핵심 분석 요청</text>
+  <text x="530" y="134" text-anchor="middle" font-size="10" fill="#E85D04">→ 인사이트 추출</text>
+  <text x="530" y="150" text-anchor="middle" font-size="10" fill="#E85D04">→ 시각화 아이디어</text>
+  <line x1="530" y1="163" x2="530" y2="170" stroke="#FDBA74" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- End of day -->
+  <circle cx="680" cy="200" r="30" fill="#FFF7ED" stroke="#E85D04" stroke-width="2"/>
+  <text x="680" y="196" text-anchor="middle" font-size="18">🌙</text>
+  <text x="680" y="211" text-anchor="middle" font-size="9" fill="#E85D04" font-weight="700">퇴근 전</text>
+  <rect x="620" y="240" width="120" height="105" fill="white" rx="8" stroke="#FDBA74" stroke-width="1"/>
+  <text x="680" y="262" text-anchor="middle" font-size="11" font-weight="700" fill="#92400E">정리·계획</text>
+  <text x="680" y="280" text-anchor="middle" font-size="10" fill="#6B7280">오늘 작업 정리</text>
+  <text x="680" y="296" text-anchor="middle" font-size="10" fill="#6B7280">내일 준비사항</text>
+  <text x="680" y="316" text-anchor="middle" font-size="10" fill="#E85D04">→ 5분 마감 루틴</text>
+  <text x="680" y="332" text-anchor="middle" font-size="10" fill="#E85D04">→ 퇴근 빨라짐!</text>
+  <line x1="680" y1="230" x2="680" y2="237" stroke="#FDBA74" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <!-- Arrow indicators on timeline -->
+  <polygon points="150,168 145,178 155,178" fill="#FDBA74"/>
+  <polygon points="340,232 335,222 345,222" fill="#FDBA74"/>
+  <polygon points="530,168 525,178 535,178" fill="#FDBA74"/>
+  <polygon points="680,232 675,222 685,222" fill="#FDBA74"/>
+</svg>

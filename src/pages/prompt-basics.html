@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="좋은 프롬프트의 5가지 요소와 실무 예시를 배웁니다.">
+  <title>프롬프트 잘 쓰는 법 — AI 활용 강의</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>프롬프트 잘 쓰는 법</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 25분</span>
+          <span class="badge badge--difficulty badge--초급">초급</span>
+        </div>
+        <p class="page-description">좋은 프롬프트의 5가지 요소와 업무별 실전 예시를 배워봐요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>✍️ "AI가 이상한 답을 줘요" — 보통 프롬프트 문제입니다</h2>
+        <p>
+          혹시 AI에게 뭔가를 부탁했는데 "이게 내가 원하는 게 아닌데…"라는 경험 해보셨나요?
+          그럴 때 대부분은 AI의 문제가 아니라, <strong>업무 지시서(프롬프트)를 더 구체적으로 쓰면 해결</strong>됩니다.
+        </p>
+        <p>
+          생각해보면 직원에게 업무를 지시할 때도 마찬가지예요.
+          "보고서 써줘"보다 "이번 분기 매출 현황을 임원 보고용으로 1페이지 요약해줘"가 훨씬 좋은 결과를 냅니다.
+          AI도 똑같아요.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 핵심 원칙:</strong> 프롬프트는 AI에게 보내는 업무 지시서입니다. 구체적일수록 원하는 결과를 얻을 가능성이 높아져요.
+        </div>
+
+        <h2>📋 좋은 프롬프트의 5가지 요소</h2>
+        <p>꼭 5가지를 다 넣을 필요는 없어요. 하지만 원하는 결과가 안 나올 때 이 요소들을 하나씩 추가해보세요.</p>
+
+        <div style="counter-reset: step; margin: 1.5rem 0;">
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.5rem; background:var(--color-bg-alt); border-radius:8px; padding:1.25rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</div>
+            <div>
+              <h3 style="margin:0 0 0.5rem;">역할 (Role) — "너는 ~야"</h3>
+              <p style="margin:0; font-size:0.9375rem;">AI에게 어떤 전문가처럼 답해달라고 역할을 부여해요.</p>
+              <p style="margin:0.5rem 0 0; font-size:0.875rem; color:var(--color-text-muted);">예: "너는 10년 경력의 마케터야", "경험 많은 HR 담당자처럼 답해줘"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.5rem; background:var(--color-bg-alt); border-radius:8px; padding:1.25rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</div>
+            <div>
+              <h3 style="margin:0 0 0.5rem;">맥락 (Context) — "상황은 이래"</h3>
+              <p style="margin:0; font-size:0.9375rem;">관련 배경 정보를 제공해요. AI는 내 상황을 모르니까요.</p>
+              <p style="margin:0.5rem 0 0; font-size:0.875rem; color:var(--color-text-muted);">예: "이번 달 영업 실적이 목표의 80%야. 팀장에게 보고해야 해."</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.5rem; background:var(--color-bg-alt); border-radius:8px; padding:1.25rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">3</div>
+            <div>
+              <h3 style="margin:0 0 0.5rem;">과제 (Task) — "이걸 해줘"</h3>
+              <p style="margin:0; font-size:0.9375rem;">원하는 결과물을 명확히 말해요. 동사로 시작하면 좋아요.</p>
+              <p style="margin:0.5rem 0 0; font-size:0.875rem; color:var(--color-text-muted);">예: "보고 이메일을 써줘", "3가지 개선 방안을 제안해줘", "표로 정리해줘"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.5rem; background:var(--color-bg-alt); border-radius:8px; padding:1.25rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">4</div>
+            <div>
+              <h3 style="margin:0 0 0.5rem;">형식 (Format) — "이렇게 보여줘"</h3>
+              <p style="margin:0; font-size:0.9375rem;">결과물의 길이, 구조, 형식을 지정해요.</p>
+              <p style="margin:0.5rem 0 0; font-size:0.875rem; color:var(--color-text-muted);">예: "500자 이내로", "글머리 기호로", "3단락으로", "표 형식으로"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.5rem; background:var(--color-bg-alt); border-radius:8px; padding:1.25rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">5</div>
+            <div>
+              <h3 style="margin:0 0 0.5rem;">예시 (Example) — "예를 들면 이런 느낌"</h3>
+              <p style="margin:0; font-size:0.9375rem;">원하는 스타일이나 결과의 예시를 보여주면 AI가 훨씬 잘 따라와요.</p>
+              <p style="margin:0.5rem 0 0; font-size:0.875rem; color:var(--color-text-muted);">예: "이런 톤으로 써줘: [예시 문장]", "이전에 쓴 것처럼: [이전 내용]"</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>🔄 나쁜 프롬프트 vs 좋은 프롬프트</h2>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1.5rem 0;">
+          <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; padding:1.25rem;">
+            <h3 style="color:#DC2626; margin-top:0; font-size:1rem;">❌ 이렇게 하면 아쉬워요</h3>
+            <p style="font-size:0.9rem; font-style:italic; background:white; padding:0.75rem; border-radius:4px;">"이메일 써줘"</p>
+            <p style="font-size:0.875rem; color:var(--color-text-muted);">→ AI가 어떤 이메일인지, 누구에게 보내는지, 어떤 톤인지 몰라요</p>
+          </div>
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:1.25rem;">
+            <h3 style="color:#16A34A; margin-top:0; font-size:1rem;">✅ 이렇게 해보세요</h3>
+            <p style="font-size:0.9rem; font-style:italic; background:white; padding:0.75rem; border-radius:4px;">"신규 고객사 A기업 담당자에게 첫 미팅 후 감사 인사 이메일을 써줘. 전문적이지만 따뜻한 톤으로, 미팅에서 논의한 협업 가능성을 언급하고 다음 단계를 제안하는 내용. 3단락, 200자 이내."</p>
+            <p style="font-size:0.875rem; color:var(--color-text-muted);">→ AI가 원하는 결과를 정확히 만들 수 있어요</p>
+          </div>
+        </div>
+
+        <h2>💡 업무별 프롬프트 실전 예시</h2>
+
+        <h3>📧 이메일 작성</h3>
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.25rem; margin-bottom:1rem; font-family:monospace; font-size:0.9rem; white-space:pre-wrap;">경험 많은 비즈니스 커뮤니케이터처럼 답해줘.
+
+상황: 납품이 3일 지연됐고, 거래처 담당자에게 사과와 함께 새 일정을 안내해야 해.
+
+정중하고 책임감 있는 톤의 사과 이메일을 써줘.
+- 지연 사유를 간략히 설명
+- 새로운 납품 예정일 명시 (○월 ○일로 자리표시)
+- 재발 방지 약속 포함
+- 3단락, 이메일 형식으로</div>
+
+        <h3>📊 데이터 정리</h3>
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.25rem; margin-bottom:1rem; font-family:monospace; font-size:0.9rem; white-space:pre-wrap;">아래 고객 피드백 10개를 분석해줘.
+
+[피드백 내용 붙여넣기]
+
+카테고리별로 분류하고(긍정/중립/부정),
+각 카테고리에서 반복되는 키워드 3개씩 뽑아서 표로 정리해줘.</div>
+
+        <h3>💭 아이디어 발굴</h3>
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.25rem; margin-bottom:1rem; font-family:monospace; font-size:0.9rem; white-space:pre-wrap;">창의적인 마케터처럼 브레인스토밍을 도와줘.
+
+우리 회사는 B2B SaaS 회사이고, 이번 달 신규 가입자가 목표의 60%야.
+전환율을 높이기 위한 아이디어를 5가지 제안해줘.
+각 아이디어는 실행 난이도(낮음/중간/높음)와 예상 효과도 함께 알려줘.</div>
+
+        <div class="tip-box">
+          <strong>💡 대화를 이어가세요:</strong> 첫 번째 답변이 마음에 들지 않는다고 포기하지 마세요. "더 짧게 해줘", "톤을 더 따뜻하게", "2번 아이디어를 더 자세히 설명해줘"처럼 이어서 요청하면 원하는 결과를 얻을 수 있어요.
+        </div>
+
+        <img src="../assets/images/prompt-comparison.svg" alt="나쁜 프롬프트 vs 좋은 프롬프트 비교" class="screenshot-img">
+
+        <h2>🚫 자주 하는 실수</h2>
+        <ol>
+          <li><strong>너무 짧게 쓰기</strong>: "요약해줘" → 무엇을, 어떻게, 얼마나 짧게?</li>
+          <li><strong>결과물 형식 미지정</strong>: 표가 필요한데 글로 받거나, 짧게 필요한데 길게 받는 경우</li>
+          <li><strong>맥락 빠뜨리기</strong>: AI는 내 회사, 내 상황, 내 독자를 모릅니다</li>
+          <li><strong>첫 답변에 포기하기</strong>: 추가 요청으로 계속 개선할 수 있어요</li>
+          <li><strong>결과물 그대로 쓰기</strong>: AI 결과물은 초안입니다. 반드시 검토하고 수정하세요</li>
+        </ol>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 프롬프트 자가 진단 체크리스트</h3>
+          <p style="color:var(--color-text-muted); font-size:0.9rem; margin-bottom:1rem;">AI에게 부탁하기 전, 이 항목들을 확인해보세요.</p>
+          <label><input type="checkbox" data-key="prompt-1"> 역할(Role)을 지정했다 (예: "마케터처럼 답해줘")</label>
+          <label><input type="checkbox" data-key="prompt-2"> 관련 맥락·배경을 충분히 설명했다</label>
+          <label><input type="checkbox" data-key="prompt-3"> 원하는 결과물(과제)을 동사로 명확히 표현했다</label>
+          <label><input type="checkbox" data-key="prompt-4"> 형식(길이, 구조)을 지정했다</label>
+          <label><input type="checkbox" data-key="prompt-5"> 받은 결과물을 검토하고 필요하면 추가 요청했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="ai-landscape.html" class="nav-prev">← 이전: AI 도구 지도</a>
+      <a href="ai-work-habits.html" class="nav-next">다음: AI와 일하는 습관 만들기 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

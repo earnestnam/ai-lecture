@@ -1,0 +1,42 @@
+<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="420" fill="#F3F4F6" rx="12"/>
+  <rect x="0" y="0" width="800" height="40" fill="#E5E7EB" rx="12"/>
+  <rect x="0" y="28" width="800" height="12" fill="#E5E7EB"/>
+  <circle cx="24" cy="20" r="7" fill="#EF4444"/><circle cx="46" cy="20" r="7" fill="#F59E0B"/><circle cx="68" cy="20" r="7" fill="#10B981"/>
+  <rect x="140" y="10" width="380" height="20" fill="white" rx="10"/>
+  <text x="330" y="24" font-size="11" fill="#6B7280">claude.ai/projects</text>
+  <!-- main content -->
+  <rect x="0" y="40" width="800" height="380" fill="white"/>
+  <text x="400" y="80" text-anchor="middle" font-size="20" font-weight="700" fill="#111827">📁 프로젝트 설정</text>
+  <!-- project card -->
+  <rect x="60" y="100" width="300" height="280" fill="#FFF7ED" rx="12" stroke="#FDBA74" stroke-width="1.5"/>
+  <text x="210" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#C2410C">마케팅 업무</text>
+  <text x="210" y="152" text-anchor="middle" font-size="11" fill="#9CA3AF">최근 활동: 오늘</text>
+  <rect x="80" y="165" width="260" height="1" fill="#FDBA74"/>
+  <text x="80" y="190" font-size="12" fill="#374151" font-weight="600">📌 시스템 프롬프트</text>
+  <rect x="80" y="200" width="260" height="120" fill="white" rx="8" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="92" y="220" font-size="10" fill="#6B7280">나는 B2B SaaS 스타트업의</text>
+  <text x="92" y="236" font-size="10" fill="#6B7280">마케팅 담당자야. 고객은</text>
+  <text x="92" y="252" font-size="10" fill="#6B7280">중소기업 HR 담당자...</text>
+  <text x="92" y="268" font-size="10" fill="#6B7280">글쓰기 스타일: 전문적이되</text>
+  <text x="92" y="284" font-size="10" fill="#6B7280">친근하게...</text>
+  <rect x="80" y="332" width="120" height="28" fill="#E85D04" rx="6"/>
+  <text x="140" y="350" text-anchor="middle" font-size="12" fill="white">편집</text>
+  <!-- settings panel -->
+  <rect x="400" y="100" width="340" height="280" fill="#F9FAFB" rx="12" stroke="#E5E7EB" stroke-width="1.5"/>
+  <text x="570" y="130" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">⚙️ 프로젝트 설정</text>
+  <rect x="420" y="145" width="300" height="1" fill="#E5E7EB"/>
+  <text x="420" y="170" font-size="12" fill="#374151">📎 파일 업로드</text>
+  <rect x="420" y="178" width="300" height="36" fill="white" rx="6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="440" y="201" font-size="11" fill="#9CA3AF">파일을 드래그하거나 클릭해서 업로드</text>
+  <text x="420" y="232" font-size="12" fill="#374151">🔗 연동 서비스</text>
+  <rect x="420" y="240" width="140" height="28" fill="white" rx="6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="440" y="258" font-size="11" fill="#374151">🗂 Google Drive</text>
+  <rect x="572" y="240" width="148" height="28" fill="white" rx="6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="592" y="258" font-size="11" fill="#374151">📧 Gmail</text>
+  <text x="420" y="294" font-size="12" fill="#374151">🔔 알림 설정</text>
+  <rect x="420" y="302" width="300" height="28" fill="white" rx="6" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="440" y="320" font-size="11" fill="#6B7280">중요 대화만 알림</text>
+  <rect x="420" y="340" width="140" height="28" fill="#E85D04" rx="6"/>
+  <text x="490" y="358" text-anchor="middle" font-size="12" fill="white" font-weight="600">저장</text>
+</svg>

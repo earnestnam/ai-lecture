@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#F3F4F6" rx="12"/>
+  <!-- Browser chrome -->
+  <rect x="0" y="0" width="800" height="36" fill="#E5E7EB" rx="12"/>
+  <rect x="0" y="24" width="800" height="12" fill="#E5E7EB"/>
+  <circle cx="22" cy="18" r="6" fill="#EF4444"/><circle cx="42" cy="18" r="6" fill="#F59E0B"/><circle cx="62" cy="18" r="6" fill="#10B981"/>
+  <rect x="130" y="7" width="440" height="20" fill="white" rx="10"/>
+  <text x="350" y="21" font-size="10" fill="#6B7280">notebooklm.google.com</text>
+  <!-- NotebookLM interface -->
+  <rect x="0" y="36" width="800" height="364" fill="#1C1B1F"/>
+  <!-- Header -->
+  <rect x="0" y="36" width="800" height="45" fill="#2D2C31"/>
+  <text x="30" y="64" font-size="14" fill="white" font-weight="700">📓 NotebookLM</text>
+  <text x="400" y="64" font-size="12" fill="#9CA3AF">새 노트북: 2분기 시장조사</text>
+  <!-- Source panel (left) -->
+  <rect x="0" y="81" width="270" height="319" fill="#2D2C31"/>
+  <text x="20" y="107" font-size="11" fill="#E5E7EB" font-weight="600">소스</text>
+  <!-- Upload area -->
+  <rect x="15" y="115" width="240" height="80" fill="#3C3B41" rx="8" stroke="#5E5CE6" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="135" y="145" text-anchor="middle" font-size="18">⬆️</text>
+  <text x="135" y="163" text-anchor="middle" font-size="10" fill="#9CA3AF">파일 업로드 또는 드래그</text>
+  <text x="135" y="179" text-anchor="middle" font-size="9" fill="#6B7280">PDF, Docs, 웹 링크</text>
+  <!-- Uploaded files -->
+  <rect x="15" y="205" width="240" height="38" fill="#3C3B41" rx="6"/>
+  <text x="30" y="220" font-size="16">📊</text>
+  <text x="55" y="220" font-size="10" fill="#E5E7EB">시장조사_보고서.pdf</text>
+  <text x="55" y="236" font-size="9" fill="#5E5CE6">✓ 분석 완료</text>
+  <rect x="15" y="250" width="240" height="38" fill="#3C3B41" rx="6"/>
+  <text x="30" y="265" font-size="16">📄</text>
+  <text x="55" y="265" font-size="10" fill="#E5E7EB">경쟁사_분석.docx</text>
+  <text x="55" y="281" font-size="9" fill="#5E5CE6">✓ 분석 완료</text>
+  <rect x="15" y="295" width="240" height="38" fill="#3C3B41" rx="6"/>
+  <text x="30" y="310" font-size="16">🔗</text>
+  <text x="55" y="310" font-size="10" fill="#E5E7EB">industry-report.com/2024</text>
+  <text x="55" y="326" font-size="9" fill="#9CA3AF">⟳ 처리중...</text>
+  <!-- Chat area (center) -->
+  <rect x="270" y="81" width="530" height="319" fill="#1C1B1F"/>
+  <text x="535" y="108" text-anchor="middle" font-size="11" fill="#9CA3AF">소스를 기반으로 질문해보세요</text>
+  <!-- Auto-generated summary box -->
+  <rect x="290" y="120" width="490" height="100" fill="#2D2C31" rx="8"/>
+  <text x="310" y="140" font-size="11" fill="#5E5CE6" font-weight="600">✨ 자동 생성된 요약</text>
+  <text x="310" y="160" font-size="10" fill="#E5E7EB">업로드된 3개 소스를 기반으로:</text>
+  <text x="310" y="178" font-size="10" fill="#9CA3AF">• 시장 규모는 2024년 기준 약 4.2조원으로 추정</text>
+  <text x="310" y="195" font-size="10" fill="#9CA3AF">• 주요 경쟁사 A·B·C사 점유율 합계 58%</text>
+  <text x="310" y="211" font-size="10" fill="#9CA3AF">• 성장 동력: MZ세대 수요 증가, 온라인 채널 확대</text>
+  <!-- User question -->
+  <rect x="400" y="238" width="370" height="40" fill="#5E5CE6" rx="10"/>
+  <text x="420" y="253" font-size="10" fill="white">우리 회사에 유리한 기회 요인은?</text>
+  <text x="420" y="270" font-size="10" fill="white">근거 출처도 함께 알려줘</text>
+  <!-- Answer -->
+  <rect x="290" y="290" width="380" height="90" fill="#2D2C31" rx="8"/>
+  <text x="308" y="308" font-size="10" fill="#5E5CE6" font-weight="600">🤖 분석 결과 (소스 기반)</text>
+  <text x="308" y="325" font-size="10" fill="#E5E7EB">중소 브랜드 진입 기회 확대 중입니다.</text>
+  <text x="308" y="340" font-size="10" fill="#9CA3AF">• 대기업 집중도 감소 추세 [시장조사_p.12]</text>
+  <text x="308" y="355" font-size="10" fill="#9CA3AF">• 프리미엄 니치 시장 성장률 23% [경쟁사_p.5]</text>
+  <text x="308" y="370" font-size="10" fill="#9CA3AF">• 온라인 채널 전환 가속화 [웹소스]</text>
+</svg>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Google Sheets와 Forms를 AI 도움으로 자동화하는 기초를 배웁니다.">
+  <title>Apps Script로 자동화하기 — AI 활용 강의</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Apps Script로 자동화하기</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 35분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">Google Sheets와 Forms를 AI 도움으로 자동화해 반복 업무를 없애봐요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>⚙️ "이 작업, 매주 수동으로 해야 하나요?"</h2>
+        <p>
+          매주 같은 형식의 보고서를 만들거나, 설문 응답을 정리하거나, 특정 조건이 되면 이메일을 보내야 하는 업무가 있으신가요?
+          이런 반복적인 Google 서비스 작업을 자동화하는 도구가 <strong>Google Apps Script</strong>예요.
+        </p>
+        <p>
+          Apps Script는 Google이 제공하는 자동화 도구인데, 코드를 직접 써야 해서 어렵게 느껴질 수 있어요.
+          하지만 이제 <strong>AI에게 코드를 대신 작성해달라고 하면</strong> 됩니다.
+          개념만 이해하면 AI가 실행 가능한 코드를 만들어줘요.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 Apps Script란?</strong> Google Sheets, Docs, Gmail, Calendar 등 Google 서비스를 자동화하는 프로그래밍 도구예요. JavaScript라는 언어로 작성하지만, AI에게 부탁하면 코드를 직접 작성하지 않아도 돼요.
+        </div>
+
+        <h2>📋 Apps Script로 할 수 있는 것들</h2>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-primary);">
+            <h3 style="margin-top:0; font-size:1rem;">📊 Sheets 자동화</h3>
+            <ul style="font-size:0.875rem; padding-left:1.25rem; margin:0;">
+              <li>특정 조건의 행 강조</li>
+              <li>데이터 자동 정리·분류</li>
+              <li>주간 보고서 자동 생성</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-secondary);">
+            <h3 style="margin-top:0; font-size:1rem;">📧 Gmail 자동화</h3>
+            <ul style="font-size:0.875rem; padding-left:1.25rem; margin:0;">
+              <li>특정 조건 시 자동 이메일 발송</li>
+              <li>설문 제출 시 확인 메일</li>
+              <li>마감일 임박 알림 이메일</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-accent);">
+            <h3 style="margin-top:0; font-size:1rem;">📝 Forms 연동</h3>
+            <ul style="font-size:0.875rem; padding-left:1.25rem; margin:0;">
+              <li>설문 응답을 Sheets에 자동 정리</li>
+              <li>응답자에게 자동 이메일 전송</li>
+              <li>조건별 다른 응답 처리</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>🎯 Step 1. Apps Script 에디터 열기</h2>
+        <ol>
+          <li>Google Sheets를 열기</li>
+          <li>상단 메뉴 → <strong>확장 프로그램 → Apps Script</strong> 클릭</li>
+          <li>새 탭에서 Apps Script 에디터가 열림</li>
+          <li>여기에 코드를 붙여넣고 실행하면 돼요</li>
+        </ol>
+
+        <img src="../assets/images/apps-script-editor.svg" alt="Apps Script 코드 에디터 화면" class="screenshot-img">
+
+        <h2>🤖 Step 2. AI에게 코드 요청하기</h2>
+        <p>직접 코드를 쓸 필요 없어요. Claude나 Gemini에게 이렇게 요청하세요:</p>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.25rem; margin:1rem 0; font-size:0.9rem;">
+          <strong>예시 요청 1 — 이메일 자동 발송:</strong><br><br>
+          "Google Apps Script 코드를 만들어줘.<br>
+          Google Sheets에 데이터가 추가될 때마다<br>
+          B열의 이메일 주소로 자동으로 확인 이메일을 보내고 싶어.<br>
+          이메일 내용은 'A열의 이름님, 신청이 완료되었습니다.'야.<br>
+          완전히 복사해서 바로 쓸 수 있는 코드로 줘."
+        </div>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.25rem; margin:1rem 0; font-size:0.9rem;">
+          <strong>예시 요청 2 — 주간 보고서 자동화:</strong><br><br>
+          "Google Apps Script 코드를 만들어줘.<br>
+          매주 월요일 오전 9시에 자동으로 실행되는 스크립트야.<br>
+          Google Sheets의 '판매 데이터' 시트에서 지난 주 데이터를 읽어서<br>
+          총계와 상위 3개 항목을 정리해 담당자 이메일로 요약 보고서를 보내줘."
+        </div>
+
+        <h2>▶️ Step 3. 코드 붙여넣고 실행하기</h2>
+        <ol>
+          <li>AI가 준 코드를 전체 복사</li>
+          <li>Apps Script 에디터의 기존 내용 삭제 후 붙여넣기</li>
+          <li>💾 저장 버튼 클릭 (또는 Ctrl+S)</li>
+          <li>▶️ <strong>실행 버튼</strong> 클릭</li>
+          <li>처음 실행 시 권한 승인 팝업 → "허용" 클릭</li>
+          <li>실행 완료 확인!</li>
+        </ol>
+
+        <img src="../assets/images/apps-script-trigger.svg" alt="Apps Script 트리거 설정 화면" class="screenshot-img">
+
+        <div class="warning-box">
+          <strong>⚠️ 권한 승인 팝업이 뜰 때:</strong> "Google이 이 앱을 확인하지 않았습니다"라는 경고가 나올 수 있어요. 직접 작성한 내 코드이므로 "Advanced → Go to [스크립트명]" → "Allow"를 클릭해도 안전해요.
+        </div>
+
+        <h2>⏰ Step 4. 자동 실행 설정하기 (트리거)</h2>
+        <p>
+          코드를 매번 직접 실행하는 게 아니라, 특정 시간이나 조건에 자동으로 실행되게 할 수 있어요.
+        </p>
+        <ol>
+          <li>Apps Script 에디터 왼쪽 메뉴에서 <strong>⏰ "트리거"</strong> 클릭</li>
+          <li><strong>"+ 트리거 추가"</strong> 버튼 클릭</li>
+          <li>실행할 함수 선택 → 실행 조건 설정</li>
+          <li>조건 예시: "매주 월요일 오전 8~9시", "스프레드시트가 수정될 때"</li>
+          <li>저장!</li>
+        </ol>
+
+        <div class="tip-box">
+          <strong>💡 오류가 나면?</strong> 오류 메시지를 그대로 복사해서 Claude에게 "이 오류가 났어. 어떻게 고쳐야 해?"라고 물어보세요. 대부분의 오류는 AI가 바로 해결해줄 수 있어요.
+        </div>
+
+        <h2>🚀 실전 활용 아이디어</h2>
+        <ul>
+          <li><strong>신청 자동 처리</strong>: 교육 신청 폼 제출 시 자동 확인 이메일 + 명단 시트 추가</li>
+          <li><strong>마감 알림</strong>: 스프레드시트에서 마감일이 3일 남은 항목 자동 이메일 알림</li>
+          <li><strong>주간 현황 보고</strong>: 매주 특정 시트 데이터를 요약해서 팀장에게 자동 보고</li>
+          <li><strong>데이터 백업</strong>: 매일 자정에 중요 시트를 새 탭으로 자동 복사</li>
+        </ul>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 첫 스크립트 실행 체크리스트</h3>
+          <label><input type="checkbox" data-key="apps-1"> Google Sheets에서 Apps Script 에디터를 열었다</label>
+          <label><input type="checkbox" data-key="apps-2"> AI에게 간단한 자동화 코드를 요청해봤다</label>
+          <label><input type="checkbox" data-key="apps-3"> 코드를 에디터에 붙여넣고 저장했다</label>
+          <label><input type="checkbox" data-key="apps-4"> 코드를 실행하고 결과를 확인했다</label>
+          <label><input type="checkbox" data-key="apps-5"> 업무에서 자동화하고 싶은 반복 작업을 하나 선정했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="notebooklm.html" class="nav-prev">← 이전: NotebookLM 활용법</a>
+      <a href="glossary.html" class="nav-next">다음: AI 용어 사전 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI와 개발 용어를 비개발자 언어로 쉽게 설명합니다.">
+  <title>AI 용어 사전 — AI 활용 강의</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .glossary-search {
+      position: sticky;
+      top: 60px;
+      background: var(--color-bg);
+      padding: 1rem 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 2rem;
+    }
+    .glossary-search input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 2px solid var(--color-border);
+      border-radius: 8px;
+      font-size: 1rem;
+      background: var(--color-surface);
+      color: var(--color-text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .glossary-search input:focus {
+      border-color: var(--color-primary);
+    }
+    .glossary-filter {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .filter-btn {
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--color-border);
+      border-radius: 20px;
+      background: var(--color-surface);
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--color-primary);
+      color: white;
+      border-color: var(--color-primary);
+    }
+    .glossary-section { margin-bottom: 2.5rem; }
+    .glossary-section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-primary);
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .glossary-item {
+      padding: 1rem;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      background: var(--color-surface);
+      transition: border-color 0.2s;
+    }
+    .glossary-item:hover { border-color: var(--color-primary-light); }
+    .glossary-item.hidden { display: none; }
+    .glossary-term {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .glossary-term .en {
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      font-weight: 400;
+    }
+    .glossary-def { font-size: 0.9375rem; color: var(--color-text); }
+    .glossary-analogy {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin-top: 0.4rem;
+      font-style: italic;
+    }
+    .no-results {
+      text-align: center;
+      color: var(--color-text-muted);
+      padding: 3rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>AI 용어 사전 📚</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 참고용</span>
+        </div>
+        <p class="page-description">강의에서 만나는 AI 용어들을 비개발자 언어로 쉽게 설명합니다. 모르는 용어가 나오면 검색해보세요.</p>
+      </div>
+
+      <!-- 검색 & 필터 -->
+      <div class="glossary-search">
+        <input type="text" id="glossarySearch" placeholder="🔍 용어 검색... (예: 프롬프트, LLM, API)">
+        <div class="glossary-filter" id="filterBtns">
+          <button class="filter-btn active" data-category="all">전체</button>
+          <button class="filter-btn" data-category="ai-basic">AI 기초</button>
+          <button class="filter-btn" data-category="model">AI 모델</button>
+          <button class="filter-btn" data-category="tool">도구·기능</button>
+          <button class="filter-btn" data-category="tech">기술 용어</button>
+        </div>
+      </div>
+
+      <div id="glossaryContent">
+
+        <!-- AI 기초 -->
+        <div class="glossary-section" data-section="ai-basic">
+          <div class="glossary-section-title">🧠 AI 기초</div>
+
+          <div class="glossary-item" data-category="ai-basic" data-terms="인공지능 ai artificial intelligence">
+            <div class="glossary-term">인공지능 <span class="en">AI, Artificial Intelligence</span></div>
+            <div class="glossary-def">사람처럼 생각하고 판단하는 능력을 컴퓨터가 갖도록 만든 기술의 총칭이에요.</div>
+            <div class="glossary-analogy">💡 비유: 사람이 아니지만 사람처럼 대화하고, 글을 쓰고, 이미지를 만들 수 있는 '디지털 두뇌'</div>
+          </div>
+
+          <div class="glossary-item" data-category="ai-basic" data-terms="llm 대규모 언어 모델 large language model">
+            <div class="glossary-term">LLM <span class="en">Large Language Model, 대규모 언어 모델</span></div>
+            <div class="glossary-def">방대한 양의 텍스트를 학습해서 사람처럼 글을 이해하고 생성할 수 있게 된 AI 모델이에요. ChatGPT, Claude, Gemini가 모두 LLM 기반이에요.</div>
+            <div class="glossary-analogy">💡 비유: 수억 권의 책을 읽고 언어를 마스터한 AI</div>
+          </div>
+
+          <div class="glossary-item" data-category="ai-basic" data-terms="프롬프트 prompt">
+            <div class="glossary-term">프롬프트 <span class="en">Prompt</span></div>
+            <div class="glossary-def">AI에게 보내는 지시·질문·요청 텍스트예요. 어떻게 부탁하느냐에 따라 AI의 답변 품질이 크게 달라져요.</div>
+            <div class="glossary-analogy">💡 비유: AI에게 보내는 업무 지시서</div>
+          </div>
+
+          <div class="glossary-item" data-category="ai-basic" data-terms="할루시네이션 환각 hallucination">
+            <div class="glossary-term">할루시네이션 <span class="en">Hallucination, 환각</span></div>
+            <div class="glossary-def">AI가 사실이 아닌 내용을 마치 사실인 것처럼 자신있게 말하는 현상이에요. AI의 가장 큰 주의사항 중 하나예요.</div>
+            <div class="glossary-analogy">💡 비유: 자신있게 틀린 말을 하는 것. 중요한 정보는 반드시 원출처 확인 필수!</div>
+          </div>
+
+          <div class="glossary-item" data-category="ai-basic" data-terms="컨텍스트 윈도우 context window 문맥창">
+            <div class="glossary-term">컨텍스트 윈도우 <span class="en">Context Window</span></div>
+            <div class="glossary-def">AI가 한 번의 대화에서 기억할 수 있는 내용의 최대 길이예요. 이 범위를 넘으면 이전 내용을 잊어버려요.</div>
+            <div class="glossary-analogy">💡 비유: AI의 단기 기억. 너무 긴 내용은 기억이 끊김</div>
+          </div>
+
+          <div class="glossary-item" data-category="ai-basic" data-terms="토큰 token">
+            <div class="glossary-term">토큰 <span class="en">Token</span></div>
+            <div class="glossary-def">AI가 텍스트를 처리하는 단위예요. 영어는 단어 하나, 한국어는 약 1~3글자가 하나의 토큰에 해당해요. AI 사용 요금이나 처리 한도를 토큰 단위로 측정해요.</div>
+            <div class="glossary-analogy">💡 비유: AI가 읽고 쓰는 글자 묶음 단위</div>
+          </div>
+        </div>
+
+        <!-- AI 모델 -->
+        <div class="glossary-section" data-section="model">
+          <div class="glossary-section-title">🤖 AI 모델</div>
+
+          <div class="glossary-item" data-category="model" data-terms="claude 클로드 anthropic">
+            <div class="glossary-term">Claude <span class="en">클로드</span></div>
+            <div class="glossary-def">Anthropic이 만든 AI 어시스턴트예요. 긴 문서 처리와 세밀한 글쓰기에 특히 강하며, 안전하고 신중한 응답으로 유명해요.</div>
+          </div>
+
+          <div class="glossary-item" data-category="model" data-terms="chatgpt gpt openai 챗지피티">
+            <div class="glossary-term">ChatGPT <span class="en">챗지피티</span></div>
+            <div class="glossary-def">OpenAI가 만든 가장 널리 알려진 AI 챗봇이에요. 2022년 말 출시 이후 AI 붐을 이끌었고, 이미지 생성(DALL-E)과 다양한 플러그인을 지원해요.</div>
+          </div>
+
+          <div class="glossary-item" data-category="model" data-terms="gemini 제미나이 google">
+            <div class="glossary-term">Gemini <span class="en">제미나이</span></div>
+            <div class="glossary-def">Google이 만든 AI예요. Google 검색, Gmail, Docs 등 Google 서비스와 깊이 통합되어 있고 실시간 웹 검색이 가능해요.</div>
+          </div>
+
+          <div class="glossary-item" data-category="model" data-terms="gpt-4 gpt4 모델">
+            <div class="glossary-term">모델 버전 <span class="en">GPT-4, Claude 3.5, Gemini 1.5 등</span></div>
+            <div class="glossary-def">AI의 성능 버전이에요. 숫자가 높을수록 더 최신, 더 성능이 좋은 버전이에요. 같은 회사의 AI도 버전에 따라 능력이 다를 수 있어요.</div>
+          </div>
+        </div>
+
+        <!-- 도구·기능 -->
+        <div class="glossary-section" data-section="tool">
+          <div class="glossary-section-title">🛠️ 도구·기능</div>
+
+          <div class="glossary-item" data-category="tool" data-terms="시스템 프롬프트 system prompt">
+            <div class="glossary-term">시스템 프롬프트 <span class="en">System Prompt</span></div>
+            <div class="glossary-def">AI에게 미리 설정해두는 업무 지침이에요. Claude 프로젝트의 "Instructions" 또는 ChatGPT의 "Custom Instructions"가 여기에 해당해요.</div>
+            <div class="glossary-analogy">💡 비유: 직원에게 미리 건네주는 업무 매뉴얼</div>
+          </div>
+
+          <div class="glossary-item" data-category="tool" data-terms="notebooklm 노트북lm">
+            <div class="glossary-term">NotebookLM</div>
+            <div class="glossary-def">Google이 만든 문서 기반 AI 연구 도우미예요. 내가 올린 문서만을 기반으로 질문에 답하고 요약을 생성해요. 팟캐스트(오디오) 형식으로도 내보낼 수 있어요.</div>
+          </div>
+
+          <div class="glossary-item" data-category="tool" data-terms="apps script 구글 자동화">
+            <div class="glossary-term">Apps Script</div>
+            <div class="glossary-def">Google Sheets, Gmail, Calendar 등 Google 서비스를 자동화하는 도구예요. AI에게 코드를 작성해달라고 하면 직접 코딩하지 않아도 사용할 수 있어요.</div>
+          </div>
+
+          <div class="glossary-item" data-category="tool" data-terms="바이브 코딩 vibe coding">
+            <div class="glossary-term">바이브 코딩 <span class="en">Vibe Coding</span></div>
+            <div class="glossary-def">코드를 직접 짜는 대신, AI에게 원하는 것을 말로 설명해서 소프트웨어를 만드는 새로운 개발 방식이에요.</div>
+            <div class="glossary-analogy">💡 비유: 요리 레시피를 직접 쓰는 대신, 셰프(AI)에게 "이런 요리 만들어줘"라고 말하는 것</div>
+          </div>
+
+          <div class="glossary-item" data-category="tool" data-terms="멀티모달 multimodal">
+            <div class="glossary-term">멀티모달 <span class="en">Multimodal</span></div>
+            <div class="glossary-def">텍스트뿐 아니라 이미지, 음성, 동영상 등 여러 형태의 입력을 처리할 수 있는 AI 기능이에요. Gemini가 이 분야에서 강점을 가지고 있어요.</div>
+            <div class="glossary-analogy">💡 비유: 글뿐 아니라 사진, 소리도 이해하는 AI</div>
+          </div>
+
+          <div class="glossary-item" data-category="tool" data-terms="플러그인 확장프로그램 plugin extension">
+            <div class="glossary-term">플러그인 / 확장 프로그램 <span class="en">Plugin / Extension</span></div>
+            <div class="glossary-def">기존 프로그램에 추가 기능을 더해주는 소프트웨어 모듈이에요. 크롬에 Claude 확장 프로그램을 설치하면 브라우저에서 바로 AI를 쓸 수 있어요.</div>
+          </div>
+        </div>
+
+        <!-- 기술 용어 -->
+        <div class="glossary-section" data-section="tech">
+          <div class="glossary-section-title">⚙️ 기술 용어</div>
+
+          <div class="glossary-item" data-category="tech" data-terms="api 에이피아이">
+            <div class="glossary-term">API <span class="en">Application Programming Interface</span></div>
+            <div class="glossary-def">서로 다른 프로그램이 서로 통신하는 방법이에요. AI API는 우리가 만든 서비스에 ChatGPT나 Claude의 기능을 넣을 때 사용해요.</div>
+            <div class="glossary-analogy">💡 비유: 음식점 주방(AI)과 홀(우리 서비스) 사이의 주문 전달 시스템</div>
+          </div>
+
+          <div class="glossary-item" data-category="tech" data-terms="파인튜닝 fine-tuning">
+            <div class="glossary-term">파인튜닝 <span class="en">Fine-tuning</span></div>
+            <div class="glossary-def">이미 학습된 AI 모델에 특정 분야의 추가 데이터를 학습시켜 더 전문적으로 만드는 기술이에요.</div>
+            <div class="glossary-analogy">💡 비유: 일반 의사를 심장 전문의로 추가 교육시키는 것</div>
+          </div>
+
+          <div class="glossary-item" data-category="tech" data-terms="로컬스토리지 localstorage">
+            <div class="glossary-term">로컬스토리지 <span class="en">localStorage</span></div>
+            <div class="glossary-def">웹 브라우저가 사용자 컴퓨터에 데이터를 저장하는 방식이에요. 이 강의 사이트에서 체크리스트 완료 상태를 저장할 때 사용해요.</div>
+            <div class="glossary-analogy">💡 비유: 웹사이트가 내 컴퓨터에 남기는 메모</div>
+          </div>
+
+          <div class="glossary-item" data-category="tech" data-terms="생성ai generative ai 제너레이티브">
+            <div class="glossary-term">생성 AI <span class="en">Generative AI</span></div>
+            <div class="glossary-def">텍스트, 이미지, 음악 등 새로운 콘텐츠를 만들어낼 수 있는 AI예요. ChatGPT, Claude, Midjourney 등이 모두 생성 AI에 속해요.</div>
+          </div>
+
+          <div class="glossary-item" data-category="tech" data-terms="rag retrieval augmented generation">
+            <div class="glossary-term">RAG <span class="en">Retrieval-Augmented Generation</span></div>
+            <div class="glossary-def">AI가 답변할 때 외부 문서(데이터베이스, 파일 등)를 검색해서 정보를 보완하는 기술이에요. NotebookLM이 이 방식으로 작동해요.</div>
+            <div class="glossary-analogy">💡 비유: 시험 볼 때 교과서를 참고할 수 있는 '오픈북 시험'처럼 AI가 문서를 참조</div>
+          </div>
+        </div>
+
+        <div class="no-results" id="noResults">검색 결과가 없어요. 다른 키워드로 검색해보세요.</div>
+      </div>
+
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="apps-script.html" class="nav-prev">← 이전: Apps Script로 자동화하기</a>
+      <span></span>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('glossarySearch');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const items = document.querySelectorAll('.glossary-item');
+      const noResults = document.getElementById('noResults');
+      let currentCategory = 'all';
+
+      function filterItems() {
+        const query = searchInput.value.toLowerCase().trim();
+        let visibleCount = 0;
+
+        items.forEach(item => {
+          const terms = item.dataset.terms || '';
+          const termEl = item.querySelector('.glossary-term');
+          const defEl = item.querySelector('.glossary-def');
+          const text = (terms + ' ' + (termEl ? termEl.textContent : '') + ' ' + (defEl ? defEl.textContent : '')).toLowerCase();
+          const cat = item.dataset.category;
+
+          const matchSearch = !query || text.includes(query);
+          const matchCategory = currentCategory === 'all' || cat === currentCategory;
+
+          if (matchSearch && matchCategory) {
+            item.classList.remove('hidden');
+            visibleCount++;
+          } else {
+            item.classList.add('hidden');
+          }
+        });
+
+        // 섹션이 모두 숨겨지면 섹션 제목도 숨김
+        document.querySelectorAll('.glossary-section').forEach(section => {
+          const visibleItems = section.querySelectorAll('.glossary-item:not(.hidden)');
+          section.style.display = visibleItems.length === 0 ? 'none' : '';
+        });
+
+        noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      searchInput.addEventListener('input', filterItems);
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.dataset.category;
+          filterItems();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#F3F4F6" rx="12"/>
+  <text x="400" y="30" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">Apps Script 트리거 설정</text>
+  <!-- Trigger dialog -->
+  <rect x="120" y="50" width="560" height="320" fill="white" rx="12" stroke="#E5E7EB" stroke-width="1.5"/>
+  <rect x="120" y="50" width="560" height="50" fill="#4285F4" rx="12"/>
+  <rect x="120" y="88" width="560" height="12" fill="#4285F4"/>
+  <text x="400" y="82" text-anchor="middle" font-size="14" fill="white" font-weight="700">⏰ 트리거 추가</text>
+  <!-- Form fields -->
+  <text x="160" y="130" font-size="11" fill="#374151" font-weight="600">실행할 함수 선택</text>
+  <rect x="155" y="138" width="480" height="32" fill="#F9FAFB" rx="6" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="175" y="158" font-size="11" fill="#374151">sendWeeklyReport ▼</text>
+  <text x="160" y="195" font-size="11" fill="#374151" font-weight="600">이벤트 소스 선택</text>
+  <rect x="155" y="203" width="480" height="32" fill="#F9FAFB" rx="6" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="175" y="223" font-size="11" fill="#374151">시간 기반 ▼</text>
+  <text x="160" y="260" font-size="11" fill="#374151" font-weight="600">시간 간격 유형</text>
+  <rect x="155" y="268" width="480" height="32" fill="#F9FAFB" rx="6" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="175" y="288" font-size="11" fill="#374151">매주 ▼</text>
+  <text x="160" y="325" font-size="11" fill="#374151" font-weight="600">요일 및 시간</text>
+  <rect x="155" y="333" width="220" height="32" fill="#F9FAFB" rx="6" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="175" y="353" font-size="11" fill="#374151">월요일 ▼</text>
+  <rect x="390" y="333" width="245" height="32" fill="#F9FAFB" rx="6" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="410" y="353" font-size="11" fill="#374151">오전 9시~10시 ▼</text>
+  <!-- Buttons -->
+  <rect x="510" y="340" width="75" height="20" fill="white" rx="4" stroke="#D1D5DB" stroke-width="1"/>
+  <text x="547" y="354" text-anchor="middle" font-size="10" fill="#374151">취소</text>
+  <rect x="595" y="340" width="75" height="20" fill="#4285F4" rx="4"/>
+  <text x="632" y="354" text-anchor="middle" font-size="10" fill="white">저장</text>
+  <!-- Right side explanation -->
+  <rect x="690" y="50" width="100" height="320" fill="#FFF7ED" rx="8" stroke="#FDBA74" stroke-width="1"/>
+  <text x="740" y="80" text-anchor="middle" font-size="10" font-weight="700" fill="#92400E">자동화</text>
+  <text x="740" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#92400E">효과</text>
+  <text x="740" y="125" text-anchor="middle" font-size="22">⏰</text>
+  <text x="740" y="148" text-anchor="middle" font-size="9" fill="#374151">매주 월요일</text>
+  <text x="740" y="163" text-anchor="middle" font-size="9" fill="#374151">오전 9시</text>
+  <text x="740" y="178" text-anchor="middle" font-size="9" fill="#6B7280">자동 실행</text>
+  <line x1="710" y1="190" x2="770" y2="190" stroke="#FDBA74" stroke-width="1"/>
+  <text x="740" y="210" text-anchor="middle" font-size="22">📧</text>
+  <text x="740" y="233" text-anchor="middle" font-size="9" fill="#374151">이메일</text>
+  <text x="740" y="248" text-anchor="middle" font-size="9" fill="#374151">자동 발송</text>
+  <line x1="710" y1="260" x2="770" y2="260" stroke="#FDBA74" stroke-width="1"/>
+  <text x="740" y="280" text-anchor="middle" font-size="22">✅</text>
+  <text x="740" y="303" text-anchor="middle" font-size="9" fill="#374151">내 개입</text>
+  <text x="740" y="318" text-anchor="middle" font-size="9" fill="#374151">불필요!</text>
+  <!-- Left side visual -->
+  <rect x="20" y="50" width="95" height="320" fill="#E8F0FE" rx="8" stroke="#BFDBFE" stroke-width="1"/>
+  <text x="67" y="80" text-anchor="middle" font-size="10" font-weight="700" fill="#1A73E8">설정</text>
+  <text x="67" y="95" text-anchor="middle" font-size="10" font-weight="700" fill="#1A73E8">순서</text>
+  <circle cx="67" cy="125" r="14" fill="#4285F4"/>
+  <text x="67" y="130" text-anchor="middle" font-size="11" fill="white" font-weight="700">1</text>
+  <text x="67" y="152" text-anchor="middle" font-size="9" fill="#374151">함수</text>
+  <text x="67" y="164" text-anchor="middle" font-size="9" fill="#374151">선택</text>
+  <line x1="67" y1="175" x2="67" y2="195" stroke="#4285F4" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="67" cy="205" r="14" fill="#4285F4"/>
+  <text x="67" y="210" text-anchor="middle" font-size="11" fill="white" font-weight="700">2</text>
+  <text x="67" y="232" text-anchor="middle" font-size="9" fill="#374151">실행</text>
+  <text x="67" y="244" text-anchor="middle" font-size="9" fill="#374151">시점</text>
+  <line x1="67" y1="255" x2="67" y2="275" stroke="#4285F4" stroke-width="1.5" stroke-dasharray="3,2"/>
+  <circle cx="67" cy="285" r="14" fill="#4285F4"/>
+  <text x="67" y="290" text-anchor="middle" font-size="11" fill="white" font-weight="700">3</text>
+  <text x="67" y="312" text-anchor="middle" font-size="9" fill="#374151">저장</text>
+  <text x="67" y="324" text-anchor="middle" font-size="9" fill="#374151">→ 완료!</text>
+</svg>

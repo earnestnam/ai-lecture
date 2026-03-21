@@ -1,0 +1,40 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#F3F4F6" rx="12"/>
+  <rect x="0" y="0" width="800" height="40" fill="#E5E7EB" rx="12"/>
+  <rect x="0" y="28" width="800" height="12" fill="#E5E7EB"/>
+  <circle cx="24" cy="20" r="7" fill="#EF4444"/><circle cx="46" cy="20" r="7" fill="#F59E0B"/><circle cx="68" cy="20" r="7" fill="#10B981"/>
+  <rect x="140" y="10" width="440" height="20" fill="white" rx="10"/>
+  <text x="360" y="24" font-size="11" fill="#6B7280">chromewebstore.google.com</text>
+  <!-- chrome store header -->
+  <rect x="0" y="40" width="800" height="55" fill="#1A73E8"/>
+  <text x="30" y="72" font-size="18" fill="white" font-weight="700">Chrome 웹 스토어</text>
+  <rect x="400" y="52" width="260" height="28" fill="white" rx="14"/>
+  <text x="420" y="70" font-size="12" fill="#9CA3AF">🔍 Claude 검색...</text>
+  <!-- extension card -->
+  <rect x="40" y="110" width="340" height="240" fill="white" rx="10" stroke="#E5E7EB" stroke-width="1"/>
+  <circle cx="100" cy="160" r="35" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2"/>
+  <text x="100" y="167" text-anchor="middle" font-size="26">🤖</text>
+  <text x="160" y="150" font-size="15" font-weight="700" fill="#111827">Claude for Chrome</text>
+  <text x="160" y="168" font-size="12" fill="#6B7280">Anthropic 공식</text>
+  <text x="160" y="185" font-size="12" fill="#F59E0B">★★★★★</text>
+  <text x="220" y="185" font-size="11" fill="#9CA3AF">(4.8 · 리뷰 2.3만)</text>
+  <rect x="55" y="200" width="310" height="1" fill="#E5E7EB"/>
+  <text x="55" y="225" font-size="11" fill="#6B7280">브라우저에서 바로 Claude를 사용하세요.</text>
+  <text x="55" y="242" font-size="11" fill="#6B7280">Gmail, Docs, 웹페이지에서 AI 도움받기.</text>
+  <text x="55" y="259" font-size="11" fill="#6B7280">✓ 무료  ✓ 로그인 필요  ✓ 한국어 지원</text>
+  <rect x="55" y="278" width="160" height="36" fill="#E85D04" rx="8"/>
+  <text x="135" y="300" text-anchor="middle" font-size="13" fill="white" font-weight="700">Chrome에 추가</text>
+  <!-- installed state -->
+  <rect x="430" y="110" width="330" height="240" fill="white" rx="10" stroke="#E5E7EB" stroke-width="1"/>
+  <text x="595" y="145" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">설치 완료! 🎉</text>
+  <rect x="595" y="158" width="0" height="0"/>
+  <text x="595" y="180" text-anchor="middle" font-size="30">✅</text>
+  <text x="595" y="215" text-anchor="middle" font-size="12" fill="#6B7280">브라우저 우측 상단에</text>
+  <text x="595" y="233" text-anchor="middle" font-size="12" fill="#6B7280">Claude 아이콘이 생겼어요</text>
+  <!-- browser bar mockup -->
+  <rect x="450" y="255" width="290" height="32" fill="#F3F4F6" rx="8"/>
+  <text x="600" y="264" text-anchor="middle" font-size="10" fill="#9CA3AF">주소창</text>
+  <circle cx="710" cy="270" r="13" fill="#E85D04"/>
+  <text x="710" y="275" text-anchor="middle" font-size="13" fill="white">🤖</text>
+  <text x="595" y="320" text-anchor="middle" font-size="11" fill="#374151">아이콘 클릭 → Claude 바로 실행</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="800" height="400" fill="#1e1e1e" rx="12"/>
+  <!-- PowerPoint toolbar area -->
+  <rect x="0" y="0" width="800" height="38" fill="#B7472A" rx="12"/>
+  <rect x="0" y="26" width="800" height="12" fill="#B7472A"/>
+  <text x="20" y="24" font-size="13" fill="white" font-weight="700">PowerPoint</text>
+  <text x="300" y="24" font-size="11" fill="rgba(255,255,255,0.8)">홈  삽입  디자인  전환  애니메이션  검토  보기  </text>
+  <text x="660" y="24" font-size="11" fill="white" font-weight="700">Claude AI ✨</text>
+  <!-- Ribbon -->
+  <rect x="0" y="38" width="800" height="50" fill="#F3F2F1"/>
+  <text x="670" y="55" font-size="10" fill="#E85D04" font-weight="700">🤖 Claude 애드인</text>
+  <rect x="640" y="60" width="90" height="20" fill="#E85D04" rx="4"/>
+  <text x="685" y="74" text-anchor="middle" font-size="10" fill="white">슬라이드 생성</text>
+  <!-- Slide panel -->
+  <rect x="0" y="88" width="140" height="312" fill="#262626"/>
+  <rect x="8" y="96" width="124" height="78" fill="#3a3a3a" rx="3" stroke="#E85D04" stroke-width="1.5"/>
+  <text x="70" y="132" text-anchor="middle" font-size="8" fill="white">슬라이드 1</text>
+  <rect x="8" y="182" width="124" height="78" fill="#3a3a3a" rx="3"/>
+  <text x="70" y="218" text-anchor="middle" font-size="8" fill="#9CA3AF">슬라이드 2</text>
+  <rect x="8" y="268" width="124" height="78" fill="#3a3a3a" rx="3"/>
+  <text x="70" y="304" text-anchor="middle" font-size="8" fill="#9CA3AF">슬라이드 3</text>
+  <!-- Main slide -->
+  <rect x="148" y="88" width="450" height="312" fill="#2b2b2b"/>
+  <rect x="165" y="105" width="416" height="275" fill="white" rx="4"/>
+  <rect x="165" y="105" width="416" height="70" fill="#E85D04" rx="4"/>
+  <rect x="165" y="155" width="416" height="20" fill="#E85D04"/>
+  <text x="373" y="133" text-anchor="middle" font-size="15" fill="white" font-weight="700">2분기 실적 보고서</text>
+  <text x="373" y="152" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.8)">마케팅팀 · 2024년 7월</text>
+  <rect x="185" y="190" width="120" height="60" fill="#FFF7ED" rx="6"/>
+  <text x="245" y="215" text-anchor="middle" font-size="18" font-weight="700" fill="#E85D04">+12%</text>
+  <text x="245" y="235" text-anchor="middle" font-size="10" fill="#374151">매출 성장률</text>
+  <rect x="315" y="190" width="120" height="60" fill="#FFF7ED" rx="6"/>
+  <text x="375" y="215" text-anchor="middle" font-size="18" font-weight="700" fill="#E85D04">85명</text>
+  <text x="375" y="235" text-anchor="middle" font-size="10" fill="#374151">신규 고객</text>
+  <rect x="445" y="190" width="120" height="60" fill="#FFF7ED" rx="6"/>
+  <text x="505" y="215" text-anchor="middle" font-size="18" font-weight="700" fill="#E85D04">94%</text>
+  <text x="505" y="235" text-anchor="middle" font-size="10" fill="#374151">목표 달성률</text>
+  <!-- Claude AI panel -->
+  <rect x="606" y="88" width="194" height="312" fill="#FFF7ED"/>
+  <rect x="606" y="88" width="194" height="40" fill="#E85D04"/>
+  <text x="703" y="112" text-anchor="middle" font-size="12" fill="white" font-weight="700">🤖 Claude AI</text>
+  <text x="616" y="148" font-size="10" fill="#92400E" font-weight="600">슬라이드 개선 제안:</text>
+  <rect x="616" y="158" width="174" height="32" fill="white" rx="5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="703" y="172" text-anchor="middle" font-size="9" fill="#374151">📊 차트로 시각화</text>
+  <text x="703" y="184" text-anchor="middle" font-size="9" fill="#374151">데이터 자동 변환</text>
+  <rect x="616" y="198" width="174" height="32" fill="white" rx="5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="703" y="212" text-anchor="middle" font-size="9" fill="#374151">✍️ 발표 노트 생성</text>
+  <text x="703" y="224" text-anchor="middle" font-size="9" fill="#374151">각 슬라이드별 작성</text>
+  <rect x="616" y="238" width="174" height="32" fill="white" rx="5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="703" y="252" text-anchor="middle" font-size="9" fill="#374151">🎨 디자인 통일</text>
+  <text x="703" y="264" text-anchor="middle" font-size="9" fill="#374151">색상·폰트 정리</text>
+  <rect x="616" y="278" width="174" height="32" fill="white" rx="5" stroke="#FDBA74" stroke-width="1"/>
+  <text x="703" y="292" text-anchor="middle" font-size="9" fill="#374151">📝 슬라이드 추가</text>
+  <text x="703" y="304" text-anchor="middle" font-size="9" fill="#374151">주제에 맞게 자동</text>
+  <rect x="616" y="330" width="174" height="36" fill="#E85D04" rx="6"/>
+  <text x="703" y="352" text-anchor="middle" font-size="11" fill="white" font-weight="700">적용하기 →</text>
+</svg>

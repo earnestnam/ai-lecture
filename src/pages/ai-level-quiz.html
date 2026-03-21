@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="10문항 퀴즈로 현재 AI 활용 수준을 진단하고 맞춤 학습 경로를 추천받습니다.">
+  <title>나의 AI 활용 수준 진단 — AI 활용 강의</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .quiz-section { margin: 2rem 0; }
+    .quiz-container { max-width: 700px; margin: 0 auto; }
+    .quiz-progress { margin-bottom: 1.5rem; }
+    .quiz-progress-bar {
+      height: 8px;
+      background: var(--color-border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 0.5rem;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+    .quiz-progress-text {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+    .question-text {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .question-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .quiz-option {
+      padding: 1rem 1.25rem;
+      border: 2px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: 1rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .quiz-option:hover {
+      border-color: var(--color-primary);
+      background: var(--color-bg-alt);
+    }
+    .quiz-result { text-align: center; padding: 2rem 0; }
+    .result-level {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--color-primary);
+      color: white;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+    }
+    .result-level-number { font-size: 2rem; font-weight: 800; }
+    .result-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .result-description { color: var(--color-text-muted); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .result-recommendation { text-align: left; background: var(--color-bg-alt); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
+    .result-recommendation h3 { margin-bottom: 0.75rem; }
+    .result-recommendation ul { padding-left: 1.5rem; }
+    .result-recommendation li { margin-bottom: 0.5rem; }
+    .result-recommendation a { color: var(--color-primary); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>나의 AI 활용 수준 진단</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 15분</span>
+          <span class="badge badge--difficulty badge--입문">입문</span>
+        </div>
+        <p class="page-description">자율주행 비유로 1~5단계를 진단하고, 맞춤형 학습 경로를 추천받아요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>🚗 AI 활용, 자율주행으로 비유하면?</h2>
+        <p>
+          자동차 자율주행 기술은 레벨 0(사람이 모든 것)부터 레벨 5(완전 자율주행)까지 나뉩니다.
+          AI 활용도 비슷하게 5단계로 나눌 수 있어요.
+        </p>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; border-left:4px solid #9CA3AF;">
+            <strong>Lv.1 탐색</strong><br>
+            <small style="color:var(--color-text-muted);">AI를 거의 안 써봤거나 한두 번 시도해봤어요</small>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; border-left:4px solid #60A5FA;">
+            <strong>Lv.2 입문</strong><br>
+            <small style="color:var(--color-text-muted);">가끔 쓰지만 어떻게 활용해야 할지 막막해요</small>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; border-left:4px solid #34D399;">
+            <strong>Lv.3 활용</strong><br>
+            <small style="color:var(--color-text-muted);">업무에 꽤 활용하고 있고 효과를 경험했어요</small>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; border-left:4px solid #FBBF24;">
+            <strong>Lv.4 숙련</strong><br>
+            <small style="color:var(--color-text-muted);">다양한 도구를 쓰고 프롬프트도 잘 짜요</small>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; border-left:4px solid #F97316;">
+            <strong>Lv.5 전문가</strong><br>
+            <small style="color:var(--color-text-muted);">자동화, 코딩 지원까지 AI로 해결해요</small>
+          </div>
+        </div>
+
+        <p>10개 질문에 답하면, 지금 내 레벨과 맞춤 학습 경로를 알 수 있어요. 약 5분이면 충분합니다!</p>
+
+        <!-- 퀴즈 영역 -->
+        <section class="quiz-section">
+          <div class="quiz-container">
+            <div class="quiz-progress">
+              <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" id="quizProgressFill"></div>
+              </div>
+              <span class="quiz-progress-text" id="quizProgressText">1 / 10</span>
+            </div>
+
+            <div class="quiz-question" id="quizQuestion">
+              <h2 class="question-text" id="questionText"></h2>
+              <div class="question-options" id="questionOptions"></div>
+            </div>
+
+            <div class="quiz-result hidden" id="quizResult">
+              <div class="result-level">
+                <span class="result-level-number" id="resultLevel"></span>
+                <span style="font-size:0.75rem; opacity:0.8;">LEVEL</span>
+              </div>
+              <h2 class="result-title" id="resultTitle"></h2>
+              <p class="result-description" id="resultDescription"></p>
+              <div class="result-recommendation">
+                <h3>📚 추천 학습 경로</h3>
+                <ul id="recommendedPages"></ul>
+              </div>
+              <button class="btn btn--primary" id="retakeQuiz" style="margin-top:1rem;">🔄 다시 진단하기</button>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="ai-why.html" class="nav-prev">← 이전: 왜 AI를 써야 하는가?</a>
+      <a href="ai-landscape.html" class="nav-next">다음: AI 도구 지도 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2025</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/quiz.js" defer></script>
+  <script>
+    // 퀴즈 질문 데이터
+    const QUIZ_DATA = [
+      {
+        question: "Q1. AI 챗봇(ChatGPT, Claude 등)을 사용해본 적이 있나요?",
+        options: [
+          { text: "들어본 적은 있지만 써본 적 없어요", score: 0 },
+          { text: "한두 번 써봤는데 잘 모르겠어요", score: 1 },
+          { text: "가끔 쓰는 편이에요", score: 2 },
+          { text: "거의 매일 씁니다", score: 3 }
+        ]
+      },
+      {
+        question: "Q2. AI에게 업무를 부탁할 때 어떻게 하시나요?",
+        options: [
+          { text: "아직 업무에 써본 적 없어요", score: 0 },
+          { text: "짧게 한 줄로 부탁해요 (예: '이메일 써줘')", score: 1 },
+          { text: "맥락을 좀 설명하고 부탁해요", score: 2 },
+          { text: "배경, 목적, 형식까지 구체적으로 설명해요", score: 3 }
+        ]
+      },
+      {
+        question: "Q3. AI 결과물을 받았을 때 어떻게 하시나요?",
+        options: [
+          { text: "AI를 아직 써보지 않았어요", score: 0 },
+          { text: "그냥 그대로 쓰거나 포기해요", score: 1 },
+          { text: "조금 수정해서 써요", score: 2 },
+          { text: "추가 질문하거나 다시 요청해서 원하는 결과를 얻어요", score: 3 }
+        ]
+      },
+      {
+        question: "Q4. 현재 AI를 어떤 업무에 활용하고 있나요? (가장 가까운 것 선택)",
+        options: [
+          { text: "아직 업무에 활용하지 않아요", score: 0 },
+          { text: "간단한 질문에 대한 답 찾기 정도요", score: 1 },
+          { text: "이메일, 보고서 등 문서 작성에 써요", score: 2 },
+          { text: "분석, 요약, 자동화 등 다양한 업무에 써요", score: 3 }
+        ]
+      },
+      {
+        question: "Q5. Claude, ChatGPT, Gemini 중 차이를 알고 용도별로 구분해서 쓰나요?",
+        options: [
+          { text: "이름은 들어봤지만 차이를 몰라요", score: 0 },
+          { text: "하나만 알고 써요", score: 1 },
+          { text: "두어 개를 알고 있어요", score: 2 },
+          { text: "특성을 알고 업무에 따라 다르게 써요", score: 3 }
+        ]
+      },
+      {
+        question: "Q6. AI와 대화할 때 '시스템 프롬프트' 또는 '역할 지정'을 사용해본 적 있나요?",
+        options: [
+          { text: "그런 기능이 있는지 몰랐어요", score: 0 },
+          { text: "들어봤지만 써본 적 없어요", score: 1 },
+          { text: "가끔 써봤어요 (예: '마케터처럼 답해줘')", score: 2 },
+          { text: "자주 활용하고 효과를 알아요", score: 3 }
+        ]
+      },
+      {
+        question: "Q7. 긴 문서(보고서, 계약서 등)를 AI로 요약하거나 분석해본 적 있나요?",
+        options: [
+          { text: "아직 없어요", score: 0 },
+          { text: "시도해봤는데 잘 안 됐어요", score: 1 },
+          { text: "해봤고 꽤 유용했어요", score: 2 },
+          { text: "이런 작업을 자주 하고 잘 활용해요", score: 3 }
+        ]
+      },
+      {
+        question: "Q8. AI 플러그인이나 앱 연동(크롬, Office, Google Drive 등)을 써본 적 있나요?",
+        options: [
+          { text: "그런 기능이 있는지 몰랐어요", score: 0 },
+          { text: "알고는 있지만 써본 적 없어요", score: 1 },
+          { text: "하나 정도 써봤어요", score: 2 },
+          { text: "여러 플러그인을 업무에 활용해요", score: 3 }
+        ]
+      },
+      {
+        question: "Q9. Google Sheets나 Excel에서 반복 작업을 자동화해본 경험이 있나요?",
+        options: [
+          { text: "자동화는 개발자가 하는 거 아닌가요?", score: 0 },
+          { text: "매크로나 함수 정도는 써봤어요", score: 1 },
+          { text: "AI 도움으로 간단한 자동화를 해봤어요", score: 2 },
+          { text: "Apps Script나 자동화 도구를 활용해요", score: 3 }
+        ]
+      },
+      {
+        question: "Q10. 앞으로 AI 활용에서 가장 관심 있는 분야는?",
+        options: [
+          { text: "일단 기본적인 사용법부터 알고 싶어요", score: 0 },
+          { text: "문서 작성과 정리 업무 효율화요", score: 1 },
+          { text: "Claude, Gemini 등 심화 활용이요", score: 2 },
+          { text: "자동화와 바이브 코딩에 도전해보고 싶어요", score: 3 }
+        ]
+      }
+    ];
+
+    // 퀴즈 결과 레벨별 정보 (quiz.js의 기본값을 덮어씀)
+    const LEVEL_INFO = {
+      1: {
+        title: "탐색 단계 🌱",
+        description: "AI 도구가 아직 낯설게 느껴지시나요? 괜찮습니다! 이 강의의 처음부터 차근차근 따라오시면 금방 익숙해지실 거예요. '왜 AI를 써야 하는가'부터 읽으셨다면 이미 첫 발을 내딛으신 거예요.",
+        pages: [
+          { id: "ai-landscape.html", title: "AI 도구 지도 — 전체 그림 파악하기" },
+          { id: "prompt-basics.html", title: "프롬프트 잘 쓰는 법 — AI와 대화하는 기술" },
+          { id: "claude-intro.html", title: "Claude 시작하기 — 나만의 AI 공간 만들기" }
+        ]
+      },
+      2: {
+        title: "입문 단계 🌿",
+        description: "AI 도구를 가끔 사용해본 경험이 있으시군요! 이제 프롬프트를 더 잘 쓰는 법과 Claude의 핵심 기능을 익히면 업무 효율이 크게 달라질 거예요.",
+        pages: [
+          { id: "prompt-basics.html", title: "프롬프트 잘 쓰는 법 — 더 좋은 결과 얻기" },
+          { id: "ai-work-habits.html", title: "AI와 일하는 습관 만들기" },
+          { id: "claude-intro.html", title: "Claude 시작하기 — 프로젝트 설정" }
+        ]
+      },
+      3: {
+        title: "활용 단계 🌳",
+        description: "AI를 꽤 다양하게 활용하고 있으시네요! 이제 플러그인과 연동 기능으로 한 단계 더 깊이 파고들어봐요. Google 생태계와의 연결도 큰 도움이 될 거예요.",
+        pages: [
+          { id: "claude-plugin.html", title: "플러그인 활용 — 크롬·파워포인트·엑셀" },
+          { id: "claude-cowork.html", title: "클로드 코워크 — 파일·Drive·Gmail 연결" },
+          { id: "gemini-intro.html", title: "Gemini 활용법 — Google 생태계 연동" }
+        ]
+      },
+      4: {
+        title: "숙련 단계 🚀",
+        description: "훌륭합니다! AI를 업무에 아주 잘 활용하고 계시네요. Claude Code로 바이브 코딩에 도전하거나, Apps Script로 자동화 레벨을 올려봐요!",
+        pages: [
+          { id: "claude-code.html", title: "클로드 코드 — 바이브 코딩 입문" },
+          { id: "notebooklm.html", title: "NotebookLM — 문서 기반 AI 연구" },
+          { id: "apps-script.html", title: "Apps Script로 자동화하기" }
+        ]
+      },
+      5: {
+        title: "전문가 단계 ⭐",
+        description: "AI 활용의 최전선에 계시네요! 아직 도전하지 않은 영역이 있다면 NotebookLM의 팟캐스트 생성이나 Apps Script 고급 자동화를 탐구해보세요.",
+        pages: [
+          { id: "notebooklm.html", title: "NotebookLM — 고급 문서 분석과 팟캐스트" },
+          { id: "apps-script.html", title: "Apps Script — 복잡한 자동화 워크플로우" },
+          { id: "glossary.html", title: "AI 용어 사전 — 모르는 용어 한번에 정리" }
+        ]
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const quiz = new Quiz(QUIZ_DATA, '.quiz-container');
+
+      // 결과 표시 오버라이드 (레벨별 추천 페이지를 실제 파일명으로)
+      const originalShowResult = quiz.showResult.bind(quiz);
+      quiz.showResult = function(level, score) {
+        originalShowResult(level, score);
+        const info = LEVEL_INFO[level];
+        if (!info) return;
+
+        const titleEl = document.getElementById('resultTitle');
+        const descEl = document.getElementById('resultDescription');
+        const recoEl = document.getElementById('recommendedPages');
+
+        if (titleEl) titleEl.textContent = info.title;
+        if (descEl) descEl.textContent = info.description;
+        if (recoEl) {
+          recoEl.innerHTML = info.pages.map(p =>
+            `<li><a href="${p.id}">${p.title}</a></li>`
+          ).join('');
+        }
+      };
+    });
+  </script>
+</body>
+</html>
