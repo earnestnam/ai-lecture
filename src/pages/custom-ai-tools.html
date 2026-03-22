@@ -98,23 +98,120 @@
 
         <p>
           "AI한테 뭘 시키고 싶은데 어떻게 말해야 할지 모르겠어요"라는 분들을 위한 최고의 해법입니다.
-          <strong>프롬프트를 대신 만들어주는 AI</strong>를 하나 만들어두면, 앞으로는 AI에게 막연하게 물어봐도
-          잘 구조화된 프롬프트를 자동으로 생성해 줍니다.
+          <strong>프롬프트를 대신 만들어주는 AI</strong>를 Gem으로 하나 만들어두면,
+          이제부터는 "신제품 이메일 써줘" 한 마디만 해도 완벽한 프롬프트를 자동으로 설계해 줍니다.
         </p>
 
-        <h3>프롬프트 생성기 설정 방법</h3>
-        <p>Gems 또는 Projects를 열고, 아래 내용을 <strong>지시사항(Instructions)</strong>에 붙여넣으세요.</p>
+        <h3>이 생성기가 하는 일</h3>
+        <p>
+          사용자가 막연한 아이디어를 던지면, 생성기는 <strong>4단계 내부 프로세스</strong>를 거쳐
+          Gemini가 최고의 결과물을 낼 수 있도록 완성된 프롬프트를 만들어줍니다.
+          결과물을 직접 만드는 게 아니라, <em>결과물을 만들기 위한 설계도</em>를 만드는 역할입니다.
+        </p>
 
-        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.5rem; margin:var(--space-xl) 0; font-family:monospace; font-size:0.875rem; line-height:1.8; color:#111827; border:1px solid var(--color-border);">
-          <div style="color:var(--color-primary); font-weight:700; margin-bottom:0.75rem; font-family:var(--font-family);">📋 프롬프트 생성기 지시사항 (복사해서 사용)</div>
-          당신은 전문 프롬프트 작성 도우미입니다.<br><br>
-          사용자가 원하는 작업을 설명하면, 다음 단계로 진행하세요:<br><br>
-          1. 목적 파악: 이 프롬프트로 무엇을 얻고 싶은지 1~2가지 핵심 질문으로 확인합니다.<br>
-          2. 역할 설정: AI에게 맡길 역할을 명확히 정의합니다 (예: "당신은 10년 경력의 카피라이터입니다").<br>
-          3. 맥락 추가: 대상, 목적, 톤앤매너, 분량 등을 구체화합니다.<br>
-          4. 출력 형식: 결과물의 형태(목록, 표, 단락 등)를 지정합니다.<br>
-          5. 완성된 프롬프트를 코드 블록으로 제시합니다.<br><br>
-          항상 한국어로 답하고, 전문 용어 대신 쉬운 표현을 사용하세요.
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:var(--space-xl) 0;">
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1.25rem;">
+            <div style="font-size:1.1rem; font-weight:700; color:var(--color-primary); margin-bottom:0.75rem;">① 분석 (Deconstruct)</div>
+            <p style="font-size:0.875rem; color:#111827; margin:0;">요청에서 핵심 의도, 대상, 목표를 추출합니다. 무엇이 주어졌고 무엇이 부족한지 파악합니다.</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1.25rem;">
+            <div style="font-size:1.1rem; font-weight:700; color:var(--color-primary); margin-bottom:0.75rem;">② 진단 (Diagnose)</div>
+            <p style="font-size:0.875rem; color:#111827; margin:0;">모호한 부분을 찾고 어떤 기법(예시 활용, 단계별 사고 등)이 효과적인지 결정합니다.</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1.25rem;">
+            <div style="font-size:1.1rem; font-weight:700; color:var(--color-primary); margin-bottom:0.75rem;">③ 설계 (Develop)</div>
+            <p style="font-size:0.875rem; color:#111827; margin:0;">역할·목표·맥락·절차·제약 조건을 포함한 완성형 프롬프트를 구조적으로 작성합니다.</p>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1.25rem;">
+            <div style="font-size:1.1rem; font-weight:700; color:var(--color-primary); margin-bottom:0.75rem;">④ 전달 (Deliver)</div>
+            <p style="font-size:0.875rem; color:#111827; margin:0;">완성된 프롬프트를 코드 블록으로 제공하고, 더 정교하게 만들기 위한 추가 질문을 이어갑니다.</p>
+          </div>
+        </div>
+
+        <h3>생성기가 만들어주는 프롬프트 구조</h3>
+        <p>생성된 프롬프트는 항상 아래 6가지 항목을 포함합니다. 업무에 따라 일부는 생략되기도 합니다.</p>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.5rem; margin:var(--space-xl) 0; font-size:0.875rem; line-height:2; color:#111827; border:1px solid var(--color-border);">
+          <div style="color:var(--color-primary); font-weight:700; margin-bottom:0.75rem; font-size:1rem;">📋 프롬프트 구조 템플릿</div>
+          <div style="display:grid; gap:0.5rem;">
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <span style="background:var(--color-primary); color:white; border-radius:4px; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:0.2rem;">페르소나</span>
+              <span>AI에게 맡길 역할 — "너는 [분야] 전문가인 [역할]이야"</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <span style="background:var(--color-primary); color:white; border-radius:4px; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:0.2rem;">목표</span>
+              <span>핵심 요청을 한두 문장으로 명확하게 정의</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <span style="background:var(--color-primary); color:white; border-radius:4px; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:0.2rem;">맥락</span>
+              <span>작업 배경, 타겟 독자, 이유 — AI가 의도를 깊이 이해하게 도와줌</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <span style="background:var(--color-primary); color:white; border-radius:4px; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:0.2rem;">절차</span>
+              <span>1단계, 2단계… 순서로 AI가 논리적으로 작업하도록 안내</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <span style="background:var(--color-primary); color:white; border-radius:4px; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:0.2rem;">형식·제약</span>
+              <span>출력 형식, 분량, 어조, 반드시 포함/제외할 내용 명시</span>
+            </div>
+            <div style="display:flex; gap:0.75rem; align-items:flex-start;">
+              <span style="background:var(--color-text-muted); color:white; border-radius:4px; padding:0.1rem 0.5rem; font-size:0.75rem; font-weight:700; flex-shrink:0; margin-top:0.2rem;">예시(선택)</span>
+              <span>원하는 결과물의 톤·스타일·구조를 보여주는 예시 포함</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>Gemini Gems에 설정하는 방법</h3>
+        <ol style="margin:var(--space-md) 0; padding-left:var(--space-xl);">
+          <li style="margin-bottom:0.75rem;">Gemini 접속 → 왼쪽 메뉴에서 <strong>Gems 탐색</strong> 클릭</li>
+          <li style="margin-bottom:0.75rem;"><strong>새 Gem 만들기</strong> 버튼 클릭</li>
+          <li style="margin-bottom:0.75rem;">이름: <code style="background:var(--color-bg-section); padding:0.1rem 0.4rem; border-radius:4px;">프롬프트 생성기</code> 입력</li>
+          <li style="margin-bottom:0.75rem;"><strong>지시사항</strong> 칸에 아래 내용 전체를 붙여넣기</li>
+          <li style="margin-bottom:0.75rem;"><strong>저장</strong> 후 바로 사용 시작</li>
+        </ol>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.5rem; margin:var(--space-xl) 0; border:1px solid var(--color-border); position:relative;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <div style="color:var(--color-primary); font-weight:700; font-size:1rem;">📋 Gems 지시사항 전문 (복사해서 붙여넣기)</div>
+          </div>
+          <pre style="font-size:0.8rem; line-height:1.7; color:#111827; white-space:pre-wrap; word-break:break-word; margin:0; font-family:monospace;">🤖 페르소나 (Persona)
+너는 Google의 Gemini 모델을 위한 전문 프롬프트 엔지니어, 'Gems'야. 너의 유일한 임무는 사용자의 간단한 아이디어나 요청을 받아서, Gemini가 최고의 결과물을 생성할 수 있도록 체계적이고, 명확하며, 상세한 '최적화 프롬프트'를 생성하는 거야. 너는 결과물을 직접 만드는 것이 아니라, 결과물을 만들기 위한 완벽한 '설계도(프롬프트)'를 만드는 역할에만 집중해야 해.
+
+📝 핵심 원칙 (Core Principles)
+1. 명확성과 구체성: 추상적인 표현 대신 구체적인 지시, 형식, 제약 조건을 제시해.
+2. 맥락 제공: 작업의 배경과 최종 목표를 설명해서 Gemini가 의도를 더 깊이 이해하도록 해.
+3. 체계적인 구조: Markdown 헤더, 글머리 기호, 번호 매기기를 활용해 가독성을 높여줘.
+4. 단계별 사고 유도: 복잡한 작업은 명확한 절차를 순서대로 제시해 논리적으로 생각하도록 해.
+5. 예시 활용: 원하는 톤, 스타일, 구조를 보여주는 구체적인 예시를 포함해.
+6. Gemini 기능 활용: Google 검색, 표/차트 생성, 코드 작성 등 Gemini 특화 기능을 명시적으로 요구해.
+
+🛠️ 생성 프로세스 (4단계)
+1단계 분석: 요청에서 핵심 의도, 주요 대상, 결과물의 목표를 추출해.
+2단계 진단: 모호한 부분을 찾고, 가장 효과적인 프롬프트 기법을 결정해.
+3단계 설계: 아래 템플릿에 따라 프롬프트 각 구성 요소를 체계적으로 작성해.
+4단계 전달: 완성된 프롬프트를 한국어 코드 블록 안에 담아 전달해.
+
+📋 결과물 템플릿
+# 페르소나: 너는 [분야] 전문가인 [역할 이름]이야.
+# 목표: [핵심 요청을 한두 문장으로 명확하게 정의]
+# 맥락: 이 작업은 [배경/이유]를 위해 필요해. 타겟 독자는 [대상]이야.
+# 작업 절차:
+  1. [1단계]: [구체적 지시]
+  2. [2단계]: [구체적 지시]
+# 결과물 형식 및 제약:
+  - 출력 형식: [Markdown / 이메일 / 표 등]
+  - 분량: [글자 수 또는 문단 수]
+  - 어조: [전문적 / 친근한 / 간결한 등]
+  - 반드시 포함: [키워드, 특정 문구]
+  - 절대 포함하지 말 것: [피해야 할 내용]
+  - 언어: 한국어
+# (선택) 예시: [모범 출력 예시]
+
+⚠️ 절대 규칙
+- 유일한 결과물은 '프롬프트'야. 직접 답변, 요약, 창작은 절대 안 돼.
+- 최종 프롬프트는 반드시 한국어 코드 블록(```) 안에 넣어서 제공해.
+- 프롬프트 생성 후, 추가 정교화를 위해 세부 질문을 항목별로 이어서 해줘.
+- 사용자가 예시를 제공하면, 그 스타일을 분석해서 프롬프트에 반영한 수정 버전을 다시 제공해.</pre>
         </div>
 
         <h3>실제 사용 예시</h3>
@@ -124,18 +221,23 @@
             <p style="font-size:0.9rem; font-style:italic; background:white; padding:0.75rem; border-radius:4px; color:#111827; margin:0;">"신제품 출시 이메일 써줘"</p>
           </div>
           <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:1.25rem; color:#111827;">
-            <div style="font-size:0.8rem; font-weight:700; color:#16A34A; margin-bottom:0.5rem;">생성기가 만들어준 프롬프트</div>
-            <p style="font-size:0.85rem; background:white; padding:0.75rem; border-radius:4px; color:#111827; margin:0; line-height:1.6;">
-              "당신은 B2B SaaS 마케팅 전문가입니다. [제품명]의 신규 출시를 알리는 이메일을 작성해 주세요. 대상: 기존 고객사 담당자. 톤: 전문적이지만 따뜻한. 구성: 제목 + 본문(3단락) + CTA 버튼 문구. 분량: 200자 이내."
+            <div style="font-size:0.8rem; font-weight:700; color:#16A34A; margin-bottom:0.5rem;">생성기가 만들어준 프롬프트 (코드 블록)</div>
+            <p style="font-size:0.82rem; background:white; padding:0.75rem; border-radius:4px; color:#111827; margin:0; line-height:1.6; font-family:monospace;">
+              # 페르소나: B2B 마케팅 카피라이터<br>
+              # 목표: 신제품 출시 고객 이메일 작성<br>
+              # 맥락: 기존 고객사 담당자 대상<br>
+              # 절차: 1.제목 3개 안 → 2.본문 → 3.CTA<br>
+              # 형식: 제목+본문(3단락)+CTA, 200자 이내<br>
+              # 어조: 전문적이지만 따뜻한
             </p>
           </div>
         </div>
 
         <div class="tip-box">
-          <strong>💡 이렇게 활용해 보세요</strong><br>
-          프롬프트 생성기를 Gem/Project로 만들어두면 팀원들에게 공유할 수도 있습니다.
-          "이 AI한테 하고 싶은 거 말하면 프롬프트 만들어줘"라고 안내하면,
-          AI 초보자도 쉽게 좋은 프롬프트를 쓸 수 있습니다.
+          <strong>💡 생성기의 핵심 가치</strong><br>
+          이 생성기는 프롬프트를 만든 뒤 <strong>항목별로 추가 질문</strong>을 이어갑니다.
+          "참고할 예시가 있나요?", "타겟 독자의 특징은 무엇인가요?" 같은 질문에 답할수록
+          프롬프트가 점점 정교해집니다. 처음엔 짧게 시작해도 충분합니다.
         </div>
 
         <h2>활용 사례 ② — 업무 전용 AI 어시스턴트</h2>
