@@ -50,7 +50,16 @@ const NAV_DATA = [
   }
 ];
 
+// 페이지 로드 전에 테마 적용 (깜빡임 방지)
+(function () {
+  const saved = localStorage.getItem('ai-lecture-theme');
+  if (saved) {
+    document.documentElement.setAttribute('data-theme', saved);
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
   initSidebarNav();
   initMobileNav();
   initActiveNavLink();
@@ -174,6 +183,47 @@ function initMobileNav() {
     hamburger.setAttribute('aria-label', isOpen ? '메뉴 열기' : '메뉴 닫기');
     hamburger.innerHTML = isOpen ? '☰' : '✕';
   });
+}
+
+/**
+ * 테마 토글 (라이트/다크 모드)
+ */
+function initThemeToggle() {
+  const header = document.querySelector('.site-header .container');
+  if (!header) return;
+
+  const btn = document.createElement('button');
+  btn.className = 'theme-toggle';
+  btn.setAttribute('aria-label', '테마 변경');
+
+  const updateBtn = (theme) => {
+    const isDark = theme === 'dark';
+    btn.innerHTML = `<span class="theme-toggle__icon">${isDark ? '☀️' : '🌙'}</span><span class="theme-toggle__label">${isDark ? '라이트 모드' : '다크 모드'}</span>`;
+  };
+
+  const getEffectiveTheme = () => {
+    const saved = localStorage.getItem('ai-lecture-theme');
+    if (saved) return saved;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  updateBtn(getEffectiveTheme());
+
+  btn.addEventListener('click', () => {
+    const current = getEffectiveTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('ai-lecture-theme', next);
+    updateBtn(next);
+  });
+
+  // 햄버거 버튼 앞에 삽입
+  const hamburger = header.querySelector('.nav-hamburger');
+  if (hamburger) {
+    header.insertBefore(btn, hamburger);
+  } else {
+    header.appendChild(btn);
+  }
 }
 
 /**
