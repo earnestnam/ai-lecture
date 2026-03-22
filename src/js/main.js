@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * 사이드바 네비게이션 주입 (콘텐츠 페이지 전용)
+ * 사이드바 네비게이션 주입 (콘텐츠 페이지 전용, 데스크탑)
  */
 function initSidebarNav() {
   const mainEl = document.querySelector('main.content-page');
@@ -85,12 +85,6 @@ function initSidebarNav() {
 
   sidebar.innerHTML = html;
 
-  // 모바일 토글 버튼
-  const toggleBtn = document.createElement('button');
-  toggleBtn.className = 'sidebar-toggle';
-  toggleBtn.setAttribute('aria-label', '목차 열기');
-  toggleBtn.innerHTML = '☰ 목차';
-
   // 레이아웃 래퍼 생성
   const wrapper = document.createElement('div');
   wrapper.className = 'page-with-sidebar';
@@ -99,32 +93,19 @@ function initSidebarNav() {
   mainEl.parentNode.insertBefore(wrapper, mainEl);
   wrapper.appendChild(sidebar);
   wrapper.appendChild(mainEl);
-
-  // 모바일: 사이드바 토글
-  mainEl.insertAdjacentElement('beforebegin', toggleBtn);
-  toggleBtn.addEventListener('click', () => {
-    const isOpen = sidebar.style.display === 'block';
-    sidebar.style.display = isOpen ? '' : 'block';
-    sidebar.style.position = isOpen ? '' : 'fixed';
-    sidebar.style.zIndex = isOpen ? '' : '200';
-    sidebar.style.top = isOpen ? '' : '60px';
-    sidebar.style.left = isOpen ? '' : '0';
-    sidebar.style.width = isOpen ? '' : '80vw';
-    sidebar.style.maxWidth = isOpen ? '' : '300px';
-    sidebar.style.height = isOpen ? '' : 'calc(100vh - 60px)';
-    toggleBtn.innerHTML = isOpen ? '☰ 목차' : '✕ 닫기';
-  });
 }
 
 /**
- * 모바일 헤더 햄버거 메뉴
+ * 모바일 헤더 햄버거 메뉴 — 전체 목차 오버레이
  */
 function initMobileNav() {
   const header = document.querySelector('.site-header .container');
   if (!header) return;
-  const nav = header.querySelector('.main-nav');
-  if (!nav) return;
 
+  const isDetailPage = !!document.querySelector('main.content-page');
+  const currentId = window.location.pathname.split('/').pop().replace('.html', '');
+
+  // 햄버거 버튼
   const hamburger = document.createElement('button');
   hamburger.className = 'nav-hamburger';
   hamburger.setAttribute('aria-label', '메뉴 열기');
@@ -140,27 +121,54 @@ function initMobileNav() {
   `;
   header.appendChild(hamburger);
 
+  // 모바일 전체 목차 오버레이
+  const overlay = document.createElement('div');
+  overlay.className = 'mobile-nav-overlay';
+
+  let overlayHtml = '';
+
+  if (!isDetailPage) {
+    // 메인 페이지: 섹션 앵커 링크
+    overlayHtml += `<a href="#section-0" class="mobile-nav-section-link">🎯 진단</a>`;
+    overlayHtml += `<a href="#section-1" class="mobile-nav-section-link">📚 AI 기본기</a>`;
+    overlayHtml += `<a href="#section-2" class="mobile-nav-section-link">🤖 Claude</a>`;
+    overlayHtml += `<a href="#section-3" class="mobile-nav-section-link">✨ Gemini</a>`;
+    overlayHtml += `<a href="#section-4" class="mobile-nav-section-link">📖 부록</a>`;
+  } else {
+    // 상세 페이지: 전체 목차 트리
+    overlayHtml += `<a href="../index.html" class="mobile-nav-home">← 전체 목차로</a>`;
+    NAV_DATA.forEach(section => {
+      overlayHtml += `<div class="mobile-nav-section-title">${section.icon} ${section.section}</div>`;
+      section.pages.forEach(page => {
+        const isActive = page.id === currentId;
+        overlayHtml += `<a href="${page.id}.html" class="mobile-nav-link${isActive ? ' active' : ''}">${page.title}</a>`;
+      });
+    });
+  }
+
+  overlay.innerHTML = overlayHtml;
+  document.body.appendChild(overlay);
+
+  // 링크 클릭 시 오버레이 닫기
+  overlay.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      overlay.classList.remove('is-open');
+      hamburger.innerHTML = '☰';
+      hamburger.setAttribute('aria-label', '메뉴 열기');
+    });
+  });
+
   const mq = window.matchMedia('(max-width: 767px)');
   const handleResize = (m) => {
     hamburger.style.display = m.matches ? 'block' : 'none';
-    if (!m.matches) nav.style.display = '';
+    if (!m.matches) overlay.classList.remove('is-open');
   };
   mq.addEventListener('change', handleResize);
   handleResize(mq);
 
   hamburger.addEventListener('click', () => {
-    const isOpen = nav.style.display === 'flex';
-    Object.assign(nav.style, {
-      display: isOpen ? 'none' : 'flex',
-      flexDirection: 'column',
-      position: 'absolute',
-      top: '60px', left: '0', right: '0',
-      backgroundColor: 'var(--color-surface)',
-      padding: '1rem',
-      borderBottom: '1px solid var(--color-border)',
-      zIndex: '100'
-    });
-    if (isOpen) nav.style.display = 'none';
+    const isOpen = overlay.classList.contains('is-open');
+    overlay.classList.toggle('is-open');
     hamburger.setAttribute('aria-label', isOpen ? '메뉴 열기' : '메뉴 닫기');
     hamburger.innerHTML = isOpen ? '☰' : '✕';
   });
