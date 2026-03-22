@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>나만의 AI 어시스턴트 만들기 — AI 활용 강의</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+
+      <div class="page-header">
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 30분</span>
+          <span class="badge badge--difficulty badge--초급">초급</span>
+        </div>
+        <h1>나만의 AI 어시스턴트 만들기</h1>
+        <p class="page-description">GPTs, Gems, Projects — 매번 긴 설명 없이도 내 스타일을 아는 AI를 직접 설계해 봐요.</p>
+      </div>
+
+      <div class="content-body">
+
+        <p>
+          프롬프트를 잘 쓰는 것도 중요하지만, 매번 같은 설명을 반복하는 건 번거롭죠.
+          "나는 마케팅 담당자고, 우리 회사 톤앤매너는 친근하고 간결해야 해, 타겟은 20~30대야…"
+          이런 배경을 매번 입력하지 않아도 되는 방법이 있습니다.
+        </p>
+        <p>
+          ChatGPT의 <strong>GPTs</strong>, Gemini의 <strong>Gems</strong>, Claude의 <strong>Projects</strong> —
+          세 AI 모두 "나만의 전용 AI"를 직접 설계할 수 있는 기능을 제공합니다.
+          한 번 설정해두면 매번 처음부터 설명할 필요 없이, 내 업무에 딱 맞게 작동합니다.
+        </p>
+
+        <h2>세 가지 플랫폼 비교</h2>
+
+        <div style="overflow-x:auto; margin: var(--space-xl) 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+            <thead>
+              <tr style="background:var(--color-primary); color:white;">
+                <th style="padding:0.75rem 1rem; text-align:left;">기능</th>
+                <th style="padding:0.75rem 1rem; text-align:center;">ChatGPT GPTs</th>
+                <th style="padding:0.75rem 1rem; text-align:center;">Gemini Gems</th>
+                <th style="padding:0.75rem 1rem; text-align:center;">Claude Projects</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--color-border);">
+                <td style="padding:0.75rem 1rem; font-weight:600;">나만의 지시 설정</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border); background:var(--color-bg-alt);">
+                <td style="padding:0.75rem 1rem; font-weight:600;">문서/파일 업로드</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border);">
+                <td style="padding:0.75rem 1rem; font-weight:600;">대화 기록 유지</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">GPTs별 별도</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">Gem별 별도</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅ 프로젝트 내 공유</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--color-border); background:var(--color-bg-alt);">
+                <td style="padding:0.75rem 1rem; font-weight:600;">타인과 공유</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅ (GPT Store)</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">❌ 개인용</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">제한적</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem 1rem; font-weight:600;">무료 사용</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">❌ Plus 필요</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅ 무료 포함</td>
+                <td style="padding:0.75rem 1rem; text-align:center;">✅ 무료 포함</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 어떤 걸 써야 할까요?</strong><br>
+          Gemini를 주로 쓴다면 <strong>Gems</strong>, Claude를 주로 쓴다면 <strong>Projects</strong>가 가장 빠릅니다.
+          GPTs는 ChatGPT Plus 구독이 필요하지만 타인과 공유할 수 있어서 팀 배포에 유용합니다.
+        </div>
+
+        <h2>활용 사례 ① — 프롬프트 생성기 만들기</h2>
+
+        <p>
+          "AI한테 뭘 시키고 싶은데 어떻게 말해야 할지 모르겠어요"라는 분들을 위한 최고의 해법입니다.
+          <strong>프롬프트를 대신 만들어주는 AI</strong>를 하나 만들어두면, 앞으로는 AI에게 막연하게 물어봐도
+          잘 구조화된 프롬프트를 자동으로 생성해 줍니다.
+        </p>
+
+        <h3>프롬프트 생성기 설정 방법</h3>
+        <p>Gems 또는 Projects를 열고, 아래 내용을 <strong>지시사항(Instructions)</strong>에 붙여넣으세요.</p>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.5rem; margin:var(--space-xl) 0; font-family:monospace; font-size:0.875rem; line-height:1.8; color:#111827; border:1px solid var(--color-border);">
+          <div style="color:var(--color-primary); font-weight:700; margin-bottom:0.75rem; font-family:var(--font-family);">📋 프롬프트 생성기 지시사항 (복사해서 사용)</div>
+          당신은 전문 프롬프트 작성 도우미입니다.<br><br>
+          사용자가 원하는 작업을 설명하면, 다음 단계로 진행하세요:<br><br>
+          1. 목적 파악: 이 프롬프트로 무엇을 얻고 싶은지 1~2가지 핵심 질문으로 확인합니다.<br>
+          2. 역할 설정: AI에게 맡길 역할을 명확히 정의합니다 (예: "당신은 10년 경력의 카피라이터입니다").<br>
+          3. 맥락 추가: 대상, 목적, 톤앤매너, 분량 등을 구체화합니다.<br>
+          4. 출력 형식: 결과물의 형태(목록, 표, 단락 등)를 지정합니다.<br>
+          5. 완성된 프롬프트를 코드 블록으로 제시합니다.<br><br>
+          항상 한국어로 답하고, 전문 용어 대신 쉬운 표현을 사용하세요.
+        </div>
+
+        <h3>실제 사용 예시</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:var(--space-xl) 0;">
+          <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; padding:1.25rem; color:#111827;">
+            <div style="font-size:0.8rem; font-weight:700; color:#DC2626; margin-bottom:0.5rem;">내가 입력한 것</div>
+            <p style="font-size:0.9rem; font-style:italic; background:white; padding:0.75rem; border-radius:4px; color:#111827; margin:0;">"신제품 출시 이메일 써줘"</p>
+          </div>
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:1.25rem; color:#111827;">
+            <div style="font-size:0.8rem; font-weight:700; color:#16A34A; margin-bottom:0.5rem;">생성기가 만들어준 프롬프트</div>
+            <p style="font-size:0.85rem; background:white; padding:0.75rem; border-radius:4px; color:#111827; margin:0; line-height:1.6;">
+              "당신은 B2B SaaS 마케팅 전문가입니다. [제품명]의 신규 출시를 알리는 이메일을 작성해 주세요. 대상: 기존 고객사 담당자. 톤: 전문적이지만 따뜻한. 구성: 제목 + 본문(3단락) + CTA 버튼 문구. 분량: 200자 이내."
+            </p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 이렇게 활용해 보세요</strong><br>
+          프롬프트 생성기를 Gem/Project로 만들어두면 팀원들에게 공유할 수도 있습니다.
+          "이 AI한테 하고 싶은 거 말하면 프롬프트 만들어줘"라고 안내하면,
+          AI 초보자도 쉽게 좋은 프롬프트를 쓸 수 있습니다.
+        </div>
+
+        <h2>활용 사례 ② — 업무 전용 AI 어시스턴트</h2>
+
+        <p>
+          한 번 설정해두면 매번 배경 설명 없이 바로 업무 지시만 내릴 수 있는 나만의 AI를 만들 수 있습니다.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin:var(--space-xl) 0;">
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--card-radius); padding:1.25rem;">
+            <div style="font-size:1.5rem; margin-bottom:0.5rem;">📣</div>
+            <div style="font-weight:700; margin-bottom:0.4rem;">마케팅 카피 도우미</div>
+            <div style="font-size:0.85rem; color:var(--color-text-muted);">회사 톤앤매너, 타겟 고객, 금지어 등을 미리 등록해두면 매번 설명 불필요</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--card-radius); padding:1.25rem;">
+            <div style="font-size:1.5rem; margin-bottom:0.5rem;">📊</div>
+            <div style="font-weight:700; margin-bottom:0.4rem;">보고서 작성 도우미</div>
+            <div style="font-size:0.85rem; color:var(--color-text-muted);">회사 보고서 양식, 결재 라인, 문체 스타일을 지정해 일관된 보고서 생성</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--card-radius); padding:1.25rem;">
+            <div style="font-size:1.5rem; margin-bottom:0.5rem;">🙋</div>
+            <div style="font-weight:700; margin-bottom:0.4rem;">고객 응대 도우미</div>
+            <div style="font-size:0.85rem; color:var(--color-text-muted);">FAQ 문서, 응대 가이드라인을 업로드해두면 일관된 답변 초안 생성</div>
+          </div>
+          <div style="background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--card-radius); padding:1.25rem;">
+            <div style="font-size:1.5rem; margin-bottom:0.5rem;">📅</div>
+            <div style="font-weight:700; margin-bottom:0.4rem;">기획안 도우미</div>
+            <div style="font-size:0.85rem; color:var(--color-text-muted);">과거 기획서 양식, 승인 기준을 등록해 신규 기획안의 구조화 지원</div>
+          </div>
+        </div>
+
+        <h3>지시사항 작성 5단계</h3>
+        <p>좋은 AI 어시스턴트를 만드는 지시사항은 다음 다섯 가지를 포함하면 됩니다.</p>
+
+        <ol style="margin:var(--space-md) 0; padding-left:var(--space-xl);">
+          <li style="margin-bottom:1rem;">
+            <strong>역할 정의</strong> — "당신은 우리 회사의 마케팅 카피 전문가입니다."
+          </li>
+          <li style="margin-bottom:1rem;">
+            <strong>맥락 제공</strong> — "회사: OO기업 / 업종: B2B SaaS / 주요 고객: 중소기업 HR 담당자"
+          </li>
+          <li style="margin-bottom:1rem;">
+            <strong>스타일 규칙</strong> — "문체: 친근하지만 전문적 / 길이: 간결하게 / 금지어: 혁신적, 최고의"
+          </li>
+          <li style="margin-bottom:1rem;">
+            <strong>출력 형식</strong> — "결과물은 항상 제목 + 본문 + 핵심 메시지 한 줄 순서로 제시"
+          </li>
+          <li style="margin-bottom:1rem;">
+            <strong>예시 포함</strong> — 잘 만들어진 예시 결과물을 하나 추가하면 일관성이 크게 높아집니다
+          </li>
+        </ol>
+
+        <h2>Claude Projects 심화 — 설계서 활용법</h2>
+
+        <p>
+          Claude Projects는 특히 복잡한 업무를 지속적으로 협업할 때 강력합니다.
+          단순한 지시사항 외에도 <strong>업무 설계서</strong>를 문서로 업로드하면,
+          Claude가 훨씬 더 구체적이고 일관된 방식으로 도와줍니다.
+        </p>
+
+        <h3>설계서에 담으면 좋은 내용</h3>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:var(--space-xl) 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; color:#111827;">
+            <div style="font-weight:700; color:var(--color-primary); margin-bottom:0.75rem;">📋 작업 컨텍스트</div>
+            <ul style="font-size:0.9rem; padding-left:1.25rem; color:#111827;">
+              <li>이 프로젝트의 목적과 배경</li>
+              <li>최종 결과물의 모습</li>
+              <li>함께 쓰는 도구나 파일 형식</li>
+              <li>절대 하면 안 되는 것 (제약사항)</li>
+            </ul>
+          </div>
+          <div style="background:#EEF2FF; border-radius:8px; padding:1.25rem; color:#111827;">
+            <div style="font-weight:700; color:#4338CA; margin-bottom:0.75rem;">🔄 진행 방식</div>
+            <ul style="font-size:0.9rem; padding-left:1.25rem; color:#111827;">
+              <li>작업 순서 (1단계, 2단계…)</li>
+              <li>판단이 필요할 때 기준</li>
+              <li>내가 확인해야 하는 시점</li>
+              <li>결과물의 검토 기준</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>실제 설계서 예시 (간략형)</h3>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.5rem; margin:var(--space-xl) 0; font-size:0.875rem; line-height:1.8; color:#111827; border:1px solid var(--color-border);">
+          <div style="color:var(--color-primary); font-weight:700; margin-bottom:0.75rem; font-family:var(--font-family);">📄 월간 뉴스레터 제작 프로젝트 설계서</div>
+          <strong>목적:</strong> 매월 고객사에게 발송하는 뉴스레터 초안 작성<br>
+          <strong>결과물:</strong> 제목 3개 안 + 본문(500자) + 마무리 CTA<br>
+          <strong>스타일:</strong> 친근한 문체, 전문 용어 최소화, 이모지 1~2개<br>
+          <strong>금지사항:</strong> 경쟁사 언급, 가격 정보 포함<br>
+          <strong>작업 순서:</strong><br>
+          1. 이번 달 주제 키워드 확인<br>
+          2. 제목 3개 초안 제시 → 내가 선택<br>
+          3. 선택된 제목으로 본문 작성<br>
+          4. 검토 요청 후 최종본 확정
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 설계서는 처음부터 완벽하지 않아도 됩니다</strong><br>
+          Claude와 대화하면서 "이번엔 이 부분이 별로였어"라고 피드백을 주면,
+          Claude가 설계서 수정안을 제안해 드립니다. 쓰면서 조금씩 다듬어 가면 됩니다.
+        </div>
+
+        <h2>한 눈에 보는 시작 가이드</h2>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:0.75rem; margin:var(--space-xl) 0;">
+          <div style="display:flex; align-items:flex-start; gap:1rem; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">1</div>
+            <div>
+              <strong>플랫폼 선택</strong> — 평소 자주 쓰는 AI (Gemini → Gems / Claude → Projects / ChatGPT Plus → GPTs)
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">2</div>
+            <div>
+              <strong>용도 결정</strong> — 프롬프트 생성기? 특정 업무 도우미? 목적 하나만 정하세요
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">3</div>
+            <div>
+              <strong>지시사항 작성</strong> — 역할 + 맥락 + 스타일 규칙 + 출력 형식, 5단계로 작성
+            </div>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:1rem; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:1rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:32px; height:32px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0;">4</div>
+            <div>
+              <strong>테스트 & 개선</strong> — 실제로 써보고 아쉬운 부분을 AI에게 말하면 수정안 제안
+            </div>
+          </div>
+        </div>
+
+        <!-- 실습 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 실습 체크리스트</h3>
+          <label>
+            <input type="checkbox">
+            <span>Gemini Gems 또는 Claude Projects에서 새 어시스턴트를 하나 만들었다</span>
+          </label>
+          <label>
+            <input type="checkbox">
+            <span>역할·맥락·스타일·형식을 포함한 지시사항을 작성했다</span>
+          </label>
+          <label>
+            <input type="checkbox">
+            <span>프롬프트 생성기 지시사항을 복사해서 설정해봤다</span>
+          </label>
+          <label>
+            <input type="checkbox">
+            <span>실제 업무 요청을 넣어보고 결과를 확인했다</span>
+          </label>
+          <label>
+            <input type="checkbox">
+            <span>아쉬운 부분을 피드백해서 지시사항을 한 번 이상 개선했다</span>
+          </label>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="prompt-basics.html" class="nav-prev">← 이전: 프롬프트 잘 쓰는 법</a>
+      <a href="ai-work-habits.html" class="nav-next">다음: AI와 일하는 습관 만들기 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026 — 비개발자를 위한 AI 실전 가이드</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>

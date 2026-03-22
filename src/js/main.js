@@ -18,6 +18,7 @@ const NAV_DATA = [
     pages: [
       { id: 'ai-landscape', title: 'AI 도구 지도' },
       { id: 'prompt-basics', title: '프롬프트 잘 쓰는 법' },
+      { id: 'custom-ai-tools', title: '나만의 AI 어시스턴트 만들기' },
       { id: 'ai-work-habits', title: 'AI와 일하는 습관' },
     ]
   },
