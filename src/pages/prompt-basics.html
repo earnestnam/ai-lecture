@@ -96,6 +96,114 @@
           </div>
         </div>
 
+        <h2>🔑 Google이 추천하는 TCREI 프레임워크</h2>
+
+        <p>
+          Google은 AI 프롬프트를 잘 쓰는 방법으로 <strong>TCREI</strong> 5가지 요소를 제안합니다.
+          앞서 배운 5요소와 비슷하지만, 특히 <strong>반복 개선(Iterate)</strong>을 핵심으로 강조하는 점이 특징입니다.
+        </p>
+
+        <div style="display:grid; grid-template-columns:repeat(5, 1fr); gap:0.5rem; margin:var(--space-xl) 0; text-align:center;">
+          <div style="background:var(--color-primary); color:white; border-radius:8px; padding:1rem 0.5rem;">
+            <div style="font-size:1.75rem; font-weight:800;">T</div>
+            <div style="font-size:0.75rem; font-weight:600; margin-top:0.3rem;">Task</div>
+          </div>
+          <div style="background:var(--color-primary-dark); color:white; border-radius:8px; padding:1rem 0.5rem;">
+            <div style="font-size:1.75rem; font-weight:800;">C</div>
+            <div style="font-size:0.75rem; font-weight:600; margin-top:0.3rem;">Context</div>
+          </div>
+          <div style="background:#7C3AED; color:white; border-radius:8px; padding:1rem 0.5rem;">
+            <div style="font-size:1.75rem; font-weight:800;">R</div>
+            <div style="font-size:0.75rem; font-weight:600; margin-top:0.3rem;">References</div>
+          </div>
+          <div style="background:#1D4ED8; color:white; border-radius:8px; padding:1rem 0.5rem;">
+            <div style="font-size:1.75rem; font-weight:800;">E</div>
+            <div style="font-size:0.75rem; font-weight:600; margin-top:0.3rem;">Evaluate</div>
+          </div>
+          <div style="background:#16A34A; color:white; border-radius:8px; padding:1rem 0.5rem;">
+            <div style="font-size:1.75rem; font-weight:800;">I</div>
+            <div style="font-size:0.75rem; font-weight:600; margin-top:0.3rem;">Iterate</div>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:0.75rem; margin:var(--space-xl) 0;">
+
+          <div style="display:flex; gap:1rem; align-items:flex-start; background:var(--color-bg-alt); border-radius:8px; padding:1.1rem;">
+            <div style="background:var(--color-primary); color:white; border-radius:6px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0;">T</div>
+            <div>
+              <strong>Task (과제)</strong> — 원하는 작업을 동사로 명확하게
+              <p style="font-size:0.875rem; color:#374151; margin:0.4rem 0 0;">예: "작성해줘", "분류해줘", "요약해줘", "표로 정리해줘"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; align-items:flex-start; background:var(--color-bg-alt); border-radius:8px; padding:1.1rem;">
+            <div style="background:var(--color-primary-dark); color:white; border-radius:6px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0;">C</div>
+            <div>
+              <strong>Context (맥락)</strong> — 배경 상황과 목적 설명
+              <p style="font-size:0.875rem; color:#374151; margin:0.4rem 0 0;">예: "우리 회사는 B2B SaaS 기업이고, 다음 달 신규 기능을 출시해"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; align-items:flex-start; background:var(--color-bg-alt); border-radius:8px; padding:1.1rem;">
+            <div style="background:#7C3AED; color:white; border-radius:6px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0;">R</div>
+            <div>
+              <strong>References (참고)</strong> — 원하는 스타일이나 참고 자료 제시
+              <p style="font-size:0.875rem; color:#374151; margin:0.4rem 0 0;">예: "이 문장 스타일처럼: [예시]", "지난번에 쓴 이 이메일처럼 해줘"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; align-items:flex-start; background:var(--color-bg-alt); border-radius:8px; padding:1.1rem;">
+            <div style="background:#1D4ED8; color:white; border-radius:6px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0;">E</div>
+            <div>
+              <strong>Evaluate (평가)</strong> — 좋은 결과물의 기준 명시
+              <p style="font-size:0.875rem; color:#374151; margin:0.4rem 0 0;">예: "200자 이내로", "전문 용어 없이", "20~30대가 이해할 수 있는 수준으로"</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; align-items:flex-start; background:var(--color-bg-alt); border-radius:8px; padding:1.1rem;">
+            <div style="background:#16A34A; color:white; border-radius:6px; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1rem; flex-shrink:0;">I</div>
+            <div>
+              <strong>Iterate (반복)</strong> — 첫 결과에서 피드백으로 개선
+              <p style="font-size:0.875rem; color:#374151; margin:0.4rem 0 0;">예: "더 짧게", "2번 항목을 더 구체적으로", "톤을 더 친근하게 바꿔줘"</p>
+            </div>
+          </div>
+
+        </div>
+
+        <h3>TCREI 실전 예시 — 보고서 작성 요청</h3>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">✍️ TCREI 적용 프롬프트 예시 (복사해서 수정 후 사용)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>[T - 과제]
+이번 분기 팀 성과를 임원 보고용으로 요약해줘.
+
+[C - 맥락]
+우리 팀은 마케팅팀이고, Q3 목표 달성률은 85%야.
+주요 성과는 SNS 팔로워 20% 증가, 전환율 1.2%p 개선이야.
+
+[R - 참고]
+아래처럼 간결하고 숫자 중심으로 써줘:
+"Q2 신규 가입자 12% 증가, 이탈률 0.5%p 개선."
+
+[E - 평가 기준]
+- 3단락 이내
+- 숫자와 퍼센트 중심
+- 전문 용어 최소화
+
+[I - 이후 개선]
+결과를 보고 "더 짧게" 또는 "항목별로 나눠줘"라고 추가 요청</pre>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 TCREI vs 5요소, 뭘 써야 할까요?</strong><br>
+          둘 다 좋은 프레임워크입니다. 처음엔 <strong>5요소(역할·맥락·과제·형식·예시)</strong>로 시작하고,
+          익숙해지면 <strong>TCREI의 Iterate(반복 개선)</strong> 개념을 더해 대화를 이어가는 습관을 만들어 보세요.
+          두 프레임워크를 합치면 AI와 더 자연스럽게 협업할 수 있습니다.
+        </div>
+
         <h2>🔄 나쁜 프롬프트 vs 좋은 프롬프트</h2>
 
         <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1.5rem 0;">

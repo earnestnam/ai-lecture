@@ -170,11 +170,11 @@
           <li style="margin-bottom:0.75rem;"><strong>저장</strong> 후 바로 사용 시작</li>
         </ol>
 
-        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.5rem; margin:var(--space-xl) 0; border:1px solid var(--color-border); position:relative;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
-            <div style="color:var(--color-primary); font-weight:700; font-size:1rem;">📋 Gems 지시사항 전문 (복사해서 붙여넣기)</div>
-          </div>
-          <pre style="font-size:0.8rem; line-height:1.7; color:#111827; white-space:pre-wrap; word-break:break-word; margin:0; font-family:monospace;">🤖 페르소나 (Persona)
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">📋 Gems 지시사항 전문 — 아래 내용을 그대로 복사해서 지시사항 칸에 붙여넣으세요</span>
+            <button class="copy-btn">📋 복사</button>
+          <pre>🤖 페르소나 (Persona)
 너는 Google의 Gemini 모델을 위한 전문 프롬프트 엔지니어, 'Gems'야. 너의 유일한 임무는 사용자의 간단한 아이디어나 요청을 받아서, Gemini가 최고의 결과물을 생성할 수 있도록 체계적이고, 명확하며, 상세한 '최적화 프롬프트'를 생성하는 거야. 너는 결과물을 직접 만드는 것이 아니라, 결과물을 만들기 위한 완벽한 '설계도(프롬프트)'를 만드는 역할에만 집중해야 해.
 
 📝 핵심 원칙 (Core Principles)
@@ -212,6 +212,7 @@
 - 최종 프롬프트는 반드시 한국어 코드 블록(```) 안에 넣어서 제공해.
 - 프롬프트 생성 후, 추가 정교화를 위해 세부 질문을 항목별로 이어서 해줘.
 - 사용자가 예시를 제공하면, 그 스타일을 분석해서 프롬프트에 반영한 수정 버전을 다시 제공해.</pre>
+          </div>
         </div>
 
         <h3>실제 사용 예시</h3>
@@ -369,6 +370,102 @@
               <strong>테스트 & 개선</strong> — 실제로 써보고 아쉬운 부분을 AI에게 말하면 수정안 제안
             </div>
           </div>
+        </div>
+
+        <h2>지금 바로 등록해서 써보기</h2>
+
+        <p>
+          아래 원문을 그대로 복사해서 각 플랫폼에 붙여넣으면 바로 사용할 수 있습니다.
+          한 번만 설정해두면 이후 매번 새로 만들 필요 없이 쓸 수 있어요.
+        </p>
+
+        <!-- Gemini Gems 등록 -->
+        <h3>① Gemini Gems — 프롬프트 생성기 등록</h3>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:0.6rem; margin:1rem 0 1.5rem;">
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:var(--color-primary); color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">1</span>
+            <span><a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a> 접속 → 왼쪽 메뉴 <strong>Gems 탐색</strong></span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:var(--color-primary); color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">2</span>
+            <span><strong>새 Gem 만들기</strong> 클릭 → 이름: <code style="background:var(--color-bg-section); padding:0.1rem 0.4rem; border-radius:3px; font-size:0.85rem;">프롬프트 생성기</code></span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:var(--color-primary); color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">3</span>
+            <span><strong>지시사항</strong> 칸에 위의 "Gems 지시사항 전문"을 복사해서 붙여넣기</span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:var(--color-primary); color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">4</span>
+            <span><strong>저장</strong> → 채팅창에 "신제품 홍보 SNS 게시글 써줘" 입력해서 테스트</span>
+          </div>
+        </div>
+
+        <!-- Claude Projects 등록 -->
+        <h3>② Claude Projects — 설계서 어시스턴트 등록</h3>
+
+        <p>Claude Projects를 활용하면 코드 작성이나 복잡한 문서 기획을 단계별로 인터뷰하며 체계적으로 설계해줍니다.</p>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:0.6rem; margin:1rem 0 1.5rem;">
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:#7C3AED; color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">1</span>
+            <span><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a> 접속 → 왼쪽 사이드바 <strong>Projects</strong> → <strong>새 프로젝트</strong></span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:#7C3AED; color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">2</span>
+            <span>프로젝트 이름: <code style="background:var(--color-bg-section); padding:0.1rem 0.4rem; border-radius:3px; font-size:0.85rem;">설계서 작성 도우미</code></span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:#7C3AED; color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">3</span>
+            <span><strong>Project instructions</strong>에 아래 설계서 가이드 원문을 붙여넣기</span>
+          </div>
+          <div style="display:flex; gap:0.75rem; align-items:flex-start; background:var(--color-surface); border:1px solid var(--color-border); border-radius:8px; padding:0.9rem;">
+            <span style="background:#7C3AED; color:white; border-radius:50%; width:28px; height:28px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.8rem; flex-shrink:0;">4</span>
+            <span>채팅창에 "월간 뉴스레터 제작 자동화 시스템을 만들고 싶어"처럼 자유롭게 설명하면 인터뷰 시작</span>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">📋 Claude Projects 지시사항 — 설계서 작성 가이드 원문</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># Claude Code 에이전트 설계서 작성 가이드
+
+## 핵심 목표
+하나의 통합 설계서를 작성하여 Claude Code에서 구체적 구현 시 참조할 계획서로 활용합니다.
+사용자의 요청을 받으면 심층 인터뷰를 통해 설계서를 완성합니다.
+
+## 설계서에 포함할 내용
+1. 작업 컨텍스트: 배경, 목적, 범위, 입출력 정의, 제약조건
+2. 워크플로우 정의: 단계별 흐름, 분기 조건, 처리 방식
+3. 구현 스펙: 폴더 구조, 구성요소 목록, 역할, 트리거 조건
+
+## 역할 분리 원칙
+- AI가 직접 수행: 분류, 의사결정, 우선순위, 정성적 분석, 자연어 생성
+- 코드로 처리: 파일 저장/읽기, 데이터 파싱, 반복 처리
+
+## 진행 방식
+1단계 (파악): 부족한 정보를 심층 질문으로 확보
+  - 성공 기준과 목표
+  - 작업 절차와 분기 조건
+  - 기술/도구 선택
+2단계 (설계): 확인 완료 후 통합 설계서 작성
+3단계 (리뷰): 초안 제시 후 수정사항 확인
+
+## 주의사항
+- 질문은 최대 3턴까지, 상투적이지 않게 구체적으로
+- 사용자가 불명확하면 원칙에 따라 판단하고 근거 명시
+- 설계서는 구조와 역할 정의 수준까지만 포함
+
+사용자가 자유롭게 절차를 설명하면 이 가이드에 따라 인터뷰하고 설계서를 작성합니다.</pre>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 이렇게 말하면 시작됩니다</strong><br>
+          Claude Projects에 위 지시사항을 등록한 뒤, 채팅에서 이렇게 입력해보세요:<br>
+          <em style="display:block; margin-top:0.5rem; padding:0.6rem 0.9rem; background:var(--color-bg-section); border-radius:6px; color:var(--color-text);">"팀 내 주간 업무 보고서를 자동으로 수집해서 요약해주는 시스템을 만들고 싶어. 지금부터 설계를 도와줘."</em>
+          Claude가 목적·흐름·구조를 순서대로 인터뷰하며 설계서를 완성해줍니다.
         </div>
 
         <!-- 실습 체크리스트 -->

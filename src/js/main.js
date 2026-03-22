@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSidebarNav();
   initMobileNav();
   initActiveNavLink();
+  initCopyButtons();
 });
 
 /**
@@ -172,6 +173,26 @@ function initMobileNav() {
     overlay.classList.toggle('is-open');
     hamburger.setAttribute('aria-label', isOpen ? '메뉴 열기' : '메뉴 닫기');
     hamburger.innerHTML = isOpen ? '☰' : '✕';
+  });
+}
+
+/**
+ * 코드 블록 복사 버튼
+ */
+function initCopyButtons() {
+  document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const pre = btn.closest('.code-block-wrapper').querySelector('pre');
+      if (!pre) return;
+      navigator.clipboard.writeText(pre.textContent.trim()).then(() => {
+        btn.textContent = '✅ 복사됨!';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = '📋 복사';
+          btn.classList.remove('copied');
+        }, 2000);
+      });
+    });
   });
 }
 

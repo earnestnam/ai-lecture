@@ -786,3 +786,65 @@ body:has(.sidebar-nav) .site-footer {
   background: var(--color-bg-alt);
   text-decoration: none;
 }
+
+/* =========================================
+   코드 블록 & 복사 버튼
+   ========================================= */
+.code-block-wrapper {
+  position: relative;
+  margin: var(--space-xl) 0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.code-block-inner {
+  background: #1e1e2e;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid #313244;
+}
+
+.code-block-label {
+  color: #cba6f7;
+  font-weight: 700;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  display: block;
+  padding-right: 5rem;
+}
+
+.code-block-inner pre {
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: #cdd6f4;
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #a6adc8;
+  padding: 0.3rem 0.75rem;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  z-index: 1;
+}
+
+.copy-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #cdd6f4;
+}
+
+.copy-btn.copied {
+  background: #40a02b;
+  border-color: #40a02b;
+  color: white;
+}
