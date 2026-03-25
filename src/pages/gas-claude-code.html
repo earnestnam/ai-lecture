@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CLAUDE.md 작성부터 코드 생성·리뷰·수정 워크플로를 익혀요.">
+  <title>Claude Code로 GAS 개발 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Claude Code로 GAS 개발</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 50분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">CLAUDE.md 작성부터 코드 생성·리뷰·수정 워크플로를 익혀요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- INTRO -->
+        <h2>🤖 Claude Code가 GAS 개발을 바꾸는 방법</h2>
+        <p>
+          예전에는 Google Apps Script(GAS) 코드를 짜려면 구글 공식 문서를 뒤지고, 스택 오버플로우를 헤매고, 시행착오를 반복해야 했어요.
+          하지만 이제 <strong>Claude Code</strong>가 있으면 이야기가 달라집니다.
+        </p>
+        <p>
+          Claude Code는 VSCode 터미널에서 실행되는 AI 코딩 어시스턴트예요. 단순히 "코드 짜줘"가 아니라, 프로젝트의 맥락을 이해하고
+          <strong>생성 → 리뷰 → 수정</strong>을 반복하면서 실제 업무에 맞는 코드를 만들어냅니다.
+          특히 GAS처럼 패턴이 정해진 코드에서는 그 실력이 더 빛납니다.
+        </p>
+        <p>
+          이번 강의에서는 Claude Code를 GAS 개발에 최대한 활용하는 세 가지 핵심을 배웁니다:
+        </p>
+        <ul>
+          <li><strong>CLAUDE.md</strong> — 프로젝트 맥락을 Claude에게 사전에 알려주는 설정 파일</li>
+          <li><strong>효과적인 프롬프트 패턴</strong> — "좋은 지시"와 "나쁜 지시"의 차이</li>
+          <li><strong>반복 수정 워크플로</strong> — 오류가 나도 당황하지 않고 빠르게 해결하는 방법</li>
+        </ul>
+
+        <!-- CLAUDE.md -->
+        <h2>📄 CLAUDE.md에 GAS 프로젝트 컨텍스트 작성하기</h2>
+        <p>
+          CLAUDE.md는 프로젝트 루트에 만드는 마크다운 파일이에요. Claude Code가 프로젝트를 열면 이 파일을 가장 먼저 읽어서
+          "이 프로젝트가 무엇인지", "어떤 규칙을 따르는지" 파악합니다.
+          마치 새 팀원에게 건네는 <strong>온보딩 문서</strong>라고 생각하면 됩니다.
+        </p>
+        <p>
+          GAS 프로젝트의 경우 스프레드시트 구조, 함수 명명 규칙, 할당량 제한 등을 미리 알려주면
+          Claude가 훨씬 프로젝트에 맞는 코드를 생성합니다. 아래는 실제 업무에 쓸 수 있는 CLAUDE.md 예시입니다.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">CLAUDE.md (GAS 프로젝트 예시)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># 프로젝트 개요
+
+이 프로젝트는 영업팀 일일 보고서를 자동으로 수집·집계해 슬랙에 전송하는
+Google Apps Script 자동화 시스템입니다.
+
+- 실행 트리거: 매일 오전 9시 (time-based trigger)
+- 주 사용자: 영업팀 (약 20명), 슬랙 채널 #영업-daily-report
+- 스크립트 소유자: earne@company.com
+
+---
+
+# 스프레드시트 구조
+
+## 시트 1: "일일입력" (직원이 직접 입력하는 시트)
+| 컬럼 | 인덱스 | 설명 |
+|------|--------|------|
+| 날짜 | A (0) | Date 형식, 자동 입력 |
+| 담당자 | B (1) | 이름 텍스트 |
+| 목표 | C (2) | 숫자 (만 원 단위) |
+| 실적 | D (3) | 숫자 (만 원 단위) |
+| 메모 | E (4) | 자유 텍스트 |
+
+## 시트 2: "집계" (수식 및 스크립트가 관리하는 시트)
+| 컬럼 | 설명 |
+|------|------|
+| A | 날짜 |
+| B | 팀 합계 목표 |
+| C | 팀 합계 실적 |
+| D | 달성률 (%) |
+
+---
+
+# 함수 규칙
+
+## 명명 규칙
+- 진입점 함수: `run동작명()` (예: runDailyReport, runWeeklySummary)
+- 헬퍼 함수: `동사명사()` 카멜케이스 (예: fetchTodayData, sendSlackMessage)
+- 상수: 전부 대문자 + 언더스코어 (예: SHEET_NAME_INPUT, SLACK_WEBHOOK_URL)
+
+## 오류 처리 패턴
+- 모든 외부 통신(UrlFetchApp, 스프레드시트 접근)은 try-catch 필수
+- 오류 발생 시 Logger.log()로 기록 후 운영자 이메일로 알림 전송
+- 함수 시작/종료 시점에 Logger.log()로 실행 흔적 남기기
+
+## PropertiesService 사용
+- 슬랙 웹훅 URL 등 민감한 값은 Script Properties에 저장
+- 코드에 직접 URL, 토큰을 하드코딩하지 않음
+
+---
+
+# 금지사항
+
+- SpreadsheetApp.getActiveSpreadsheet() 사용 금지 → ID로 직접 열기
+  (트리거 실행 시 active spreadsheet가 없을 수 있음)
+- sleep() 남발 금지 → GAS 실행 시간은 6분 제한
+- UrlFetchApp 호출을 루프 안에 넣지 않기 → 할당량 초과 위험
+- Utilities.sleep(1000) 이상의 딜레이는 반드시 주석으로 이유 설명
+- 하드코딩된 이메일, URL, 시트 이름 금지 → 상수로 분리
+
+---
+
+# GAS 할당량 참고
+
+| 항목 | 일일 한도 |
+|------|---------|
+| 이메일 발송 | 100건 |
+| UrlFetchApp 호출 | 20,000건 |
+| 스크립트 실행시간 | 6분/회 |
+| Spreadsheet 읽기/쓰기 | 제한 없음 (단 대용량 주의) |</pre>
+          </div>
+        </div>
+
+        <div class="tip-box"><strong>💡 CLAUDE.md를 작성할 때 팁:</strong> 처음부터 완벽하게 쓰려 하지 마세요. 일단 프로젝트 개요와 스프레드시트 구조만 작성해도 Claude의 코드 품질이 눈에 띄게 올라갑니다. 이후 Claude가 실수하는 패턴이 생기면 "금지사항"에 하나씩 추가하세요.</div>
+
+        <!-- 프롬프트 패턴 -->
+        <h2>✍️ 효과적인 프롬프트 설계 패턴 3가지</h2>
+        <p>
+          Claude Code가 아무리 똑똑해도, 지시를 어떻게 내리느냐에 따라 결과물이 크게 달라집니다.
+          GAS 개발에서 자주 쓰이는 세 가지 상황별로 "나쁜 예"와 "좋은 예"를 비교해볼게요.
+        </p>
+
+        <!-- Pattern 1 -->
+        <h3>패턴 1: 새 기능 요청할 때</h3>
+        <div class="comparison-grid">
+          <div class="comparison-card comparison-card--bad">
+            <div class="comparison-label">❌ 나쁜 예</div>
+            <div class="comparison-content">
+              <p>"슬랙 메시지 보내는 코드 짜줘."</p>
+              <p class="comparison-reason">문제: 어떤 내용을, 어느 채널에, 어떤 형식으로 보내야 하는지 Claude가 알 수 없어요. 범용 예제 코드가 나올 가능성이 높습니다.</p>
+            </div>
+          </div>
+          <div class="comparison-card comparison-card--good">
+            <div class="comparison-label">✅ 좋은 예</div>
+            <div class="comparison-content">
+              <p>"집계 시트의 오늘 날짜 행 데이터(B, C, D 컬럼)를 읽어서, SLACK_WEBHOOK_URL Script Property로 슬랙 메시지를 보내는 함수를 작성해줘. 메시지 형식은 '📊 오늘의 영업 실적\n목표: X만원 | 실적: Y만원 | 달성률: Z%'이고, 실패 시 Logger.log()로 오류를 기록해줘."</p>
+              <p class="comparison-reason">좋은 이유: 읽을 시트·컬럼, 메시지 형식, 오류 처리 방식까지 구체적으로 명시했어요.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern 2 -->
+        <h3>패턴 2: 버그 수정 요청할 때</h3>
+        <div class="comparison-grid">
+          <div class="comparison-card comparison-card--bad">
+            <div class="comparison-label">❌ 나쁜 예</div>
+            <div class="comparison-content">
+              <p>"코드가 안 돼. 고쳐줘."</p>
+              <p class="comparison-reason">문제: "안 된다"가 무슨 의미인지, 어떤 오류인지, 어떤 상황에서 발생하는지 정보가 없어요. Claude는 추측으로만 수정할 수밖에 없습니다.</p>
+            </div>
+          </div>
+          <div class="comparison-card comparison-card--good">
+            <div class="comparison-label">✅ 좋은 예</div>
+            <div class="comparison-content">
+              <p>"runDailyReport() 실행 시 아래 오류가 발생해:<br>
+              TypeError: Cannot read properties of undefined (reading 'getRange')<br>
+              at fetchTodayData (Code.gs:23)<br><br>
+              해당 함수 코드는 [코드 붙여넣기]. '일일입력' 시트에 오늘 날짜 데이터가 없을 때만 오류가 나는 것 같아. 데이터가 없으면 빈 배열을 반환하도록 수정해줘."</p>
+              <p class="comparison-reason">좋은 이유: 오류 메시지, 발생 위치, 관련 코드, 재현 조건까지 모두 제공했어요.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pattern 3 -->
+        <h3>패턴 3: 코드 리뷰 요청할 때</h3>
+        <div class="comparison-grid">
+          <div class="comparison-card comparison-card--bad">
+            <div class="comparison-label">❌ 나쁜 예</div>
+            <div class="comparison-content">
+              <p>"이 코드 리뷰해줘."</p>
+              <p class="comparison-reason">문제: "리뷰"의 범위가 너무 넓어요. 스타일 개선인지, 버그 탐지인지, 보안 검토인지 모르면 Claude는 두루뭉술한 피드백을 줍니다.</p>
+            </div>
+          </div>
+          <div class="comparison-card comparison-card--good">
+            <div class="comparison-label">✅ 좋은 예</div>
+            <div class="comparison-content">
+              <p>"아래 GAS 코드를 세 가지 관점에서 리뷰해줘:<br>
+              1. GAS 할당량 초과 위험 (UrlFetchApp, 이메일 발송 횟수)<br>
+              2. 트리거 실행 시 발생할 수 있는 null/undefined 오류<br>
+              3. Script Properties 대신 하드코딩된 값이 있는지<br>
+              문제가 있으면 수정 방법도 같이 알려줘."</p>
+              <p class="comparison-reason">좋은 이유: 리뷰 관점 3가지를 명확히 지정하고, 수정 방법까지 요청했어요.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 코드 리뷰 체크포인트 -->
+        <h2>🔍 생성된 코드 리뷰 체크포인트</h2>
+        <p>
+          Claude가 코드를 생성해줬더라도 그냥 붙여넣기 하면 안 됩니다. GAS 특성상 놓치기 쉬운 세 가지를 반드시 확인하세요.
+        </p>
+
+        <div class="card-grid">
+          <div class="card">
+            <div class="card__icon">🔐</div>
+            <h3 class="card__title">권한 확인</h3>
+            <p class="card__desc">
+              GAS 함수가 처음 실행될 때 사용자에게 권한 동의를 요청합니다.
+              코드에서 사용하는 서비스(SpreadsheetApp, GmailApp, UrlFetchApp 등)가 실제로 필요한 것들인지 확인하세요.
+              불필요한 서비스를 사용하면 "과도한 권한 요청"으로 동의율이 떨어집니다.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card__icon">⚡</div>
+            <h3 class="card__title">할당량 확인</h3>
+            <p class="card__desc">
+              GAS에는 일일 실행 한도가 있어요. 특히 루프 안에 UrlFetchApp 호출이나 이메일 발송이 있으면 순식간에 한도를 초과할 수 있습니다.
+              Claude 코드에 반복문이 있다면 "이 루프가 최대 몇 번 실행될 수 있는지" 반드시 계산해보세요.
+            </p>
+          </div>
+          <div class="card">
+            <div class="card__icon">🛡️</div>
+            <h3 class="card__title">오류 처리</h3>
+            <p class="card__desc">
+              try-catch 블록이 있는지, 오류 발생 시 Logger.log()로 기록하는지 확인하세요.
+              트리거로 자동 실행되는 함수는 오류가 나도 화면에 표시되지 않아 나중에 발견하기 어렵습니다.
+              오류 시 담당자 이메일 알림을 추가하면 더욱 안전합니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 반복 수정 워크플로 -->
+        <h2>🔄 반복 수정 워크플로</h2>
+        <p>
+          코드가 한 번에 완벽하게 동작하는 경우는 드뭅니다. 오류가 나도 당황하지 말고 아래 흐름을 따라가세요.
+          오히려 "오류 → 수정" 반복이 Claude와 협업하는 가장 효과적인 방법입니다.
+        </p>
+
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="workflow-step__number">1</div>
+            <div class="workflow-step__content">
+              <h4>코드 실행</h4>
+              <p>GAS 에디터에서 함수를 실행하거나, clasp push 후 트리거를 통해 실행합니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-step__number">2</div>
+            <div class="workflow-step__content">
+              <h4>오류 확인</h4>
+              <p>실행 로그(보기 → 로그)를 열어 오류 메시지와 스택 트레이스를 확인합니다. Logger.log()로 남긴 기록도 여기서 볼 수 있어요.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-step__number">3</div>
+            <div class="workflow-step__content">
+              <h4>로그 복사</h4>
+              <p>오류 메시지 전체를 복사합니다. 파일명, 줄 번호까지 포함된 전체 스택 트레이스가 중요합니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-step__number">4</div>
+            <div class="workflow-step__content">
+              <h4>Claude에게 컨텍스트 제공</h4>
+              <p>오류 메시지 + 관련 코드 + 재현 조건을 함께 전달합니다. 아래 템플릿을 활용하세요.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-step__number">5</div>
+            <div class="workflow-step__content">
+              <h4>수정 코드 받기</h4>
+              <p>Claude가 제안한 수정 코드를 받아 GAS 에디터에 적용합니다. 수정 이유도 함께 물어보면 학습이 됩니다.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <div class="workflow-step__number">6</div>
+            <div class="workflow-step__content">
+              <h4>재실행 및 검증</h4>
+              <p>수정된 코드를 다시 실행해서 오류가 해결됐는지 확인합니다. 해결됐다면 clasp push로 동기화!</p>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.5rem;">오류를 Claude에게 전달할 때는 아래 형식을 사용하면 빠르게 해결됩니다:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">오류 컨텍스트 전달 템플릿</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>아래 GAS 함수에서 오류가 발생했어. 수정해줘.
+
+## 오류 메시지
+TypeError: Cannot read properties of undefined (reading 'getRange')
+    at fetchTodayData (Code.gs:23:20)
+    at runDailyReport (Code.gs:8:3)
+
+## 오류가 난 함수 코드
+function fetchTodayData() {
+  const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = ss.getSheetByName(SHEET_NAME_INPUT);
+  const today = new Date();
+  const lastRow = sheet.getLastRow();
+
+  // 오늘 날짜와 일치하는 행 찾기
+  const data = sheet.getRange(2, 1, lastRow - 1, 5).getValues();
+  // ... 이하 생략
+}
+
+## 재현 조건
+- '일일입력' 시트에 헤더 행(1행)만 있고 데이터가 없을 때 발생
+- 데이터가 있을 때는 정상 동작
+
+## 원하는 수정 방향
+데이터가 없을 때는 빈 배열을 반환하고,
+runDailyReport에서 빈 배열이면 "오늘 데이터 없음"을 Logger.log()로 남기고 종료되게 해줘.</pre>
+          </div>
+        </div>
+
+        <div class="tip-box"><strong>💡 Logger.log() vs console.log():</strong> GAS에서는 <code>console.log()</code>도 사용할 수 있지만, <code>Logger.log()</code>를 권장합니다. Logger.log()는 GAS 에디터의 실행 로그 탭에서 바로 확인할 수 있고, Stackdriver Logging과도 통합됩니다. 단, Logger.log()는 문자열만 받으므로 객체를 출력할 때는 <code>Logger.log(JSON.stringify(obj))</code>처럼 사용하세요.</div>
+
+        <!-- 실습 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 실습 체크리스트</h3>
+          <label><input type="checkbox" data-key="claude-gas-1"> CLAUDE.md를 프로젝트 루트에 생성하고 프로젝트 개요를 작성했다</label>
+          <label><input type="checkbox" data-key="claude-gas-2"> 스프레드시트 구조(시트명, 컬럼 인덱스)를 CLAUDE.md에 문서화했다</label>
+          <label><input type="checkbox" data-key="claude-gas-3"> 함수 명명 규칙과 금지사항을 CLAUDE.md에 추가했다</label>
+          <label><input type="checkbox" data-key="claude-gas-4"> Claude에게 새 기능을 요청할 때 "좋은 예" 패턴으로 프롬프트를 작성해봤다</label>
+          <label><input type="checkbox" data-key="claude-gas-5"> 오류 발생 시 컨텍스트 전달 템플릿을 사용해 Claude에게 수정을 요청해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-spreadsheet.html" class="nav-prev">← 이전: 스프레드시트 API 핵심</a>
+      <a href="gas-clasp.html" class="nav-next">다음: clasp 배포 워크플로 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

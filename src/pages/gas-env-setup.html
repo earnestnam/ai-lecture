@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="VSCode, Node.js, clasp 설치부터 Git 연동까지 한 번에 세팅해요.">
+  <title>개발 환경 설정 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>개발 환경 설정</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 45분</span>
+          <span class="badge badge--difficulty badge--입문">입문</span>
+        </div>
+        <p class="page-description">VSCode, Node.js, clasp 설치부터 Git 연동까지 한 번에 세팅해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>🛠️ 로컬에서 GAS를 개발한다는 것</h2>
+        <p>
+          Google Apps Script는 브라우저에서 바로 코드를 작성할 수 있는 온라인 에디터를 제공해요.
+          간단한 스크립트라면 그걸로 충분하지만, 조금만 규모가 커지면 금방 한계에 부딪히게 됩니다.
+          파일을 저장하다가 실수로 덮어쓰거나, "어제 잘 됐는데 오늘은 왜 안 되지?" 하는 상황이 생기죠.
+        </p>
+        <p>
+          <strong>로컬 개발 환경</strong>을 세팅하면 세 가지가 달라져요.
+          첫째, <strong>버전 관리(Git)</strong>를 통해 코드 변경 이력을 모두 추적할 수 있어요.
+          둘째, <strong>VSCode + AI 보조 도구</strong>가 코드를 작성하는 내내 실시간으로 도와줘요.
+          셋째, <strong>clasp</strong>라는 도구로 내 컴퓨터에서 작성한 코드를 Google 서버에 바로 올릴 수 있어요.
+          한 번 세팅해두면 이후 GAS 개발이 훨씬 편해집니다.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 순서가 중요해요:</strong> 이 페이지의 설치 순서를 꼭 따라주세요. Node.js를 먼저 설치해야 clasp를 설치할 수 있어요. 순서가 바뀌면 오류가 날 수 있습니다.
+        </div>
+
+        <h2>🎯 Step 1. VSCode 설치 및 추천 확장</h2>
+        <p>
+          VSCode(Visual Studio Code)는 Microsoft가 만든 무료 코드 에디터예요.
+          전 세계 개발자가 가장 많이 사용하고, AI 도구와의 연동도 뛰어납니다.
+        </p>
+        <ol>
+          <li><a href="https://code.visualstudio.com" target="_blank" rel="noopener">code.visualstudio.com</a>에 접속해요</li>
+          <li>운영체제(Windows / macOS)에 맞는 버전으로 다운로드해요</li>
+          <li>설치 파일을 실행하고, 기본 옵션 그대로 "다음"을 눌러 설치를 완료해요</li>
+          <li>VSCode를 열고, 왼쪽 사이드바의 확장(Extensions) 아이콘을 클릭해요</li>
+          <li>아래 확장들을 검색해서 하나씩 설치해요</li>
+        </ol>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-primary);">
+            <h3 style="margin-top:0; font-size:1rem;">🔍 ESLint</h3>
+            <p style="font-size:0.875rem; margin:0;">코드 오류 실시간 감지. 문법 실수를 저장하기 전에 잡아줘요.</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-secondary);">
+            <h3 style="margin-top:0; font-size:1rem;">✨ Prettier</h3>
+            <p style="font-size:0.875rem; margin:0;">코드 자동 정렬. 저장할 때마다 코드가 보기 좋게 다듬어져요.</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-accent);">
+            <h3 style="margin-top:0; font-size:1rem;">🔎 GitLens</h3>
+            <p style="font-size:0.875rem; margin:0;">Git 히스토리 시각화. 누가 언제 무엇을 바꿨는지 한눈에 보여요.</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid #4285F4;">
+            <h3 style="margin-top:0; font-size:1rem;">📜 Google Apps Script</h3>
+            <p style="font-size:0.875rem; margin:0;">GAS 문법 지원. SpreadsheetApp 등 GAS 전용 함수를 자동 완성해줘요.</p>
+          </div>
+        </div>
+
+        <h2>🟢 Step 2. Node.js 설치 및 버전 확인</h2>
+        <p>
+          Node.js는 JavaScript를 브라우저 밖에서 실행할 수 있게 해주는 도구예요.
+          clasp가 Node.js 위에서 동작하기 때문에 반드시 먼저 설치해야 합니다.
+        </p>
+        <ol>
+          <li><a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>에 접속해요</li>
+          <li><strong>LTS 버전</strong>(Long Term Support, 안정적인 버전)을 다운로드해요</li>
+          <li>설치 파일 실행 후 기본 옵션으로 설치를 완료해요</li>
+          <li>설치 후 터미널(또는 명령 프롬프트)을 열고 아래 명령어로 확인해요</li>
+        </ol>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">터미널</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>node -v
+# 출력 예시: v20.11.0
+
+npm -v
+# 출력 예시: 10.2.4</pre>
+          </div>
+        </div>
+
+        <p>버전 번호가 출력되면 설치가 성공한 거예요. <code>v20.x.x</code> 이상이면 문제없이 사용할 수 있습니다.</p>
+
+        <div class="tip-box">
+          <strong>💡 터미널이 처음이라면:</strong> Windows에서는 시작 메뉴에서 "명령 프롬프트" 또는 "PowerShell"을 검색해서 열면 돼요. macOS는 Spotlight(⌘+Space)에서 "터미널"을 검색하세요. VSCode 안에서도 터미널을 열 수 있어요 (메뉴 → Terminal → New Terminal).
+        </div>
+
+        <h2>🔗 Step 3. clasp 설치 및 Google 로그인</h2>
+        <p>
+          clasp(Command Line Apps Script Projects)는 로컬 컴퓨터와 Google Apps Script 서버를 연결해주는 도구예요.
+          내 컴퓨터에서 코드를 작성하고, 명령어 한 줄로 Google에 올릴(push) 수 있게 해줍니다.
+        </p>
+
+        <p><strong>1) clasp 전역 설치:</strong></p>
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">터미널</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>npm install -g @google/clasp</pre>
+          </div>
+        </div>
+
+        <p><strong>2) Google 계정 로그인:</strong></p>
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">터미널</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>clasp login</pre>
+          </div>
+        </div>
+        <p>브라우저가 자동으로 열리면서 Google 계정 로그인 화면이 나타나요. 사용할 Google 계정으로 로그인하고 권한을 허용해주세요.</p>
+
+        <p><strong>3) 설치 확인:</strong></p>
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">터미널</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>clasp --version
+# 출력 예시: 2.4.2</pre>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ Apps Script API를 먼저 활성화하세요:</strong> clasp를 사용하려면 Google Apps Script API가 켜져 있어야 해요. <a href="https://script.google.com/home/usersettings" target="_blank" rel="noopener">script.google.com/home/usersettings</a>에 접속해서 "Google Apps Script API"를 <strong>사용</strong> 상태로 바꿔주세요. 이 설정이 꺼져 있으면 clasp push/pull이 작동하지 않아요.
+        </div>
+
+        <h2>📂 Step 4. Git 초기 설정 및 .gitignore 작성</h2>
+        <p>
+          Git은 코드의 변경 이력을 기록하는 도구예요. "어제 잘 됐던 버전으로 되돌아가고 싶다"는 상황에서 구원투수 역할을 합니다.
+          Git이 설치되어 있지 않다면 <a href="https://git-scm.com" target="_blank" rel="noopener">git-scm.com</a>에서 먼저 설치해주세요.
+        </p>
+
+        <p><strong>1) Git 사용자 정보 설정 (최초 1회):</strong></p>
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">터미널</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>git config --global user.name "홍길동"
+git config --global user.email "hong@example.com"</pre>
+          </div>
+        </div>
+
+        <p><strong>2) .gitignore 파일 작성:</strong></p>
+        <p>
+          .gitignore 파일은 Git이 추적하지 않을 파일 목록을 지정해요.
+          스크립트 ID나 API 키 같은 민감한 정보, 그리고 자동 생성되는 파일들을 제외하는 게 좋아요.
+          프로젝트 폴더 루트에 <code>.gitignore</code> 파일을 만들고 아래 내용을 붙여넣으세요:
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">.gitignore</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># clasp 설정 파일 (scriptId 포함 — 공개 저장소라면 제외)
+.clasp.json
+
+# Node.js 패키지 폴더
+node_modules/
+
+# 환경 변수 파일 (API 키, 비밀번호 등)
+.env
+.env.local
+
+# 운영체제 자동 생성 파일
+.DS_Store
+Thumbs.db
+
+# 에디터 설정 폴더
+.vscode/settings.json</pre>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 .clasp.json에는 scriptId가 들어있어요:</strong> scriptId는 여러분의 GAS 프로젝트를 식별하는 고유 번호예요. 공개 GitHub 저장소에 올릴 경우 .gitignore에 포함해서 노출되지 않게 해주세요. 팀원과 공유할 때는 별도로 전달하면 됩니다.
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 개발 환경 세팅 체크리스트</h3>
+          <label><input type="checkbox" data-key="env-1"> VSCode를 설치하고 추천 확장 4개를 모두 설치했다</label>
+          <label><input type="checkbox" data-key="env-2"> Node.js LTS 버전을 설치하고 <code>node -v</code>로 확인했다</label>
+          <label><input type="checkbox" data-key="env-3"> <code>npm install -g @google/clasp</code>로 clasp를 설치했다</label>
+          <label><input type="checkbox" data-key="env-4"> Apps Script API를 활성화하고 <code>clasp login</code>으로 로그인했다</label>
+          <label><input type="checkbox" data-key="env-5"> .gitignore 파일을 작성하고 Git 사용자 정보를 설정했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="apps-script.html" class="nav-prev">← 이전: Apps Script 자동화</a>
+      <a href="gas-structure.html" class="nav-next">다음: GAS 프로젝트 구조 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

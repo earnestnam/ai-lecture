@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="doGet/doPost로 HTML 서비스를 만들고 URL로 배포하는 전 과정을 실습해요.">
+  <title>웹앱 서비스 배포 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>웹앱 서비스 배포</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 45분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">doGet/doPost로 HTML 서비스를 만들고 URL로 배포하는 전 과정을 실습해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>🌐 GAS로 웹 서비스를 만든다?</h2>
+        <p>
+          Google Apps Script는 단순 자동화 도구를 넘어, <strong>URL로 접근 가능한 웹 페이지</strong>를 직접 서빙할 수 있어요.
+          별도의 서버나 호스팅 비용 없이, 구글 인프라 위에서 팀 내부 도구를 뚝딱 만들어 배포할 수 있다는 뜻이에요.
+        </p>
+        <p>
+          예를 들어, 교육 신청 폼·행사 등록 페이지·재고 조회 화면을
+          GAS 웹앱으로 만들면 <strong>조직 내 누구나 링크만 클릭하면 바로 사용</strong>할 수 있어요.
+          React나 Vue 같은 복잡한 프레임워크 없이도 가능하고,
+          스프레드시트 DB(이전 페이지에서 배운 CRUD)와 바로 연결됩니다.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 GAS 웹앱이 특히 빛나는 경우:</strong> 사내 시스템에 별도 계정 만들기 어려울 때, Google 계정으로 접근 제어가 필요할 때, 데이터가 Google Sheets에 있을 때. 외부 고객용보다는 <strong>팀 내 내부 도구</strong>에 최적이에요.
+        </div>
+
+        <h2>🔀 doGet() / doPost() 라우팅 구조</h2>
+        <p>
+          GAS 웹앱의 진입점은 두 함수예요.
+          <strong><code>doGet(e)</code></strong>는 브라우저에서 URL을 열 때(GET 요청),
+          <strong><code>doPost(e)</code></strong>는 폼을 제출할 때(POST 요청) 자동으로 호출돼요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — doGet() 기본 구조</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * GET 요청 진입점 — 브라우저에서 URL을 열면 이 함수가 실행됩니다.
+ * @param {Object} e - 요청 이벤트 객체
+ *   e.parameter        : URL 쿼리 파라미터 (?key=value)
+ *   e.pathInfo         : URL 경로 추가 정보
+ */
+function doGet(e) {
+  // URL에서 페이지 파라미터 읽기 (?page=list 처럼 사용)
+  const page = e.parameter.page || 'index';
+
+  // 페이지별 다른 HTML 파일 서빙
+  let template;
+  if (page === 'list') {
+    template = HtmlService.createTemplateFromFile('list');
+  } else {
+    template = HtmlService.createTemplateFromFile('index');
+  }
+
+  // 데이터를 HTML 템플릿에 주입
+  template.applicants = getAllApplicants(); // CRUD 페이지에서 만든 함수
+
+  return template.evaluate()
+    .setTitle('교육 신청 시스템')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}</pre>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — doPost() 폼 제출 처리</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre">/**
+ * POST 요청 진입점 — HTML 폼 제출 또는 fetch POST 요청 처리
+ * @param {Object} e - 요청 이벤트 객체
+ *   e.parameter       : application/x-www-form-urlencoded 데이터
+ *   e.postData.contents : 요청 바디 문자열 (JSON 등)
+ */
+function doPost(e) {
+  try {
+    // 방법 1: HTML 폼 데이터 (e.parameter 사용)
+    const name  = e.parameter.name;
+    const email = e.parameter.email;
+    const course = e.parameter.course;
+
+    // 방법 2: JSON 바디 파싱 (fetch로 보낼 때)
+    // const body = JSON.parse(e.postData.contents);
+    // const { name, email, course } = body;
+
+    // 스프레드시트에 저장
+    const id = createApplicant(name, email, course);
+
+    // 성공 응답 (JSON)
+    const result = { success: true, id: id };
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+
+  } catch (err) {
+    // 오류 응답
+    const result = { success: false, error: err.message };
+    return ContentService
+      .createTextOutput(JSON.stringify(result))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}</pre>
+          </div>
+        </div>
+
+        <h2>📄 HtmlService — HTML 파일 서빙 패턴</h2>
+        <p>
+          GAS 프로젝트에 HTML 파일을 추가하면, <code>HtmlService.createTemplateFromFile()</code>로
+          그 파일을 웹 페이지로 서빙할 수 있어요.
+          GAS의 <strong>스크립틀릿(Scriptlet)</strong> 문법으로 서버 데이터를 HTML에 바로 넣을 수도 있어요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS HTML 파일 — index.html (스크립틀릿 예시)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre">&lt;!DOCTYPE html&gt;
+&lt;html lang="ko"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;title&gt;교육 신청&lt;/title&gt;
+  &lt;base target="_top"&gt; &lt;!-- GAS 웹앱에서 링크가 제대로 열리려면 필요 --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;!-- 스크립틀릿: GAS 코드 실행 결과를 HTML에 출력 --&gt;
+  &lt;!-- &lt;?= 값 ?&gt;  : HTML 이스케이프 후 출력 (XSS 방지, 권장) --&gt;
+  &lt;!-- &lt;? 코드 ?&gt; : 실행만 하고 출력 없음                       --&gt;
+
+  &lt;h1&gt;안녕하세요! 현재 신청자 수: &lt;?= applicants.length ?&gt;명&lt;/h1&gt;
+
+  &lt;ul&gt;
+    &lt;? for (const person of applicants) { ?&gt;
+      &lt;li&gt;&lt;?= person.name ?&gt; — &lt;?= person.status ?&gt;&lt;/li&gt;
+    &lt;? } ?&gt;
+  &lt;/ul&gt;
+
+  &lt;hr&gt;
+
+  &lt;h2&gt;신청하기&lt;/h2&gt;
+  &lt;form id="applyForm"&gt;
+    &lt;input type="text"   name="name"   placeholder="이름" required&gt;
+    &lt;input type="email"  name="email"  placeholder="이메일" required&gt;
+    &lt;input type="text"   name="course" placeholder="신청 과정" required&gt;
+    &lt;button type="submit"&gt;신청&lt;/button&gt;
+  &lt;/form&gt;
+
+  &lt;script&gt;
+    // GAS 함수를 HTML에서 호출: google.script.run
+    document.getElementById('applyForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+
+      // google.script.run으로 GAS 서버 함수 호출
+      google.script.run
+        .withSuccessHandler(res =&gt; alert(`신청 완료! ID: ${res}`))
+        .withFailureHandler(err =&gt; alert(`오류: ${err.message}`))
+        .createApplicant(data.name, data.email, data.course);
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 google.script.run이란?</strong> HTML 파일(클라이언트) 에서 GAS 서버 함수를 호출하는 브릿지예요. <code>.withSuccessHandler()</code>는 성공했을 때, <code>.withFailureHandler()</code>는 오류가 났을 때 실행될 콜백을 지정해요. GAS 웹앱에서만 동작하는 특수 API예요.
+        </div>
+
+        <h2>🔐 배포 설정 — 액세스 권한 선택</h2>
+        <p>
+          웹앱을 배포할 때 <strong>누가 접근할 수 있는지</strong> 반드시 설정해야 해요.
+          잘못 설정하면 외부에 민감한 데이터가 노출될 수 있어요.
+        </p>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid #27ae60;">
+            <h3 style="margin-top:0; font-size:1rem;">🔒 나만 접근 가능</h3>
+            <p style="font-size:0.875rem; margin:0 0 0.5rem;">본인 계정으로만 접근 가능. 개발·테스트 중에 사용해요.</p>
+            <code style="font-size:0.8rem;">Execute as: Me<br>Who has access: Only myself</code>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-primary);">
+            <h3 style="margin-top:0; font-size:1rem;">🏢 조직 내 공개</h3>
+            <p style="font-size:0.875rem; margin:0 0 0.5rem;">같은 Google Workspace 도메인 구성원만 접근 가능. 사내 도구에 적합해요.</p>
+            <code style="font-size:0.8rem;">Execute as: Me<br>Who has access: Anyone in [도메인]</code>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid #e74c3c;">
+            <h3 style="margin-top:0; font-size:1rem;">🌍 전체 공개</h3>
+            <p style="font-size:0.875rem; margin:0 0 0.5rem;">구글 계정 없이도 접근 가능. 외부 공개 폼·도구에 사용하되 보안에 주의하세요.</p>
+            <code style="font-size:0.8rem;">Execute as: Me<br>Who has access: Anyone</code>
+          </div>
+        </div>
+
+        <h2>🚀 Step-by-Step 배포 가이드</h2>
+        <p>코드 작성이 끝났다면 아래 순서대로 배포하세요.</p>
+
+        <ol>
+          <li>Apps Script 에디터 상단 오른쪽의 <strong>"배포"</strong> 버튼 클릭</li>
+          <li>드롭다운에서 <strong>"새 배포"</strong> 선택</li>
+          <li><strong>"유형 선택"</strong> → <strong>"웹 앱"</strong> 클릭</li>
+          <li>설명란에 버전 메모 입력 (예: <code>v1.0 — 초기 배포</code>)</li>
+          <li><strong>Execute as(코드 실행 주체)</strong>: 스프레드시트 소유자 본인 계정 선택 권장</li>
+          <li><strong>Who has access(접근 권한)</strong>: 용도에 맞게 선택 (위 표 참고)</li>
+          <li><strong>"배포"</strong> 버튼 클릭 → 권한 승인 팝업 허용</li>
+          <li><strong>웹 앱 URL</strong>이 생성됨 → 복사해서 팀원과 공유!</li>
+        </ol>
+
+        <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; margin:1.5rem 0; border-left:4px solid var(--color-secondary);">
+          <h3 style="margin-top:0; font-size:1rem;">🔄 코드 수정 후 배포 업데이트하는 법</h3>
+          <ol style="font-size:0.875rem; margin:0; padding-left:1.25rem;">
+            <li>코드 수정 후 저장 (Ctrl+S)</li>
+            <li><strong>"배포"</strong> → <strong>"배포 관리"</strong> 클릭</li>
+            <li>연필(✏️) 아이콘 클릭 → <strong>"새 버전"</strong> 선택</li>
+            <li>버전 설명 입력 후 <strong>"배포"</strong> 클릭</li>
+            <li>기존 URL은 그대로 유지됩니다 — 별도로 공유할 필요 없어요</li>
+          </ol>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 개발 중에는 ?dev=true URL 사용:</strong> 배포된 URL 뒤에 <code>?dev=true</code>를 붙이면 저장할 때마다 최신 코드가 바로 반영되는 개발 버전 URL로 접근할 수 있어요. 단, 본인 계정으로만 접근 가능하고 팀원에게 공유하면 안 됩니다. 테스트 후 정식 배포하면 깔끔해요.
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ CORS 및 인증 주의사항:</strong> GAS 웹앱은 기본적으로 Google의 인증을 거쳐야 실행돼요. 외부 사이트에서 fetch로 GAS 웹앱 URL을 호출하면 CORS 오류가 날 수 있어요. 외부 API 용도로 쓰려면 <code>doPost()</code>에서 CORS 헤더를 포함한 ContentService 응답을 반환하거나, 접근 권한을 "Anyone (anonymous)"으로 설정해야 해요. 사내 도구라면 이런 복잡한 상황을 피해 조직 내 공개 설정을 권장해요.
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 웹앱 배포 체크리스트</h3>
+          <label><input type="checkbox" data-key="webapp-1"> doGet() 함수가 HtmlService로 HTML을 반환하도록 작성했다</label>
+          <label><input type="checkbox" data-key="webapp-2"> HTML 파일에서 google.script.run으로 GAS 함수를 호출해봤다</label>
+          <label><input type="checkbox" data-key="webapp-3"> 액세스 권한(나만 / 조직 내 / 전체)을 목적에 맞게 설정했다</label>
+          <label><input type="checkbox" data-key="webapp-4"> 배포 후 생성된 웹 앱 URL로 실제 접근해봤다</label>
+          <label><input type="checkbox" data-key="webapp-5"> 코드 수정 후 새 버전으로 배포 업데이트를 해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-crud.html" class="nav-prev">← 이전: 스프레드시트 DB CRUD</a>
+      <a href="gas-automation.html" class="nav-next">다음: 실무 자동화 시나리오 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

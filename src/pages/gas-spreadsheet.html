@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="getValues, setValues 등 데이터 읽기·쓰기 패턴을 실습해요.">
+  <title>스프레드시트 API 핵심 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>스프레드시트 API 핵심</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 40분</span>
+          <span class="badge badge--difficulty badge--초급">초급</span>
+        </div>
+        <p class="page-description">getValues, setValues 등 데이터 읽기·쓰기 패턴을 실습해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>📊 스프레드시트를 코드로 다루는 법</h2>
+        <p>
+          Google Sheets를 마우스로 클릭하고 타이핑하는 건 누구나 할 수 있어요.
+          그런데 코드로 다루면, 수천 개의 행을 0.1초 만에 처리하거나,
+          조건에 맞는 행만 골라 이메일을 보내거나, 매일 자동으로 데이터를 업데이트하는 것도 가능해집니다.
+        </p>
+        <p>
+          GAS에서 스프레드시트를 다루는 핵심 객체는 <strong>SpreadsheetApp</strong>이에요.
+          마치 시트를 다루는 리모컨 같은 거예요. 이 리모컨에서 시작해서,
+          원하는 시트 → 원하는 셀 범위 → 데이터 읽기/쓰기 순으로 접근합니다.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 SpreadsheetApp은 GAS 내장 객체예요:</strong> 별도로 import하거나 설치할 필요 없이, GAS 코드 어디서든 <code>SpreadsheetApp</code>을 바로 사용할 수 있어요. Google이 제공하는 기본 도구입니다.
+        </div>
+
+        <h2>🔑 SpreadsheetApp 기본 패턴</h2>
+        <p>데이터를 읽거나 쓰려면 항상 이 순서를 따라요: <strong>스프레드시트 → 시트 → 범위 → 값</strong></p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Code.gs — 기본 접근 패턴</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>// 1단계: 현재 스크립트와 연결된 스프레드시트를 가져와요
+const ss = SpreadsheetApp.getActiveSpreadsheet();
+
+// 2단계: 원하는 시트를 이름으로 가져와요
+const sheet = ss.getSheetByName('신청자 명단');
+
+// 3단계: 원하는 셀 범위를 지정해요
+//   getRange(시작행, 시작열, 행수, 열수) 순서예요
+const range = sheet.getRange(2, 1, 10, 4); // 2행 1열부터 10행 4열까지
+
+// 4단계-A: 셀 하나의 값 읽기
+const singleCell = sheet.getRange(2, 1); // B행 A열
+const value = singleCell.getValue();     // 문자열 또는 숫자 하나 반환
+
+// 4단계-B: 범위 전체 값 읽기 (2차원 배열로 반환)
+const values = range.getValues(); // [[행1열1, 행1열2, ...], [행2열1, ...], ...]
+
+// 4단계-C: 셀에 값 쓰기
+singleCell.setValue('홍길동');
+
+// 4단계-D: 범위에 값 쓰기 (2차원 배열로 전달)
+range.setValues([
+  ['홍길동', 'hong@example.com', '서울', '완료'],
+  ['김영희', 'kim@example.com',  '부산', '대기'],
+]);</pre>
+          </div>
+        </div>
+
+        <h2>🔲 getValues() / setValues() — 2차원 배열 이해하기</h2>
+        <p>
+          <code>getValues()</code>가 반환하는 2차원 배열이 처음엔 헷갈릴 수 있어요.
+          스프레드시트의 표 구조가 그대로 배열로 변환된다고 생각하면 쉬워요.
+        </p>
+
+        <div style="overflow-x:auto; margin:1.5rem 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.9rem; text-align:center;">
+            <thead>
+              <tr style="background:var(--color-primary); color:#fff;">
+                <th style="padding:0.6rem 1rem;">&nbsp;</th>
+                <th style="padding:0.6rem 1rem;">A열 (이름)</th>
+                <th style="padding:0.6rem 1rem;">B열 (이메일)</th>
+                <th style="padding:0.6rem 1rem;">C열 (상태)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.6rem 1rem; font-weight:600; border-right:2px solid var(--color-border);">2행</td>
+                <td style="padding:0.6rem 1rem; border-bottom:1px solid var(--color-border);">홍길동</td>
+                <td style="padding:0.6rem 1rem; border-bottom:1px solid var(--color-border);">hong@example.com</td>
+                <td style="padding:0.6rem 1rem; border-bottom:1px solid var(--color-border);">완료</td>
+              </tr>
+              <tr>
+                <td style="padding:0.6rem 1rem; font-weight:600; border-right:2px solid var(--color-border);">3행</td>
+                <td style="padding:0.6rem 1rem; border-bottom:1px solid var(--color-border);">김영희</td>
+                <td style="padding:0.6rem 1rem; border-bottom:1px solid var(--color-border);">kim@example.com</td>
+                <td style="padding:0.6rem 1rem; border-bottom:1px solid var(--color-border);">대기</td>
+              </tr>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.6rem 1rem; font-weight:600; border-right:2px solid var(--color-border);">4행</td>
+                <td style="padding:0.6rem 1rem;">이민준</td>
+                <td style="padding:0.6rem 1rem;">lee@example.com</td>
+                <td style="padding:0.6rem 1rem;">완료</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p>위 표를 <code>getValues()</code>로 읽으면 아래와 같은 배열이 돼요:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Code.gs — 2차원 배열 읽기 및 쓰기</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('신청자 명단');
+
+// 2행부터 4행까지, A~C열 데이터 읽기
+const data = sheet.getRange(2, 1, 3, 3).getValues();
+
+// data의 구조:
+// [
+//   ['홍길동', 'hong@example.com', '완료'],  // 첫 번째 행 (인덱스 0)
+//   ['김영희', 'kim@example.com',  '대기'],  // 두 번째 행 (인덱스 1)
+//   ['이민준', 'lee@example.com',  '완료'],  // 세 번째 행 (인덱스 2)
+// ]
+
+// 특정 값에 접근하기: data[행 인덱스][열 인덱스]
+const firstName  = data[0][0]; // '홍길동'
+const firstEmail = data[0][1]; // 'hong@example.com'
+const thirdStatus = data[2][2]; // '완료'
+
+// 수정된 데이터를 다시 시트에 쓰기
+const updatedData = [
+  ['홍길동', 'hong@example.com', '완료'],
+  ['김영희', 'kim@example.com',  '완료'], // 상태 업데이트
+  ['이민준', 'lee@example.com',  '완료'],
+];
+sheet.getRange(2, 1, 3, 3).setValues(updatedData);</pre>
+          </div>
+        </div>
+
+        <h2>🔍 데이터 필터링, 특정 행 찾기 패턴</h2>
+        <p>
+          실제 업무에서는 전체 데이터를 읽은 뒤,
+          특정 조건(이메일, 상태, 날짜 등)에 맞는 행만 골라내야 할 때가 많아요.
+          JavaScript의 배열 메서드를 활용하면 간결하게 처리할 수 있어요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Code.gs — 필터링 및 특정 행 찾기</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('신청자 명단');
+
+// 헤더를 제외한 전체 데이터 가져오기
+// getLastRow(): 데이터가 있는 마지막 행 번호를 자동으로 구해줘요
+const lastRow = sheet.getLastRow();
+const data = sheet.getRange(2, 1, lastRow - 1, 3).getValues();
+// data 구조: [[이름, 이메일, 상태], ...]
+
+// 패턴 1: 특정 이메일을 가진 행 찾기 (find)
+const targetEmail = 'hong@example.com';
+const foundRow = data.find(row => row[1] === targetEmail);
+// foundRow: ['홍길동', 'hong@example.com', '완료'] (없으면 undefined)
+
+if (foundRow) {
+  Logger.log(`이름: ${foundRow[0]}, 상태: ${foundRow[2]}`);
+}
+
+// 패턴 2: 상태가 '대기'인 행만 골라내기 (filter)
+const pendingRows = data.filter(row => row[2] === '대기');
+// pendingRows: [['김영희', 'kim@example.com', '대기'], ...]
+
+// 패턴 3: 대기 상태인 사람들에게 이메일 보내기
+pendingRows.forEach(row => {
+  const name  = row[0];
+  const email = row[1];
+  GmailApp.sendEmail(
+    email,
+    `[안내] ${name}님, 신청이 확인 중입니다`,
+    `${name}님, 현재 신청이 검토 중이에요. 처리 완료 시 다시 안내드릴게요.`
+  );
+});</pre>
+          </div>
+        </div>
+
+        <h2>🤖 Claude Code로 스프레드시트 함수 생성하기</h2>
+        <p>
+          패턴을 외울 필요 없어요. Claude Code에게 원하는 기능을 설명하면 코드를 바로 만들어줍니다.
+          아래는 효과적인 프롬프트 예시와 예상 출력이에요.
+        </p>
+
+        <div style="background:var(--color-bg-section); border-radius:8px; padding:1.25rem; margin:1rem 0;">
+          <strong>Claude Code에게 이렇게 요청해보세요:</strong>
+          <div style="margin-top:0.75rem; padding:1rem; background:var(--color-bg); border-radius:6px; font-size:0.9rem; line-height:1.7; border:1px solid var(--color-border);">
+            Google Apps Script 코드를 작성해줘.<br><br>
+            시트 이름은 '교육 신청자'이고, 구조는 이래:<br>
+            A열: 이름, B열: 이메일, C열: 부서, D열: 신청 상태 ('대기' 또는 '완료')<br>
+            헤더는 1행이고 데이터는 2행부터 시작해.<br><br>
+            기능: 신청 상태가 '대기'인 행을 모두 찾아서,<br>
+            해당 사람의 이메일로 "신청이 접수되었습니다"라는 확인 메일을 보내고,<br>
+            D열 상태를 '완료'로 업데이트해줘.<br><br>
+            완전히 복사해서 바로 쓸 수 있는 코드로 줘.
+          </div>
+        </div>
+
+        <p>위 프롬프트에 대해 Claude Code가 생성할 코드는 아래와 비슷한 형태가 돼요:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Code.gs — Claude Code 생성 예시 출력</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>function sendConfirmationEmails() {
+  const ss    = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('교육 신청자');
+
+  if (!sheet) {
+    Logger.log('시트를 찾을 수 없습니다: 교육 신청자');
+    return;
+  }
+
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) {
+    Logger.log('처리할 데이터가 없습니다.');
+    return;
+  }
+
+  // 2행부터 전체 데이터 읽기 (A~D열)
+  const data = sheet.getRange(2, 1, lastRow - 1, 4).getValues();
+
+  data.forEach((row, index) => {
+    const name   = row[0]; // A열: 이름
+    const email  = row[1]; // B열: 이메일
+    const status = row[3]; // D열: 신청 상태
+
+    // 상태가 '대기'인 경우에만 처리
+    if (status === '대기') {
+      // 확인 이메일 발송
+      GmailApp.sendEmail(
+        email,
+        '[교육 신청] 신청이 접수되었습니다',
+        `${name}님, 안녕하세요.\n교육 신청이 정상적으로 접수되었습니다.\n감사합니다.`
+      );
+
+      // D열 상태를 '완료'로 업데이트
+      // index는 0부터 시작하므로 실제 행 번호는 index + 2
+      sheet.getRange(index + 2, 4).setValue('완료');
+      Logger.log(`처리 완료: ${name} (${email})`);
+    }
+  });
+
+  Logger.log('모든 대기 건 처리 완료!');
+}</pre>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 성능 팁 — getValues() 한 번이 getValue() 여러 번보다 빨라요:</strong> 셀을 하나씩 읽는 <code>getValue()</code>를 루프 안에서 반복 호출하면 네트워크 통신이 그만큼 반복돼서 매우 느려져요. 항상 <code>getValues()</code>로 범위 전체를 한 번에 읽은 뒤 JavaScript에서 처리하세요. 100행 기준으로 속도가 10배 이상 차이날 수 있어요.
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ setValues() 배열 크기를 정확히 맞추세요:</strong> <code>setValues()</code>에 전달하는 2차원 배열의 행·열 수가 <code>getRange()</code>에서 지정한 범위와 다르면 오류가 나요. 배열 크기와 범위를 항상 일치시켜주세요.
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 스프레드시트 API 실습 체크리스트</h3>
+          <label><input type="checkbox" data-key="sheet-1"> SpreadsheetApp → getSheetByName → getRange → getValues() 흐름을 이해했다</label>
+          <label><input type="checkbox" data-key="sheet-2"> getValues()가 반환하는 2차원 배열 구조를 이해하고, 특정 값에 접근할 수 있다</label>
+          <label><input type="checkbox" data-key="sheet-3"> filter()와 find()로 특정 조건의 행을 찾는 패턴을 실습해봤다</label>
+          <label><input type="checkbox" data-key="sheet-4"> Claude Code에 구체적인 시트 구조를 설명하고 코드를 요청해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-structure.html" class="nav-prev">← 이전: GAS 프로젝트 구조</a>
+      <a href="gas-claude-code.html" class="nav-next">다음: Claude Code로 GAS 개발 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

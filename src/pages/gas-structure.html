@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="appsscript.json, 파일 구조, Standalone vs Container-bound 차이를 이해해요.">
+  <title>GAS 프로젝트 구조 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>GAS 프로젝트 구조</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 30분</span>
+          <span class="badge badge--difficulty badge--초급">초급</span>
+        </div>
+        <p class="page-description">appsscript.json, 파일 구조, Standalone vs Container-bound 차이를 이해해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>📁 GAS 프로젝트, 어떻게 생겼나요?</h2>
+        <p>
+          clasp로 GAS 프로젝트를 내 컴퓨터에 받으면(clone), 폴더 안에 여러 파일이 생겨요.
+          처음 보면 뭐가 뭔지 헷갈릴 수 있는데, 구조를 한 번만 이해해두면 이후 개발이 훨씬 수월해집니다.
+        </p>
+        <p>
+          GAS 프로젝트의 핵심은 두 가지예요. 하나는 프로젝트 설정을 담은 <strong>appsscript.json</strong>,
+          나머지는 실제 코드가 들어가는 <strong>.gs 확장자 파일들</strong>이에요.
+          마치 레스토랑의 주방처럼, appsscript.json은 주방의 설비·규정 문서이고,
+          .gs 파일들은 실제 요리 레시피라고 생각하면 됩니다.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 .gs 파일 = JavaScript 파일:</strong> GAS의 코드 파일 확장자는 <code>.gs</code>지만, 내용은 JavaScript와 동일해요. VSCode에서 JS 문법 강조가 적용되도록 설정하면 더 편하게 작업할 수 있어요.
+        </div>
+
+        <h2>⚙️ appsscript.json 파일 설명</h2>
+        <p>
+          모든 GAS 프로젝트 루트에는 <code>appsscript.json</code> 파일이 있어요.
+          이 파일은 프로젝트의 기본 설정값을 담고 있습니다. 아래는 웹 앱으로 배포하는 프로젝트의 전형적인 예시예요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">appsscript.json</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>{
+  "timeZone": "Asia/Seoul",
+  "dependencies": {
+    "enabledAdvancedServices": []
+  },
+  "webapp": {
+    "executeAs": "USER_DEPLOYING",
+    "access": "ANYONE"
+  },
+  "exceptionLogging": "STACKDRIVER",
+  "runtimeVersion": "V8"
+}</pre>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-primary);">
+            <h3 style="margin-top:0; font-size:0.95rem;"><code>timeZone</code></h3>
+            <p style="font-size:0.875rem; margin:0;">스크립트 실행 시 기준 시간대. 한국 시간을 쓰려면 <code>"Asia/Seoul"</code>로 설정해요.</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-secondary);">
+            <h3 style="margin-top:0; font-size:0.95rem;"><code>dependencies</code></h3>
+            <p style="font-size:0.875rem; margin:0;">고급 Google 서비스(BigQuery, Drive API 등)를 활성화할 때 여기에 추가해요. 기본은 비어있어요.</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-accent);">
+            <h3 style="margin-top:0; font-size:0.95rem;"><code>webapp</code></h3>
+            <p style="font-size:0.875rem; margin:0;">웹 앱으로 배포할 때 사용. <code>executeAs</code>는 실행 주체, <code>access</code>는 접근 권한이에요.</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid #34A853;">
+            <h3 style="margin-top:0; font-size:0.95rem;"><code>runtimeVersion</code></h3>
+            <p style="font-size:0.875rem; margin:0;">JavaScript 엔진 버전. <code>"V8"</code>로 설정하면 최신 JS 문법을 사용할 수 있어요.</p>
+          </div>
+        </div>
+
+        <h2>🔀 Standalone vs Container-bound 차이</h2>
+        <p>
+          GAS 프로젝트는 만드는 방식에 따라 두 종류로 나뉘어요.
+          어떤 걸 선택하느냐에 따라 접근 가능한 서비스와 주요 용도가 달라지니, 미리 알아두면 좋아요.
+        </p>
+
+        <div style="overflow-x:auto; margin:1.5rem 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
+            <thead>
+              <tr style="background:var(--color-primary); color:#fff;">
+                <th style="padding:0.75rem 1rem; text-align:left; border-radius:6px 0 0 0;">구분</th>
+                <th style="padding:0.75rem 1rem; text-align:left;">Standalone</th>
+                <th style="padding:0.75rem 1rem; text-align:left; border-radius:0 6px 0 0;">Container-bound</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.75rem 1rem; font-weight:600; border-bottom:1px solid var(--color-border);">생성 방법</td>
+                <td style="padding:0.75rem 1rem; border-bottom:1px solid var(--color-border);">script.google.com에서 직접 생성</td>
+                <td style="padding:0.75rem 1rem; border-bottom:1px solid var(--color-border);">Sheets·Docs·Forms 등에서 "확장 프로그램 → Apps Script"</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem 1rem; font-weight:600; border-bottom:1px solid var(--color-border);">연결된 서비스</td>
+                <td style="padding:0.75rem 1rem; border-bottom:1px solid var(--color-border);">특정 파일에 묶이지 않음. 다양한 Google 서비스에 접근 가능</td>
+                <td style="padding:0.75rem 1rem; border-bottom:1px solid var(--color-border);">연결된 파일(Sheets 등)에 간편하게 접근 가능</td>
+              </tr>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.75rem 1rem; font-weight:600; border-bottom:1px solid var(--color-border);">주요 용도</td>
+                <td style="padding:0.75rem 1rem; border-bottom:1px solid var(--color-border);">웹 앱, API 서버, 독립 자동화 스크립트</td>
+                <td style="padding:0.75rem 1rem; border-bottom:1px solid var(--color-border);">특정 시트 데이터 처리, 폼 제출 시 자동화</td>
+              </tr>
+              <tr>
+                <td style="padding:0.75rem 1rem; font-weight:600;">권장 상황</td>
+                <td style="padding:0.75rem 1rem;">여러 팀이 공유하는 도구, 외부에 URL로 공개하는 서비스</td>
+                <td style="padding:0.75rem 1rem;">특정 스프레드시트와 1:1로 연결되는 단순 자동화</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>🗂️ 파일 분리 전략</h2>
+        <p>
+          코드가 길어지면 하나의 파일에 모든 내용을 넣기보다,
+          역할에 따라 파일을 나누는 게 훨씬 관리하기 쉬워요.
+          아래 구조를 기본 템플릿으로 사용해보세요.
+        </p>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-primary);">
+            <h3 style="margin-top:0; font-size:1rem;">📄 Code.gs</h3>
+            <p style="font-size:0.875rem; margin:0 0 0.5rem;">메인 진입점. 외부에서 호출되는 핵심 함수들을 모아두는 곳이에요.</p>
+            <p style="font-size:0.8rem; color:var(--color-text-muted); margin:0;">예: <code>doGet()</code>, <code>doPost()</code>, <code>main()</code></p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-secondary);">
+            <h3 style="margin-top:0; font-size:1rem;">🔧 Utils.gs</h3>
+            <p style="font-size:0.875rem; margin:0 0 0.5rem;">공통 유틸리티 함수 모음. 여러 곳에서 반복해서 쓰는 기능을 여기에 모아요.</p>
+            <p style="font-size:0.8rem; color:var(--color-text-muted); margin:0;">예: 날짜 포맷, 이메일 발송, 로그 기록</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-accent);">
+            <h3 style="margin-top:0; font-size:1rem;">⚙️ Config.gs</h3>
+            <p style="font-size:0.875rem; margin:0 0 0.5rem;">상수와 설정값 모음. 자주 바뀌는 값은 여기서 한 번에 관리해요.</p>
+            <p style="font-size:0.8rem; color:var(--color-text-muted); margin:0;">예: 시트 이름, 이메일 주소, 열 번호</p>
+          </div>
+        </div>
+
+        <h2>💻 clasp clone 실습</h2>
+        <p>
+          이미 Google Drive에 있는 GAS 프로젝트를 로컬로 가져오려면 <code>clasp clone</code> 명령어를 사용해요.
+        </p>
+
+        <p><strong>1) scriptId 찾기:</strong></p>
+        <ol>
+          <li>GAS 에디터를 열어요 (script.google.com 또는 Sheets → 확장 프로그램 → Apps Script)</li>
+          <li>왼쪽 메뉴에서 <strong>⚙️ 프로젝트 설정(Project Settings)</strong>을 클릭해요</li>
+          <li>"스크립트 ID" 항목에 표시된 긴 문자열을 복사해요</li>
+        </ol>
+
+        <p><strong>2) clasp clone 실행:</strong></p>
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">터미널</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># 원하는 폴더로 이동한 후 실행
+clasp clone [여기에_scriptId_붙여넣기]
+
+# 예시
+clasp clone 1BxAbCdEfGhIjKlMnOpQrStUvWxYz_abcdefghij123456</pre>
+          </div>
+        </div>
+
+        <p>실행하면 현재 폴더에 프로젝트 파일들이 다운로드돼요. <code>appsscript.json</code>과 <code>.gs</code> 파일들이 보이면 성공입니다.</p>
+
+        <div class="warning-box">
+          <strong>⚠️ 빈 폴더에서 실행하세요:</strong> <code>clasp clone</code>은 현재 폴더에 파일을 만들어요. 기존 파일이 있는 폴더에서 실행하면 충돌이 날 수 있으니, 새 폴더를 만들고 그 안에서 실행하는 걸 권장해요.
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ GAS 프로젝트 구조 이해 체크리스트</h3>
+          <label><input type="checkbox" data-key="structure-1"> appsscript.json의 주요 필드(timeZone, runtimeVersion 등)를 이해했다</label>
+          <label><input type="checkbox" data-key="structure-2"> Standalone과 Container-bound의 차이를 설명할 수 있다</label>
+          <label><input type="checkbox" data-key="structure-3"> Code.gs / Utils.gs / Config.gs 파일 분리 전략을 이해했다</label>
+          <label><input type="checkbox" data-key="structure-4"> GAS 에디터에서 scriptId를 찾아 clasp clone을 실행해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-env-setup.html" class="nav-prev">← 이전: 개발 환경 설정</a>
+      <a href="gas-spreadsheet.html" class="nav-next">다음: 스프레드시트 API 핵심 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

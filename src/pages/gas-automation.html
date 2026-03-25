@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="폼 수집→분류→알림, Gmail 자동발송, Calendar 연동 3가지 시나리오를 완성해요.">
+  <title>실무 자동화 시나리오 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>실무 자동화 시나리오</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 60분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">폼 수집→분류→알림, Gmail 자동발송, Calendar 연동 3가지 시나리오를 완성해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>🚀 배운 것들을 실무에 연결하는 시간</h2>
+        <p>
+          개발 환경 세팅, CRUD, 웹앱 배포까지 — 지금까지 배운 내용들이 단독으로도 유용하지만,
+          <strong>실제 업무 흐름에 연결할 때 진짜 가치가 생겨요.</strong>
+          이 페이지에서는 이 모든 것을 엮어 "처음부터 끝까지 혼자 돌아가는" 자동화 시스템 3가지를 만들어볼 거예요.
+        </p>
+        <p>
+          복잡해 보여도 걱정 마세요. <strong>Claude Code에게 시나리오를 설명하고 코드를 만들어달라고 요청</strong>하면 됩니다.
+          여러분의 역할은 "이런 게 필요해"를 명확히 표현하는 것, 그리고 코드가 제대로 동작하는지 확인하는 것이에요.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 이 페이지 활용법:</strong> 3개 시나리오를 순서대로 따라가도 좋고, 지금 당장 필요한 시나리오 하나만 골라 바로 실습해도 좋아요. Claude Code 프롬프트 예시가 각 시나리오마다 있으니, 복사해서 바로 사용해보세요.
+        </div>
+
+        <!-- ───────── 시나리오 1 ───────── -->
+        <h2>📋 시나리오 1: 구글 폼 제출 → 시트 기록 → Gmail 알림</h2>
+        <p>
+          가장 많이 쓰이는 패턴이에요. 누군가 구글 폼을 제출하면,
+          응답이 스프레드시트에 자동 기록되고, 담당자에게 즉시 알림 이메일이 발송돼요.
+          교육 신청, 행사 등록, 문의 접수 등 어디든 쓸 수 있어요.
+        </p>
+
+        <!-- 아키텍처 다이어그램 -->
+        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap; margin:1.5rem 0; padding:1.25rem; background:var(--color-bg-alt); border-radius:8px; justify-content:center;">
+          <div style="background:var(--color-primary); color:#fff; border-radius:8px; padding:0.75rem 1.25rem; font-size:0.875rem; font-weight:600; text-align:center; min-width:120px;">
+            📝 Google Form<br><span style="font-size:0.75rem; font-weight:400;">사용자가 제출</span>
+          </div>
+          <div style="font-size:1.5rem; color:var(--color-primary); flex-shrink:0;">→</div>
+          <div style="background:var(--color-secondary); color:#fff; border-radius:8px; padding:0.75rem 1.25rem; font-size:0.875rem; font-weight:600; text-align:center; min-width:120px;">
+            📊 Google Sheets<br><span style="font-size:0.75rem; font-weight:400;">자동 기록</span>
+          </div>
+          <div style="font-size:1.5rem; color:var(--color-primary); flex-shrink:0;">→</div>
+          <div style="background:var(--color-accent); color:#fff; border-radius:8px; padding:0.75rem 1.25rem; font-size:0.875rem; font-weight:600; text-align:center; min-width:120px;">
+            📧 Gmail<br><span style="font-size:0.75rem; font-weight:400;">담당자 알림</span>
+          </div>
+          <div style="font-size:1.5rem; color:var(--color-primary); flex-shrink:0;">+</div>
+          <div style="background:#27ae60; color:#fff; border-radius:8px; padding:0.75rem 1.25rem; font-size:0.875rem; font-weight:600; text-align:center; min-width:120px;">
+            📧 Gmail<br><span style="font-size:0.75rem; font-weight:400;">신청자 확인 메일</span>
+          </div>
+        </div>
+
+        <h3>핵심 GAS 개념</h3>
+        <ul>
+          <li><strong>FormApp 트리거</strong>: 폼 제출 시 자동 실행 (<code>onFormSubmit</code>)</li>
+          <li><strong>MailApp.sendEmail()</strong>: 이메일 발송 함수</li>
+          <li><strong>e.values[]</strong>: 폼 응답 데이터 배열</li>
+          <li><strong>e.namedValues[]</strong>: 질문 이름으로 응답 접근 (더 직관적)</li>
+        </ul>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Claude Code 프롬프트 — 시나리오 1</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>Google Apps Script 코드를 만들어줘.
+구글 폼 제출 시 자동으로 실행되는 onFormSubmit 트리거 함수야.
+
+[폼 질문 구성]
+- 이름 (단답형)
+- 이메일 (단답형)
+- 신청 과정 (객관식: 'AI 기초반', 'ChatGPT 활용반', 'Apps Script반')
+- 소속 부서 (단답형)
+
+[동작 흐름]
+1. 폼 응답이 연결된 스프레드시트의 '신청자' 시트에 자동으로 기록됨 (이건 구글이 알아서 함)
+2. 신청자 이메일로 신청 확인 이메일 발송
+   - 제목: "[교육 신청 완료] {이름}님의 신청이 접수되었습니다"
+   - 내용: 신청자 이름, 신청 과정, 담당자 연락처 (admin@company.com) 포함
+3. 담당자(admin@company.com)에게 신청 알림 이메일 발송
+   - 제목: "[신규 신청] {이름} — {신청과정}"
+   - 내용: 전체 응답 내용 요약
+
+[요구사항]
+- e.namedValues를 사용해서 질문 이름으로 응답 접근
+- 이메일 발송 실패 시 Logger.log()로 오류 기록
+- 함수 이름: onFormSubmit(e)
+- 한국어 JSDoc 주석 포함</pre>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 시나리오 1 코드 구조</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * 구글 폼 제출 시 자동 실행되는 함수
+ * 트리거 설정: 폼 연결 스프레드시트 → 트리거 → onFormSubmit
+ * @param {Object} e - 폼 제출 이벤트 객체
+ */
+function onFormSubmit(e) {
+  // namedValues: { '질문 텍스트': ['응답값'] } 형태
+  const responses = e.namedValues;
+  const name    = responses['이름'][0];
+  const email   = responses['이메일'][0];
+  const course  = responses['신청 과정'][0];
+  const dept    = responses['소속 부서'][0];
+
+  const adminEmail = 'admin@company.com';
+
+  try {
+    // ① 신청자에게 확인 이메일 발송
+    MailApp.sendEmail({
+      to: email,
+      subject: `[교육 신청 완료] ${name}님의 신청이 접수되었습니다`,
+      body: `안녕하세요, ${name}님!\n\n` +
+            `아래 내용으로 신청이 완료되었습니다.\n\n` +
+            `• 신청 과정: ${course}\n` +
+            `• 소속 부서: ${dept}\n\n` +
+            `문의사항은 ${adminEmail}으로 연락 주세요.\n\n감사합니다.`
+    });
+
+    // ② 담당자에게 알림 이메일 발송
+    MailApp.sendEmail({
+      to: adminEmail,
+      subject: `[신규 신청] ${name} — ${course}`,
+      body: `새로운 교육 신청이 접수되었습니다.\n\n` +
+            `이름: ${name}\n이메일: ${email}\n` +
+            `과정: ${course}\n부서: ${dept}`
+    });
+
+    Logger.log(`신청 처리 완료 — ${name} (${email})`);
+
+  } catch (err) {
+    Logger.log(`이메일 발송 실패: ${err.message}`);
+  }
+}
+
+// ── 트리거 설정 방법 ──────────────────────────────
+// Apps Script 에디터 → 왼쪽 메뉴 '트리거(⏰)' → '+ 트리거 추가'
+// ① 실행할 함수: onFormSubmit
+// ② 이벤트 소스: 스프레드시트에서
+// ③ 이벤트 유형: 양식 제출 시
+// ④ 저장 → 완료!</pre>
+          </div>
+        </div>
+
+        <!-- ───────── 시나리오 2 ───────── -->
+        <h2>📬 시나리오 2: 조건부 Gmail 자동 발송 (템플릿 기반)</h2>
+        <p>
+          스프레드시트의 상태 컬럼 값에 따라 <strong>서로 다른 내용의 이메일</strong>을 자동 발송하는 패턴이에요.
+          예를 들어, 신청자 상태가 '승인'이면 승인 안내 메일을, '반려'이면 사유를 담은 안내 메일을 보내는 거죠.
+          매일 또는 매주 정해진 시각에 자동으로 체크·발송하도록 타임 트리거를 설정해요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Claude Code 프롬프트 — 시나리오 2</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>Google Apps Script 코드를 만들어줘.
+스프레드시트의 상태 컬럼 값에 따라 조건부 이메일을 발송하는 함수야.
+
+[스프레드시트 구조 — '신청자' 시트]
+A열: id, B열: name, C열: email, D열: course
+E열: status ('대기' | '승인' | '반려')
+F열: notified ('Y' | 빈 값) — 이미 발송했는지 체크
+
+[동작 로직]
+1. '신청자' 시트에서 status가 '승인' 또는 '반려'이고
+   notified 컬럼이 비어있는 행을 찾는다
+2. 상태에 따라 다른 템플릿으로 이메일 발송:
+   - 승인: "{{name}}님, {{course}} 과정 신청이 승인되었습니다. 교육 일정..."
+   - 반려: "{{name}}님, 아쉽게도 이번 신청은 반려되었습니다. 사유: 정원 초과"
+3. 발송 후 해당 행의 notified 컬럼에 'Y' 표시
+4. 발송 건수를 Logger.log()로 기록
+
+[요구사항]
+- 함수 이름: sendStatusEmails()
+- {{name}}, {{course}} 자리표시자를 실제 값으로 치환하는 replaceTemplate() 헬퍼 함수 포함
+- 타임 트리거로 매일 오전 10시에 실행하도록 주석으로 설정 방법 안내
+- 오류 시 Logger.log() 기록</pre>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 시나리오 2 핵심 코드</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre">// 이메일 템플릿 정의
+const EMAIL_TEMPLATES = {
+  '승인': {
+    subject: '[승인 완료] {{name}}님의 {{course}} 신청',
+    body: `안녕하세요, {{name}}님!\n\n` +
+          `{{course}} 과정 신청이 최종 승인되었습니다. 🎉\n\n` +
+          `교육 시작 3일 전에 상세 일정 안내 메일을 별도 발송해드릴 예정이에요.\n\n` +
+          `기대해 주세요! 감사합니다.`
+  },
+  '반려': {
+    subject: '[안내] {{name}}님의 {{course}} 신청 결과',
+    body: `안녕하세요, {{name}}님.\n\n` +
+          `아쉽게도 {{course}} 과정 신청이 이번 차수에는 반려되었습니다.\n` +
+          `사유: 신청 인원 초과 (선착순 마감)\n\n` +
+          `다음 차수에 다시 신청해 주시면 우선 검토해드릴게요.\n\n감사합니다.`
+  }
+};
+
+/**
+ * 템플릿의 자리표시자를 실제 값으로 치환합니다.
+ * @param {string} template - {{key}} 형태의 자리표시자가 있는 문자열
+ * @param {Object} data     - { key: value } 치환 데이터
+ */
+function replaceTemplate(template, data) {
+  return Object.entries(data).reduce((str, [key, value]) => {
+    // 정규식으로 {{key}} 패턴을 모두 치환
+    return str.replace(new RegExp(`{{${key}}}`, 'g'), value);
+  }, template);
+}
+
+/**
+ * 매일 오전 10시에 실행 — 미발송 상태 이메일 일괄 처리
+ *
+ * 트리거 설정:
+ *   Apps Script → 트리거 → + 추가
+ *   실행함수: sendStatusEmails
+ *   이벤트 소스: 시간 기반
+ *   시간 유형: 일별 타이머 → 오전 9시~10시
+ */
+function sendStatusEmails() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('신청자');
+  const data = sheet.getDataRange().getValues();
+
+  let sentCount = 0;
+
+  // i=1부터: 1행은 헤더
+  for (let i = 1; i < data.length; i++) {
+    const [id, name, email, course, status, notified] = data[i];
+
+    // 발송 대상: 승인 또는 반려이면서 아직 미발송
+    if ((status === '승인' || status === '반려') && notified !== 'Y') {
+      const tmpl = EMAIL_TEMPLATES[status];
+      const vars = { name, course };
+
+      try {
+        MailApp.sendEmail({
+          to: email,
+          subject: replaceTemplate(tmpl.subject, vars),
+          body:    replaceTemplate(tmpl.body,    vars)
+        });
+
+        // F열(6번째)에 'Y' 표시
+        sheet.getRange(i + 1, 6).setValue('Y');
+        sentCount++;
+
+      } catch (err) {
+        Logger.log(`발송 실패 — ${name} (${email}): ${err.message}`);
+      }
+    }
+  }
+
+  Logger.log(`발송 완료: ${sentCount}건`);
+}</pre>
+          </div>
+        </div>
+
+        <!-- ───────── 시나리오 3 ───────── -->
+        <h2>📅 시나리오 3: 스프레드시트 데이터 → Google Calendar 일정 자동 생성</h2>
+        <p>
+          일정 데이터가 스프레드시트에 있다면, 매번 Calendar에 직접 입력하지 않아도 돼요.
+          GAS가 시트를 읽어 <strong>자동으로 구글 캘린더 일정을 만들어</strong>줍니다.
+          팀 교육 스케줄, 프로젝트 마일스톤, 행사 일정 관리에 딱 맞아요.
+          중복 생성 방지 로직도 함께 넣어서 안전하게 운영할 수 있어요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Claude Code 프롬프트 — 시나리오 3</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>Google Apps Script 코드를 만들어줘.
+스프레드시트의 일정 데이터를 읽어 Google Calendar에 자동으로 일정을 생성하는 함수야.
+
+[스프레드시트 구조 — '교육일정' 시트]
+A열: event_title (일정 제목, 예: "AI 기초반 1회차")
+B열: start_date  (시작일, 예: "2026-04-07")
+C열: start_time  (시작 시각, 예: "14:00")
+D열: end_time    (종료 시각, 예: "17:00")
+E열: location    (장소, 예: "회의실 A")
+F열: description (설명, 선택사항)
+G열: calendar_event_id (생성된 이벤트 ID 저장 — 중복 방지용, 처음엔 빈 값)
+
+[동작 로직]
+1. '교육일정' 시트의 모든 행을 읽는다
+2. G열(calendar_event_id)이 비어있는 행만 처리 (이미 생성된 건 스킵)
+3. 시작/종료 Date 객체를 조합하여 CalendarApp으로 일정 생성
+4. 생성된 이벤트 ID를 G열에 저장 (다음 실행 시 중복 생성 방지)
+5. 생성된 건수 Logger.log() 기록
+
+[요구사항]
+- 함수 이름: syncCalendarEvents()
+- CalendarApp.getDefaultCalendar() 사용
+- 날짜/시간 파싱 헬퍼 함수 포함
+- 중복 방지 설명 주석 포함
+- 일정 생성 실패 시 해당 행 스킵 후 계속 진행</pre>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 시나리오 3 핵심 코드</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * 날짜 문자열과 시각 문자열을 Date 객체로 조합합니다.
+ * @param {string} dateStr - "2026-04-07" 형식
+ * @param {string} timeStr - "14:00" 형식
+ * @returns {Date}
+ */
+function parseDateTime(dateStr, timeStr) {
+  const [year, month, day] = dateStr.split('-').map(Number);
+  const [hour, minute]     = timeStr.split(':').map(Number);
+  // month는 0-based이므로 -1
+  return new Date(year, month - 1, day, hour, minute);
+}
+
+/**
+ * 스프레드시트의 교육 일정을 Google Calendar에 동기화합니다.
+ * G열에 이벤트 ID가 있는 행은 이미 생성된 것이므로 스킵해요.
+ *
+ * 트리거: 수동 실행 또는 일별 타이머로 설정 가능
+ */
+function syncCalendarEvents() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('교육일정');
+  const data    = sheet.getDataRange().getValues();
+  const calendar = CalendarApp.getDefaultCalendar();
+
+  let createdCount = 0;
+
+  for (let i = 1; i < data.length; i++) {
+    const [title, startDate, startTime, endTime,
+           location, description, existingId] = data[i];
+
+    // G열에 이미 이벤트 ID가 있으면 중복 생성 방지 — 스킵
+    if (existingId) {
+      Logger.log(`스킵 (이미 생성됨): ${title}`);
+      continue;
+    }
+
+    // 빈 행 스킵
+    if (!title || !startDate || !startTime) continue;
+
+    try {
+      const startDt = parseDateTime(startDate.toString(), startTime.toString());
+      const endDt   = parseDateTime(startDate.toString(), endTime.toString());
+
+      // 캘린더 일정 생성
+      const event = calendar.createEvent(title, startDt, endDt, {
+        location:    location    || '',
+        description: description || ''
+      });
+
+      // 생성된 이벤트 ID를 G열에 저장 (중복 방지)
+      sheet.getRange(i + 1, 7).setValue(event.getId());
+      createdCount++;
+
+      Logger.log(`일정 생성 완료: ${title} (${startDate} ${startTime}~${endTime})`);
+
+    } catch (err) {
+      Logger.log(`일정 생성 실패 — ${title}: ${err.message}`);
+      // 실패해도 다음 행 계속 처리
+    }
+  }
+
+  Logger.log(`총 ${createdCount}건의 일정 생성 완료`);
+}</pre>
+          </div>
+        </div>
+
+        <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; margin:1.5rem 0; border-left:4px solid var(--color-secondary);">
+          <h3 style="margin-top:0; font-size:1rem;">🔄 중복 방지 전략이 왜 중요한가요?</h3>
+          <p style="font-size:0.875rem; margin:0;">
+            트리거를 매일 실행하면, 이미 생성된 일정을 또 만들 위험이 있어요.
+            이를 막으려면 <strong>"이미 처리했음"을 시트에 표시</strong>해야 해요.
+            위 코드처럼 생성된 이벤트 ID를 G열에 저장하면, 다음 실행 시 해당 행을 건너뛰어요.
+            나중에 일정을 수정해야 한다면, G열 값을 지우고 다시 실행하면 돼요.
+          </p>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 이제 뭘 더 할 수 있나요?</strong> 오늘 배운 세 가지 시나리오에서 한 발 더 나아갈 수 있어요:
+          <ul style="margin:0.5rem 0 0; padding-left:1.25rem;">
+            <li><strong>Slack 웹훅 연동</strong>: MailApp 대신 UrlFetchApp으로 Slack 채널에 알림 보내기</li>
+            <li><strong>Google Drive 자동화</strong>: 폼 제출 시 Drive에 개인 폴더 자동 생성</li>
+            <li><strong>외부 API 연동</strong>: UrlFetchApp으로 날씨, 환율 등 외부 데이터 가져와 시트에 저장</li>
+            <li><strong>Docs 자동화</strong>: 템플릿 문서를 복사해 데이터로 채운 계약서·보고서 자동 생성</li>
+            <li><strong>BigQuery 연동</strong>: 대용량 데이터는 BigQuery로 내보내 분석하기</li>
+          </ul>
+          Claude Code에게 "이런 자동화를 만들고 싶어"라고 설명하면 그에 맞는 코드를 만들어줄 거예요!
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ GAS 할당량(Quota) 주의:</strong> Google Apps Script는 무료이지만 일일 사용 한도가 있어요.
+          <ul style="margin:0.5rem 0 0; padding-left:1.25rem;">
+            <li><strong>이메일 발송</strong>: 무료 계정 100건/일, Workspace 계정 1,500건/일</li>
+            <li><strong>스크립트 실행 시간</strong>: 1회 최대 6분 (초과 시 강제 종료)</li>
+            <li><strong>URL Fetch</strong>: 20,000건/일</li>
+            <li><strong>Calendar 이벤트 생성</strong>: 5,000건/일</li>
+          </ul>
+          대량 처리가 필요하다면 한 번에 모든 행을 처리하지 말고, 배치 크기를 제한하거나 여러 번 나눠 실행하세요.
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 실무 자동화 완성 체크리스트</h3>
+          <label><input type="checkbox" data-key="auto-1"> 시나리오 1: onFormSubmit 트리거를 설정하고 테스트 폼 제출로 이메일 발송을 확인했다</label>
+          <label><input type="checkbox" data-key="auto-2"> 시나리오 2: 상태 컬럼 기반 조건부 이메일과 notified 중복 방지 로직을 이해했다</label>
+          <label><input type="checkbox" data-key="auto-3"> 시나리오 3: 스프레드시트 일정 데이터로 캘린더 이벤트를 자동 생성해봤다</label>
+          <label><input type="checkbox" data-key="auto-4"> GAS 일일 할당량 제한을 확인하고 내 업무에 영향이 없는지 검토했다</label>
+          <label><input type="checkbox" data-key="auto-5"> 실제 내 업무에 적용할 자동화 시나리오를 하나 정하고 Claude Code에게 코드를 요청해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-webapp.html" class="nav-prev">← 이전: 웹앱 서비스 배포</a>
+      <a href="glossary.html" class="nav-next">다음: AI 용어 사전 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

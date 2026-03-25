@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="main/dev 브랜치 분리, 커밋 규칙, PR 습관으로 형상관리를 체계화해요.">
+  <title>Git 브랜치 전략 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Git 브랜치 전략</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 30분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">main/dev 브랜치 분리, 커밋 규칙, PR 습관으로 형상관리를 체계화해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- INTRO -->
+        <h2>📦 GAS 코드도 형상관리가 필요한 이유</h2>
+        <p>
+          "GAS는 구글 서버에 올라가 있으니 백업은 알아서 되겠지"라고 생각하기 쉽습니다.
+          하지만 GAS 에디터는 버전 히스토리를 제한적으로만 제공하고, 실수로 코드를 지우면
+          복구가 어렵습니다. 특히 여러 사람이 같은 스크립트를 수정하다 보면 누가 언제 무엇을 바꿨는지
+          추적하기가 사실상 불가능해집니다.
+        </p>
+        <p>
+          Git으로 형상관리를 하면 세 가지 문제가 해결됩니다:
+        </p>
+        <ul>
+          <li><strong>롤백</strong>: 기능이 망가지면 이전 상태로 즉시 되돌아갈 수 있어요.</li>
+          <li><strong>협업</strong>: 누가 어떤 이유로 코드를 바꿨는지 커밋 메시지로 알 수 있어요.</li>
+          <li><strong>히스토리</strong>: "3개월 전에 동작하던 버전"을 꺼내볼 수 있어요.</li>
+        </ul>
+        <p>
+          clasp로 로컬 개발 환경을 만든 이상, Git을 함께 쓰지 않을 이유가 없습니다.
+          이번 강의에서는 GAS 프로젝트에 맞는 실용적인 Git 전략을 소개합니다.
+        </p>
+
+        <!-- .gitignore -->
+        <h2>🙈 GAS 프로젝트 전용 .gitignore</h2>
+        <p>
+          Git 저장소를 초기화하기 전에 <code>.gitignore</code> 파일부터 만드세요.
+          나중에 추가하면 이미 추적된 파일은 제거하는 과정이 번거롭습니다.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">.gitignore (GAS 프로젝트)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># clasp 설정 파일 - scriptId가 포함되어 있어 공개 저장소에 올리면 안 됨
+# 팀 내부 비공개 저장소라면 포함해도 무방
+.clasp.json
+
+# 환경 변수 (API 키, 웹훅 URL 등 민감한 정보)
+.env
+.env.local
+.env.production
+
+# Node.js 의존성 (clasp, eslint 등 로컬 도구)
+node_modules/
+
+# 로그 파일
+*.log
+npm-debug.log*
+
+# OS 생성 파일
+.DS_Store
+Thumbs.db
+
+# 에디터 설정 (팀 공유가 필요하면 제외해도 됨)
+.vscode/
+.idea/
+
+# clasp 컴파일 결과물 (TypeScript 사용 시)
+dist/</pre>
+          </div>
+        </div>
+
+        <div class="tip-box"><strong>💡 .clasp.json을 커밋해야 할 때:</strong> 팀원이 같은 GAS 프로젝트를 공유해야 한다면 .clasp.json을 커밋하는 것이 편리할 수 있습니다. 이 경우 저장소를 반드시 <strong>비공개(private)</strong>로 설정하세요. 또는 scriptId를 환경변수로 분리하고 .clasp.json은 <code>.clasp.json.example</code> 형태로 예시 파일만 커밋하는 방법도 있습니다.</div>
+
+        <!-- 브랜치 전략 -->
+        <h2>🌿 main/dev 브랜치 운영 규칙</h2>
+        <p>
+          GAS 프로젝트는 대부분 소규모이므로 복잡한 Git Flow 대신 간단한 두 브랜치 전략을 추천합니다.
+        </p>
+
+        <div class="branch-diagram">
+          <div class="branch-card branch-card--main">
+            <div class="branch-card__header">
+              <span class="branch-badge">main</span>
+              <span class="branch-tag">운영 브랜치</span>
+            </div>
+            <ul>
+              <li>직접 커밋 <strong>금지</strong></li>
+              <li>dev 브랜치에서 PR(Pull Request)을 통해서만 병합</li>
+              <li>항상 실제 운영에서 동작하는 안정적인 코드만 존재</li>
+              <li>main의 최신 커밋 = GAS 운영 환경에 배포된 코드</li>
+              <li>태그로 버전 관리: <code>git tag v1.2.0</code></li>
+            </ul>
+          </div>
+          <div class="branch-card branch-card--dev">
+            <div class="branch-card__header">
+              <span class="branch-badge branch-badge--dev">dev</span>
+              <span class="branch-tag">개발 브랜치</span>
+            </div>
+            <ul>
+              <li>일상적인 개발 커밋은 여기에</li>
+              <li>기능 개발은 <code>feat/기능명</code> 브랜치로 분기 후 dev에 병합</li>
+              <li>테스트 완료 후 main으로 PR</li>
+              <li>GAS에는 dev 브랜치 코드를 테스트용으로 push</li>
+            </ul>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.5rem;">기능 브랜치 명명 규칙은 다음 패턴을 따르세요:</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">브랜치 명명 규칙</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># 새 기능 개발
+feat/slack-notification
+feat/weekly-report
+feat/auto-email
+
+# 버그 수정
+fix/null-pointer-error
+fix/date-format
+
+# 리팩터링
+refactor/extract-helper-functions
+
+# 작업 흐름 예시
+git checkout dev
+git checkout -b feat/slack-notification
+# ... 개발 ...
+git add .
+git commit -m "feat: 슬랙 알림 기능 추가"
+git checkout dev
+git merge feat/slack-notification
+git branch -d feat/slack-notification</pre>
+          </div>
+        </div>
+
+        <!-- 커밋 메시지 컨벤션 -->
+        <h2>💬 커밋 메시지 컨벤션</h2>
+        <p>
+          좋은 커밋 메시지는 "미래의 나"를 위한 배려입니다. 3개월 뒤 "왜 이 코드를 바꿨지?"라는 질문에
+          바로 답할 수 있도록 일관된 형식을 유지하세요. <strong>Conventional Commits</strong> 규칙을 GAS에 맞게 적용합니다.
+        </p>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>타입</th>
+                <th>설명</th>
+                <th>예시</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>feat</code></td>
+                <td>새로운 기능 추가</td>
+                <td>feat: 주간 보고서 자동 발송 기능 추가</td>
+              </tr>
+              <tr>
+                <td><code>fix</code></td>
+                <td>버그 수정</td>
+                <td>fix: 날짜 데이터 없을 때 null 오류 수정</td>
+              </tr>
+              <tr>
+                <td><code>refactor</code></td>
+                <td>기능 변경 없이 코드 구조 개선</td>
+                <td>refactor: 슬랙 발송 로직을 별도 함수로 분리</td>
+              </tr>
+              <tr>
+                <td><code>docs</code></td>
+                <td>문서 변경 (CLAUDE.md, README 등)</td>
+                <td>docs: 스프레드시트 컬럼 구조 설명 업데이트</td>
+              </tr>
+              <tr>
+                <td><code>chore</code></td>
+                <td>빌드, 설정 파일 변경</td>
+                <td>chore: .claspignore에 테스트 파일 추가</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">좋은 커밋 메시지 예시</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre># 형식: 타입: 무엇을 했는가 (50자 이내)
+# 빈 줄 후 왜, 어떻게에 대한 설명 (선택)
+
+# 좋은 예 1: 기능 추가
+feat: 일일 실적 슬랙 알림 기능 추가
+
+매일 오전 9시 트리거로 실행되어
+집계 시트의 전날 데이터를 슬랙 #영업-daily-report 채널에 전송
+
+# 좋은 예 2: 버그 수정
+fix: 입력 시트에 데이터 없을 때 null 오류 수정
+
+lastRow가 1(헤더만 있는 상태)일 때 getRange가 실패하는 문제.
+데이터가 없으면 빈 배열을 반환하도록 수정.
+
+# 나쁜 예 (이렇게 쓰지 마세요)
+# "수정"
+# "코드 변경"
+# "aaaa"
+# "작업중"</pre>
+          </div>
+        </div>
+
+        <!-- GitHub Actions -->
+        <h2>⚙️ GitHub Actions로 자동 배포하기</h2>
+        <p>
+          main 브랜치에 코드가 병합될 때마다 자동으로 <code>clasp push</code>를 실행하도록
+          GitHub Actions 워크플로를 설정할 수 있습니다. 수동으로 터미널을 열 필요가 없어지죠.
+        </p>
+        <p>
+          먼저 GitHub 저장소의 <strong>Settings → Secrets and variables → Actions</strong>에서
+          <code>CLASP_TOKEN</code> 시크릿을 추가해야 합니다. 값은 로컬의 <code>~/.clasprc.json</code> 파일 내용 전체를 넣으면 됩니다.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">.github/workflows/deploy.yml</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>name: GAS 자동 배포
+
+# main 브랜치에 push될 때 실행 (PR 병합 포함)
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: clasp push
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: 코드 체크아웃
+        uses: actions/checkout@v4
+
+      # 2. Node.js 설치 (clasp 실행에 필요)
+      - name: Node.js 설치
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 3. clasp 전역 설치
+      - name: clasp 설치
+        run: npm install -g @google/clasp
+
+      # 4. 구글 인증 설정
+      # GitHub Secrets에 저장된 CLASP_TOKEN으로 ~/.clasprc.json 생성
+      - name: 구글 인증 설정
+        run: echo '${{ secrets.CLASP_TOKEN }}' > ~/.clasprc.json
+
+      # 5. GAS에 코드 업로드
+      - name: GAS에 코드 배포
+        run: clasp push --force
+
+      # 6. (선택) 배포 버전 생성
+      # 아래 줄의 주석을 해제하면 push마다 새 배포 버전도 생성됩니다
+      # - name: 배포 버전 생성
+      #   run: clasp deploy -d "자동 배포 - ${{ github.sha }}"</pre>
+          </div>
+        </div>
+
+        <div class="warning-box"><strong>⚠️ 커밋 메시지에 자격증명을 넣지 마세요:</strong> 슬랙 웹훅 URL, API 키, 비밀번호 등을 커밋 메시지나 코드에 직접 적으면 Git 히스토리에 영원히 남습니다. 공개 저장소라면 외부에 노출됩니다. 민감한 값은 반드시 GAS의 Script Properties 또는 GitHub Secrets에 저장하고, 코드에는 키 이름(변수명)만 사용하세요. 실수로 커밋했다면 즉시 해당 키를 무효화하고 재발급하세요.</div>
+
+        <div class="tip-box"><strong>💡 Conventional Commits 도구 활용:</strong> 커밋 메시지 규칙을 팀 전체가 지키려면 <code>commitlint</code>나 <code>commitizen</code> 같은 도구를 활용하세요. <code>git commit</code>을 실행하면 대화형으로 타입, 범위, 설명을 입력하도록 안내해줍니다. VSCode 확장 중 "Conventional Commits"를 설치하면 GUI로도 사용할 수 있어요.</div>
+
+        <!-- 실습 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 실습 체크리스트</h3>
+          <label><input type="checkbox" data-key="git-1"> GAS 프로젝트에 .gitignore를 생성하고 .clasp.json, .env 등을 추가했다</label>
+          <label><input type="checkbox" data-key="git-2"> main과 dev 브랜치를 분리하고 dev에서만 개발 커밋을 작성하고 있다</label>
+          <label><input type="checkbox" data-key="git-3"> feat/기능명 패턴으로 기능 브랜치를 만들어 개발해봤다</label>
+          <label><input type="checkbox" data-key="git-4"> Conventional Commits 형식(feat:, fix: 등)으로 커밋 메시지를 작성했다</label>
+          <label><input type="checkbox" data-key="git-5"> .github/workflows/deploy.yml을 만들고 CLASP_TOKEN 시크릿을 설정했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-clasp.html" class="nav-prev">← 이전: clasp 배포 워크플로</a>
+      <a href="gas-crud.html" class="nav-next">다음: 스프레드시트 DB CRUD →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

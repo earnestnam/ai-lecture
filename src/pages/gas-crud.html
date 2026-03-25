@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="스프레드시트를 DB로 쓰는 레코드 생성·조회·수정·삭제 패턴을 실습해요.">
+  <title>스프레드시트 DB CRUD — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>스프레드시트 DB CRUD</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 50분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">스프레드시트를 DB로 쓰는 레코드 생성·조회·수정·삭제 패턴을 실습해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>🗄️ 스프레드시트를 데이터베이스로 쓰는 법</h2>
+        <p>
+          "데이터베이스"라고 하면 MySQL이나 PostgreSQL 같은 전문 도구를 떠올리기 쉬운데요,
+          사실 Google Sheets도 훌륭한 데이터베이스 역할을 할 수 있어요.
+          특히 <strong>팀 내 소규모 데이터 관리</strong>에는 스프레드시트 DB가 딱 맞아요.
+        </p>
+        <p>
+          별도 서버가 필요 없고, 구글 계정만 있으면 바로 시작할 수 있어요.
+          데이터를 눈으로 직접 확인·수정할 수도 있고, Apps Script와 조합하면
+          자동화까지 연결되죠. 다만 <strong>동시 접속자가 많거나, 수십만 건 이상의 대용량 데이터</strong>라면
+          전문 DB를 쓰는 게 낫습니다.
+        </p>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid var(--color-primary);">
+            <h3 style="margin-top:0; font-size:1rem;">✅ 스프레드시트 DB가 잘 맞는 경우</h3>
+            <ul style="font-size:0.875rem; padding-left:1.25rem; margin:0;">
+              <li>팀 내 신청·등록·관리 데이터</li>
+              <li>건수가 수천~수만 건 이하</li>
+              <li>동시 수정이 거의 없는 업무</li>
+              <li>비개발자도 데이터를 직접 볼 필요가 있을 때</li>
+            </ul>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; border-left:4px solid #e74c3c;">
+            <h3 style="margin-top:0; font-size:1rem;">❌ 전문 DB가 필요한 경우</h3>
+            <ul style="font-size:0.875rem; padding-left:1.25rem; margin:0;">
+              <li>수십만 건 이상 대용량 데이터</li>
+              <li>여러 명이 동시에 자주 수정하는 경우</li>
+              <li>복잡한 관계형 쿼리가 필요한 경우</li>
+              <li>보안이 매우 중요한 민감한 정보</li>
+            </ul>
+          </div>
+        </div>
+
+        <h2>📐 스프레드시트 DB 구조 설계</h2>
+        <p>
+          스프레드시트를 DB로 쓰려면 <strong>구조를 먼저 정해두는 게 핵심</strong>이에요.
+          나중에 구조를 바꾸면 기존 코드를 전부 수정해야 하거든요.
+        </p>
+
+        <h3>기본 규칙</h3>
+        <ul>
+          <li><strong>1행은 무조건 헤더(컬럼명)</strong>로 고정해요. 절대 삭제하거나 순서를 바꾸면 안 돼요.</li>
+          <li><strong>A열은 ID</strong>로 예약해요. 레코드를 고유하게 식별하는 값이에요.</li>
+          <li>컬럼명은 영문 소문자 + 언더스코어로 통일하면 코드 작성이 편해요. (예: <code>created_at</code>, <code>user_email</code>)</li>
+          <li>한 시트 = 한 종류의 데이터. 여러 종류를 섞지 마세요.</li>
+        </ul>
+
+        <h3>예시: 신청자 관리 시트 구조</h3>
+        <div style="overflow-x:auto; margin:1.5rem 0;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+            <thead>
+              <tr style="background:var(--color-primary); color:#fff;">
+                <th style="padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--color-border);">A열: id</th>
+                <th style="padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--color-border);">B열: name</th>
+                <th style="padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--color-border);">C열: email</th>
+                <th style="padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--color-border);">D열: department</th>
+                <th style="padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--color-border);">E열: status</th>
+                <th style="padding:0.6rem 0.8rem; text-align:left; border:1px solid var(--color-border);">F열: created_at</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background:var(--color-bg);">
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">1710000001234</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">김민준</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">minjun@company.com</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">마케팅팀</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">승인</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">2026-03-20 09:31</td>
+              </tr>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">1710000005678</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">이서연</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">seoyeon@company.com</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">기획팀</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">대기</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">2026-03-21 14:05</td>
+              </tr>
+              <tr style="background:var(--color-bg);">
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">1710000009012</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">박지훈</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">jihoon@company.com</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">운영팀</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">반려</td>
+                <td style="padding:0.6rem 0.8rem; border:1px solid var(--color-border);">2026-03-22 10:47</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>➕ Create — 레코드 생성</h2>
+        <p>
+          새 레코드를 추가할 때는 <code>appendRow()</code> 메서드를 써요.
+          시트의 마지막 행 다음에 데이터를 자동으로 붙여줘요.
+          ID는 현재 시각의 타임스탬프(밀리초)를 활용해 자동 생성해요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 레코드 생성 함수</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * 신청자 레코드를 시트에 추가합니다.
+ * @param {string} name    - 이름
+ * @param {string} email   - 이메일
+ * @param {string} dept    - 부서
+ */
+function createApplicant(name, email, dept) {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const sheet = ss.getSheetByName('신청자'); // 시트 이름과 맞춰주세요
+
+  // ID: 현재 시각 밀리초 (중복 없는 고유값)
+  const id = new Date().getTime().toString();
+
+  // 등록 시각 문자열로 변환
+  const createdAt = Utilities.formatDate(
+    new Date(),
+    'Asia/Seoul',
+    'yyyy-MM-dd HH:mm'
+  );
+
+  // 헤더 순서: id, name, email, department, status, created_at
+  sheet.appendRow([id, name, email, dept, '대기', createdAt]);
+
+  Logger.log(`레코드 추가 완료 — ID: ${id}`);
+  return id; // 생성된 ID 반환
+}</pre>
+          </div>
+        </div>
+
+        <h2>🔍 Read — 레코드 조회</h2>
+        <p>
+          조회는 <code>getValues()</code>로 전체 데이터를 한 번에 읽어온 뒤,
+          JavaScript의 <code>filter</code>나 <code>find</code>로 원하는 행을 찾아요.
+          매번 시트에 개별 접근하는 것보다 한 번에 읽어오는 게 훨씬 빠릅니다.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 전체 조회 및 조건 검색</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * 시트의 모든 레코드를 객체 배열로 반환합니다.
+ */
+function getAllApplicants() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('신청자');
+
+  // getValues()는 2차원 배열 반환 [[행1값들], [행2값들], ...]
+  const data = sheet.getDataRange().getValues();
+
+  // 1행(인덱스 0)은 헤더이므로 제거
+  const headers = data[0];  // ['id', 'name', 'email', ...]
+  const rows    = data.slice(1);
+
+  // 각 행을 {id, name, email, ...} 객체로 변환
+  return rows.map(row => {
+    const obj = {};
+    headers.forEach((header, i) => {
+      obj[header] = row[i];
+    });
+    return obj;
+  });
+}
+
+/**
+ * ID로 특정 레코드를 찾습니다.
+ * @param {string} targetId - 찾을 레코드의 ID
+ */
+function findApplicantById(targetId) {
+  const all = getAllApplicants();
+  // find()는 조건에 맞는 첫 번째 요소 반환, 없으면 undefined
+  return all.find(record => record.id === targetId) || null;
+}
+
+/**
+ * 이메일로 레코드를 찾습니다.
+ * @param {string} email - 찾을 이메일 주소
+ */
+function findApplicantByEmail(email) {
+  const all = getAllApplicants();
+  return all.find(record => record.email === email) || null;
+}
+
+/**
+ * 특정 상태의 레코드만 필터링합니다.
+ * @param {string} status - '대기', '승인', '반려' 중 하나
+ */
+function filterByStatus(status) {
+  const all = getAllApplicants();
+  return all.filter(record => record.status === status);
+}</pre>
+          </div>
+        </div>
+
+        <h2>✏️ Update — 레코드 수정</h2>
+        <p>
+          수정은 먼저 <strong>대상 행의 번호를 찾은 뒤</strong>, 해당 셀의 값을 바꿔요.
+          GAS에서 행 번호는 1부터 시작하고, 헤더가 1행이므로 데이터는 2행부터예요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 레코드 수정 함수</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre">/**
+ * ID로 레코드를 찾아 status 값을 업데이트합니다.
+ * @param {string} targetId  - 수정할 레코드의 ID
+ * @param {string} newStatus - 새로운 상태값 ('승인' | '반려')
+ */
+function updateApplicantStatus(targetId, newStatus) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('신청자');
+
+  const data = sheet.getDataRange().getValues();
+
+  // A열(인덱스 0)이 id 컬럼 — 1행은 헤더이므로 i=1부터 시작
+  for (let i = 1; i < data.length; i++) {
+    if (data[i][0].toString() === targetId) {
+      // 시트 행 번호 = 배열 인덱스 + 1 (1-based)
+      const sheetRow = i + 1;
+
+      // E열(5번째)이 status — getRange(행, 열)
+      sheet.getRange(sheetRow, 5).setValue(newStatus);
+
+      Logger.log(`ID ${targetId} → 상태 '${newStatus}'으로 변경`);
+      return true; // 수정 성공
+    }
+  }
+
+  Logger.log(`ID ${targetId}를 찾을 수 없습니다.`);
+  return false; // 대상 없음
+}</pre>
+          </div>
+        </div>
+
+        <h2>🗑️ Delete — 레코드 삭제</h2>
+        <p>
+          삭제에는 두 가지 방법이 있어요. <strong>물리 삭제</strong>(행 자체를 제거)와
+          <strong>소프트 삭제</strong>(삭제 표시만 해두기)예요.
+          업무 데이터는 소프트 삭제를 추천해요. 실수로 지워도 복구할 수 있거든요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 소프트 삭제 (권장)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * 소프트 삭제: status를 '삭제됨'으로 변경합니다.
+ * 실제 행은 유지되므로 필요 시 복구 가능해요.
+ * @param {string} targetId - 삭제할 레코드의 ID
+ */
+function softDeleteApplicant(targetId) {
+  // status를 '삭제됨'으로 바꾸는 것으로 처리
+  return updateApplicantStatus(targetId, '삭제됨');
+}</pre>
+          </div>
+        </div>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — 물리 삭제 (주의해서 사용)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>/**
+ * 물리 삭제: 행 자체를 제거합니다.
+ * ⚠️ 아래에서 위로 삭제해야 행 번호 밀림을 방지할 수 있어요.
+ * @param {string} targetId - 삭제할 레코드의 ID
+ */
+function hardDeleteApplicant(targetId) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet()
+    .getSheetByName('신청자');
+
+  const data = sheet.getDataRange().getValues();
+
+  // 뒤에서 앞으로 순회해야 deleteRow() 후 인덱스가 안 밀려요
+  for (let i = data.length - 1; i >= 1; i--) {
+    if (data[i][0].toString() === targetId) {
+      sheet.deleteRow(i + 1); // 배열 인덱스 → 시트 행 번호
+      Logger.log(`ID ${targetId} 행 삭제 완료`);
+      return true;
+    }
+  }
+  return false;
+}</pre>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ deleteRow() 사용 시 주의:</strong> <code>deleteRow()</code>를 호출하면 그 아래 모든 행의 번호가 하나씩 밀려요.
+          앞에서 뒤로 반복문을 돌다가 삭제하면 이후 행 번호가 틀어집니다.
+          <strong>반드시 뒤에서 앞으로(역순) 순회</strong>하거나, 삭제할 행 번호를 먼저 모두 수집한 뒤 역순으로 삭제하세요.
+        </div>
+
+        <h2>🔑 ID 자동 생성 전략</h2>
+        <p>
+          레코드마다 고유 ID가 있어야 조회·수정·삭제를 정확히 할 수 있어요.
+          GAS에서 가장 간단하면서도 실용적인 방법은 <strong>타임스탬프(밀리초) 기반 ID</strong>예요.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — ID 생성 방식 비교</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre">// ① 타임스탬프 기반 (가장 간단, 권장)
+// 현재 시각의 밀리초 → 13자리 숫자 문자열
+const id1 = new Date().getTime().toString();
+// 예: "1710000001234"
+
+// ② UUID 스타일 (더 고유하지만 코드가 길어요)
+function generateUUID() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+    /[xy]/g,
+    c => {
+      const r = (Math.random() * 16) | 0;
+      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
+    }
+  );
+}
+const id2 = generateUUID();
+// 예: "a3f2c1d0-5b7e-4a9f-8c2d-1e3f5a7b9c0d"
+
+// ③ 프리픽스 + 타임스탬프 (가독성이 좋아요)
+const id3 = `APP-${new Date().getTime()}`;
+// 예: "APP-1710000001234"</pre>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 배치 처리로 성능 높이기:</strong> 여러 행을 한꺼번에 추가할 때는 <code>appendRow()</code>를 반복 호출하지 말고, 데이터를 배열에 모아 <code>sheet.getRange(startRow, 1, data.length, data[0].length).setValues(data)</code>로 한 번에 쓰세요. 시트 API 호출 횟수를 줄여 실행 속도가 크게 빨라져요.
+        </div>
+
+        <h2>🤖 Claude Code로 CRUD 일괄 생성 요청하기</h2>
+        <p>
+          시트 구조를 미리 정해두었다면, Claude Code에게 CRUD 함수를 한 번에 만들어달라고 할 수 있어요.
+          <strong>컬럼 정보를 명확히 알려줄수록</strong> 더 정확한 코드가 나옵니다.
+        </p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">Claude Code 프롬프트 예시</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>Google Apps Script로 스프레드시트 CRUD 함수를 만들어줘.
+
+[시트 정보]
+- 시트 이름: "교육신청"
+- 스프레드시트는 SpreadsheetApp.getActiveSpreadsheet()로 가져와
+
+[컬럼 구조 — 1행이 헤더]
+A열: id        (타임스탬프 기반 자동 생성, 문자열)
+B열: name      (신청자 이름, 문자열)
+C열: email     (이메일, 문자열)
+D열: course    (신청 과정명, 문자열)
+E열: status    (처리 상태: '대기' | '승인' | '반려' | '삭제됨')
+F열: created_at (등록 시각, 'yyyy-MM-dd HH:mm' 형식 문자열)
+
+[필요한 함수]
+1. createApplicant(name, email, course) — 신규 레코드 추가, 생성된 id 반환
+2. getAllApplicants() — 전체 레코드를 객체 배열로 반환
+3. findById(id) — id로 단건 조회
+4. filterByStatus(status) — 상태별 필터링
+5. updateStatus(id, newStatus) — 상태값 변경
+6. softDelete(id) — status를 '삭제됨'으로 변경
+
+[요구사항]
+- 각 함수마다 JSDoc 주석 달기
+- 에러 발생 시 Logger.log()로 메시지 출력
+- 반복문에서 deleteRow() 사용 시 역순 순회 적용
+- ES6+ 문법 사용 (const/let, 화살표 함수, 템플릿 리터럴)</pre>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ 동시 접근 주의:</strong> 여러 사람이 동시에 폼을 제출하거나 스크립트가 같은 시트에 동시에 쓸 경우, 행이 겹치거나 데이터가 손상될 수 있어요. GAS에는 <code>LockService</code>라는 잠금 기능이 있어요. 동시 접근이 우려된다면 <code>LockService.getScriptLock()</code>으로 한 번에 하나의 실행만 허용하도록 설정하세요.
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 스프레드시트 DB CRUD 체크리스트</h3>
+          <label><input type="checkbox" data-key="crud-1"> 1행 헤더, A열 ID 규칙으로 시트 구조를 설계했다</label>
+          <label><input type="checkbox" data-key="crud-2"> appendRow()로 새 레코드를 추가하는 함수를 작성(또는 생성)했다</label>
+          <label><input type="checkbox" data-key="crud-3"> getValues()로 전체 데이터를 읽고 조건 검색을 해봤다</label>
+          <label><input type="checkbox" data-key="crud-4"> 특정 ID의 레코드를 찾아 상태값을 업데이트해봤다</label>
+          <label><input type="checkbox" data-key="crud-5"> 소프트 삭제와 물리 삭제의 차이를 이해하고 프로젝트에 맞는 방식을 선택했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-git.html" class="nav-prev">← 이전: Git 브랜치 전략</a>
+      <a href="gas-webapp.html" class="nav-next">다음: 웹앱 서비스 배포 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>
