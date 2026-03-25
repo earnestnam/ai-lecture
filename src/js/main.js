@@ -18,6 +18,7 @@ const NAV_DATA = [
     pages: [
       { id: 'ai-landscape', title: 'AI 도구 지도' },
       { id: 'prompt-basics', title: '프롬프트 잘 쓰는 법' },
+      { id: 'multi-persona', title: '멀티 페르소나 토론 기법' },
       { id: 'custom-ai-tools', title: '나만의 AI 어시스턴트 만들기' },
       { id: 'ai-work-habits', title: 'AI와 일하는 습관' },
     ]
@@ -39,6 +40,21 @@ const NAV_DATA = [
       { id: 'gemini-intro', title: 'Gemini 활용법' },
       { id: 'notebooklm', title: 'NotebookLM' },
       { id: 'apps-script', title: 'Apps Script 자동화' },
+    ]
+  },
+  {
+    section: 'GAS 개발 트랙',
+    icon: '⚙️',
+    pages: [
+      { id: 'gas-env-setup', title: '개발 환경 설정' },
+      { id: 'gas-structure', title: 'GAS 프로젝트 구조' },
+      { id: 'gas-spreadsheet', title: '스프레드시트 API 핵심' },
+      { id: 'gas-claude-code', title: 'Claude Code로 GAS 개발' },
+      { id: 'gas-clasp', title: 'clasp 배포 워크플로' },
+      { id: 'gas-git', title: 'Git 브랜치 전략' },
+      { id: 'gas-crud', title: '스프레드시트 DB CRUD' },
+      { id: 'gas-webapp', title: '웹앱 서비스 배포' },
+      { id: 'gas-automation', title: '실무 자동화 시나리오' },
     ]
   },
   {
@@ -144,7 +160,8 @@ function initMobileNav() {
     overlayHtml += `<a href="#section-1" class="mobile-nav-section-link">📚 AI 기본기</a>`;
     overlayHtml += `<a href="#section-2" class="mobile-nav-section-link">🤖 Claude</a>`;
     overlayHtml += `<a href="#section-3" class="mobile-nav-section-link">✨ Gemini</a>`;
-    overlayHtml += `<a href="#section-4" class="mobile-nav-section-link">📖 부록</a>`;
+    overlayHtml += `<a href="#section-4" class="mobile-nav-section-link">⚙️ GAS 개발 트랙</a>`;
+    overlayHtml += `<a href="#section-5" class="mobile-nav-section-link">📖 부록</a>`;
   } else {
     // 상세 페이지: 전체 목차 트리
     overlayHtml += `<a href="../index.html" class="mobile-nav-home">← 전체 목차로</a>`;
