@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI에게 여러 전문가 역할을 동시에 맡겨 토론시키는 멀티 페르소나 기법을 배웁니다.">
+  <title>멀티 페르소나 토론 기법 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>멀티 페르소나 토론 기법</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 25분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">AI에게 여러 전문가를 동시에 맡겨 토론시키면, 혼자 생각할 때 놓치는 관점을 한 번에 얻을 수 있어요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <h2>🎭 "AI한테 물어봤는데 항상 비슷한 답만 나와요"</h2>
+        <p>
+          AI에게 의견을 물으면 무난하고 두루뭉술한 답변이 나올 때가 많죠?
+          "좋은 점도 있고 나쁜 점도 있습니다"처럼요.
+          이건 AI가 멍청해서가 아니에요 — <strong>한 가지 시각에서만 답하도록 요청했기 때문</strong>이에요.
+        </p>
+        <p>
+          실제 회사에서 중요한 결정을 내릴 때는 혼자 생각하지 않잖아요.
+          팀장, 실무자, 재무팀, 디자이너 각자의 시각에서 의견을 모은 뒤 결론을 내리죠.
+          <strong>멀티 페르소나 기법</strong>은 AI에게 이 과정을 그대로 재현하도록 하는 방법입니다.
+        </p>
+
+        <div class="tip-box">
+          <strong>💡 핵심 원리:</strong> AI는 훈련 과정에서 수많은 사람들의 사고방식을 학습했어요. 특정 역할을 부여하면 해당 역할에 맞는 사고 패턴이 활성화됩니다. 다섯 명의 전문가를 동시에 불러내는 셈이에요.
+        </div>
+
+        <h2>👥 5인 전문가 팀 구성</h2>
+        <p>멀티 페르소나 기법의 핵심은 <strong>서로 다른 역할을 가진 5명의 팀원</strong>을 AI에게 맡기는 거예요. 각자 역할이 뚜렷해서 의견 충돌이 생기고, 그 충돌에서 더 나은 결론이 나옵니다.</p>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1.5rem 0;">
+
+          <div style="background:var(--color-bg-alt); border-left:4px solid #1f2937; border-radius:8px; padding:1.25rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+              <div style="background:#1f2937; color:white; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">⚫</div>
+              <div>
+                <strong style="font-size:1rem;">블랙 — 팀 리더</strong>
+                <div style="font-size:0.8rem; color:#6b7280; margin-top:2px;">Black · Team Lead</div>
+              </div>
+            </div>
+            <p style="margin:0; font-size:0.9rem;">전체 논의를 조율하고 최종 결론을 종합합니다. 모든 의견을 들은 뒤 "그래서 어떻게 하자"를 정리하는 역할이에요.</p>
+          </div>
+
+          <div style="background:var(--color-bg-alt); border-left:4px solid #dc2626; border-radius:8px; padding:1.25rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+              <div style="background:#dc2626; color:white; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">🔴</div>
+              <div>
+                <strong style="font-size:1rem;">레드 — 비평가</strong>
+                <div style="font-size:0.8rem; color:#6b7280; margin-top:2px;">Red · Critic</div>
+              </div>
+            </div>
+            <p style="margin:0; font-size:0.9rem;">논리적 허점, 약한 근거, 반론을 찾아냅니다. 듣기 불편하지만 가장 필요한 시각이에요. "이 계획에 문제가 있다면?"을 물어보는 역할이에요.</p>
+          </div>
+
+          <div style="background:var(--color-bg-alt); border-left:4px solid #d97706; border-radius:8px; padding:1.25rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+              <div style="background:#d97706; color:white; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">🟡</div>
+              <div>
+                <strong style="font-size:1rem;">골드 — 실무 전문가</strong>
+                <div style="font-size:0.8rem; color:#6b7280; margin-top:2px;">Gold · Practitioner</div>
+              </div>
+            </div>
+            <p style="margin:0; font-size:0.9rem;">현실에서 실제로 적용 가능한지를 봅니다. "이론은 좋은데 현장에서는 이렇게 작동하지 않아요"처럼 실행 가능성을 점검해요.</p>
+          </div>
+
+          <div style="background:var(--color-bg-alt); border-left:4px solid #7c3aed; border-radius:8px; padding:1.25rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+              <div style="background:#7c3aed; color:white; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">🟣</div>
+              <div>
+                <strong style="font-size:1rem;">퍼플 — 전략가</strong>
+                <div style="font-size:0.8rem; color:#6b7280; margin-top:2px;">Purple · Strategist</div>
+              </div>
+            </div>
+            <p style="margin:0; font-size:0.9rem;">설득력과 영향력을 높이는 방향을 제시합니다. "이 메시지를 어떻게 포지셔닝해야 먹힐까?"처럼 커뮤니케이션 전략을 다뤄요.</p>
+          </div>
+
+          <div style="background:var(--color-bg-alt); border-left:4px solid #0891b2; border-radius:8px; padding:1.25rem; grid-column: 1 / -1;">
+            <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem;">
+              <div style="background:#0891b2; color:white; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; font-size:1.25rem; flex-shrink:0;">🔵</div>
+              <div>
+                <strong style="font-size:1rem;">화이트 — 디자이너</strong>
+                <div style="font-size:0.8rem; color:#6b7280; margin-top:2px;">White · Designer</div>
+              </div>
+            </div>
+            <p style="margin:0; font-size:0.9rem;">결과물의 구조, 명확성, 전달 방식을 최적화합니다. "이 내용을 어떻게 정리하면 상대방이 가장 잘 이해할까?"를 고민해요.</p>
+          </div>
+
+        </div>
+
+        <h2>🔄 진행 방식 — 4단계</h2>
+
+        <div style="counter-reset: step; margin: 1.5rem 0;">
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.25rem; align-items:flex-start;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; margin-top:2px;">1</div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.1rem; flex:1;">
+              <strong>팀 구성 선언</strong>
+              <p style="margin:0.5rem 0 0; font-size:0.9rem; color:#374151;">5명의 전문가 역할과 각자의 임무를 프롬프트에 정의해요.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.25rem; align-items:flex-start;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; margin-top:2px;">2</div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.1rem; flex:1;">
+              <strong>개별 의견 수집</strong>
+              <p style="margin:0.5rem 0 0; font-size:0.9rem; color:#374151;">각 팀원이 주제에 대한 초기 의견을 각자의 역할 관점에서 표명해요.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.25rem; align-items:flex-start;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; margin-top:2px;">3</div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.1rem; flex:1;">
+              <strong>3라운드 토론</strong>
+              <p style="margin:0.5rem 0 0; font-size:0.9rem; color:#374151;">블랙(리더)이 각 팀원의 의견에 도전하고, 팀원이 반박하는 과정을 3번 반복해요. 이 충돌에서 더 날카로운 인사이트가 나옵니다.</p>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:1rem; margin-bottom:1.25rem; align-items:flex-start;">
+            <div style="background:var(--color-primary); color:white; border-radius:50%; width:36px; height:36px; display:flex; align-items:center; justify-content:center; font-weight:700; flex-shrink:0; margin-top:2px;">4</div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.1rem; flex:1;">
+              <strong>결론 종합</strong>
+              <p style="margin:0.5rem 0 0; font-size:0.9rem; color:#374151;">블랙이 토론 결과를 바탕으로 실행 가능한 최종 결론과 액션 아이템을 도출해요.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <h2>📋 복사해서 바로 쓰는 프롬프트</h2>
+
+        <h3>⚡ 간편 버전 — 빠르게 시작하고 싶을 때</h3>
+        <p>5가지 역할을 한 줄에 정의하고 바로 토론을 시작해요. 15~20분 미팅 대체용으로 좋아요.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">⚡ 간편 버전 프롬프트 (복사해서 수정 후 사용)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>당신은 5명의 전문가 팀입니다:
+⚫ 블랙(팀 리더): 논의를 종합하고 최종 결론 도출
+🔴 레드(비평가): 논리적 허점과 반론 제시
+🟡 골드(실무가): 현실 적용 가능성 평가
+🟣 퍼플(전략가): 설득력과 영향력 강화 방향 제시
+🔵 화이트(디자이너): 구조와 전달 방식 최적화
+
+주제: [여기에 주제를 입력하세요]
+
+각자의 역할 관점에서 초기 의견을 제시한 뒤,
+블랙이 종합한 실행 가능한 결론을 내려주세요.</pre>
+          </div>
+        </div>
+
+        <h3>🔬 풀버전 — 중요한 결정이나 깊은 분석이 필요할 때</h3>
+        <p>3라운드 토론까지 포함한 완전한 버전이에요. 중요한 기획 검토나 전략 수립에 활용해보세요.</p>
+
+        <div class="code-block-wrapper">
+          <div class="code-block-inner">
+            <span class="code-block-label">🔬 풀버전 프롬프트 (복사해서 수정 후 사용)</span>
+            <button class="copy-btn">📋 복사</button>
+            <pre>## 팀 구성
+당신은 아래 5명의 전문가 역할을 모두 수행합니다:
+⚫ 블랙(팀 리더): 전체 토론을 조율하고 최종 결론 종합
+🔴 레드(비평가): 논리 허점, 약한 근거, 반론 발굴
+🟡 골드(실무 전문가): 현실 적용 가능성, 실행 리스크 평가
+🟣 퍼플(전략가): 메시지 설득력, 포지셔닝 강화 방향 제시
+🔵 화이트(디자이너): 구조 명확성, 전달 방식 최적화
+
+## 토론 규칙
+- 각 팀원이 초기 의견을 먼저 제시합니다
+- 블랙이 각 팀원에게 3라운드에 걸쳐 도전하고, 팀원은 반박합니다
+- 모든 라운드가 끝나면 블랙이 최종 결론을 종합합니다
+
+## 출력 형식
+1. 각 팀원의 초기 의견
+2. 라운드별 토론 (블랙의 도전 → 각 팀원의 반박)
+3. 최종 결론 및 구체적인 액션 아이템
+
+## 토론 시작
+주제: [여기에 주제를 입력하세요]
+
+토론을 시작해주세요.</pre>
+          </div>
+        </div>
+
+        <h2>💼 실전 업무 시나리오 3가지</h2>
+
+        <h3>📌 시나리오 1 — 신규 서비스 기획 검토</h3>
+        <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
+          <p style="margin:0 0 0.75rem; font-size:0.9rem; font-weight:600; color:#374151;">🗣️ 이런 상황에서 사용해요</p>
+          <p style="margin:0; font-size:0.9rem;">새로운 유료 멤버십 서비스 도입을 검토 중인데, 팀 내에서 의견이 엇갈려요.</p>
+          <div style="background:white; border-radius:6px; padding:1rem; margin-top:0.75rem; font-size:0.875rem; font-family:monospace; white-space:pre-wrap; color:#1f2937;">[풀버전 프롬프트 삽입]
+
+주제: 우리 회사가 월 9,900원 프리미엄 멤버십을 도입해야 하는가?
+- 현재 무료 서비스 월 사용자 5만 명
+- 예상 전환율 3~5%
+- 주요 기능: 광고 제거, 우선 고객지원, 월간 리포트 제공</div>
+          <div style="margin-top:0.75rem; padding:0.75rem; background:#F0FDF4; border-radius:6px; font-size:0.875rem; color:#166534;">
+            <strong>✅ 기대 결과:</strong> 레드가 "3% 전환율 가정의 근거가 약하다"를 지적하고, 골드가 "고객지원 인력 충원 없이 우선 지원은 현실적으로 불가능"을 제기하며, 최종적으로 더 현실적인 출시 계획이 나와요.
+          </div>
+        </div>
+
+        <h3>📌 시나리오 2 — 제안서·기획서 품질 검토</h3>
+        <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
+          <p style="margin:0 0 0.75rem; font-size:0.9rem; font-weight:600; color:#374151;">🗣️ 이런 상황에서 사용해요</p>
+          <p style="margin:0; font-size:0.9rem;">클라이언트에게 보낼 제안서를 완성했는데 혼자 보다 보니 객관적으로 보이지 않아요.</p>
+          <div style="background:white; border-radius:6px; padding:1rem; margin-top:0.75rem; font-size:0.875rem; font-family:monospace; white-space:pre-wrap; color:#1f2937;">[간편 버전 프롬프트 삽입]
+
+주제: 아래 제안서를 5인 팀 관점에서 검토해주세요.
+
+[제안서 전문 붙여넣기]</div>
+          <div style="margin-top:0.75rem; padding:0.75rem; background:#F0FDF4; border-radius:6px; font-size:0.875rem; color:#166534;">
+            <strong>✅ 기대 결과:</strong> 혼자 검토할 때 보이지 않던 논리 구멍, 설득력 약한 부분, 구조 개선점이 한 번에 정리돼요.
+          </div>
+        </div>
+
+        <h3>📌 시나리오 3 — 부서 간 협업 갈등 해결책 찾기</h3>
+        <div style="background:var(--color-bg-alt); border-radius:8px; padding:1.25rem; margin-bottom:1rem;">
+          <p style="margin:0 0 0.75rem; font-size:0.9rem; font-weight:600; color:#374151;">🗣️ 이런 상황에서 사용해요</p>
+          <p style="margin:0; font-size:0.9rem;">마케팅팀과 개발팀이 출시 일정을 두고 의견이 충돌하고 있어요.</p>
+          <div style="background:white; border-radius:6px; padding:1rem; margin-top:0.75rem; font-size:0.875rem; font-family:monospace; white-space:pre-wrap; color:#1f2937;">[간편 버전 프롬프트 삽입]
+
+주제: 신규 기능 출시를 마케팅 캠페인에 맞춰 3주 앞당기는 것이 옳은가?
+- 마케팅: 대형 이벤트 시즌 맞추면 노출 3배 기대
+- 개발: 3주 단축 시 QA 기간 절반으로 줄어 버그 리스크 높아짐
+- 현재 출시 예정일: 6주 후</div>
+          <div style="margin-top:0.75rem; padding:0.75rem; background:#F0FDF4; border-radius:6px; font-size:0.875rem; color:#166534;">
+            <strong>✅ 기대 결과:</strong> 양쪽 입장을 균형 있게 분석해 "핵심 기능만 먼저 출시하는 소프트 런칭"처럼 제3의 현실적 대안이 나와요.
+          </div>
+        </div>
+
+        <h2>🎯 이 기법이 잘 맞는 상황 vs 안 맞는 상황</h2>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1rem; margin:1.5rem 0;">
+          <div style="background:#F0FDF4; border:1px solid #BBF7D0; border-radius:8px; padding:1.25rem; color:#111827;">
+            <h3 style="color:#16A34A; margin-top:0; font-size:1rem;">✅ 이럴 때 써보세요</h3>
+            <ul style="font-size:0.9rem; margin:0; padding-left:1.25rem; color:#374151;">
+              <li>중요한 의사결정을 혼자 내려야 할 때</li>
+              <li>제안서·기획서를 제출 전 검토할 때</li>
+              <li>찬반 의견이 나뉘는 주제를 정리할 때</li>
+              <li>이해관계자가 다양한 프로젝트를 기획할 때</li>
+              <li>콘텐츠나 보고서의 완성도를 높이고 싶을 때</li>
+            </ul>
+          </div>
+          <div style="background:#FEF2F2; border:1px solid #FECACA; border-radius:8px; padding:1.25rem; color:#111827;">
+            <h3 style="color:#DC2626; margin-top:0; font-size:1rem;">❌ 이럴 땐 다른 방법을</h3>
+            <ul style="font-size:0.9rem; margin:0; padding-left:1.25rem; color:#374151;">
+              <li>정답이 하나인 팩트 확인 질문 ("서울 인구는?")</li>
+              <li>빠른 초안이 급하게 필요한 경우</li>
+              <li>단순 번역·요약처럼 창의적 판단이 불필요한 작업</li>
+              <li>의견 다양성보다 일관된 톤이 중요한 작업</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 처음 써보는 분을 위한 팁:</strong> 처음엔 간편 버전으로 시작해서 결과를 확인해보세요.
+          AI가 각 역할의 시각으로 의견을 나누는 걸 보면, 혼자 생각할 때는 몰랐던 각도가 보입니다.
+          풀버전은 정말 중요한 결정에서만 써도 충분해요.
+        </div>
+
+        <h2>🔁 응용 — 역할을 내 업무에 맞게 바꿔보기</h2>
+        <p>기본 5인 팀 외에도 내 업무 맥락에 맞는 전문가로 바꿀 수 있어요.</p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin:1.5rem 0;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+            <strong style="font-size:0.9rem;">📣 마케팅 기획 검토용</strong>
+            <p style="font-size:0.85rem; margin:0.5rem 0 0; color:#374151;">소비자 심리 전문가 / 데이터 분석가 / 브랜드 매니저 / 예산 담당자 / 크리에이티브 디렉터</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+            <strong style="font-size:0.9rem;">📦 제품 출시 결정용</strong>
+            <p style="font-size:0.85rem; margin:0.5rem 0 0; color:#374151;">제품 매니저 / QA 담당자 / 고객지원 팀장 / 영업 대표 / 재무 담당자</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+            <strong style="font-size:0.9rem;">✍️ 콘텐츠 검토용</strong>
+            <p style="font-size:0.85rem; margin:0.5rem 0 0; color:#374151;">독자 대표 / 사실 검증자 / SEO 전문가 / 편집자 / 브랜드 가이드 관리자</p>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+            <strong style="font-size:0.9rem;">📊 전략 수립용</strong>
+            <p style="font-size:0.85rem; margin:0.5rem 0 0; color:#374151;">낙관론자 / 비관론자 / 실용주의자 / 혁신가 / 위험 관리자</p>
+          </div>
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 멀티 페르소나 기법 실습 체크리스트</h3>
+          <p style="color:#374151; font-size:0.9rem; margin-bottom:1rem;">아래 순서대로 한 번 직접 해보세요.</p>
+          <label><input type="checkbox" data-key="persona-1"> 간편 버전 프롬프트를 복사했다</label>
+          <label><input type="checkbox" data-key="persona-2"> 현재 고민 중인 업무 주제를 [주제] 자리에 입력했다</label>
+          <label><input type="checkbox" data-key="persona-3"> AI의 답변에서 내가 미처 생각 못한 관점을 1개 이상 발견했다</label>
+          <label><input type="checkbox" data-key="persona-4"> 풀버전으로 3라운드 토론을 진행해봤다</label>
+          <label><input type="checkbox" data-key="persona-5"> 내 업무에 맞는 커스텀 역할로 프롬프트를 수정해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="prompt-basics.html" class="nav-prev">← 이전: 프롬프트 잘 쓰는 법</a>
+      <a href="custom-ai-tools.html" class="nav-next">다음: 나만의 AI 어시스턴트 만들기 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>
