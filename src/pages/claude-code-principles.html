@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="앤트로픽 클로드 코드 내부 프롬프트에서 추출한 AI 실전 활용 7대 원칙을 배웁니다.">
+  <title>AI 실전 활용 7대 원칙 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* 원칙 카드 아코디언 */
+    .principle-card {
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      transition: box-shadow 0.2s ease;
+    }
+    .principle-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .principle-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      background: var(--color-bg);
+      user-select: none;
+    }
+    .principle-header:hover {
+      background: var(--color-bg-alt);
+    }
+    .principle-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      color: white;
+    }
+    .principle-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .principle-title-wrap {
+      flex: 1;
+    }
+    .principle-title-wrap strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .principle-title-wrap span {
+      font-size: 0.8rem;
+      color: var(--color-text-muted);
+    }
+    .principle-toggle {
+      font-size: 1.2rem;
+      color: var(--color-text-muted);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+    .principle-body {
+      display: none;
+      padding: 0 1.5rem 1.5rem;
+      background: var(--color-bg);
+      border-top: 1px solid var(--color-border);
+    }
+    .principle-body.is-open {
+      display: block;
+    }
+    .principle-header.is-open .principle-toggle {
+      transform: rotate(180deg);
+    }
+
+    /* 대조 박스 */
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 600px) {
+      .contrast-grid { grid-template-columns: 1fr; }
+    }
+    .contrast-bad {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      border-radius: 8px;
+      padding: 1rem;
+      color: #111827;
+    }
+    .contrast-good {
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      border-radius: 8px;
+      padding: 1rem;
+      color: #111827;
+    }
+    .contrast-bad h4 { color: #DC2626; margin: 0 0 0.5rem; font-size: 0.875rem; }
+    .contrast-good h4 { color: #16A34A; margin: 0 0 0.5rem; font-size: 0.875rem; }
+    .contrast-bad p, .contrast-good p { font-size: 0.875rem; margin: 0; color: #374151; }
+
+    /* 인사이트 카드 */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .insight-card {
+      border-radius: 12px;
+      padding: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .insight-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+    }
+    .insight-card--1 { background: #FFF7ED; }
+    .insight-card--1::before { background: var(--color-primary); }
+    .insight-card--2 { background: #EFF6FF; }
+    .insight-card--2::before { background: #2563EB; }
+    .insight-card--3 { background: #F0FDF4; }
+    .insight-card--3::before { background: #16A34A; }
+    .insight-card__icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .insight-card__title { font-weight: 700; font-size: 1rem; margin: 0 0 0.5rem; color: #111827; }
+    .insight-card__body { font-size: 0.9rem; color: #374151; margin: 0; line-height: 1.6; }
+
+    /* 사건 타임라인 */
+    .event-banner {
+      background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+      border-radius: 12px;
+      padding: 2rem;
+      color: white;
+      margin: 1.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .event-banner::after {
+      content: '🔓';
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 4rem;
+      opacity: 0.15;
+    }
+    .event-banner h3 {
+      margin: 0 0 0.75rem;
+      font-size: 1.1rem;
+      color: #FCA5A5;
+    }
+    .event-banner p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #E5E7EB;
+    }
+    .event-banner strong { color: #FCD34D; }
+
+    /* 핵심 인사이트 하이라이트 */
+    .key-insight {
+      background: var(--color-bg-alt);
+      border-left: 4px solid var(--color-primary);
+      border-radius: 0 8px 8px 0;
+      padding: 1.25rem 1.5rem;
+      margin: 1.25rem 0;
+    }
+    .key-insight p { margin: 0; font-size: 0.95rem; line-height: 1.7; }
+
+    /* 원칙 색상 팔레트 */
+    .n1 { background: #E85D04; }
+    .n2 { background: #7C3AED; }
+    .n3 { background: #0891B2; }
+    .n4 { background: #D97706; }
+    .n5 { background: #16A34A; }
+    .n6 { background: #DC2626; }
+    .n7 { background: #1D4ED8; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>AI 실전 활용 7대 원칙</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 30분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">앤트로픽이 자사 AI에게 내린 내부 지침에서 추출한 7가지 실전 원칙 — 지금 바로 내 프롬프트에 적용해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- ===== SECTION 1: 사건의 배경 ===== -->
+        <h2>📰 Section 1. 사건의 배경 — 51만 줄 유출이 우리에게 알려준 것</h2>
+
+        <div class="event-banner">
+          <h3>⚠️ 무슨 일이 있었나요?</h3>
+          <p>
+            최근 앤트로픽의 클로드 코드 소스 코드 <strong>51만 줄(타입스크립트)</strong>이 통째로 유출되는 사건이 발생했습니다.
+            현재 원본 저장소는 DMCA 요청으로 삭제된 상태입니다.
+          </p>
+        </div>
+
+        <div class="key-insight">
+          <p>
+            💡 <strong>진짜 가치 있는 것은 코드가 아니었습니다.</strong><br>
+            이 사건에서 주목할 점은 51만 줄의 코드 자체가 아니라,
+            <strong>"앤트로픽이 자사 AI에게 어떻게 명령을 내리고 있었는가 — 즉 내부 프롬프트"</strong>를
+            엿볼 수 있게 되었다는 점입니다.
+          </p>
+        </div>
+
+        <h3>🤖 챗봇 vs 에이전트 — 사고방식을 바꿔야 합니다</h3>
+
+        <div class="contrast-grid">
+          <div class="contrast-bad">
+            <h4>❌ 챗봇 방식 (구식 접근)</h4>
+            <p>
+              한 번에 거대하고 복잡한 질문을 던지고,
+              AI가 알아서 다 해주기를 기대합니다.
+            </p>
+          </div>
+          <div class="contrast-good">
+            <h4>✅ 에이전트 방식 (현대적 접근)</h4>
+            <p>
+              <strong>조사 → 계획 → 실행 → 검증</strong>의 단계로
+              작업을 쪼개서 지시합니다. AI를 현장 전문가처럼 다룹니다.
+            </p>
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 클로드 코드는 단순한 챗봇이 아닙니다.</strong><br>
+          현장에 직접 투입되어 장비를 만지고 문제를 고치는 <strong>에이전트 런타임</strong>입니다.
+          이를 이해하고 나면, 아래 7가지 원칙이 왜 필요한지 자연스럽게 납득이 됩니다.
+        </div>
+
+        <!-- ===== SECTION 2: 7대 원칙 ===== -->
+        <h2>📖 Section 2. 핵심 커리큘럼 — 실전 적용 7대 원칙</h2>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1.5rem;">
+          각 원칙을 클릭하면 상세 내용과 실전 예시가 펼쳐집니다.
+        </p>
+
+        <!-- 원칙 1 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n1">1</div>
+            <div class="principle-icon">⚖️</div>
+            <div class="principle-title-wrap">
+              <strong>Do's and Don'ts 대조 패턴</strong>
+              <span>명확한 기준을 숫자로 제시하고, 해야 할 것과 하지 말아야 할 것을 나란히</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">추상적인 지시는 AI를 혼란스럽게 합니다. <strong>"간결하게"</strong> 대신 <strong>"25단어 이내"</strong>처럼 측정 가능한 숫자를 주세요.</p>
+
+            <div class="contrast-grid">
+              <div class="contrast-bad">
+                <h4>❌ 이렇게 하면 아쉬워요</h4>
+                <p>"코드를 간결하게 작성해줘. 너무 길면 안 돼."</p>
+              </div>
+              <div class="contrast-good">
+                <h4>✅ 이렇게 해보세요</h4>
+                <p>"함수는 20줄 이내로. 주석은 코드 3줄당 1개 이내. 중복 코드는 절대 복붙 금지."</p>
+              </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 1rem;">
+              <strong>💡 왜 효과가 있을까요?</strong><br>
+              AI의 과잉 생산을 막으려면 "하지 말아야 할 것"과 그 대안을 나란히 제시해야 행동 범위가 정밀하게 좁혀집니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 원칙 2 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n2">2</div>
+            <div class="principle-icon">🔍</div>
+            <div class="principle-title-wrap">
+              <strong>결과 검증 강제 패턴</strong>
+              <span>할루시네이션 방지 — "다 했습니다"를 믿지 마세요</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">AI는 기본적으로 자신감 있게 <strong>"완료했습니다"</strong>라고 대답하려는 경향이 있습니다. 보고하기 전에 반드시 검증을 강제하세요.</p>
+
+            <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1.25rem; margin: 1rem 0;">
+              <p style="margin: 0; font-size: 0.9rem;"><strong>📋 프롬프트에 이 문장을 추가하세요:</strong></p>
+              <ul style="margin: 0.75rem 0 0; font-size: 0.9rem; color: #374151;">
+                <li>"작업 완료 보고 전 반드시 테스트를 실행해라."</li>
+                <li>"검증할 수 없으면 '확인 불가'라고 명시적으로 말해라."</li>
+                <li>"거짓 주장 금지. 모르면 모른다고 해라."</li>
+              </ul>
+            </div>
+
+            <div class="warning-box">
+              <strong>⚠️ 특히 조심하세요:</strong> "거짓 주장하지 마라, 조작하지 마라"처럼 나쁜 행동의 구체적인 형태까지 나열해서 금지해야 합니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 원칙 3 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n3">3</div>
+            <div class="principle-icon">🔁</div>
+            <div class="principle-title-wrap">
+              <strong>3중 반복 패턴</strong>
+              <span>최신 편향 극복 — 중요한 규칙은 앞·중간·끝에 세 번</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">대화가 길어지면 AI는 앞서 지시한 규칙을 잊어버리는 <strong>'최신 편향(Recency Bias)'</strong>을 보입니다.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin: 1rem 0; text-align: center;">
+              <div style="background: var(--color-primary); color: white; border-radius: 8px; padding: 1rem;">
+                <div style="font-size: 1.5rem;">🔝</div>
+                <div style="font-weight: 700; font-size: 0.85rem; margin-top: 0.4rem;">맨 앞</div>
+                <div style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.85;">크리티컬 텍스트</div>
+              </div>
+              <div style="background: #0891B2; color: white; border-radius: 8px; padding: 1rem;">
+                <div style="font-size: 1.5rem;">📄</div>
+                <div style="font-weight: 700; font-size: 0.85rem; margin-top: 0.4rem;">중간</div>
+                <div style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.85;">본문 중 재강조</div>
+              </div>
+              <div style="background: #7C3AED; color: white; border-radius: 8px; padding: 1rem;">
+                <div style="font-size: 1.5rem;">🔚</div>
+                <div style="font-weight: 700; font-size: 0.85rem; margin-top: 0.4rem;">맨 끝</div>
+                <div style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.85;">리마인더</div>
+              </div>
+            </div>
+
+            <div class="tip-box">
+              <strong>💡 적용 기준:</strong> "절대 어겨선 안 되는 핵심 규칙" 1~2개만 3중 반복하세요. 모든 규칙을 반복하면 효과가 없어집니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 원칙 4 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n4">4</div>
+            <div class="principle-icon">⚡</div>
+            <div class="principle-title-wrap">
+              <strong>턴 예산 전략과 컨텍스트 비용 인식</strong>
+              <span>토큰 절약 및 속도 향상 — 병렬과 순차 작업을 구분하라</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">AI와 대화할수록 컨텍스트 창(기억 공간)에 내용이 쌓이고, 매 턴마다 비용(토큰)이 소모됩니다.</p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0;">
+              <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1rem; border-left: 4px solid #16A34A;">
+                <strong style="color: #16A34A; font-size: 0.9rem;">🟢 병렬 처리 (동시에)</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.875rem; color: #374151;">파일 읽기, 정보 검색처럼 <strong>안전하고 되돌릴 수 있는</strong> 작업들</p>
+              </div>
+              <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1rem; border-left: 4px solid #DC2626;">
+                <strong style="color: #DC2626; font-size: 0.9rem;">🔴 순차 처리 (순서대로)</strong>
+                <p style="margin: 0.5rem 0 0; font-size: 0.875rem; color: #374151;">파일 수정, 데이터 삭제처럼 <strong>위험하거나 되돌리기 어려운</strong> 작업들</p>
+              </div>
+            </div>
+
+            <div class="tip-box">
+              <strong>💡 대화가 길어졌다면:</strong> "지금까지 내용을 3줄로 요약하고 핵심 규칙만 남겨서 새로 시작해줘"처럼 주기적으로 압축하면 비용과 속도를 동시에 관리할 수 있어요.
+            </div>
+          </div>
+        </div>
+
+        <!-- 원칙 5 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n5">5</div>
+            <div class="principle-icon">🧠</div>
+            <div class="principle-title-wrap">
+              <strong>Chain of Thought Stripping 패턴</strong>
+              <span>사고 품질 관리 — 생각은 숨기고 결론만 출력</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">AI에게 먼저 속으로 생각하게 한 뒤, 최종 출력에는 결론만 보여주는 방식입니다.</p>
+
+            <div class="code-block-wrapper">
+              <div class="code-block-inner">
+                <span class="code-block-label">💡 프롬프트 예시</span>
+                <button class="copy-btn">📋 복사</button>
+                <pre>먼저 &lt;thinking&gt; 태그 안에 분석 과정을 작성해줘.
+단계별로 장단점을 검토하고, 어떤 선택이 더 나은지 판단해봐.
+
+&lt;thinking&gt;
+[여기에 AI가 사고 과정을 작성]
+&lt;/thinking&gt;
+
+그 다음, thinking 태그 밖에 최종 결론과 액션 아이템만 간결하게 출력해줘.</pre>
+              </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 1rem;">
+              <strong>💡 효과:</strong> 분석 품질은 높이면서, 사용자에게 보여주는 최종 결과물은 깔끔하게 정리됩니다. 불필요한 토큰 소모와 정보 노출도 막을 수 있어요.
+            </div>
+          </div>
+        </div>
+
+        <!-- 원칙 6 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n6">6</div>
+            <div class="principle-icon">🎯</div>
+            <div class="principle-title-wrap">
+              <strong>스킬즈 디스크립션 예산</strong>
+              <span>시스템 한계 이해 — AI 도구 설명은 250자 이내로 압축</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">AI가 어떤 도구(스킬)를 쓸지 판단하는 <strong>유일한 기준은 '설명(디스크립션)'</strong>인데, 이 설명이 차지할 수 있는 공간은 전체 컨텍스트의 단 <strong>1%</strong>에 불과합니다.</p>
+
+            <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1.25rem; margin: 1rem 0;">
+              <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;">
+                <div style="background: #DC2626; color: white; border-radius: 6px; padding: 0.3rem 0.75rem; font-size: 0.8rem; font-weight: 700;">위험</div>
+                <span style="font-size: 0.9rem;">스킬을 무작정 많이 만들면 → 핵심 스킬 트리거가 작동 안 함</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 1rem;">
+                <div style="background: #16A34A; color: white; border-radius: 6px; padding: 0.3rem 0.75rem; font-size: 0.8rem; font-weight: 700;">권장</div>
+                <span style="font-size: 0.9rem;">각 스킬 설명을 <strong>250자 이내</strong>로 고도로 압축</span>
+              </div>
+            </div>
+
+            <div class="tip-box">
+              <strong>💡 GPTs, Gems, Claude Projects 사용자라면:</strong> 커스텀 지시사항에서 각 기능의 설명을 짧고 명확하게 쓸수록 AI가 더 정확하게 도구를 선택합니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- 원칙 7 -->
+        <div class="principle-card">
+          <div class="principle-header" onclick="togglePrinciple(this)">
+            <div class="principle-number n7">7</div>
+            <div class="principle-icon">🛡️</div>
+            <div class="principle-title-wrap">
+              <strong>컨텍스트 오염 방지</strong>
+              <span>작업 경계 설계 — 여러 작업이 서로 섞이지 않게</span>
+            </div>
+            <div class="principle-toggle">▼</div>
+          </div>
+          <div class="principle-body">
+            <p style="margin-top: 1rem;">동시에 여러 작업을 처리할 때, 서로 다른 작업의 맥락(컨텍스트)이 섞이면 오류와 노이즈가 발생합니다.</p>
+
+            <div class="contrast-grid">
+              <div class="contrast-bad">
+                <h4>❌ 컨텍스트 오염 발생</h4>
+                <p>A 모듈 작업 중 B 모듈의 로그를 참조하게 지시 → 맥락이 섞여 엉뚱한 수정 발생</p>
+              </div>
+              <div class="contrast-good">
+                <h4>✅ 명확한 경계 설정</h4>
+                <p>"이 작업은 /src/moduleA 폴더만 수정해. 다른 폴더는 참조하지 마."</p>
+              </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 1rem;">
+              <strong>💡 실무 적용:</strong> 대화 하나에 한 가지 작업만 담는 습관을 만드세요. 작업이 바뀌면 새 대화창을 여는 것이 더 깔끔한 결과를 냅니다.
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 3: 사용자 인사이트 ===== -->
+        <h2 style="margin-top: 2.5rem;">💡 Section 3. 우리는 AI를 어떻게 써야 하는가?</h2>
+        <p>7가지 원칙을 관통하는 핵심 마인드셋 3가지입니다.</p>
+
+        <div class="insight-grid">
+          <div class="insight-card insight-card--1">
+            <div class="insight-card__icon">🔄</div>
+            <p class="insight-card__title">패러다임의 변화</p>
+            <p class="insight-card__body">
+              이번 유출 코드는 단순히 코딩 기술의 문제가 아닙니다.
+              <strong>"무엇을 만들어야 하는지 정의하는 능력"</strong>이
+              더 중요한 시대로 바뀌었음을 증명합니다.
+            </p>
+          </div>
+          <div class="insight-card insight-card--2">
+            <div class="insight-card__icon">🤝</div>
+            <p class="insight-card__title">AI는 실행자가 아닌 협업자</p>
+            <p class="insight-card__body">
+              앤트로픽은 자사 AI에게 이렇게 명시했습니다:<br>
+              <strong>"당신은 순종이 아니라 판단력이 필요한 협업자다."</strong><br>
+              AI를 단순한 명령 수행 도구로 보지 마세요.
+            </p>
+          </div>
+          <div class="insight-card insight-card--3">
+            <div class="insight-card__icon">🏆</div>
+            <p class="insight-card__title">나만의 맥락이 경쟁력</p>
+            <p class="insight-card__body">
+              소스 코드나 툴은 누구나 쓸 수 있는 인프라일 뿐입니다.
+              진짜 차별화는 <strong>내 도메인 지식과 판단 기준을 얼마나 잘 반영한
+              독자적인 워크플로우</strong>를 구축하느냐에 달려 있습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 체크리스트 -->
+        <div class="checklist">
+          <h3>✅ 7대 원칙 적용 체크리스트</h3>
+          <p style="color: #374151; font-size: 0.9rem; margin-bottom: 1rem;">다음 AI 대화에서 하나씩 적용해보세요.</p>
+          <label><input type="checkbox" data-key="principles-1"> 지시할 때 "짧게"·"간결하게" 대신 구체적인 숫자(단어 수, 줄 수)를 사용했다</label>
+          <label><input type="checkbox" data-key="principles-2"> "확인 불가하면 모른다고 말해라" 문장을 프롬프트에 추가했다</label>
+          <label><input type="checkbox" data-key="principles-3"> 절대 지켜야 할 핵심 규칙을 프롬프트 앞·중간·끝에 배치했다</label>
+          <label><input type="checkbox" data-key="principles-4"> 안전한 작업(읽기)과 위험한 작업(수정)의 순서를 명시했다</label>
+          <label><input type="checkbox" data-key="principles-5"> &lt;thinking&gt; 태그로 분석 과정과 최종 출력을 분리해봤다</label>
+          <label><input type="checkbox" data-key="principles-6"> 하나의 대화창에 하나의 작업만 담는 습관을 만들었다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="multi-persona.html" class="nav-prev">← 이전: 멀티 페르소나 토론 기법</a>
+      <a href="custom-ai-tools.html" class="nav-next">다음: 나만의 AI 어시스턴트 만들기 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AI 활용 강의 &copy; 2026</p>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+  <script>
+    function togglePrinciple(headerEl) {
+      const body = headerEl.nextElementSibling;
+      const isOpen = body.classList.contains('is-open');
+      // 현재 열린 것 닫기
+      document.querySelectorAll('.principle-body.is-open').forEach(el => el.classList.remove('is-open'));
+      document.querySelectorAll('.principle-header.is-open').forEach(el => el.classList.remove('is-open'));
+      // 클릭한 것 토글
+      if (!isOpen) {
+        body.classList.add('is-open');
+        headerEl.classList.add('is-open');
+      }
+    }
+  </script>
+</body>
+</html>

@@ -19,6 +19,7 @@ const NAV_DATA = [
       { id: 'ai-landscape', title: 'AI 도구 지도' },
       { id: 'prompt-basics', title: '프롬프트 잘 쓰는 법' },
       { id: 'multi-persona', title: '멀티 페르소나 토론 기법' },
+      { id: 'claude-code-principles', title: 'AI 실전 활용 7대 원칙' },
       { id: 'custom-ai-tools', title: '나만의 AI 어시스턴트 만들기' },
       { id: 'ai-work-habits', title: 'AI와 일하는 습관' },
     ]
