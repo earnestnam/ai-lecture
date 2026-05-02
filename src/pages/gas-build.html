@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="6칸을 그리면 Claude Code가 GAS 코드를 만들어줍니다. 4단계로 첫 자동화를 완성해요.">
+  <title>Claude Code로 직접 만들기 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav"><a href="../index.html">홈</a></nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>Claude Code로 직접 만들기</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 45분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">6칸을 그리면 Claude Code가 GAS 코드를 만들어줍니다. 4단계로 첫 자동화를 완성해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- Claude Code — AI와 짝 프로그래밍 -->
+        <h2>Claude Code — AI와 짝 프로그래밍</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+
+          <!-- LEFT -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+            <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+              <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">무엇인가</p>
+              <p style="margin: 0; font-size: 0.9rem; line-height: 1.7;">
+                VSCode 안에서 Claude와 대화하면서 코드를 짜는 CLI 도구.
+                6칸을 설명하면 GAS 코드를 완성해줍니다.
+              </p>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+              <p style="margin: 0 0 0.5rem; font-weight: 700; font-size: 0.875rem;">핵심 원칙</p>
+              <ul style="margin: 0; padding-left: 0; list-style: none; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.9;">
+                <li>✦ 코드부터 시키지 말 것</li>
+                <li>✦ "데이터 구조 어떻게 잡으면 좋겠어?"부터</li>
+                <li>✦ 6칸이 명확할수록 코드 품질이 올라감</li>
+                <li>✦ 한 번에 한 섹션씩 빌드</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+              <p style="margin: 0 0 0.5rem; font-weight: 700; font-size: 0.875rem;">어떻게 사용하나</p>
+              <ol style="margin: 0; padding-left: 1.2rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.9;">
+                <li>6칸을 텍스트로 정리</li>
+                <li>Claude Code에게 설명</li>
+                <li>생성된 GAS 코드 검토</li>
+                <li>Google Apps Script에 붙여넣기 → 테스트</li>
+              </ol>
+            </div>
+
+            <div class="code-block-wrapper">
+              <div class="code-block-inner">
+                <span class="code-block-label">프롬프트 예시</span>
+                <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent.trim())">복사</button>
+                <pre>// 이렇게 시작하세요
+"6칸 기반으로 GAS 코드 짜줘.
+ 트리거: 캘린더 시간 기반 (5분마다 체크)
+ INPUT: Gemini 회의록 + 캘린더 이벤트 정보
+ OUTPUT: 슬랙 DM 발송 (슬랙 마크다운 형식)
+ API Key는 Script Properties로 읽어줘.
+ 헤더명으로 열을 찾는 방식 사용해줘."</pre>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- 4단계 -->
+        <h2>6칸 → 코드 → 배포까지 — 4단계</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 2.5rem;">
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-primary); color: #fff; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.2rem; font-weight: 800; opacity: 0.9;">01</span>
+              <span style="font-weight: 700; font-size: 0.9rem;">6칸 그리기 (종이 or 노션)</span>
+            </div>
+            <div style="padding: 1rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7;">
+              코드 전에 설계부터. 6칸이 명확할수록 Claude가 더 정확한 코드를 만들어줍니다.
+              <strong style="display: block; margin-top: 0.4rem; color: var(--color-text);">30분이면 충분합니다.</strong>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary); opacity: 0.7;">02</span>
+              <span style="font-weight: 700; font-size: 0.9rem;">Claude Code에게 설명</span>
+            </div>
+            <div style="padding: 1rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7;">
+              6칸 내용을 그대로 텍스트로 붙여넣기.
+              <strong style="display: block; margin-top: 0.4rem; color: var(--color-text);">"데이터 구조부터 어떻게 잡으면 좋겠어?" 먼저 물어보세요.</strong>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary); opacity: 0.7;">03</span>
+              <span style="font-weight: 700; font-size: 0.9rem;">GAS 코드 검토 + 수정</span>
+            </div>
+            <div style="padding: 1rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7;">
+              생성된 코드를 Claude와 함께 읽으면서 검토.
+              <strong style="display: block; margin-top: 0.4rem; color: var(--color-text);">"이 함수 뭐 하는 거야?" 바로 물어보면 됩니다.</strong>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.6rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 1.2rem; font-weight: 800; color: var(--color-primary); opacity: 0.7;">04</span>
+              <span style="font-weight: 700; font-size: 0.9rem;">Apps Script에 배포 + 테스트</span>
+            </div>
+            <div style="padding: 1rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7;">
+              코드 붙여넣기 → 권한 설정 → 테스트 실행 → 로그 확인.
+              <strong style="display: block; margin-top: 0.4rem; color: var(--color-text);">슬랙 DM이 오면 완성.</strong>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- clasp -->
+        <h2>clasp — 코드를 로컬에서 관리하기</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1rem;">
+
+          <!-- LEFT -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+              <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">무엇인가</p>
+              <p style="margin: 0; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+                clasp(Command Line Apps Script)는 GAS 프로젝트를 로컬 파일로 받아
+                Claude Code로 편집하고, 다시 Google 서버에 올릴 수 있게 해주는 CLI 도구.
+              </p>
+            </div>
+
+            <div class="code-block-wrapper">
+              <div class="code-block-inner">
+                <span class="code-block-label">설치 &amp; 로그인</span>
+                <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent.trim())">복사</button>
+                <pre>$ npm install -g @google/clasp
+$ clasp login  # Google 계정 인증
+$ clasp --version  # 설치 확인</pre>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT — pull / push / deploy -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.85rem 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+              <span style="flex-shrink: 0; background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.25rem; padding: 0.15rem 0.45rem; font-size: 0.75rem; font-weight: 700; font-family: monospace;">pull</span>
+              <div style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">
+                <code style="font-size: 0.82rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">clasp clone [Script ID]</code> 또는 <code style="font-size: 0.82rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">clasp pull</code><br>
+                기존 프로젝트 동기화
+              </div>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.85rem 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+              <span style="flex-shrink: 0; background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.25rem; padding: 0.15rem 0.45rem; font-size: 0.75rem; font-weight: 700; font-family: monospace;">push</span>
+              <div style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">
+                Claude Code로 편집 후 <code style="font-size: 0.82rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">clasp push</code><br>
+                GitHub의 git push와 동일 개념
+              </div>
+            </div>
+
+            <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; padding: 0.85rem 1rem; display: flex; align-items: flex-start; gap: 0.75rem;">
+              <span style="flex-shrink: 0; background: var(--color-primary); color: #fff; border-radius: 0.25rem; padding: 0.15rem 0.45rem; font-size: 0.75rem; font-weight: 700; font-family: monospace;">deploy</span>
+              <div style="font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">
+                <code style="font-size: 0.82rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">clasp deploy</code><br>
+                Slack이 호출할 수 있는 공개 URL 생성
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1.25rem; margin-bottom: 2.5rem; font-size: 0.875rem; color: var(--color-text-secondary); font-style: italic;">
+          "Apps Script 에디터에서 직접 작성해도 되지만, clasp + Claude Code 조합이 훨씬 빠릅니다 — 수정-푸시-테스트 사이클이 30초"
+        </div>
+
+        <!-- API Key 보안 -->
+        <h2>API Key 보안 — Script Properties</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+
+          <!-- LEFT -->
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+              <p style="margin: 0 0 0.5rem; font-weight: 700; font-size: 0.875rem;">하드코딩이 위험한 이유</p>
+              <ul style="margin: 0; padding-left: 1.1rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.9;">
+                <li>✕ 코드를 공유하거나 clasp로 올리면 Key가 노출</li>
+                <li>✕ GitHub에 올리면 영구 기록에 남음</li>
+                <li>✓ Script Properties에 저장하면 코드와 완전 분리</li>
+              </ul>
+            </div>
+
+            <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+              <p style="margin: 0 0 0.5rem; font-weight: 700; font-size: 0.875rem;">설정 위치</p>
+              <p style="margin: 0; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7;">
+                Apps Script 에디터 →
+                프로젝트 설정(⚙) →
+                스크립트 속성 →
+                속성 추가
+              </p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT -->
+          <div>
+            <div class="code-block-wrapper">
+              <div class="code-block-inner">
+                <span class="code-block-label">Script Properties로 Key 읽기</span>
+                <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent.trim())">복사</button>
+                <pre>// 한 번만 설정하면 어디서든 읽기 가능
+const props = PropertiesService
+  .getScriptProperties();
+
+const claudeKey = props.getProperty('CLAUDE_API_KEY');
+const geminiKey = props.getProperty('GEMINI_API_KEY');
+const slackToken = props.getProperty('SLACK_BOT_TOKEN');</pre>
+              </div>
+            </div>
+            <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1.25rem; margin-top: 0.75rem; font-size: 0.85rem; color: var(--color-text-secondary); font-style: italic;">
+              "Claude Code에게 'API Key는 Script Properties로 읽어줘'라고 지시하면 알아서 이 패턴으로 코드를 작성해줍니다"
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 슬랙 봇 만들기 -->
+        <h2>슬랙 봇 만들기</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">01</span>
+              <span style="font-weight: 700; font-size: 0.875rem;">App 생성</span>
+            </div>
+            <div style="padding: 0.85rem 0.9rem; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              api.slack.com/apps → Create New App → From scratch →
+              앱 이름 + 워크스페이스 선택
+            </div>
+          </div>
+
+          <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: #fff7ed; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-primary); display: flex; align-items: center; gap: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">02</span>
+              <span style="font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">Bot Token Scopes 설정</span>
+            </div>
+            <div style="padding: 0.85rem 0.9rem; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.8;">
+              OAuth &amp; Permissions → Bot Token Scopes 추가:<br>
+              <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">chat:write</code> /
+              <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">channels:read</code> /
+              <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">users:read</code> /
+              <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">im:write</code>
+              <br>메시지 발송·채널 조회·이메일→슬랙ID 매핑·DM 발송
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">03</span>
+              <span style="font-weight: 700; font-size: 0.875rem;">워크스페이스 설치 + Token 복사</span>
+            </div>
+            <div style="padding: 0.85rem 0.9rem; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              Install to Workspace → Bot User OAuth Token 복사<br>
+              <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">(xoxb-xxxx-xxxx)</code>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border); display: flex; align-items: center; gap: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">04</span>
+              <span style="font-weight: 700; font-size: 0.875rem;">Script Properties 저장 + 채널 초대</span>
+            </div>
+            <div style="padding: 0.85rem 0.9rem; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              Token을 <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">SLACK_BOT_TOKEN</code>으로 저장<br>
+              사용할 채널에서 <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">/invite @봇이름</code> 실행
+            </div>
+          </div>
+
+        </div>
+
+        <div class="warning-box" style="margin-bottom: 2.5rem;">
+          <strong>⚠️ 봇 채널 초대를 잊지 마세요</strong>
+          <p style="margin: 0.5rem 0 0; line-height: 1.7;">
+            봇은 워크스페이스에 설치해도 채널에 초대하지 않으면 메시지를 보낼 수 없습니다 —
+            잊지 말고 <code>/invite</code> 하세요.
+          </p>
+        </div>
+
+        <!-- GAS 배포 URL을 Slack에 연결하기 -->
+        <h2>GAS 배포 URL을 Slack에 연결하기</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+
+          <!-- LEFT -->
+          <div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden; margin-bottom: 0;">
+              <div style="background: var(--color-bg-section); padding: 0.6rem 1rem; border-bottom: 1px solid var(--color-border);">
+                <span style="font-weight: 700; font-size: 0.875rem;">① GAS 웹앱 배포</span>
+              </div>
+              <div style="padding: 0.9rem 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.7rem;">
+                  <div style="display: flex; gap: 0.6rem; align-items: flex-start;">
+                    <span style="flex-shrink: 0; background: var(--color-primary); color: #fff; border-radius: 50%; width: 1.3rem; height: 1.3rem; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 0.1rem;">A</span>
+                    <p style="margin: 0; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">배포 → 새 배포<br>(유형: 웹 앱 / 실행 주체: 나 / 액세스: 모든 사용자)</p>
+                  </div>
+                  <div style="display: flex; gap: 0.6rem; align-items: flex-start;">
+                    <span style="flex-shrink: 0; background: var(--color-primary); color: #fff; border-radius: 50%; width: 1.3rem; height: 1.3rem; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 0.1rem;">B</span>
+                    <p style="margin: 0; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">배포 URL 복사<br><code style="font-size: 0.78rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem; word-break: break-all;">(https://script.google.com/macros/s/.../exec)</code></p>
+                  </div>
+                  <div style="display: flex; gap: 0.6rem; align-items: flex-start;">
+                    <span style="flex-shrink: 0; background: var(--color-primary); color: #fff; border-radius: 50%; width: 1.3rem; height: 1.3rem; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 0.1rem;">C</span>
+                    <p style="margin: 0; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.6;">코드 수정 시 재배포 — <code style="font-size: 0.78rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">clasp push</code> 후 반드시 새 버전으로 배포</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+          <div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+              <div style="background: var(--color-bg-section); padding: 0.6rem 1rem; border-bottom: 1px solid var(--color-border);">
+                <span style="font-weight: 700; font-size: 0.875rem;">② Slack에서 연결 방법 3가지</span>
+              </div>
+              <div style="padding: 0.9rem 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
+
+                <div style="border: 2px solid var(--color-primary); border-radius: 0.4rem; padding: 0.7rem 0.9rem; background: #fff7ed;">
+                  <p style="margin: 0 0 0.2rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">Incoming Webhook <span style="font-size: 0.7rem; background: var(--color-primary); color: #fff; padding: 0.05rem 0.3rem; border-radius: 0.2rem; vertical-align: middle; font-weight: 700;">추천</span></p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.6;">GAS → Slack 단방향 발송. 알림봇에 최적. 가장 빠르게 시작 가능</p>
+                </div>
+
+                <div style="border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.7rem 0.9rem;">
+                  <p style="margin: 0 0 0.2rem; font-weight: 700; font-size: 0.875rem;">Slash Commands</p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.6;">/명령어 입력 → Slack이 GAS URL로 POST. 단순하고 명확한 연결</p>
+                </div>
+
+                <div style="border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.7rem 0.9rem;">
+                  <p style="margin: 0 0 0.2rem; font-weight: 700; font-size: 0.875rem;">Event Subscriptions</p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.6;">멘션·메시지 등 이벤트 발생 시 GAS URL로 자동 전달. 반응형 봇에 사용</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 회의록봇 프롬프트 예시 -->
+        <h2>회의록봇 프롬프트 예시 — 6칸 → Claude</h2>
+
+        <div class="code-block-wrapper" style="margin-bottom: 2.5rem;">
+          <div class="code-block-inner">
+            <span class="code-block-label">Claude에게 전달하는 6칸 프롬프트</span>
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.textContent.trim())">복사</button>
+            <pre>// 6칸을 이렇게 전달합니다
+
+시스템: 회의록을 구조화해서 요약하는 어시스턴트야.
+아래 형식으로 정리해줘:
+
+## 회의 개요 (제목, 일시, 참여자)
+## 결정사항 (3줄 이내)
+## 액션 아이템 (담당자 + 기한)
+## 다음 회의 안건
+
+---
+입력 데이터:
+- 회의록: {transcript}
+- 이벤트 제목: {event_title}
+- 참여자: {attendees[]}
+- 정기 여부: {is_recurring}
+
+// 헤더명으로 찾기, 열 좌표 하드코딩 금지</pre>
+          </div>
+        </div>
+
+        <!-- AI에게 시키기 전에 사람이 먼저 정해야 할 것들 -->
+        <h2>AI에게 시키기 전에 사람이 먼저 정해야 할 것들</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1rem;">
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem;">
+            <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">01 시트 데이터 구조를 어떻게?</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              마스터 시트(잘 안 변함) vs 운영 시트(매일 변함) 분리.
+              위치(A열)로 박지 말고 헤더명으로 찾기.
+            </p>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem;">
+            <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">02 시트 간 데이터를 어떻게 연결?</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              공통 키 정하기 (이메일·사번·회의ID).
+              한 시트가 다른 시트를 참조하는 흐름을 그려보기.
+            </p>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem;">
+            <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">03 절차의 순서와 흐름?</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              트리거 → 데이터 읽기 → 가공 → 저장 → 알림.
+              분기(IF)가 필요한 지점 미리 결정.
+            </p>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem;">
+            <p style="margin: 0 0 0.4rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">04 동적 처리와 최적화?</p>
+            <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+              매일 1만 건 vs 매주 100건 — 규모에 따라 처리 방식이 다릅니다.
+              실행 속도·일괄 처리·캐싱을 Claude와 논의.
+            </p>
+          </div>
+
+        </div>
+
+        <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1.25rem; margin-bottom: 2.5rem; font-size: 0.9rem; color: var(--color-text-secondary); font-style: italic;">
+          "AI는 좋은 요리사. 재료 준비는 우리 몫 — 데이터 구조가 제대로면 코드는 Claude에게 맡겨도 됩니다."
+        </div>
+
+        <!-- 함정 3가지 -->
+        <h2>미리 알면 첫 주가 절반으로 — 함정 3가지</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 1rem;">
+
+          <!-- LEFT -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+            <div style="border: 1px solid var(--color-border); border-left: 4px solid #ef4444; border-radius: 0.5rem; padding: 0.9rem 1rem;">
+              <p style="margin: 0 0 0.35rem; font-weight: 700; font-size: 0.875rem; color: #ef4444;">① 시트 위치를 좌표로 박지 말 것</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+                A2, B3 대신 <code style="font-size: 0.8rem; background: var(--color-bg-alt); padding: 0.1rem 0.3rem; border-radius: 0.2rem;">indexOf</code>로 헤더 동적 탐색 →
+                열 추가돼도 깨지지 않음
+              </p>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-left: 4px solid #ef4444; border-radius: 0.5rem; padding: 0.9rem 1rem;">
+              <p style="margin: 0 0 0.35rem; font-weight: 700; font-size: 0.875rem; color: #ef4444;">② 권한 범위 미리 점검</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+                Drive·Calendar·Slack 권한은 코드 작성 전에 확인 —
+                배포 후 권한 오류 가장 많은 원인
+              </p>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-left: 4px solid #ef4444; border-radius: 0.5rem; padding: 0.9rem 1rem;">
+              <p style="margin: 0 0 0.35rem; font-weight: 700; font-size: 0.875rem; color: #ef4444;">③ 로그를 보지 않고 추측하지 말 것</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+                GAS 실행 로그가 모든 답을 갖고 있음 —
+                추측 전에 로그 먼저
+              </p>
+            </div>
+
+          </div>
+
+          <!-- RIGHT — 빨리 시작하는 법 -->
+          <div>
+            <p style="font-weight: 700; font-size: 0.875rem; margin: 0 0 0.75rem;">빨리 시작하는 법</p>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem;">
+
+              <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.8rem 1rem; display: flex; gap: 0.75rem; align-items: flex-start;">
+                <span style="flex-shrink: 0; background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.25rem; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">1일</span>
+                <div>
+                  <p style="margin: 0 0 0.15rem; font-weight: 700; font-size: 0.875rem;">문제 정의</p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary);">어떤 반복을 자동화할 것인가?</p>
+                </div>
+              </div>
+
+              <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.8rem 1rem; display: flex; gap: 0.75rem; align-items: flex-start;">
+                <span style="flex-shrink: 0; background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.25rem; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">반나절</span>
+                <div>
+                  <p style="margin: 0 0 0.15rem; font-weight: 700; font-size: 0.875rem;">6칸 그리기</p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary);">종이에 6칸을 채워보기</p>
+                </div>
+              </div>
+
+              <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.8rem 1rem; display: flex; gap: 0.75rem; align-items: flex-start;">
+                <span style="flex-shrink: 0; background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.25rem; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">1~2일</span>
+                <div>
+                  <p style="margin: 0 0 0.15rem; font-weight: 700; font-size: 0.875rem;">Claude Code에게 시키기</p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary);">6칸 → 프롬프트 → GAS 코드</p>
+                </div>
+              </div>
+
+              <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; padding: 0.8rem 1rem; display: flex; gap: 0.75rem; align-items: flex-start; background: #fff7ed;">
+                <span style="flex-shrink: 0; background: var(--color-primary); color: #fff; border-radius: 0.25rem; padding: 0.2rem 0.5rem; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">1~2일</span>
+                <div>
+                  <p style="margin: 0 0 0.15rem; font-weight: 700; font-size: 0.875rem; color: var(--color-primary);">슬랙 연결 + 테스트</p>
+                  <p style="margin: 0; font-size: 0.82rem; color: var(--color-text-secondary);">DM이 오면 완성 — 배포! 🚀</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 마무리 인사이트 강조 박스 -->
+        <div style="background: var(--color-primary); color: #fff; border-radius: 0.75rem; padding: 2rem 2.5rem; margin: 2.5rem 0; text-align: center;">
+          <p style="margin: 0; font-size: 1.25rem; font-weight: 800; line-height: 1.6;">
+            하나만 끝까지.
+          </p>
+          <p style="margin: 0.75rem 0 0; font-size: 1rem; opacity: 0.9; line-height: 1.7;">
+            완벽한 1개보다 동작하는 1개.<br>
+            하나만 끝까지 돌려보면 다음은 훨씬 빠릅니다.
+          </p>
+        </div>
+
+        <!-- 팁 박스 -->
+        <div class="tip-box">
+          <strong>💡 막히면 Claude에게 바로 물어보세요</strong>
+          <p style="margin: 0.5rem 0 0; line-height: 1.7;">
+            오류 메시지를 그대로 붙여넣으면 됩니다.
+            "이 오류 왜 나? 어떻게 고쳐?" — 이 한 마디로 대부분 해결됩니다.
+            GAS 실행 로그를 같이 붙여넣으면 더 정확하게 진단해줍니다.
+          </p>
+        </div>
+
+        <!-- 체크리스트 -->
+        <h2>이 페이지를 마치기 전에</h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-key="build-1"> clasp를 설치하고 Google 계정으로 로그인했다</label>
+          <label><input type="checkbox" data-key="build-2"> API Key를 Script Properties에 저장하는 방법을 이해했다</label>
+          <label><input type="checkbox" data-key="build-3"> 슬랙 봇 앱을 만들고 Token을 발급받았다</label>
+          <label><input type="checkbox" data-key="build-4"> 내 6칸 설계를 Claude Code에게 붙여넣어봤다</label>
+          <label><input type="checkbox" data-key="build-5"> GAS 코드를 Apps Script 에디터에 붙여넣고 테스트했다</label>
+          <label><input type="checkbox" data-key="build-6"> 슬랙 DM이 성공적으로 왔다 (또는 오류 로그를 확인했다)</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-cases.html" class="nav-prev">← 이전: 실제 자동화 사례 4가지</a>
+      <a href="glossary.html" class="nav-next">다음: AI 용어 사전 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container"><p>AI 활용 강의 &copy; 2026</p></div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

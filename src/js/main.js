@@ -47,15 +47,11 @@ const NAV_DATA = [
     section: 'GAS 개발 트랙',
     icon: '⚙️',
     pages: [
-      { id: 'gas-env-setup', title: '개발 환경 설정' },
-      { id: 'gas-structure', title: 'GAS 프로젝트 구조' },
-      { id: 'gas-spreadsheet', title: '스프레드시트 API 핵심' },
-      { id: 'gas-claude-code', title: 'Claude Code로 GAS 개발' },
-      { id: 'gas-clasp', title: 'clasp 배포 워크플로' },
-      { id: 'gas-git', title: 'Git 브랜치 전략' },
-      { id: 'gas-crud', title: '스프레드시트 DB CRUD' },
-      { id: 'gas-webapp', title: '웹앱 서비스 배포' },
-      { id: 'gas-automation', title: '실무 자동화 시나리오' },
+      { id: 'gas-why', title: '왜 자동화인가?' },
+      { id: 'gas-architecture', title: 'GAS + AI 아키텍처' },
+      { id: 'gas-6frame', title: '6칸 프레임으로 설계하기' },
+      { id: 'gas-cases', title: '실전 자동화 사례' },
+      { id: 'gas-build', title: '직접 만들어보기' },
     ]
   },
   {

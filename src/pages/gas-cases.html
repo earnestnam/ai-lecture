@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="모든 직무에 같은 패턴이 있습니다. 6칸이 어떻게 채워지는지 실제 사례로 확인해요.">
+  <title>실제 자동화 사례 4가지 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav"><a href="../index.html">홈</a></nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>실제 자동화 사례 4가지</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 40분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">모든 직무에 같은 패턴이 있습니다. 6칸이 어떻게 채워지는지 실제 사례로 확인해요.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- 사내에서 돌아가는 자동화들 -->
+        <h2>사내에서 돌아가는 자동화들</h2>
+        <p>
+          어떤 자동화든 6칸으로 표현됩니다. 단순한 알림봇도, 복잡한 AI 페르소나봇도 — 구조는 같고,
+          복잡도의 차이는 각 칸의 두께에서 드러납니다.
+        </p>
+
+        <!-- 4-card gallery 2x2 grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+
+          <!-- Case 01 highlighted -->
+          <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-primary); color: #fff; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.25); padding: 0.1rem 0.4rem; border-radius: 0.25rem;">CASE 01</span>
+              <span style="font-weight: 700;">회의록봇</span>
+            </div>
+            <div style="padding: 1rem;">
+              <p style="margin: 0 0 0.5rem; font-size: 0.9rem; color: var(--color-text-secondary);">회의를 하는 모든 직무</p>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+                Gemini 회의록을 Claude가 재구조화하고, 참여자에게 슬랙 DM으로 자동 전송
+              </p>
+            </div>
+          </div>
+
+          <!-- Case 02 -->
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; background: var(--color-border); padding: 0.1rem 0.4rem; border-radius: 0.25rem;">CASE 02</span>
+              <span style="font-weight: 700;">슬랙 요약봇</span>
+            </div>
+            <div style="padding: 1rem;">
+              <p style="margin: 0 0 0.5rem; font-size: 0.9rem; color: var(--color-text-secondary);">슬랙을 쓰는 모든 직무</p>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+                긴 스레드에 이모지 반응 하나면 1줄 요약 + 결정사항 + 액션 아이템이 3초 만에
+              </p>
+            </div>
+          </div>
+
+          <!-- Case 03 -->
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; background: var(--color-border); padding: 0.1rem 0.4rem; border-radius: 0.25rem;">CASE 03</span>
+              <span style="font-weight: 700;">HR 자동화 맵</span>
+            </div>
+            <div style="padding: 1rem;">
+              <p style="margin: 0 0 0.5rem; font-size: 0.9rem; color: var(--color-text-secondary);">HR + 모든 부서가 같은 패턴</p>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+                D-Day 기반 트리거 + 마스터 시트 + 슬랙 워크플로 — 정해진 시점에 정해진 사람에게
+              </p>
+            </div>
+          </div>
+
+          <!-- Case 04 highlighted -->
+          <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-primary); color: #fff; padding: 0.75rem 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; background: rgba(255,255,255,0.25); padding: 0.1rem 0.4rem; border-radius: 0.25rem;">CASE 04</span>
+              <span style="font-weight: 700;">의사결정권자봇</span>
+            </div>
+            <div style="padding: 1rem;">
+              <p style="margin: 0 0 0.5rem; font-size: 0.9rem; color: rgba(255,255,255,0.8);">보고·검토를 하는 모든 직무</p>
+              <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+                문서 링크를 DM으로 보내면 8~20초 안에 페르소나 기반 5단 피드백
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Case 01 -->
+        <h2>Case 01 — 회의록봇 (단순한 것도 6칸)</h2>
+
+        <!-- 6-box grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;">
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">01 시작 방식</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              회의 종료 후 회의록 메일 계정이 캘린더 이벤트 첨부 파일 확인<br>
+              <strong style="color: var(--color-text);">시간 트리거</strong>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">02 INPUT</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              Gemini 회의록 스크립트<br>
+              + 캘린더 이벤트 정보<br>
+              (제목·참여자·반복여부)
+            </div>
+          </div>
+
+          <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: #fff7ed; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-primary);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">03 OUTPUT ✦ AI</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              원하는 구조로 재요약된 회의록<br>
+              + 정기회의 1일 전 리마인드
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">04 커뮤니케이션</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              참여자별 슬랙 DM<br>
+              (이메일 → 슬랙 ID 매핑)
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">05 데이터 관리</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              회의록 시트 기록<br>
+              (회의명·일자·참여자·요약·링크)
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">06 연동 서비스</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              Calendar + Meet + Gemini<br>
+              + Email→SlackID 매핑<br>
+              + Slack DM API + Drive
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1.25rem; margin-bottom: 2rem; font-size: 0.93rem; font-style: italic; color: var(--color-text-secondary);">
+          "AI를 부르는 곳은 한 군데 — '재요약'할 때만. 나머지는 다 GAS가 처리합니다."
+        </div>
+
+        <!-- 타임라인 -->
+        <h3>회의록봇 동작 흐름 (타임라인)</h3>
+
+        <div style="position: relative; margin-bottom: 2rem;">
+          <!-- vertical line -->
+          <div style="position: absolute; left: 1rem; top: 1.5rem; bottom: 0.5rem; width: 2px; background: var(--color-border);"></div>
+
+          <!-- Step 1 -->
+          <div style="display: flex; gap: 1.25rem; margin-bottom: 1.25rem; position: relative;">
+            <div style="flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 1;">1</div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1rem; flex: 1; background: var(--color-bg);">
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.9rem;">회의 종료 (Google Meet)</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary);">Gemini가 자동으로 회의록 생성 → 회의록 메일 계정으로 전송</p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div style="display: flex; gap: 1.25rem; margin-bottom: 1.25rem; position: relative;">
+            <div style="flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 1;">2</div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1rem; flex: 1; background: var(--color-bg);">
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.9rem;">GAS 시간 트리거 실행 (5~10분 후)</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary);">메일 계정에서 회의록 수신 확인 → 캘린더 이벤트 정보 조회 (제목·참여자·반복여부)</p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div style="display: flex; gap: 1.25rem; margin-bottom: 1.25rem; position: relative;">
+            <div style="flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 1;">3</div>
+            <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; padding: 0.9rem 1rem; flex: 1; background: #fff7ed;">
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.9rem; color: var(--color-primary);">Claude API 호출 — 재요약</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary);">Gemini 원본 + 캘린더 정보 → Claude가 구조화된 회의록으로 재정리</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div style="display: flex; gap: 1.25rem; margin-bottom: 1.25rem; position: relative;">
+            <div style="flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 1;">4</div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1rem; flex: 1; background: var(--color-bg);">
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.9rem;">이메일 → 슬랙 ID 매핑</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary);">참여자 이메일 목록 → SlackID 매핑 시트에서 VLOOKUP → 개인 DM 발송</p>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div style="display: flex; gap: 1.25rem; position: relative;">
+            <div style="flex-shrink: 0; width: 2rem; height: 2rem; border-radius: 50%; background: var(--color-primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; z-index: 1;">5</div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1rem; flex: 1; background: var(--color-bg);">
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.9rem;">회의록 시트 기록 + (선택) 리마인드 예약</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary);">정기 회의는 다음 회의 1일 전 리마인드 자동 예약</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Key insight -->
+        <div style="background: var(--color-bg-section); border: 2px solid var(--color-primary); border-left: 6px solid var(--color-primary); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-bottom: 2.5rem;">
+          <p style="margin: 0; font-weight: 700; font-size: 0.95rem; color: var(--color-primary);">🔑 이메일 → 슬랙 ID 매핑</p>
+          <p style="margin: 0.5rem 0 0; font-size: 0.9rem; line-height: 1.7;">
+            이 하나가 전사 자동화의 열쇠. 이 테이블 하나면 누구에게든 메시지를 보낼 수 있습니다.
+          </p>
+        </div>
+
+        <!-- Case 02 -->
+        <h2>Case 02 — 슬랙 요약봇 (긴 스레드, 3초 만에 따라잡기)</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+
+          <!-- LEFT -->
+          <div>
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem; margin-bottom: 1rem;">
+              <p style="margin: 0 0 0.6rem; font-weight: 700; font-size: 0.9rem; color: var(--color-primary);">핵심 기능</p>
+              <ul style="margin: 0; padding-left: 1.1rem; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.9;">
+                <li>1줄 요약 + 결정사항 + 액션 아이템</li>
+                <li>담당자 개별 멘션해서 진척 요청</li>
+                <li>스레드 길이 제한 없음 (100개+ OK)</li>
+                <li>이미지까지 분석 (멀티모달)</li>
+              </ul>
+            </div>
+            <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem;">
+              <p style="margin: 0 0 0.5rem; font-weight: 700; font-size: 0.85rem;">정책과 함께 설계됨</p>
+              <p style="margin: 0; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7;">
+                DM은 막아둠 — 채널 커뮤니케이션 정책상 채널만 가능.
+                자동화와 정책이 같이 설계된 사례.
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT — 6칸 요약 -->
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 1rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-weight: 700; font-size: 0.875rem;">6칸 요약</span>
+            </div>
+            <div style="padding: 0.75rem 1rem;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 600; color: var(--color-primary); white-space: nowrap; width: 40%;">시작 방식</td>
+                    <td style="padding: 0.5rem 0; color: var(--color-text-secondary);">채널 내 이모지 반응 (이벤트 트리거)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 600; color: var(--color-primary);">INPUT</td>
+                    <td style="padding: 0.5rem 0; color: var(--color-text-secondary);">슬랙 스레드 전체 + 이미지</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 600; color: var(--color-primary);">OUTPUT</td>
+                    <td style="padding: 0.5rem 0; color: var(--color-text-secondary);">요약 + 결정사항 + 액션 아이템 + 멘션</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 600; color: var(--color-primary);">커뮤니케이션</td>
+                    <td style="padding: 0.5rem 0; color: var(--color-text-secondary);">같은 채널 스레드 답변</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 600; color: var(--color-primary);">데이터 관리</td>
+                    <td style="padding: 0.5rem 0; color: var(--color-text-secondary);">별도 저장 없음</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.5rem 0.75rem 0.5rem 0; font-weight: 600; color: var(--color-primary);">연동</td>
+                    <td style="padding: 0.5rem 0; color: var(--color-text-secondary);">Slack API + Claude API</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Case 03 -->
+        <h2>Case 03 — HR 자동화 맵 (정해진 데이터 + 정해진 시점 + 정해진 사람에게)</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2.5rem;">
+
+          <!-- LEFT -->
+          <div>
+            <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; padding: 1rem 1.25rem; margin-bottom: 1rem;">
+              <p style="margin: 0 0 0.5rem; font-weight: 700; font-size: 0.9rem; color: var(--color-primary);">공통 패턴</p>
+              <p style="margin: 0 0 0.6rem; font-size: 1rem; font-weight: 700;">D-Day 기반 + 마스터 시트 + 슬랙 워크플로</p>
+              <p style="margin: 0; font-size: 0.875rem; color: var(--color-text-secondary); line-height: 1.7;">이 3개가 보이면 자동화의 자리.</p>
+            </div>
+            <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem; font-size: 0.85rem; color: var(--color-text-secondary); line-height: 1.7; font-style: italic;">
+              "HR에만 적용되지 않습니다 — 영업의 KPI 알림, 재무의 마감 리마인드,
+              운영의 장애 대응 절차 — 다 같은 패턴입니다"
+            </div>
+          </div>
+
+          <!-- RIGHT — 4 cards -->
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.85rem; background: var(--color-bg);">
+              <p style="margin: 0 0 0.3rem; font-size: 1rem;">📅</p>
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.875rem;">입사 D-Day</p>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--color-text-secondary);">온보딩 체크리스트 자동 발송</p>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.85rem; background: var(--color-bg);">
+              <p style="margin: 0 0 0.3rem; font-size: 1rem;">📅</p>
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.875rem;">수습 평가 D-30</p>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--color-text-secondary);">담당자에게 미리 알림</p>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.85rem; background: var(--color-bg);">
+              <p style="margin: 0 0 0.3rem; font-size: 1rem;">📅</p>
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.875rem;">계약 만료 D-90</p>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--color-text-secondary);">갱신 검토 요청 자동 발송</p>
+            </div>
+
+            <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.85rem; background: var(--color-bg);">
+              <p style="margin: 0 0 0.3rem; font-size: 1rem;">📅</p>
+              <p style="margin: 0 0 0.25rem; font-weight: 700; font-size: 0.875rem;">연간 목표 설정 시즌</p>
+              <p style="margin: 0; font-size: 0.8rem; color: var(--color-text-secondary);">개인별 맞춤 안내문 발송</p>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Case 04 -->
+        <h2>Case 04 — 의사결정권자봇 (복잡한 것도 6칸)</h2>
+
+        <p style="margin-bottom: 1.25rem; line-height: 1.8;">
+          회의록봇은 '요약'이 전부였습니다. 실제 업무에서 필요한 건 단순 요약이 아니라 —
+          <strong>나처럼 생각하는 리뷰어</strong>입니다.
+        </p>
+
+        <!-- 6-box grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.75rem; margin-bottom: 1rem;">
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">01 시작 방식</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              슬랙 DM 메시지 또는 채널 멘션<br>
+              <strong style="color: var(--color-text);">입력 트리거</strong>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">02 INPUT</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              텍스트 + Google Docs/Sheets/<br>Slides 링크 + PDF + 이미지<br>
+              + 대화 맥락
+            </div>
+          </div>
+
+          <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: #fff7ed; padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-primary);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">03 OUTPUT ✦ AI</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              페르소나 기반 5단 피드백<br>
+              (요약 / 잘된점 / 개선 / 질문 / 관점)
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">04 커뮤니케이션</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              슬랙 스레드 답변<br>
+              <strong style="color: var(--color-text);">8~20초 응답</strong>
+            </div>
+          </div>
+
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); padding: 0.6rem 0.9rem; border-bottom: 1px solid var(--color-border);">
+              <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);">05 데이터 관리</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.875rem; line-height: 1.7; color: var(--color-text-secondary);">
+              스레드 내 대화 맥락만 유지<br>
+              별도 저장 없음<br>
+              민감 주제 차단
+            </div>
+          </div>
+
+          <!-- 06 highlighted as 주목 -->
+          <div style="border: 2px solid #7c3aed; border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: #f5f3ff; padding: 0.6rem 0.9rem; border-bottom: 1px solid #7c3aed; display: flex; align-items: center; gap: 0.4rem;">
+              <span style="font-size: 0.75rem; font-weight: 700; color: #7c3aed;">06 연동 서비스</span>
+              <span style="font-size: 0.65rem; background: #7c3aed; color: #fff; padding: 0.05rem 0.35rem; border-radius: 0.2rem; font-weight: 700;">주목</span>
+            </div>
+            <div style="padding: 0.75rem 0.9rem; font-size: 0.85rem; line-height: 1.8; color: var(--color-text-secondary);">
+              Slack + Google Drive<br>
+              + AI 모델 라우팅 (질문 분류)<br>
+              + GAS<br>
+              + 특정 기간 슬랙 대화 분석 (페르소나 구성)
+            </div>
+          </div>
+
+        </div>
+
+        <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1.25rem; margin-bottom: 2rem; font-size: 0.93rem; font-style: italic; color: var(--color-text-secondary); text-align: center;">
+          "어디까지 갈 수 있는가? — 6칸을 잘 채울 수 있는 만큼."
+        </div>
+
+        <!-- 팁 박스 -->
+        <div class="tip-box">
+          <strong>💡 6칸의 두께가 복잡도입니다</strong>
+          <p style="margin: 0.5rem 0 0; line-height: 1.7;">
+            회의록봇의 연동 서비스 칸은 4줄, 의사결정권자봇은 5가지 서비스.
+            처음엔 연동 서비스가 1~2개인 단순한 것부터 시작하세요.
+          </p>
+        </div>
+
+        <!-- 체크리스트 -->
+        <h2>이 페이지를 마치기 전에</h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-key="cases-1"> 4가지 사례 모두 같은 6칸 구조로 설명된다는 것을 이해했다</label>
+          <label><input type="checkbox" data-key="cases-2"> 내 업무와 가장 비슷한 자동화 패턴을 찾았다</label>
+          <label><input type="checkbox" data-key="cases-3"> 이메일 → 슬랙 ID 매핑이 왜 중요한지 이해했다</label>
+          <label><input type="checkbox" data-key="cases-4"> 처음 시도할 자동화의 복잡도 (연동 서비스 수)를 파악했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-6frame.html" class="nav-prev">← 이전: 6칸 프레임으로 설계하기</a>
+      <a href="gas-build.html" class="nav-next">다음: Claude Code로 직접 만들기 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container"><p>AI 활용 강의 &copy; 2026</p></div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

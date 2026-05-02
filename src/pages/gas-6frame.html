@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="어떤 자동화든 이 6칸 안에 들어옵니다. 코드 전에 6칸부터.">
+  <title>6칸 프레임으로 설계하기 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* ── 6칸 개요 그리드 ── */
+    .frame-overview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .frame-overview-card {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+    }
+    .frame-overview-card .frame-num {
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 6px;
+      padding: 0.2rem 0.45rem;
+      flex-shrink: 0;
+      letter-spacing: 0.02em;
+    }
+    .frame-overview-card .frame-label {
+      font-weight: 700;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .frame-overview-card .frame-sub {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── 트리거 2열 카드 ── */
+    .trigger-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .trigger-card {
+      border: 2px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      background: var(--color-bg-alt);
+    }
+    .trigger-card--time {
+      border-color: #16a34a;
+    }
+    .trigger-card--event {
+      border-color: var(--color-primary);
+      background: var(--color-bg-alt);
+    }
+    .trigger-card__header {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .trigger-card__tagline {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.9rem;
+    }
+    .trigger-card__desc {
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .trigger-card__examples {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .trigger-card__examples li {
+      font-size: 0.875rem;
+      display: flex;
+      gap: 0.4rem;
+      align-items: flex-start;
+    }
+    .trigger-card__examples li::before {
+      content: "✦";
+      color: var(--color-primary);
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      margin-top: 0.15rem;
+    }
+
+    /* ── INPUT/OUTPUT 아이템 ── */
+    .io-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .io-block {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .io-block__title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .io-item {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      margin-bottom: 0.85rem;
+    }
+    .io-item:last-child { margin-bottom: 0; }
+    .io-item__icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .io-item__text {
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .io-item__text strong { display: block; margin-bottom: 0.15rem; }
+    .io-item--highlight {
+      background: var(--color-bg-section);
+      border: 1px solid var(--color-primary);
+      border-radius: 8px;
+      padding: 0.75rem;
+    }
+
+    /* ── 나머지 3칸 그리드 ── */
+    .three-col-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0 1rem;
+    }
+    .three-col-card {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .three-col-card__num {
+      display: inline-block;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 800;
+      border-radius: 6px;
+      padding: 0.15rem 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .three-col-card__title {
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .three-col-card__question {
+      font-size: 0.82rem;
+      color: var(--color-text-muted);
+      margin-bottom: 0.75rem;
+    }
+    .three-col-card__list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 0.875rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .three-col-card__list li::before {
+      content: "— ";
+      color: var(--color-text-muted);
+    }
+    .annotation-note {
+      background: var(--color-bg-section);
+      border-left: 3px solid var(--color-primary);
+      border-radius: 0 8px 8px 0;
+      padding: 0.85rem 1.2rem;
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+      margin: 1rem 0 2rem;
+      line-height: 1.6;
+    }
+
+    /* ── 4단계 스텝 카드 ── */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .step-card {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .step-card__num {
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      border-radius: 50%;
+      width: 2.25rem;
+      height: 2.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-card__body {}
+    .step-card__title {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+    }
+    .step-card__desc {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+    .qbar-note {
+      background: var(--color-primary);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.9rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0.5rem 0 2rem;
+      line-height: 1.5;
+    }
+
+    /* ── 워크시트 ── */
+    .worksheet-section {
+      background: var(--color-bg-alt);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .worksheet-section > p {
+      font-size: 0.95rem;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+    }
+    .worksheet-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .ws-cell {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .ws-cell__header {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .ws-cell__num {
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      border-radius: 5px;
+      padding: 0.15rem 0.4rem;
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .ws-cell__label {
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .ws-cell textarea {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 0.6rem 0.75rem;
+      font-family: var(--font-family);
+      font-size: 0.875rem;
+      line-height: 1.55;
+      resize: vertical;
+      background: var(--color-bg);
+      color: var(--color-text);
+      transition: border-color 0.15s;
+    }
+    .ws-cell textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+    }
+    .ws-cell textarea::placeholder {
+      color: var(--color-text-muted);
+      font-size: 0.82rem;
+    }
+    .ws-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .ws-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.18s;
+    }
+    .ws-btn--primary {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .ws-btn--primary:hover { background: var(--color-primary-dark); }
+    .ws-btn--secondary {
+      background: var(--color-bg-section);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+    .ws-btn--secondary:hover { background: var(--color-border); }
+    .ws-btn--copy {
+      background: #1e40af;
+      color: #fff;
+    }
+    .ws-btn--copy:hover { background: #1e3a8a; }
+    .ws-btn--copy.copied {
+      background: #16a34a;
+    }
+    .ws-feedback {
+      font-size: 0.82rem;
+      color: #16a34a;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .ws-feedback.visible { display: flex; }
+
+    /* ── 반응형 ── */
+    @media (max-width: 1023px) {
+      .frame-overview-grid { grid-template-columns: repeat(2, 1fr); }
+      .io-section { grid-template-columns: 1fr; }
+      .three-col-grid { grid-template-columns: 1fr 1fr; }
+      .worksheet-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 767px) {
+      .trigger-grid { grid-template-columns: 1fr; }
+      .frame-overview-grid { grid-template-columns: 1fr 1fr; }
+      .three-col-grid { grid-template-columns: 1fr; }
+      .worksheet-grid { grid-template-columns: 1fr; }
+      .ws-actions { flex-direction: column; }
+      .ws-btn { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav">
+        <a href="../index.html">홈</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>6칸 프레임으로 설계하기</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 35분</span>
+          <span class="badge badge--difficulty badge--중급">중급</span>
+        </div>
+        <p class="page-description">어떤 자동화든 이 6칸 안에 들어옵니다. 코드 전에 6칸부터.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- ══════════════════════════════
+             H2: 모든 자동화의 6칸
+             ══════════════════════════════ -->
+        <h2>모든 자동화의 6칸</h2>
+        <p>
+          어떤 자동화든 이 6칸 안에 다 들어옵니다. 복잡한 AI 페르소나봇도, 단순한 알림봇도 —
+          6칸의 두께만 다를 뿐 구조는 같습니다. 코드를 짜기 전에 이 6칸을 먼저 채우면,
+          Claude Code에 붙여넣기만 해도 동작하는 코드가 나옵니다.
+        </p>
+
+        <div class="frame-overview-grid">
+
+          <div class="frame-overview-card">
+            <span class="frame-num">01</span>
+            <div>
+              <div class="frame-label">시작 방식</div>
+              <div class="frame-sub">어떻게 시작되나</div>
+            </div>
+          </div>
+
+          <div class="frame-overview-card">
+            <span class="frame-num">02</span>
+            <div>
+              <div class="frame-label">INPUT</div>
+              <div class="frame-sub">무엇이 들어가나</div>
+            </div>
+          </div>
+
+          <div class="frame-overview-card">
+            <span class="frame-num">03</span>
+            <div>
+              <div class="frame-label">OUTPUT</div>
+              <div class="frame-sub">무엇이 나오나</div>
+            </div>
+          </div>
+
+          <div class="frame-overview-card">
+            <span class="frame-num">04</span>
+            <div>
+              <div class="frame-label">커뮤니케이션</div>
+              <div class="frame-sub">누가 알림을 받나</div>
+            </div>
+          </div>
+
+          <div class="frame-overview-card">
+            <span class="frame-num">05</span>
+            <div>
+              <div class="frame-label">데이터 관리</div>
+              <div class="frame-sub">어디에 저장되나</div>
+            </div>
+          </div>
+
+          <div class="frame-overview-card">
+            <span class="frame-num">06</span>
+            <div>
+              <div class="frame-label">연동 서비스</div>
+              <div class="frame-sub">어떤 API를 쓰나</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ══════════════════════════════
+             H2: 칸 ① 시작 방식
+             ══════════════════════════════ -->
+        <h2>칸 ① 시작 방식 — 트리거 2종</h2>
+        <p>
+          자동화는 혼자 켜지지 않습니다. 반드시 무언가가 시작을 '깨워야' 합니다.
+          그 깨우는 방법이 트리거입니다. 크게 두 가지로 나뉩니다.
+        </p>
+
+        <div class="trigger-grid">
+
+          <!-- 시간 트리거 -->
+          <div class="trigger-card trigger-card--time">
+            <div class="trigger-card__header">⏰ 시간 트리거</div>
+            <div class="trigger-card__tagline">정해진 시간에 자동 실행</div>
+            <p class="trigger-card__desc">
+              매일 09:00, 매주 월요일, 매월 1일 — GAS 타임 트리거.
+              사람이 버튼을 누르지 않아도 됩니다.
+            </p>
+            <ul class="trigger-card__examples">
+              <li>매일 아침 — 오늘 마감 업무 슬랙 알림</li>
+              <li>회의 1시간 전 — 참여자에게 리마인드</li>
+              <li>주간 — 팀 KPI 요약 자동 발송</li>
+            </ul>
+          </div>
+
+          <!-- 이벤트 트리거 -->
+          <div class="trigger-card trigger-card--event">
+            <div class="trigger-card__header">⚡ 이벤트 트리거</div>
+            <div class="trigger-card__tagline">특정 사건이 발생하면 실행</div>
+            <p class="trigger-card__desc">
+              슬랙 멘션, 시트 새 행 추가, 폼 제출, 이메일 수신 —
+              누군가의 행동이 자동화를 깨웁니다.
+            </p>
+            <ul class="trigger-card__examples">
+              <li>@봇 멘션 → 즉시 피드백 생성</li>
+              <li>요약 요청 이모지 → 스레드 분석 시작</li>
+              <li>신입 입사 시트 추가 → 온보딩 알림 발송</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- ══════════════════════════════
+             H2: 칸 ②③ INPUT과 OUTPUT
+             ══════════════════════════════ -->
+        <h2>칸 ②③ INPUT과 OUTPUT 생각법</h2>
+        <p>
+          AI가 하는 일은 결국 INPUT을 받아 OUTPUT을 만드는 것입니다.
+          이 두 칸을 명확하게 정의할수록 AI가 더 정확하게 일합니다.
+        </p>
+
+        <div class="io-section">
+
+          <div class="io-block">
+            <h3 class="io-block__title">② INPUT — AI에게 줄 것</h3>
+
+            <div class="io-item">
+              <span class="io-item__icon">📄</span>
+              <div class="io-item__text">
+                <strong>텍스트 / 문서</strong>
+                회의록, 슬랙 스레드, 보고서, 이메일 본문
+              </div>
+            </div>
+
+            <div class="io-item">
+              <span class="io-item__icon">📊</span>
+              <div class="io-item__text">
+                <strong>구조화 데이터</strong>
+                Sheets 데이터, 이름·날짜·상태 같은 필드값
+              </div>
+            </div>
+
+            <div class="io-item">
+              <span class="io-item__icon">🔗</span>
+              <div class="io-item__text">
+                <strong>링크 + 맥락</strong>
+                Google Docs 링크, 대화 히스토리, 이전 결과
+              </div>
+            </div>
+          </div>
+
+          <div class="io-block">
+            <h3 class="io-block__title">③ OUTPUT — AI가 돌려줄 것</h3>
+
+            <div class="io-item">
+              <span class="io-item__icon">✍️</span>
+              <div class="io-item__text">
+                <strong>구조화된 요약</strong>
+                결정사항, 액션 아이템, 핵심 3줄 요약
+              </div>
+            </div>
+
+            <div class="io-item">
+              <span class="io-item__icon">💬</span>
+              <div class="io-item__text">
+                <strong>피드백 / 판단</strong>
+                5단 피드백, 우선순위 분류, 개선 제안
+              </div>
+            </div>
+
+            <div class="io-item io-item--highlight">
+              <span class="io-item__icon">⚠️</span>
+              <div class="io-item__text">
+                <strong>출력 형식을 반드시 명시할 것</strong>
+                슬랙 마크다운으로, JSON으로, 헤더 포함해서 — 형식이 곧 품질입니다
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tip-box">
+          <strong>💡 OUTPUT 형식을 반드시 명시하세요</strong>
+          <p style="margin: 0.5rem 0 0;">
+            "슬랙 마크다운으로" vs "JSON으로" vs "헤더 없이 텍스트만" —
+            AI는 형식을 명시하지 않으면 알아서 씁니다. 매번 달라지는 출력 형식은
+            파싱 오류와 재작업을 만듭니다. OUTPUT 형식은 프롬프트의 마지막 줄에 항상 적어두세요.
+          </p>
+        </div>
+
+        <!-- ══════════════════════════════
+             H2: 칸 ④⑤⑥ 나머지 3칸
+             ══════════════════════════════ -->
+        <h2>칸 ④⑤⑥ 나머지 3칸</h2>
+        <p>
+          앞의 3칸이 "무엇을 할 것인가"라면, 나머지 3칸은 "어디에, 어떻게, 무엇과 함께"입니다.
+        </p>
+
+        <div class="three-col-grid">
+
+          <div class="three-col-card">
+            <span class="three-col-card__num">④</span>
+            <div class="three-col-card__title">커뮤니케이션</div>
+            <div class="three-col-card__question">"누구에게 어떻게 전달?"</div>
+            <ul class="three-col-card__list">
+              <li>DM vs 채널 vs 스레드</li>
+              <li>누구에게 (개인 or 전체)</li>
+              <li>멘션 포함 여부</li>
+              <li>채널 정책 사전 결정 필수</li>
+            </ul>
+          </div>
+
+          <div class="three-col-card">
+            <span class="three-col-card__num">⑤</span>
+            <div class="three-col-card__title">데이터 관리</div>
+            <div class="three-col-card__question">"어디에 저장?"</div>
+            <ul class="three-col-card__list">
+              <li>Sheets에 기록 (이력 추적)</li>
+              <li>Drive에 파일 저장</li>
+              <li>저장 안 함 (임시 처리)</li>
+              <li>민감 정보 처리 정책 확인</li>
+            </ul>
+          </div>
+
+          <div class="three-col-card">
+            <span class="three-col-card__num">⑥</span>
+            <div class="three-col-card__title">연동 서비스</div>
+            <div class="three-col-card__question">"어떤 API를 쓰나?"</div>
+            <ul class="three-col-card__list">
+              <li>복잡할수록 이 칸이 두꺼워짐</li>
+              <li>각 서비스 권한 범위 미리 확인</li>
+              <li>연동 수 = 자동화의 복잡도 지표</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="annotation-note">
+          연동 서비스 칸이 두꺼울수록 복잡한 자동화 — 단순 알림봇보다 AI 페르소나봇의 연동 서비스 칸이 훨씬 두꺼운 이유입니다.
+        </div>
+
+        <!-- ══════════════════════════════
+             H2: 6칸 채우는 순서
+             ══════════════════════════════ -->
+        <h2>6칸 채우는 순서 — 코드 전에 설계부터</h2>
+        <p>
+          6칸은 순서가 있습니다. 처음부터 연동 서비스를 고민하지 마세요.
+          트리거와 INPUT부터 정의하면 나머지는 자연스럽게 따라옵니다.
+        </p>
+
+        <div class="step-list">
+
+          <div class="step-card">
+            <div class="step-card__num">1</div>
+            <div class="step-card__body">
+              <div class="step-card__title">어떤 반복이 있나? (트리거 + INPUT)</div>
+              <p class="step-card__desc">
+                매주 하는 일, 시간이 걸리는 일을 찾아보세요.
+                "무엇이 이 일을 시작하게 만드는가?" — 시간인지, 누군가의 행동인지 먼저 구분합니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-card__num">2</div>
+            <div class="step-card__body">
+              <div class="step-card__title">AI가 무엇을 해야 하나? (OUTPUT)</div>
+              <p class="step-card__desc">
+                요약? 피드백? 분류? AI가 할 일을 딱 한 가지로 정의하세요.
+                두 가지 이상이면 자동화를 두 개로 나누는 것이 더 간단합니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-card__num">3</div>
+            <div class="step-card__body">
+              <div class="step-card__title">누구에게 어떻게 전달? (커뮤니케이션)</div>
+              <p class="step-card__desc">
+                결과를 받는 사람, 채널, 형식을 결정하세요.
+                DM인지 채널인지 먼저 정책 확인 — 의도치 않은 공개 발송은 가장 흔한 실수입니다.
+              </p>
+            </div>
+          </div>
+
+          <div class="step-card">
+            <div class="step-card__num">4</div>
+            <div class="step-card__body">
+              <div class="step-card__title">기록이 필요한가? (데이터 + 연동)</div>
+              <p class="step-card__desc">
+                이력이 필요하면 Sheets 기록 추가. 연동 서비스 목록을 나열하면 6칸 완성.
+                여기까지 채워지면 Claude Code에 그대로 넘길 준비가 된 겁니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="qbar-note">
+          6칸이 채워지면 — Claude Code에 그대로 붙여넣기 → GAS 코드 완성
+        </div>
+
+        <!-- ══════════════════════════════
+             H2: 인터랙티브 워크시트
+             ══════════════════════════════ -->
+        <h2>🖊️ 나만의 6칸 채워보기</h2>
+        <p>자동화하고 싶은 업무를 떠올리며 아래 6칸을 채워보세요. 내용은 "저장하기" 버튼을 누르거나 입력을 마치면 브라우저에 자동 저장됩니다.</p>
+
+        <div class="worksheet-section">
+          <p>자동화하고 싶은 업무를 떠올리며 아래 6칸을 채워보세요. 내용은 브라우저에 자동 저장됩니다.</p>
+
+          <div class="worksheet-grid">
+
+            <div class="ws-cell">
+              <div class="ws-cell__header">
+                <span class="ws-cell__num">01</span>
+                <span class="ws-cell__label">시작 방식</span>
+              </div>
+              <textarea id="ws-1" placeholder="예: 매일 오전 9시 / 시트에 새 행이 추가될 때 / 슬랙에서 @멘션 받을 때"></textarea>
+            </div>
+
+            <div class="ws-cell">
+              <div class="ws-cell__header">
+                <span class="ws-cell__num">02</span>
+                <span class="ws-cell__label">INPUT</span>
+              </div>
+              <textarea id="ws-2" placeholder="예: Gemini 회의록 + 캘린더 참여자 목록"></textarea>
+            </div>
+
+            <div class="ws-cell">
+              <div class="ws-cell__header">
+                <span class="ws-cell__num">03</span>
+                <span class="ws-cell__label">OUTPUT</span>
+              </div>
+              <textarea id="ws-3" placeholder="예: 구조화된 회의록 요약 (결정사항, 액션 아이템, 다음 안건)"></textarea>
+            </div>
+
+            <div class="ws-cell">
+              <div class="ws-cell__header">
+                <span class="ws-cell__num">04</span>
+                <span class="ws-cell__label">커뮤니케이션</span>
+              </div>
+              <textarea id="ws-4" placeholder="예: 참여자별 슬랙 DM으로 전달"></textarea>
+            </div>
+
+            <div class="ws-cell">
+              <div class="ws-cell__header">
+                <span class="ws-cell__num">05</span>
+                <span class="ws-cell__label">데이터 관리</span>
+              </div>
+              <textarea id="ws-5" placeholder="예: 회의록 마스터 시트에 기록 (일자, 참여자, 요약, 링크)"></textarea>
+            </div>
+
+            <div class="ws-cell">
+              <div class="ws-cell__header">
+                <span class="ws-cell__num">06</span>
+                <span class="ws-cell__label">연동 서비스</span>
+              </div>
+              <textarea id="ws-6" placeholder="예: Google Calendar + Gemini + Slack DM API + Google Drive"></textarea>
+            </div>
+
+          </div><!-- /.worksheet-grid -->
+
+          <div class="ws-actions">
+            <button class="ws-btn ws-btn--primary" id="ws-save-btn">💾 저장하기</button>
+            <button class="ws-btn ws-btn--secondary" id="ws-clear-btn">🗑 초기화</button>
+            <button class="ws-btn ws-btn--copy" id="ws-copy-btn">📋 Claude에게 전달하기</button>
+            <span class="ws-feedback" id="ws-copy-feedback">✅ 복사됨! Claude에 붙여넣기 하세요.</span>
+          </div>
+
+        </div><!-- /.worksheet-section -->
+
+        <!-- ══════════════════════════════
+             체크리스트
+             ══════════════════════════════ -->
+        <h2>이 페이지를 마치기 전에</h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-key="frame-1"> 6칸의 각 항목이 무엇인지 설명할 수 있다</label>
+          <label><input type="checkbox" data-key="frame-2"> 시간 트리거와 이벤트 트리거의 차이를 이해했다</label>
+          <label><input type="checkbox" data-key="frame-3"> OUTPUT 형식을 명시해야 하는 이유를 이해했다</label>
+          <label><input type="checkbox" data-key="frame-4"> 내 업무에서 자동화할 것을 6칸에 채워봤다</label>
+          <label><input type="checkbox" data-key="frame-5"> "Claude에게 전달하기" 버튼으로 프롬프트를 복사해봤다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-architecture.html" class="nav-prev">← 이전: 3단 워크플로 구조</a>
+      <a href="gas-cases.html" class="nav-next">다음: 실제 자동화 사례 4가지 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container"><p>AI 활용 강의 &copy; 2026</p></div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+  <script>
+    (function () {
+      const STORAGE_KEY = 'ai-lecture-6frame';
+      const IDS = ['ws-1', 'ws-2', 'ws-3', 'ws-4', 'ws-5', 'ws-6'];
+      const LABELS = ['시작 방식', 'INPUT', 'OUTPUT', '커뮤니케이션', '데이터 관리', '연동 서비스'];
+
+      /* ── 저장 / 불러오기 ── */
+      function save() {
+        const data = {};
+        IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) data[id] = el.value;
+        });
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        } catch (e) { /* 저장 실패 시 무시 */ }
+      }
+
+      function load() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return;
+          const data = JSON.parse(raw);
+          IDS.forEach(id => {
+            const el = document.getElementById(id);
+            if (el && data[id] !== undefined) el.value = data[id];
+          });
+        } catch (e) { /* 파싱 실패 시 무시 */ }
+      }
+
+      /* ── 디바운스 자동 저장 ── */
+      let debounceTimer = null;
+      function debouncedSave() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(save, 600);
+      }
+
+      /* ── DOM 준비 후 초기화 ── */
+      function init() {
+        load();
+
+        /* 자동 저장 (입력 시) */
+        IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.addEventListener('input', debouncedSave);
+        });
+
+        /* 저장 버튼 */
+        const saveBtn = document.getElementById('ws-save-btn');
+        if (saveBtn) {
+          saveBtn.addEventListener('click', () => {
+            save();
+            const orig = saveBtn.textContent;
+            saveBtn.textContent = '✅ 저장됨!';
+            setTimeout(() => { saveBtn.textContent = orig; }, 1800);
+          });
+        }
+
+        /* 초기화 버튼 */
+        const clearBtn = document.getElementById('ws-clear-btn');
+        if (clearBtn) {
+          clearBtn.addEventListener('click', () => {
+            if (!confirm('정말 초기화할까요? 입력한 내용이 모두 삭제됩니다.')) return;
+            IDS.forEach(id => {
+              const el = document.getElementById(id);
+              if (el) el.value = '';
+            });
+            try { localStorage.removeItem(STORAGE_KEY); } catch (e) { /* 무시 */ }
+          });
+        }
+
+        /* Claude에게 전달하기 버튼 */
+        const copyBtn = document.getElementById('ws-copy-btn');
+        const feedback = document.getElementById('ws-copy-feedback');
+        if (copyBtn) {
+          copyBtn.addEventListener('click', () => {
+            const values = IDS.map(id => {
+              const el = document.getElementById(id);
+              return el ? el.value.trim() : '';
+            });
+
+            const prompt =
+              '아래 6칸 설계를 바탕으로 Google Apps Script 코드를 만들어줘.\n\n' +
+              LABELS.map((label, i) => `[${label}] ${values[i] || '(미입력)'}`).join('\n') +
+              '\n\nAPI Key는 Script Properties로 읽어줘. 헤더명으로 열을 찾는 방식을 사용해줘.';
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(prompt).then(() => {
+                showCopied();
+              }).catch(() => fallbackCopy(prompt));
+            } else {
+              fallbackCopy(prompt);
+            }
+          });
+        }
+
+        function showCopied() {
+          if (!copyBtn || !feedback) return;
+          copyBtn.textContent = '✅ 복사됨!';
+          copyBtn.classList.add('copied');
+          feedback.classList.add('visible');
+          setTimeout(() => {
+            copyBtn.textContent = '📋 Claude에게 전달하기';
+            copyBtn.classList.remove('copied');
+            feedback.classList.remove('visible');
+          }, 2500);
+        }
+
+        function fallbackCopy(text) {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0;';
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand('copy');
+            showCopied();
+          } catch (e) {
+            alert('복사에 실패했습니다. 직접 복사해주세요:\n\n' + text);
+          }
+          document.body.removeChild(ta);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    })();
+  </script>
+</body>
+</html>

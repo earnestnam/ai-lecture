@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Google Workspace × Claude × Slack — 이미 있는 3가지 도구로 충분합니다.">
+  <title>3단 워크플로 구조 — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav"><a href="../index.html">홈</a></nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>3단 워크플로 구조</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 25분</span>
+          <span class="badge badge--difficulty badge--초급">초급</span>
+        </div>
+        <p class="page-description">Google Workspace × Claude × Slack — 이미 있는 3가지 도구로 충분합니다.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- 도구 소개 -->
+        <h2>도구는 이미 있습니다</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.25rem;">
+
+          <!-- Google Workspace -->
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-primary); color: #fff; padding: 0.75rem 1rem; font-weight: 700; font-size: 0.95rem;">
+              📊 Google Workspace
+            </div>
+            <div style="padding: 1rem;">
+              <p style="font-weight: 600; margin: 0 0 0.5rem; color: var(--color-primary);">데이터와 트리거</p>
+              <ul style="margin: 0; padding-left: 1.1rem; font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.8;">
+                <li>Sheets로 데이터 관리</li>
+                <li>Calendar로 시간 트리거</li>
+                <li>Drive로 파일 저장</li>
+                <li>Gmail로 알림 수신</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Claude / Gemini -->
+          <div style="border: 2px solid var(--color-primary); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid var(--color-border);">
+              🤖 Claude / Gemini
+            </div>
+            <div style="padding: 1rem;">
+              <p style="font-weight: 600; margin: 0 0 0.5rem; color: var(--color-primary);">AI 엔진</p>
+              <ul style="margin: 0; padding-left: 1.1rem; font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.8;">
+                <li>요약, 분류, 피드백, 코드 작성</li>
+                <li>GAS에서 API로 호출</li>
+                <li>Claude 또는 Gemini 중 선택 사용</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Slack -->
+          <div style="border: 1px solid var(--color-border); border-radius: 0.5rem; overflow: hidden;">
+            <div style="background: var(--color-bg-section); color: var(--color-text); padding: 0.75rem 1rem; font-weight: 700; font-size: 0.95rem; border-bottom: 1px solid var(--color-border);">
+              💬 Slack
+            </div>
+            <div style="padding: 1rem;">
+              <p style="font-weight: 600; margin: 0 0 0.5rem;">전달 채널</p>
+              <ul style="margin: 0; padding-left: 1.1rem; font-size: 0.9rem; color: var(--color-text-secondary); line-height: 1.8;">
+                <li>결과물을 사람에게 전달하는 최종 채널</li>
+                <li>DM, 채널, 스레드, 멘션 모두 가능</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 접착제 노트 -->
+        <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 0.9rem 1.25rem; margin-bottom: 2rem; font-size: 0.93rem;">
+          <strong>GAS(Google Apps Script)</strong>가 이 도구들을 연결하는 접착제 —
+          AI가 필요할 때만 Claude/Gemini API를 호출하고, 나머지는 GAS가 처리합니다.
+        </div>
+
+        <!-- 3단 흐름 -->
+        <h2>Trigger → Process → Notify — 3단 런타임 구조</h2>
+
+        <!-- 플로우 다이어그램 -->
+        <div style="margin-bottom: 1.25rem; overflow-x: auto;">
+          <div style="display: flex; align-items: stretch; gap: 0; min-width: 520px;">
+
+            <!-- ① Trigger -->
+            <div style="flex: 1; background: #fff7ed; border: 2px solid var(--color-primary); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+              <p style="margin: 0 0 0.4rem; font-weight: 700; color: var(--color-primary); font-size: 0.85rem;">① TRIGGER</p>
+              <p style="margin: 0 0 0.5rem; font-weight: 600; font-size: 0.9rem;">Google Workspace</p>
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.7; text-align: left;">
+                <li>⏰ 시간 / Calendar</li>
+                <li>📋 Sheets 새 행·조건</li>
+                <li>💬 Slack 멘션·Form</li>
+              </ul>
+            </div>
+
+            <!-- 화살표 -->
+            <div style="display: flex; align-items: center; padding: 0 0.4rem; flex-shrink: 0;">
+              <div style="text-align: center; font-size: 0.75rem; color: var(--color-text-secondary);">
+                <div style="font-size: 1.2rem; color: var(--color-primary);">→</div>
+                <div>GAS</div>
+              </div>
+            </div>
+
+            <!-- ② Process -->
+            <div style="flex: 1; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+              <p style="margin: 0 0 0.4rem; font-weight: 700; color: var(--color-text-secondary); font-size: 0.85rem;">② PROCESS</p>
+              <p style="margin: 0 0 0.5rem; font-weight: 600; font-size: 0.9rem;">GAS</p>
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.7; text-align: left;">
+                <li>📥 데이터 읽기</li>
+                <li>🤖 AI 호출 (Claude or Gemini)</li>
+                <li>📐 결과 구조화</li>
+              </ul>
+            </div>
+
+            <!-- 화살표 -->
+            <div style="display: flex; align-items: center; padding: 0 0.4rem; flex-shrink: 0;">
+              <div style="text-align: center; font-size: 0.75rem; color: var(--color-text-secondary);">
+                <div style="font-size: 1.2rem; color: var(--color-primary);">→</div>
+                <div>GAS</div>
+              </div>
+            </div>
+
+            <!-- ③ Notify -->
+            <div style="flex: 1; background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+              <p style="margin: 0 0 0.4rem; font-weight: 700; color: var(--color-text-secondary); font-size: 0.85rem;">③ NOTIFY</p>
+              <p style="margin: 0 0 0.5rem; font-weight: 600; font-size: 0.9rem;">Slack API</p>
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.7; text-align: left;">
+                <li>📨 DM 발송</li>
+                <li>📣 채널 메시지</li>
+                <li>🧵 스레드 답변</li>
+              </ul>
+            </div>
+
+            <!-- 화살표 선택 -->
+            <div style="display: flex; align-items: center; padding: 0 0.4rem; flex-shrink: 0;">
+              <div style="text-align: center; font-size: 0.75rem; color: var(--color-text-secondary);">
+                <div style="font-size: 1.2rem; color: var(--color-border);">→</div>
+                <div>선택</div>
+              </div>
+            </div>
+
+            <!-- ④ Store -->
+            <div style="flex: 1; background: var(--color-bg-alt); border: 1px dashed var(--color-border); border-radius: 0.5rem; padding: 1rem; text-align: center;">
+              <p style="margin: 0 0 0.4rem; font-weight: 700; color: var(--color-text-secondary); font-size: 0.85rem;">④ STORE</p>
+              <p style="margin: 0 0 0.5rem; font-weight: 600; font-size: 0.9rem;">Sheets / Drive</p>
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.7; text-align: left;">
+                <li>📊 결과 기록</li>
+                <li>📋 로그 저장</li>
+                <li>🗂 이력 관리</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+
+        <p style="font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 2rem;">
+          <strong>GAS가 오케스트레이터</strong> — 트리거를 감지하고, AI가 필요한 단계에서만 Claude 또는 Gemini API를 호출합니다.
+        </p>
+
+        <!-- GAS 설명 -->
+        <h2>GAS(Google Apps Script)란?</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+
+          <!-- 왼쪽 -->
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+
+            <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.1rem;">
+              <p style="font-weight: 700; margin: 0 0 0.5rem;">무엇인가</p>
+              <p style="margin: 0; font-size: 0.92rem; color: var(--color-text-secondary); line-height: 1.7;">
+                Google Drive 안에서 실행되는 자바스크립트 환경입니다.
+                브라우저에서 바로 작성하고 실행할 수 있습니다.
+                Excel 매크로의 강화판이라고 생각하면 됩니다.
+              </p>
+            </div>
+
+            <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.1rem;">
+              <p style="font-weight: 700; margin: 0 0 0.5rem;">핵심 장점</p>
+              <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.92rem; color: var(--color-text-secondary); line-height: 1.8;">
+                <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.3rem;">✦</span> 별도 서버 설치 불필요 — 구글이 실행해줌</li>
+                <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.3rem;">✦</span> 시간/이벤트 트리거 내장</li>
+                <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.3rem;">✦</span> Claude Code가 코드를 대신 작성해줌</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- 오른쪽 -->
+          <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.1rem;">
+            <p style="font-weight: 700; margin: 0 0 0.75rem;">연결 가능한 서비스</p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem;">
+              <div style="background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.5rem 0.7rem; font-size: 0.88rem; text-align: center;">📅 Google Calendar</div>
+              <div style="background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.5rem 0.7rem; font-size: 0.88rem; text-align: center;">📊 Google Sheets</div>
+              <div style="background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.5rem 0.7rem; font-size: 0.88rem; text-align: center;">📁 Google Drive</div>
+              <div style="background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.5rem 0.7rem; font-size: 0.88rem; text-align: center;">📧 Gmail</div>
+              <div style="background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.5rem 0.7rem; font-size: 0.88rem; text-align: center;">💬 Slack API</div>
+              <div style="background: #fff7ed; border: 1px solid var(--color-primary); border-radius: 0.4rem; padding: 0.5rem 0.7rem; font-size: 0.88rem; text-align: center;">🤖 Claude / Gemini API</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- AI 엔진 역할 -->
+        <h2>AI 엔진 역할 — Claude vs Gemini</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+
+          <!-- 자동화에서 하는 역할 -->
+          <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.25rem;">
+            <p style="font-weight: 700; margin: 0 0 0.75rem;">자동화에서 하는 역할</p>
+            <ul style="margin: 0; padding: 0; list-style: none; font-size: 0.92rem; color: var(--color-text-secondary); line-height: 1.9;">
+              <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.4rem;">✦</span> <strong>요약</strong> — 긴 회의록, 슬랙 스레드를 구조화</li>
+              <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.4rem;">✦</span> <strong>분류</strong> — 질문 유형, 우선순위 판단</li>
+              <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.4rem;">✦</span> <strong>피드백</strong> — 문서, 보고서에 대한 구조적 리뷰</li>
+              <li><span style="color: var(--color-primary); font-weight: 700; margin-right: 0.4rem;">✦</span> <strong>코드 작성</strong> — GAS 자동화 스크립트 생성</li>
+            </ul>
+          </div>
+
+          <!-- Claude vs Gemini -->
+          <div style="background: var(--color-bg-alt); border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.25rem;">
+            <p style="font-weight: 700; margin: 0 0 0.75rem;">Claude vs Gemini 선택 기준</p>
+            <div style="display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.9rem;">
+              <div style="background: #fff7ed; border: 1px solid var(--color-primary); border-radius: 0.4rem; padding: 0.65rem 0.85rem;">
+                <strong>Claude</strong>
+                <p style="margin: 0.25rem 0 0; color: var(--color-text-secondary); font-size: 0.87rem;">긴 문서 이해·추론에 강점, 한국어 지원 우수</p>
+              </div>
+              <div style="background: var(--color-bg-section); border: 1px solid var(--color-border); border-radius: 0.4rem; padding: 0.65rem 0.85rem;">
+                <strong>Gemini</strong>
+                <p style="margin: 0.25rem 0 0; color: var(--color-text-secondary); font-size: 0.87rem;">Google Workspace 친화적, Sheets 데이터 처리에 유리</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 코드 블록 -->
+        <div class="code-block-wrapper" style="margin-bottom: 2rem;">
+          <div class="code-block-inner">
+            <span class="code-block-label">GAS — Claude API 호출 예시</span>
+            <button class="copy-btn" onclick="this.closest('.code-block-inner').querySelector('pre').innerText && navigator.clipboard.writeText(this.closest('.code-block-inner').querySelector('pre').innerText).then(()=>{this.textContent='복사됨!';setTimeout(()=>this.textContent='복사',1500)})">복사</button>
+            <pre>// GAS에서 Claude API 호출
+function callClaude(prompt, data) {
+  const apiKey = PropertiesService
+    .getScriptProperties()
+    .getProperty('CLAUDE_API_KEY');
+
+  const response = UrlFetchApp.fetch(
+    'https://api.anthropic.com/v1/messages', {
+    method: 'post',
+    headers: {
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json'
+    },
+    payload: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1024,
+      messages: [{ role: 'user', content: prompt + '\n\n' + data }]
+    })
+  });
+
+  const result = JSON.parse(response.getContentText());
+  return result.content[0].text;
+}</pre>
+          </div>
+        </div>
+
+        <!-- 팁 박스 -->
+        <div class="tip-box">
+          <strong>💡 AI를 부르는 시점은 딱 한 단계</strong>
+          <p style="margin: 0.5rem 0 0;">
+            전체 흐름에서 AI 호출은 한 곳만입니다.
+            Claude나 Gemini 중 하나를 선택해 프롬프트를 던지고,
+            나머지는 GAS가 처리합니다.
+            AI 호출을 최소화할수록 속도도 빠르고 비용도 줄어듭니다.
+          </p>
+        </div>
+
+        <!-- 경고 박스 -->
+        <div class="warning-box">
+          <strong>⚠️ API Key는 코드에 직접 쓰지 마세요</strong>
+          <p style="margin: 0.5rem 0 0;">
+            API Key를 소스 코드에 하드코딩하면 GitHub 등에 올렸을 때 유출될 수 있습니다.
+            반드시 <strong>Script Properties</strong>에 저장해야 합니다.
+            저장 방법은 다음 페이지에서 자세히 다룹니다.
+          </p>
+        </div>
+
+        <!-- 체크리스트 -->
+        <h2>이 페이지를 마치기 전에</h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-key="arch-1"> 3단 구조(Trigger → Process → Notify)가 무엇인지 설명할 수 있다</label>
+          <label><input type="checkbox" data-key="arch-2"> GAS가 도구들을 연결하는 접착제 역할을 한다는 것을 이해했다</label>
+          <label><input type="checkbox" data-key="arch-3"> Claude와 Gemini 중 내 업무에 어떤 게 더 맞을지 생각해봤다</label>
+          <label><input type="checkbox" data-key="arch-4"> AI 호출이 전체 흐름에서 한 단계만 이루어진다는 것을 이해했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="gas-why.html" class="nav-prev">← 이전: 왜 자동화인가?</a>
+      <a href="gas-6frame.html" class="nav-next">다음: 6칸 프레임으로 설계하기 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container"><p>AI 활용 강의 &copy; 2026</p></div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="반복되는 업무가 있다면, 그건 자동화의 자리입니다. 코딩을 몰라도 됩니다.">
+  <title>왜 자동화인가? — AI 활용 강의</title>
+  <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="../index.html" class="site-logo">🤖 AI 활용 강의</a>
+      <nav class="main-nav"><a href="../index.html">홈</a></nav>
+    </div>
+  </header>
+
+  <main class="content-page">
+    <div class="container">
+      <div class="page-header">
+        <h1>왜 자동화인가?</h1>
+        <div class="page-meta">
+          <span class="badge badge--duration">⏱ 20분</span>
+          <span class="badge badge--difficulty badge--초급">초급</span>
+        </div>
+        <p class="page-description">반복되는 업무가 있다면, 그건 자동화의 자리입니다. 코딩을 몰라도 됩니다.</p>
+      </div>
+
+      <article class="content-body">
+
+        <!-- 인트로 -->
+        <h2>지난 한 주, 같은 일을 두 번 이상 했나요?</h2>
+        <p>
+          매주 월요일 같은 양식의 보고서를 복사하고, 회의가 끝날 때마다 회의록을 정리해 슬랙에 올리고,
+          HR 공지를 하나씩 찾아서 해당 팀원에게 보내고… 이런 일들이 쌓이면 하루의 상당 부분이 사라집니다.
+          그런데 이 반복에는 공통점이 있습니다. <strong>시작 조건이 정해져 있고, 결과물의 형태도 일정합니다.</strong>
+        </p>
+        <p>
+          코딩을 배울 필요는 없습니다. <strong>패턴이 보이는 사람에게 기회가 있습니다.</strong>
+          흐름을 설계하면 GAS와 Claude가 코드를 대신 짜줍니다. 이 강의는 그 흐름 설계를 가르칩니다.
+        </p>
+
+        <!-- 자동화 대상 카드 3개 -->
+        <h2>이런 반복이 있다면 — 자동화의 자리입니다</h2>
+        <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+
+          <div style="border-left: 4px solid var(--color-primary); background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;">
+            <span style="background: var(--color-primary); color: #fff; font-weight: 700; font-size: 1.1rem; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span>
+            <div>
+              <strong style="font-size: 1rem;">회의록, 아직 손으로 정리하나요?</strong>
+              <p style="margin: 0.4rem 0 0; color: var(--color-text-secondary); font-size: 0.95rem;">
+                회의 종료 직후 녹취·메모를 Claude에 던지면 자동 요약본이 완성됩니다.
+                참여자 각각에게 슬랙 DM으로 바로 전달 — 사람이 할 일은 트리거 하나뿐입니다.
+              </p>
+            </div>
+          </div>
+
+          <div style="border-left: 4px solid var(--color-primary); background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;">
+            <span style="background: var(--color-primary); color: #fff; font-weight: 700; font-size: 1.1rem; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span>
+            <div>
+              <strong style="font-size: 1rem;">슬랙 스레드, 다 읽고 계신가요?</strong>
+              <p style="margin: 0.4rem 0 0; color: var(--color-text-secondary); font-size: 0.95rem;">
+                100개가 넘는 메시지도 3초 만에 핵심 내용과 액션 아이템으로 정리됩니다.
+                중요한 결정 사항과 내가 해야 할 일만 골라서 받아볼 수 있습니다.
+              </p>
+            </div>
+          </div>
+
+          <div style="border-left: 4px solid var(--color-primary); background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;">
+            <span style="background: var(--color-primary); color: #fff; font-weight: 700; font-size: 1.1rem; border-radius: 50%; width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span>
+            <div>
+              <strong style="font-size: 1rem;">HR 알림, 매번 수기로 보내나요?</strong>
+              <p style="margin: 0.4rem 0 0; color: var(--color-text-secondary); font-size: 0.95rem;">
+                D-Day 기반으로 마스터 시트를 읽어 해당 팀원에게 자동 발송합니다.
+                누락이나 중복 없이 정확한 타이밍에 전달 — 알림 준비에 드는 시간이 사라집니다.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 오해와 현실 비교 -->
+        <h2>자동화에 대한 오해와 현실</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+
+          <!-- 오해 -->
+          <div style="background: #f8f0f0; border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.25rem;">
+            <p style="font-weight: 700; color: #b91c1c; margin: 0 0 1rem;">오해</p>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem;">
+              <li>
+                <span style="color: #b91c1c; font-weight: 700; margin-right: 0.4rem;">✕</span>
+                <strong>자동화는 개발자만 한다</strong><br>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">코딩을 배워야 할 것 같다</span>
+              </li>
+              <li>
+                <span style="color: #b91c1c; font-weight: 700; margin-right: 0.4rem;">✕</span>
+                <strong>비용이 많이 든다</strong><br>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">새로운 도구를 사야 한다</span>
+              </li>
+              <li>
+                <span style="color: #b91c1c; font-weight: 700; margin-right: 0.4rem;">✕</span>
+                <strong>실수가 나면 더 위험하다</strong><br>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">사람이 직접 하는 게 더 안전하다</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 현실 -->
+          <div style="background: #f0f8f0; border: 1px solid var(--color-border); border-radius: 0.5rem; padding: 1.25rem;">
+            <p style="font-weight: 700; color: #166534; margin: 0 0 1rem;">현실</p>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.85rem;">
+              <li>
+                <span style="color: #166534; font-weight: 700; margin-right: 0.4rem;">✓</span>
+                <strong>흐름을 설계하면 된다</strong><br>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">GAS + Claude가 코드를 짜준다</span>
+              </li>
+              <li>
+                <span style="color: #166534; font-weight: 700; margin-right: 0.4rem;">✓</span>
+                <strong>이미 있는 도구로 가능</strong><br>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">Google Workspace + Slack, 추가 비용 거의 없음</span>
+              </li>
+              <li>
+                <span style="color: #166534; font-weight: 700; margin-right: 0.4rem;">✓</span>
+                <strong>반복 오류가 줄고 정확도가 오른다</strong><br>
+                <span style="font-size: 0.9rem; color: var(--color-text-secondary);">사람 실수보다 봇 실수가 추적하기 쉽다</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- 팁 박스 -->
+        <div class="tip-box">
+          <strong>💡 이 강의가 끝나면</strong>
+          <p style="margin: 0.5rem 0 0;">
+            자기 업무에서 자동화할 1가지를 떠올리고 시도해보세요.
+            완벽하게 모든 것을 자동화하려 하지 않아도 됩니다.
+            <strong>완벽한 1개보다 동작하는 1개</strong>가 훨씬 더 가치 있습니다.
+            작게 시작해서 실제로 돌아가는 것을 만드는 경험이 전부입니다.
+          </p>
+        </div>
+
+        <!-- 학습 경로 -->
+        <h2>이 강의에서 배우는 것</h2>
+        <ol style="display: flex; flex-direction: column; gap: 0.75rem; padding-left: 0; list-style: none; margin-bottom: 2rem;">
+          <li style="display: flex; gap: 1rem; align-items: flex-start; background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+            <span style="background: var(--color-primary); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 0.25rem; padding: 0.15rem 0.5rem; flex-shrink: 0; margin-top: 0.1rem;">1 WHY</span>
+            <div>
+              <strong>반복 업무를 자동화해야 하는 이유</strong>
+              <span style="color: var(--color-text-secondary); font-size: 0.9rem; margin-left: 0.5rem;">(지금 여기)</span>
+            </div>
+          </li>
+          <li style="display: flex; gap: 1rem; align-items: flex-start; background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+            <span style="background: var(--color-bg-section); color: var(--color-text); font-weight: 700; font-size: 0.85rem; border-radius: 0.25rem; padding: 0.15rem 0.5rem; flex-shrink: 0; margin-top: 0.1rem; border: 1px solid var(--color-border);">2 WHERE</span>
+            <div>
+              <strong>어떤 도구를 어떻게 조합하는가</strong>
+              <span style="color: var(--color-text-secondary); font-size: 0.9rem; margin-left: 0.5rem;">(다음 페이지)</span>
+            </div>
+          </li>
+          <li style="display: flex; gap: 1rem; align-items: flex-start; background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+            <span style="background: var(--color-bg-section); color: var(--color-text); font-weight: 700; font-size: 0.85rem; border-radius: 0.25rem; padding: 0.15rem 0.5rem; flex-shrink: 0; margin-top: 0.1rem; border: 1px solid var(--color-border);">3 HOW</span>
+            <div>
+              <strong>6칸 프레임으로 자동화를 설계하는 방법</strong>
+            </div>
+          </li>
+          <li style="display: flex; gap: 1rem; align-items: flex-start; background: var(--color-bg-alt); border-radius: 0.5rem; padding: 1rem 1.25rem;">
+            <span style="background: var(--color-bg-section); color: var(--color-text); font-weight: 700; font-size: 0.85rem; border-radius: 0.25rem; padding: 0.15rem 0.5rem; flex-shrink: 0; margin-top: 0.1rem; border: 1px solid var(--color-border);">4 BUILD</span>
+            <div>
+              <strong>Claude Code로 실제 GAS 코드를 만드는 법</strong>
+            </div>
+          </li>
+        </ol>
+
+        <!-- 체크리스트 -->
+        <h2>이 페이지를 마치기 전에</h2>
+        <div class="checklist">
+          <label><input type="checkbox" data-key="why-1"> 매주 반복하는 업무 중 자동화하고 싶은 것을 1가지 떠올렸다</label>
+          <label><input type="checkbox" data-key="why-2"> 그 업무의 "시작 조건"이 무엇인지 생각해봤다 (정해진 시간? 누군가의 행동?)</label>
+          <label><input type="checkbox" data-key="why-3"> 그 업무의 최종 결과물이 무엇인지 정의해봤다</label>
+          <label><input type="checkbox" data-key="why-4"> 자동화에 대한 오해 중 내가 갖고 있던 것을 하나 발견했다</label>
+        </div>
+
+      </article>
+    </div>
+  </main>
+
+  <nav class="page-nav">
+    <div class="container">
+      <a href="apps-script.html" class="nav-prev">← 이전: Apps Script 자동화</a>
+      <a href="gas-architecture.html" class="nav-next">다음: 3단 워크플로 구조 →</a>
+    </div>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container"><p>AI 활용 강의 &copy; 2026</p></div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script src="../js/checklist.js" defer></script>
+</body>
+</html>
