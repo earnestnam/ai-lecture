@@ -127,6 +127,144 @@
 
         <img src="../assets/images/vibe-coding.svg" alt="Claude Code 개발 환경 화면" class="screenshot-img">
 
+        <h2>🧠 Claude Code의 핵심 구성 요소 3가지</h2>
+        <p>
+          Claude Code를 제대로 활용하려면 3가지 핵심 개념을 알아두면 좋아요.
+          직접 코드로 작성하거나 복잡하게 설정할 필요는 없어요 — Claude에게 자연어로 요청하면 Claude가 알아서 만들어줍니다.
+          하지만 <strong>각각이 어떤 역할을 하는지</strong>는 알고 있어야 적절히 활용할 수 있어요.
+        </p>
+
+        <!-- CLAUDE.md -->
+        <div style="border:1.5px solid var(--color-primary); border-radius:12px; padding:1.5rem; margin:1.5rem 0;">
+          <h3 style="margin-top:0;">📋 CLAUDE.md — 프로젝트 기억장치</h3>
+          <p>
+            Claude Code는 대화가 끝나면 이전 내용을 기억하지 못해요.
+            <strong>CLAUDE.md</strong>는 이 문제를 해결하는 파일이에요.
+            프로젝트 폴더에 저장해두면 Claude가 새 대화를 시작할 때마다 자동으로 읽어서
+            "이 프로젝트는 이렇게 작업해야 해"라는 맥락을 항상 유지할 수 있죠.
+          </p>
+
+          <h4 style="font-size:0.95rem; margin-bottom:0.75rem;">어디에 만드나요?</h4>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:0.75rem; margin-bottom:1rem;">
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+              <strong style="font-size:0.9rem;">🏢 회사 전체 공통</strong>
+              <p style="font-size:0.8rem; margin:0.5rem 0 0 0;">모든 팀원에게 적용되는 공통 규칙을 정의해요</p>
+            </div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+              <strong style="font-size:0.9rem;">📁 프로젝트별</strong>
+              <p style="font-size:0.8rem; margin:0.5rem 0 0 0;">해당 프로젝트 폴더 안에 저장, 그 프로젝트에만 적용</p>
+            </div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem;">
+              <strong style="font-size:0.9rem;">👤 내 개인 설정</strong>
+              <p style="font-size:0.8rem; margin:0.5rem 0 0 0;">내 컴퓨터의 모든 작업에 적용되는 개인 지시사항</p>
+            </div>
+          </div>
+
+          <h4 style="font-size:0.95rem; margin-bottom:0.5rem;">어떤 내용을 넣나요?</h4>
+          <ul style="font-size:0.9rem; margin-bottom:1rem;">
+            <li>이 프로젝트에서 지켜야 할 규칙 ("파일명은 항상 영문 소문자로")</li>
+            <li>자주 쓰는 작업 흐름이나 명령어</li>
+            <li>Claude에게 항상 알려줘야 하는 배경 정보</li>
+            <li>답변 스타일 지시사항 ("항상 한국어로, 친근하게")</li>
+          </ul>
+
+          <div class="tip-box" style="margin-bottom:0;">
+            <strong>💡 실무 예시:</strong> 마케터가 매주 보고서를 만들 때, CLAUDE.md에 "보고서는 항상 이 형식으로 작성해", "주요 KPI는 CTR, ROAS, CPA야"를 저장해두면 매번 설명할 필요 없이 Claude가 알아서 적용해줘요.
+          </div>
+        </div>
+
+        <!-- MCP -->
+        <div style="border:1.5px solid var(--color-secondary); border-radius:12px; padding:1.5rem; margin:1.5rem 0;">
+          <h3 style="margin-top:0;">🔌 MCP — 외부 서비스 연결 다리</h3>
+          <p>
+            기본 Claude Code는 내 컴퓨터 파일만 다룰 수 있어요.
+            <strong>MCP(Model Context Protocol)</strong>는 Claude를 외부 서비스와 연결해주는 확장 기능이에요.
+            GitHub, Slack, Notion 같은 서비스를 Claude Code와 연결하면
+            "Slack에서 오늘 온 메시지 요약해줘"나 "GitHub 이슈 목록 보여줘" 같은 작업이 가능해져요.
+          </p>
+
+          <h4 style="font-size:0.95rem; margin-bottom:0.75rem;">연결 가능한 서비스 예시</h4>
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap:0.5rem; margin-bottom:1rem;">
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:0.75rem; text-align:center; font-size:0.85rem;">
+              <div style="font-size:1.4rem;">🐙</div>
+              <strong>GitHub</strong><br><small>코드 저장소 관리</small>
+            </div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:0.75rem; text-align:center; font-size:0.85rem;">
+              <div style="font-size:1.4rem;">💬</div>
+              <strong>Slack</strong><br><small>메시지 읽기·보내기</small>
+            </div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:0.75rem; text-align:center; font-size:0.85rem;">
+              <div style="font-size:1.4rem;">📝</div>
+              <strong>Notion</strong><br><small>문서 읽기·작성</small>
+            </div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:0.75rem; text-align:center; font-size:0.85rem;">
+              <div style="font-size:1.4rem;">🗄️</div>
+              <strong>데이터베이스</strong><br><small>Supabase, PostgreSQL</small>
+            </div>
+            <div style="background:var(--color-bg-alt); border-radius:8px; padding:0.75rem; text-align:center; font-size:0.85rem;">
+              <div style="font-size:1.4rem;">☁️</div>
+              <strong>Google Drive</strong><br><small>파일 접근·관리</small>
+            </div>
+          </div>
+
+          <div class="tip-box" style="margin-bottom:0;">
+            <strong>💡 어떻게 연결하나요?</strong> "GitHub MCP를 설치해줘"라고 Claude에게 말하면 Claude가 설정 파일을 만들고 연결까지 도와줍니다. 직접 설정 파일을 만질 필요가 없어요.
+          </div>
+        </div>
+
+        <!-- Skills -->
+        <div style="border:1.5px solid var(--color-accent); border-radius:12px; padding:1.5rem; margin:1.5rem 0;">
+          <h3 style="margin-top:0;">⚡ Skills — 재사용 가능한 워크플로 레시피</h3>
+          <p>
+            <strong>Skills</strong>는 자주 하는 작업을 레시피처럼 저장해두고 필요할 때 꺼내 쓰는 기능이에요.
+            예를 들어 "PR 코드리뷰", "API 문서 작성", "주간 보고서 생성" 같은 작업을 한 번 정의해두면
+            다음에는 <code>/review</code> 같은 간단한 명령어 하나로 바로 실행할 수 있어요.
+          </p>
+
+          <h4 style="font-size:0.95rem; margin-bottom:0.75rem;">CLAUDE.md와 뭐가 다른가요?</h4>
+          <div style="overflow-x:auto;">
+            <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+              <thead>
+                <tr style="background:var(--color-bg-alt);">
+                  <th style="padding:0.6rem; text-align:left; border:1px solid var(--color-border);">구분</th>
+                  <th style="padding:0.6rem; text-align:left; border:1px solid var(--color-border);">CLAUDE.md</th>
+                  <th style="padding:0.6rem; text-align:left; border:1px solid var(--color-border);">Skills</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">언제 로드?</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">항상 (매 대화 시작 시)</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">호출할 때만 (필요시)</td>
+                </tr>
+                <tr style="background:var(--color-bg-alt);">
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">용도</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">지속적인 지시사항·규칙</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">특정 작업 단계별 레시피</td>
+                </tr>
+                <tr>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">실행 방법</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">자동 적용 (별도 명령 불필요)</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);"><code>/명령어</code> 로 호출</td>
+                </tr>
+                <tr style="background:var(--color-bg-alt);">
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">예시</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);">"항상 한국어로 답변해"</td>
+                  <td style="padding:0.6rem; border:1px solid var(--color-border);"><code>/review</code> → PR 코드리뷰 실행</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="warning-box">
+          <strong>⚠️ 알아두세요: 너무 많이 연결하면 성능이 떨어져요</strong><br>
+          MCP는 시작할 때 연결된 서비스 목록과 설명을 모두 Claude의 기억 공간(컨텍스트 윈도우)에 올려놔요.
+          사용하지 않는 MCP가 많이 연결되어 있으면 기억 공간이 줄어들어
+          <strong>응답이 느려지고 품질이 떨어질 수 있어요</strong>.
+          필요한 서비스만 선택적으로 연결하는 게 좋아요.
+        </div>
+
         <h2>💡 바이브 코딩 성공 팁</h2>
         <ul>
           <li><strong>작게 시작하세요</strong>: 처음에는 간단한 것 하나부터. 욕심내서 복잡한 걸 만들려다 막히면 포기하게 돼요</li>
@@ -150,12 +288,14 @@
 
         <!-- 체크리스트 -->
         <div class="checklist">
-          <h3>✅ 첫 코드 프로젝트 체크리스트</h3>
+          <h3>✅ 클로드 코드 체크리스트</h3>
           <label><input type="checkbox" data-key="claude-code-1"> Claude.ai에서 간단한 HTML 페이지 코드를 요청해봤다</label>
           <label><input type="checkbox" data-key="claude-code-2"> 받은 코드를 .html 파일로 저장하고 브라우저에서 열어봤다</label>
           <label><input type="checkbox" data-key="claude-code-3"> 내용을 수정해달라고 추가 요청해봤다</label>
-          <label><input type="checkbox" data-key="claude-code-4"> 업무에서 자동화하고 싶은 반복 작업을 하나 떠올려봤다</label>
-          <label><input type="checkbox" data-key="claude-code-5"> (선택) VS Code와 Claude Code를 설치해봤다</label>
+          <label><input type="checkbox" data-key="claude-code-4"> CLAUDE.md가 무엇인지, 왜 쓰는지 이해했다</label>
+          <label><input type="checkbox" data-key="claude-code-5"> MCP로 연결하고 싶은 외부 서비스를 하나 떠올려봤다</label>
+          <label><input type="checkbox" data-key="claude-code-6"> Skills와 CLAUDE.md의 차이를 설명할 수 있다</label>
+          <label><input type="checkbox" data-key="claude-code-7"> (선택) VS Code와 Claude Code를 설치해봤다</label>
         </div>
 
       </article>
