@@ -118,6 +118,39 @@
     }
     [data-theme="dark"] .warning-box { background: #1c1507; border-color: #b45309; }
 
+    /* 레포 카드 */
+    .repo-card {
+      border: 1px solid var(--color-border);
+      border-radius: 12px; overflow: hidden;
+      margin: 1.25rem 0; background: var(--color-bg);
+    }
+    .repo-card__header {
+      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+      padding: 0.9rem 1.25rem; background: var(--color-bg-alt);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .repo-card__icon { font-size: 1.4rem; }
+    .repo-card__name { font-weight: 700; font-size: 1rem; flex: 1; min-width: 0; }
+    .repo-card__stats { font-size: 0.8rem; color: var(--color-text-muted); display: flex; gap: 0.75rem; }
+    .repo-card__link {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.78rem; font-weight: 700; padding: 0.3rem 0.75rem;
+      border-radius: 6px; background: #24292e; color: #fff;
+      text-decoration: none; flex-shrink: 0;
+    }
+    [data-theme="dark"] .repo-card__link { background: #444; }
+    .repo-card__link:hover { opacity: 0.85; }
+    .repo-card__body { padding: 1.25rem; }
+    .repo-card__desc { font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
+    .repo-install { background: var(--color-bg-alt); border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; }
+    .repo-install__title { font-size: 0.8rem; font-weight: 700; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+    .repo-features { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.75rem; }
+    .repo-feature {
+      font-size: 0.78rem; padding: 0.2rem 0.6rem;
+      border-radius: 20px; border: 1px solid var(--color-border);
+      background: var(--color-bg-alt);
+    }
+
     /* 선택 가이드 */
     .decision-flow { border: 1px solid var(--color-border); border-radius: 8px; padding: 1.5rem; margin: 1.5rem 0; }
     .decision-row { display: flex; gap: 1rem; align-items: flex-start; padding: 0.75rem 0; border-bottom: 1px solid var(--color-border); }
@@ -689,6 +722,58 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
           </div>
         </div>
 
+        <h3>🔗 실전 참고 — Sub Agent 전용 에이전트 팩</h3>
+        <p>Sub Agent를 처음부터 직접 만드는 게 막막하다면, 검증된 에이전트 모음을 그대로 가져다 쓰는 방법도 있어요.</p>
+
+        <div class="repo-card">
+          <div class="repo-card__header">
+            <span class="repo-card__icon">🧰</span>
+            <span class="repo-card__name">everything-claude-code</span>
+            <div class="repo-card__stats">
+              <span>🏆 Anthropic 해커톤 우승작</span>
+              <span>48 에이전트 · 182 스킬</span>
+            </div>
+            <a href="https://github.com/affaan-m/everything-claude-code" class="repo-card__link" target="_blank" rel="noopener">↗ GitHub</a>
+          </div>
+          <div class="repo-card__body">
+            <p class="repo-card__desc">
+              10개월 이상의 실전 개발 경험이 담긴 Claude Code 전용 에이전트 팩이에요.
+              코드 리뷰, 보안 감사, TDD 워크플로, 멀티에이전트 오케스트레이션까지 다양한 전문 에이전트를 바로 설치해서 사용할 수 있어요.
+              Claude Code 플러그인 마켓플레이스로 1분 내 설치 가능해요.
+            </p>
+
+            <div class="repo-install">
+              <div class="repo-install__title">⚡ 플러그인 마켓으로 설치 (권장)</div>
+              <div class="code-block-wrapper" style="margin: 0;">
+                <button class="copy-btn" onclick="copyCode(this)">📋 복사</button>
+                <pre style="margin:0;"><code>/plugin marketplace add https://github.com/affaan-m/everything-claude-code
+/plugin install everything-claude-code@everything-claude-code</code></pre>
+              </div>
+            </div>
+
+            <div class="repo-install">
+              <div class="repo-install__title">🖥 수동 설치 (스크립트)</div>
+              <div class="code-block-wrapper" style="margin: 0;">
+                <button class="copy-btn" onclick="copyCode(this)">📋 복사</button>
+                <pre style="margin:0;"><code># 설치 후 바로 사용 가능한 명령어 예시
+/everything-claude-code:plan "사용자 인증 기능 추가"   # 계획 수립
+/code-review                                          # 코드 검토
+/security-scan                                        # 보안 감사</code></pre>
+              </div>
+            </div>
+
+            <div class="repo-features">
+              <span class="repo-feature">48개 전문 에이전트</span>
+              <span class="repo-feature">182개 스킬</span>
+              <span class="repo-feature">68개 슬래시 명령어</span>
+              <span class="repo-feature">14개 MCP 서버</span>
+              <span class="repo-feature">8가지 자동화 훅</span>
+              <span class="repo-feature">TDD 워크플로</span>
+              <span class="repo-feature">보안 감사</span>
+            </div>
+          </div>
+        </div>
+
         <!-- ===== 5. Agent Team ===== -->
         <h2>👥 Agent Team — 에이전트들의 진짜 팀워크</h2>
 
@@ -789,6 +874,71 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
           </div>
         </div>
 
+        <h3>🔗 실전 참고 — 조직 역할 기반 에이전트 팀</h3>
+        <p>Agent Team 개념을 실무에 적용한 대표 사례예요. YC 회장 Garry Tan이 직접 만들어 공개한 오픈소스 팩이에요.</p>
+
+        <div class="repo-card">
+          <div class="repo-card__header">
+            <span class="repo-card__icon">🏭</span>
+            <span class="repo-card__name">gstack</span>
+            <div class="repo-card__stats">
+              <span>⭐ 89k+ 스타</span>
+              <span>by Garry Tan (Y Combinator CEO)</span>
+            </div>
+            <a href="https://github.com/garrytan/gstack" class="repo-card__link" target="_blank" rel="noopener">↗ GitHub</a>
+          </div>
+          <div class="repo-card__body">
+            <p class="repo-card__desc">
+              CEO, 디자이너, 엔지니어 매니저, QA 리드 등 실제 조직 역할을 AI 에이전트로 구성한 소프트웨어 팩토리예요.
+              아이디어를 입력하면 전략 수립 → 설계 검토 → 코드 구현 → QA 테스트 → 배포까지 팀 협업 방식으로 자동 처리해요.
+              <code>/pair-agent</code>로 여러 AI 에이전트가 서로 검토하며 결과를 개선하는 진짜 팀워크를 경험할 수 있어요.
+            </p>
+
+            <div class="repo-install">
+              <div class="repo-install__title">⚡ 설치 (30초)</div>
+              <div class="code-block-wrapper" style="margin: 0;">
+                <button class="copy-btn" onclick="copyCode(this)">📋 복사</button>
+                <pre style="margin:0;"><code># Claude Code 터미널에 붙여넣기
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git \
+  ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup
+
+# 팀 모드 (권장)
+(cd ~/.claude/skills/gstack && ./setup --team) && \
+  ~/.claude/skills/gstack/bin/gstack-team-init required</code></pre>
+              </div>
+            </div>
+
+            <div class="repo-install">
+              <div class="repo-install__title">🚀 주요 명령어</div>
+              <div class="code-block-wrapper" style="margin: 0;">
+                <button class="copy-btn" onclick="copyCode(this)">📋 복사</button>
+                <pre style="margin:0;"><code>/office-hours       # 제품 전략 수립 (CEO 역할)
+/plan-ceo-review    # 기획안 범위 검토
+/plan-eng-review    # 아키텍처 검증 (엔지니어링 관점)
+/design-review      # UI/UX 디자인 감시
+/pair-agent         # 다중 에이전트 협력 — 서로 검토·개선
+/qa                 # 실제 Chromium 브라우저로 테스트
+/ship               # PR 생성 및 배포</code></pre>
+              </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 0.75rem;">
+              <strong>💡 gstack 활용 시나리오</strong><br>
+              "일일 브리핑 앱을 만들고 싶어" → <code>/office-hours</code>로 전략 문서 → <code>/plan-ceo-review</code>로 검토 →
+              코드 구현 → <code>/qa</code>로 브라우저 테스트 → <code>/ship</code>으로 PR 배포까지 약 8분
+            </div>
+
+            <div class="repo-features">
+              <span class="repo-feature">조직 역할 기반 팀</span>
+              <span class="repo-feature">pair-agent (다중 에이전트)</span>
+              <span class="repo-feature">실제 브라우저 테스트</span>
+              <span class="repo-feature">자동 PR 배포</span>
+              <span class="repo-feature">GBrain 지식 베이스</span>
+              <span class="repo-feature">MIT 라이선스</span>
+            </div>
+          </div>
+        </div>
+
         <!-- ===== 6. 하네스 엔지니어링 ===== -->
         <h2>🔧 하네스 엔지니어링이란?</h2>
         <p>
@@ -827,7 +977,75 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
           → 오케스트레이터가 전체 순서 관리, 최종 결과물만 사람에게 전달
         </div>
 
-        <h3>하네스 엔지니어링 관련 참고 자료</h3>
+        <h3>🔗 실전 참고 — 자동 하네스 생성 도구</h3>
+        <p>"어떤 에이전트 팀을 어떻게 구성해야 할지" 모를 때 출발점이 되는 도구예요.</p>
+
+        <div class="repo-card">
+          <div class="repo-card__header">
+            <span class="repo-card__icon">⚙️</span>
+            <span class="repo-card__name">revfactory/harness</span>
+            <div class="repo-card__stats">
+              <span>⭐ 3.1k 스타</span>
+              <span>v1.2.0 · Apache 2.0</span>
+            </div>
+            <a href="https://github.com/revfactory/harness" class="repo-card__link" target="_blank" rel="noopener">↗ GitHub</a>
+          </div>
+          <div class="repo-card__body">
+            <p class="repo-card__desc">
+              Claude Code에서 <strong>"build a harness for this project"</strong>라고 입력하면,
+              프로젝트 도메인을 분석해서 에이전트 팀 구조와 각 에이전트가 사용할 스킬을 자동으로 설계·생성해요.
+              Pipeline, Fan-out, Expert Pool 등 6가지 아키텍처 패턴 중 최적 구조를 선택해줘요.
+            </p>
+
+            <div class="repo-install">
+              <div class="repo-install__title">⚡ 설치 방법</div>
+              <div class="code-block-wrapper" style="margin: 0;">
+                <button class="copy-btn" onclick="copyCode(this)">📋 복사</button>
+                <pre style="margin:0;"><code># 방법 1: 플러그인 마켓플레이스
+/plugin marketplace add revfactory/harness
+/plugin install harness@harness
+
+# 방법 2: 직접 설치
+# skills/harness 폴더를 ~/.claude/skills/harness/ 에 복사</code></pre>
+              </div>
+            </div>
+
+            <div class="repo-install">
+              <div class="repo-install__title">🚀 사용 방법</div>
+              <div class="code-block-wrapper" style="margin: 0;">
+                <button class="copy-btn" onclick="copyCode(this)">📋 복사</button>
+                <pre style="margin:0;"><code># Claude Code에서 자연어로 요청
+"build a harness for this project"
+→ 프로젝트 분석 → 에이전트 팀 자동 설계 → .md 파일 생성
+
+# 활용 예시
+"심층 리서치 팀을 구성해줘"        # 리서치 에이전트 팀
+"풀스택 웹사이트 개발 하네스 만들어줘" # 개발 팀
+"코드 리뷰 자동화 하네스 설정해줘"   # 검토 팀</code></pre>
+              </div>
+            </div>
+
+            <div class="tip-box" style="margin-top: 0.75rem;">
+              <strong>💡 6가지 아키텍처 패턴</strong><br>
+              <strong>Pipeline</strong> — A→B→C 순차 처리 |
+              <strong>Fan-out/Fan-in</strong> — 병렬 실행 후 취합 |
+              <strong>Expert Pool</strong> — 상황별 전문가 선택 |
+              <strong>Producer-Reviewer</strong> — 생성 후 검토 |
+              <strong>Supervisor</strong> — 중앙 관리자 패턴 |
+              <strong>Hierarchical</strong> — 계층적 위임
+            </div>
+
+            <div class="repo-features">
+              <span class="repo-feature">자동 팀 설계</span>
+              <span class="repo-feature">6가지 아키텍처 패턴</span>
+              <span class="repo-feature">스킬 자동 생성</span>
+              <span class="repo-feature">Progressive Disclosure</span>
+              <span class="repo-feature">에이전트 간 데이터 전달</span>
+            </div>
+          </div>
+        </div>
+
+        <h3>하네스 엔지니어링 관련 프레임워크</h3>
         <p>아래는 실제 현업에서 많이 사용하는 멀티에이전트 프레임워크예요. 코드 없이 개념만 살펴봐도 구조를 이해하는 데 도움이 돼요.</p>
         <table class="compare-table">
           <thead>
