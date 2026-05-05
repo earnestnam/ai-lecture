@@ -59,6 +59,7 @@ const NAV_DATA = [
     icon: '📖',
     pages: [
       { id: 'glossary', title: 'AI 용어 사전' },
+      { id: 'ai-agent-types', title: 'AI 에이전트 활용 방식' },
     ]
   }
 ];
