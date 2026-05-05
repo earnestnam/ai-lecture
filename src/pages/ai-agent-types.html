@@ -8,42 +8,61 @@
   <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
   <link rel="stylesheet" href="../css/style.css">
   <style>
-    /* 비교 카드 그리드 */
-    .compare-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
+    /* 방식 스텝 레이아웃 */
+    .method-steps { margin: 1.5rem 0; }
+    .method-step { display: flex; gap: 1rem; }
+    .method-step__track {
+      display: flex; flex-direction: column; align-items: center;
+      flex-shrink: 0; width: 2.25rem; padding-top: 0.2rem;
     }
-    .compare-card {
-      border: 2px solid var(--color-border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      background: var(--color-bg);
-      position: relative;
+    .method-step__num {
+      width: 2.25rem; height: 2.25rem; border-radius: 50%;
+      background: var(--color-primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.875rem; flex-shrink: 0;
     }
-    .compare-card--highlight {
-      border-color: var(--color-primary);
+    .method-step__line {
+      flex: 1; width: 2px; background: var(--color-border);
+      min-height: 1.5rem; margin: 0.35rem 0;
     }
-    .compare-card__badge {
-      display: inline-block;
-      font-size: 0.7rem;
-      font-weight: 700;
-      padding: 0.2rem 0.5rem;
-      border-radius: 20px;
-      background: var(--color-primary);
-      color: #fff;
-      margin-bottom: 0.5rem;
+    .method-step:last-child .method-step__line { display: none; }
+    .method-step__card {
+      flex: 1; border: 1px solid var(--color-border); border-radius: 12px;
+      overflow: hidden; margin-bottom: 1rem; background: var(--color-bg);
     }
-    .compare-card__badge--exp {
-      background: #d97706;
+    .method-step--highlight .method-step__card { border-color: var(--color-primary); border-width: 2px; }
+    .method-step__card-header {
+      display: flex; align-items: center; gap: 0.75rem;
+      padding: 0.9rem 1.25rem; background: var(--color-bg-alt);
+      border-bottom: 1px solid var(--color-border);
     }
-    .compare-card__icon { font-size: 1.8rem; margin-bottom: 0.5rem; display: block; }
-    .compare-card__title { font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
-    .compare-card__desc { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 0.75rem; }
-    .compare-card__meta { font-size: 0.8rem; border-top: 1px solid var(--color-border); padding-top: 0.5rem; }
-    .compare-card__meta dt { font-weight: 600; color: var(--color-text-muted); }
-    .compare-card__meta dd { margin: 0 0 0.4rem 0; }
+    .method-step__icon { font-size: 1.4rem; line-height: 1; }
+    .method-step__title { font-weight: 700; font-size: 1rem; flex: 1; }
+    .method-step__badges { display: flex; gap: 0.4rem; flex-shrink: 0; }
+    .method-step__badge {
+      font-size: 0.7rem; font-weight: 700; padding: 0.2rem 0.5rem;
+      border-radius: 20px; background: var(--color-primary); color: #fff;
+    }
+    .method-step__badge--exp { background: #d97706; }
+    .method-step__card-body {
+      display: grid; grid-template-columns: 2fr 1.2fr 1.2fr;
+    }
+    .method-step__col {
+      padding: 0.9rem 1.25rem; font-size: 0.875rem; line-height: 1.55;
+      border-right: 1px solid var(--color-border);
+    }
+    .method-step__col:last-child { border-right: none; }
+    .method-step__col-label {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      color: var(--color-text-muted); text-transform: uppercase;
+      letter-spacing: 0.05em; margin-bottom: 0.35rem;
+    }
+    @media (max-width: 767px) {
+      .method-step__track { display: none; }
+      .method-step__card-body { grid-template-columns: 1fr; }
+      .method-step__col { border-right: none; border-bottom: 1px solid var(--color-border); }
+      .method-step__col:last-child { border-bottom: none; }
+    }
 
     /* 비교 테이블 */
     .compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.9rem; }
@@ -158,65 +177,166 @@
         <!-- ===== 2. 5가지 방식 비교 ===== -->
         <h2>📊 5가지 방식 한눈에 보기</h2>
 
-        <div class="compare-grid">
-          <div class="compare-card">
-            <span class="compare-card__icon">💬</span>
-            <div class="compare-card__title">1. 챗봇</div>
-            <p class="compare-card__desc">Claude.ai, ChatGPT, Gemini 등 일반 채팅창에서 텍스트로 질의응답하는 가장 기본 형태예요.</p>
-            <dl class="compare-card__meta">
-              <dt>언제 쓰나요?</dt>
-              <dd>일회성 질문, 초안 작성, 아이디어 탐색</dd>
-              <dt>한계</dt>
-              <dd>대화가 끝나면 컨텍스트 사라짐</dd>
-            </dl>
+        <div class="method-steps">
+
+          <!-- STEP 1 -->
+          <div class="method-step">
+            <div class="method-step__track">
+              <div class="method-step__num">1</div>
+              <div class="method-step__line"></div>
+            </div>
+            <div class="method-step__card">
+              <div class="method-step__card-header">
+                <span class="method-step__icon">💬</span>
+                <span class="method-step__title">챗봇</span>
+                <div class="method-step__badges">
+                  <span class="badge badge--difficulty badge--입문">입문</span>
+                </div>
+              </div>
+              <div class="method-step__card-body">
+                <div class="method-step__col">
+                  <span class="method-step__col-label">어떤 건가요?</span>
+                  Claude.ai, ChatGPT, Gemini 등 채팅창에서 텍스트로 질의응답하는 기본 형태예요. 도구 없이 대화만 해요.
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">언제 쓰나요?</span>
+                  일회성 질문, 초안 작성, 아이디어 탐색
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">한계</span>
+                  대화가 끝나면 컨텍스트 사라짐. 파일·코드 실행 불가
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="compare-card">
-            <span class="compare-card__icon">🗂️</span>
-            <div class="compare-card__title">2. Project / GPTs / Gems</div>
-            <p class="compare-card__desc">사전에 역할·지침·파일을 등록해두면 매번 설명 없이도 특정 맥락 안에서 답변해요.</p>
-            <dl class="compare-card__meta">
-              <dt>언제 쓰나요?</dt>
-              <dd>우리 회사 전용 Q&A봇, 특정 업무용 어시스턴트</dd>
-              <dt>한계</dt>
-              <dd>등록 파일은 수동 업데이트 필요, 실시간 연동 없음</dd>
-            </dl>
+
+          <!-- STEP 2 -->
+          <div class="method-step">
+            <div class="method-step__track">
+              <div class="method-step__num">2</div>
+              <div class="method-step__line"></div>
+            </div>
+            <div class="method-step__card">
+              <div class="method-step__card-header">
+                <span class="method-step__icon">🗂️</span>
+                <span class="method-step__title">Project / GPTs / Gems</span>
+                <div class="method-step__badges">
+                  <span class="badge badge--difficulty badge--입문">초급</span>
+                </div>
+              </div>
+              <div class="method-step__card-body">
+                <div class="method-step__col">
+                  <span class="method-step__col-label">어떤 건가요?</span>
+                  역할·지침·파일을 미리 등록해두면 매번 설명 없이 특정 맥락 안에서 답변해요. Claude의 Project, ChatGPT의 GPTs, Gemini의 Gems가 이 방식이에요.
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">언제 쓰나요?</span>
+                  사내 규정 기반 Q&A봇, 특정 업무 전용 어시스턴트
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">한계</span>
+                  등록 파일 수동 업데이트 필요. 실시간 외부 연동 없음
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="compare-card compare-card--highlight">
-            <span class="compare-card__badge">공식 출시</span>
-            <span class="compare-card__icon">⚡</span>
-            <div class="compare-card__title">3. 단일 에이전트</div>
-            <p class="compare-card__desc">Claude Code / Gemini CLI가 도구(파일·코드·검색 등)를 직접 사용해 목표를 향해 다단계로 자율 실행해요. 서브에이전트 없이 혼자 처음부터 끝까지 처리해요.</p>
-            <dl class="compare-card__meta">
-              <dt>언제 쓰나요?</dt>
-              <dd>파일 수정, 코드 작성, 데이터 분석 등 도구가 필요한 연속 작업</dd>
-              <dt>한계</dt>
-              <dd>컨텍스트 하나에 모든 것이 쌓임 — 복잡해질수록 느려짐</dd>
-            </dl>
+
+          <!-- STEP 3 -->
+          <div class="method-step method-step--highlight">
+            <div class="method-step__track">
+              <div class="method-step__num">3</div>
+              <div class="method-step__line"></div>
+            </div>
+            <div class="method-step__card">
+              <div class="method-step__card-header">
+                <span class="method-step__icon">⚡</span>
+                <span class="method-step__title">단일 에이전트</span>
+                <div class="method-step__badges">
+                  <span class="method-step__badge">공식 출시</span>
+                  <span class="badge badge--difficulty badge--초급">중급</span>
+                </div>
+              </div>
+              <div class="method-step__card-body">
+                <div class="method-step__col">
+                  <span class="method-step__col-label">어떤 건가요?</span>
+                  Claude Code / Gemini CLI가 파일·코드·검색 등 도구를 직접 사용해 목표를 향해 다단계로 자율 실행해요. 서브에이전트 없이 혼자 처음부터 끝까지 처리해요.
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">언제 쓰나요?</span>
+                  파일 수정, 코드 작성, 데이터 분석 등 도구가 필요한 연속 작업
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">한계</span>
+                  컨텍스트 하나에 모든 것이 쌓임. 복잡해질수록 느려짐
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="compare-card">
-            <span class="compare-card__badge">공식 출시</span>
-            <span class="compare-card__icon">🤖</span>
-            <div class="compare-card__title">4. Sub Agent</div>
-            <p class="compare-card__desc">오케스트레이터(지휘자)가 전문 역할의 에이전트에게 업무를 위임해요. 각자의 컨텍스트 창에서 독립적으로 처리하고 결과를 오케스트레이터에게 보고해요.</p>
-            <dl class="compare-card__meta">
-              <dt>언제 쓰나요?</dt>
-              <dd>병렬 처리, 전문화된 업무 분담, 컨텍스트 분리</dd>
-              <dt>한계</dt>
-              <dd>에이전트끼리 직접 대화 불가, 오케스트레이터 통해서만</dd>
-            </dl>
+
+          <!-- STEP 4 -->
+          <div class="method-step">
+            <div class="method-step__track">
+              <div class="method-step__num">4</div>
+              <div class="method-step__line"></div>
+            </div>
+            <div class="method-step__card">
+              <div class="method-step__card-header">
+                <span class="method-step__icon">🤖</span>
+                <span class="method-step__title">Sub Agent</span>
+                <div class="method-step__badges">
+                  <span class="method-step__badge">공식 출시</span>
+                  <span class="badge badge--difficulty badge--중급">고급</span>
+                </div>
+              </div>
+              <div class="method-step__card-body">
+                <div class="method-step__col">
+                  <span class="method-step__col-label">어떤 건가요?</span>
+                  오케스트레이터(지휘자)가 전문 역할의 에이전트에게 업무를 위임해요. 각자의 컨텍스트 창에서 독립적으로 처리하고 결과만 보고해요.
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">언제 쓰나요?</span>
+                  병렬 처리, 전문화된 업무 분담, 컨텍스트 분리
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">한계</span>
+                  에이전트끼리 직접 대화 불가. 오케스트레이터 경유만 가능
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="compare-card">
-            <span class="compare-card__badge compare-card__badge--exp">실험 기능</span>
-            <span class="compare-card__icon">👥</span>
-            <div class="compare-card__title">5. Agent Team</div>
-            <p class="compare-card__desc">팀원 에이전트들이 공유 태스크 목록과 메시지 시스템으로 서로 직접 소통하며 협업해요. 팀장(Team Lead)이 조율하지만 팀원끼리도 직접 대화 가능해요.</p>
-            <dl class="compare-card__meta">
-              <dt>언제 쓰나요?</dt>
-              <dd>복잡한 탐구, 서로 검증이 필요한 작업, 경쟁 가설 테스트</dd>
-              <dt>한계</dt>
-              <dd>기본 비활성 상태, 토큰 소비 많음, 아직 제한 있음</dd>
-            </dl>
+
+          <!-- STEP 5 -->
+          <div class="method-step">
+            <div class="method-step__track">
+              <div class="method-step__num">5</div>
+              <div class="method-step__line"></div>
+            </div>
+            <div class="method-step__card">
+              <div class="method-step__card-header">
+                <span class="method-step__icon">👥</span>
+                <span class="method-step__title">Agent Team</span>
+                <div class="method-step__badges">
+                  <span class="method-step__badge method-step__badge--exp">실험 기능</span>
+                  <span class="badge badge--difficulty badge--중급">고급</span>
+                </div>
+              </div>
+              <div class="method-step__card-body">
+                <div class="method-step__col">
+                  <span class="method-step__col-label">어떤 건가요?</span>
+                  팀원 에이전트들이 공유 태스크 목록과 메시지 시스템으로 서로 직접 소통하며 협업해요. 팀장(Team Lead)이 조율하지만 팀원끼리도 직접 대화 가능해요.
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">언제 쓰나요?</span>
+                  복잡한 탐구, 서로 검증이 필요한 작업, 경쟁 가설 테스트
+                </div>
+                <div class="method-step__col">
+                  <span class="method-step__col-label">한계</span>
+                  기본 비활성 상태, 토큰 소비 많음, 아직 제한 있음
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
 
         <h3>📋 상세 비교표</h3>
