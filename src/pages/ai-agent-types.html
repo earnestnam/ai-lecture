@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="챗봇부터 에이전트 팀까지 — AI 활용 방식 4가지의 차이와 선택 기준, Sub Agent·Agent Team 설정법, 하네스 엔지니어링 개념을 정리합니다.">
+  <meta name="description" content="챗봇부터 에이전트 팀까지 — AI 활용 방식 5가지의 차이와 선택 기준, 단일 에이전트·Sub Agent·Agent Team 설정법, 하네스 엔지니어링 개념을 정리합니다.">
   <title>AI 에이전트 활용 방식 완전 정리 — AI 활용 강의</title>
   <script>!function(){var t=localStorage.getItem("ai-lecture-theme");t&&document.documentElement.setAttribute("data-theme",t)}();</script>
   <link rel="stylesheet" href="../css/style.css">
@@ -129,7 +129,7 @@
           <span class="badge badge--duration">⏱ 30분</span>
           <span class="badge badge--difficulty badge--중급">중급</span>
         </div>
-        <p class="page-description">챗봇 하나로 다 되던 시대는 끝났어요. 지금은 목적과 복잡도에 따라 사용 방식을 골라야 결과가 달라져요. 4가지 방식의 차이, 설정법, 선택 기준을 한 번에 정리해봐요.</p>
+        <p class="page-description">챗봇 하나로 다 되던 시대는 끝났어요. 지금은 목적과 복잡도에 따라 사용 방식을 골라야 결과가 달라져요. 5가지 방식의 차이, 설정법, 선택 기준을 한 번에 정리해봐요.</p>
       </div>
 
       <article class="content-body">
@@ -147,16 +147,16 @@
         </p>
         <p>
           이럴 때 필요한 게 <strong>사용 방식을 업그레이드</strong>하는 거예요.
-          챗봇 → Project → Sub Agent → Agent Team으로 갈수록 더 전문적이고 복잡한 업무를 처리할 수 있지만,
+          챗봇 → Project → 단일 에이전트 → Sub Agent → Agent Team으로 갈수록 더 전문적이고 복잡한 업무를 처리할 수 있지만,
           그만큼 설정 난이도와 토큰 비용도 올라가요.
         </p>
 
         <div class="tip-box">
-          <strong>💡 이 페이지를 읽고 나면</strong> 4가지 방식의 차이를 설명할 수 있고, 내 업무에 어떤 방식이 맞는지 스스로 판단할 수 있어요. Claude Code와 Gemini CLI에서 Sub Agent를 직접 설정하는 코드도 포함돼 있어요.
+          <strong>💡 이 페이지를 읽고 나면</strong> 5가지 방식의 차이를 설명할 수 있고, 내 업무에 어떤 방식이 맞는지 스스로 판단할 수 있어요. 단일 에이전트의 작동 원리, Claude Code와 Gemini CLI에서 Sub Agent를 직접 설정하는 코드도 포함돼 있어요.
         </div>
 
-        <!-- ===== 2. 4가지 방식 비교 ===== -->
-        <h2>📊 4가지 방식 한눈에 보기</h2>
+        <!-- ===== 2. 5가지 방식 비교 ===== -->
+        <h2>📊 5가지 방식 한눈에 보기</h2>
 
         <div class="compare-grid">
           <div class="compare-card">
@@ -183,8 +183,20 @@
           </div>
           <div class="compare-card compare-card--highlight">
             <span class="compare-card__badge">공식 출시</span>
+            <span class="compare-card__icon">⚡</span>
+            <div class="compare-card__title">3. 단일 에이전트</div>
+            <p class="compare-card__desc">Claude Code / Gemini CLI가 도구(파일·코드·검색 등)를 직접 사용해 목표를 향해 다단계로 자율 실행해요. 서브에이전트 없이 혼자 처음부터 끝까지 처리해요.</p>
+            <dl class="compare-card__meta">
+              <dt>언제 쓰나요?</dt>
+              <dd>파일 수정, 코드 작성, 데이터 분석 등 도구가 필요한 연속 작업</dd>
+              <dt>한계</dt>
+              <dd>컨텍스트 하나에 모든 것이 쌓임 — 복잡해질수록 느려짐</dd>
+            </dl>
+          </div>
+          <div class="compare-card">
+            <span class="compare-card__badge">공식 출시</span>
             <span class="compare-card__icon">🤖</span>
-            <div class="compare-card__title">3. Sub Agent</div>
+            <div class="compare-card__title">4. Sub Agent</div>
             <p class="compare-card__desc">오케스트레이터(지휘자)가 전문 역할의 에이전트에게 업무를 위임해요. 각자의 컨텍스트 창에서 독립적으로 처리하고 결과를 오케스트레이터에게 보고해요.</p>
             <dl class="compare-card__meta">
               <dt>언제 쓰나요?</dt>
@@ -196,7 +208,7 @@
           <div class="compare-card">
             <span class="compare-card__badge compare-card__badge--exp">실험 기능</span>
             <span class="compare-card__icon">👥</span>
-            <div class="compare-card__title">4. Agent Team</div>
+            <div class="compare-card__title">5. Agent Team</div>
             <p class="compare-card__desc">팀원 에이전트들이 공유 태스크 목록과 메시지 시스템으로 서로 직접 소통하며 협업해요. 팀장(Team Lead)이 조율하지만 팀원끼리도 직접 대화 가능해요.</p>
             <dl class="compare-card__meta">
               <dt>언제 쓰나요?</dt>
@@ -215,15 +227,33 @@
                 <th>구분</th>
                 <th>챗봇</th>
                 <th>Project</th>
+                <th>단일 에이전트</th>
                 <th>Sub Agent</th>
                 <th>Agent Team</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>컨텍스트 유지</strong></td>
+                <td><strong>도구 사용</strong></td>
+                <td>없음</td>
+                <td>없음</td>
+                <td class="good">직접 사용</td>
+                <td class="good">에이전트별</td>
+                <td class="good">에이전트별</td>
+              </tr>
+              <tr>
+                <td><strong>자율 다단계 실행</strong></td>
+                <td>없음</td>
+                <td>없음</td>
+                <td class="good">가능</td>
+                <td class="good">가능</td>
+                <td class="good">가능</td>
+              </tr>
+              <tr>
+                <td><strong>컨텍스트 구조</strong></td>
                 <td>대화 중만</td>
-                <td>사전 등록 내용만</td>
+                <td>사전 등록만</td>
+                <td>단일 창</td>
                 <td>각자 독립 창</td>
                 <td>각자 독립 창</td>
               </tr>
@@ -231,6 +261,7 @@
                 <td><strong>에이전트 간 소통</strong></td>
                 <td>없음</td>
                 <td>없음</td>
+                <td>없음 (혼자)</td>
                 <td class="caution">오케스트레이터 경유만</td>
                 <td class="good">직접 메시지 가능</td>
               </tr>
@@ -238,19 +269,14 @@
                 <td><strong>병렬 실행</strong></td>
                 <td>없음</td>
                 <td>없음</td>
+                <td>없음</td>
                 <td class="good">가능</td>
                 <td class="good">가능</td>
-              </tr>
-              <tr>
-                <td><strong>반복 개선 루프</strong></td>
-                <td>없음</td>
-                <td>없음</td>
-                <td>제한적</td>
-                <td class="good">팀원 간 검증·개선</td>
               </tr>
               <tr>
                 <td><strong>설정 난이도</strong></td>
                 <td class="good">없음</td>
+                <td class="good">쉬움</td>
                 <td class="good">쉬움</td>
                 <td class="caution">중간</td>
                 <td class="bad">어려움</td>
@@ -260,10 +286,12 @@
                 <td class="good">낮음</td>
                 <td class="good">낮음</td>
                 <td class="caution">중간</td>
+                <td class="caution">중간~높음</td>
                 <td class="bad">높음</td>
               </tr>
               <tr>
                 <td><strong>공식 출시 여부</strong></td>
+                <td class="good">✅ 출시</td>
                 <td class="good">✅ 출시</td>
                 <td class="good">✅ 출시</td>
                 <td class="good">✅ 출시</td>
@@ -298,6 +326,93 @@
             <tr><td>Gemini</td><td>Gems</td><td>✅</td><td>제한적</td></tr>
           </tbody>
         </table>
+
+        <!-- ===== 3. 단일 에이전트 ===== -->
+        <h2>⚡ 단일 에이전트 — 도구를 들고 혼자 일하는 AI</h2>
+        <p>
+          챗봇과 에이전트의 결정적 차이는 <strong>"도구를 쓸 수 있느냐"</strong>예요.
+          챗봇은 텍스트로 대화하는 게 전부지만, 단일 에이전트는 파일을 읽고, 코드를 실행하고, 웹을 검색하고, 터미널 명령어를 직접 실행할 수 있어요.
+        </p>
+        <p>
+          그리고 한 번에 끝내는 게 아니라 <strong>결과를 확인하면서 다음 단계를 스스로 결정하는 루프</strong>를 돌아요.
+          사람이 "이 보고서 분석해줘"라고 시키면, 파일을 열어보고 → 데이터를 확인하고 → 시각화 코드를 작성하고 → 실행 결과를 보고 → 수정해서 최종본을 만드는 식으로요.
+        </p>
+
+        <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1.25rem; margin: 1rem 0; font-size: 0.9rem;">
+          <strong style="display: block; margin-bottom: 0.75rem; font-size: 1rem;">⚙️ 에이전트 루프 (Agentic Loop)</strong>
+          <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; font-family: monospace;">
+            <span style="background: var(--color-primary); color: #fff; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">① 목표 이해</span>
+            <span>→</span>
+            <span style="background: var(--color-primary); color: #fff; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">② 계획 수립</span>
+            <span>→</span>
+            <span style="background: var(--color-primary); color: #fff; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">③ 도구 실행</span>
+            <span>→</span>
+            <span style="background: var(--color-primary); color: #fff; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">④ 결과 확인</span>
+            <span>→</span>
+            <span style="background: #6b7280; color: #fff; padding: 0.3rem 0.75rem; border-radius: 20px; font-size: 0.8rem;">③ 반복 or 완료</span>
+          </div>
+          <p style="margin: 0.75rem 0 0; font-size: 0.85rem; color: var(--color-text-muted);">사람이 목표만 주면 ①~④를 자율적으로 반복해요. 중간에 확인이 필요한 경우 물어보기도 해요.</p>
+        </div>
+
+        <h3>챗봇 vs 단일 에이전트 — 같은 요청, 다른 처리</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0;">
+          <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1rem; font-size: 0.85rem;">
+            <strong style="display: block; margin-bottom: 0.5rem;">💬 챗봇에게 "지난달 매출 분석해줘"</strong>
+            <p style="margin: 0; color: var(--color-text-muted);">
+              → "죄송합니다, 저는 파일에 접근할 수 없어요. 데이터를 직접 붙여넣어 주시면 분석해드릴게요."<br><br>
+              <em>(도구 없음 → 사람이 데이터 가공 후 다시 요청)</em>
+            </p>
+          </div>
+          <div style="background: var(--color-bg-alt); border-radius: 8px; padding: 1rem; font-size: 0.85rem;">
+            <strong style="display: block; margin-bottom: 0.5rem;">⚡ 단일 에이전트에게 "지난달 매출 분석해줘"</strong>
+            <p style="margin: 0; color: var(--color-text-muted);">
+              → sales_202505.xlsx 읽기 → 월별 집계 코드 실행 → 이상치 탐지 → 차트 생성 → 요약 보고서 작성<br><br>
+              <em>(도구 사용 → 처음부터 끝까지 자율 처리)</em>
+            </p>
+          </div>
+        </div>
+
+        <h3>단일 에이전트가 쓸 수 있는 도구들</h3>
+        <table class="compare-table">
+          <thead>
+            <tr><th>도구 유형</th><th>예시</th><th>어떤 업무에?</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>파일 읽기/쓰기</strong></td>
+              <td>Read, Write, Edit</td>
+              <td>문서 분석, 보고서 작성, 코드 수정</td>
+            </tr>
+            <tr>
+              <td><strong>코드 실행</strong></td>
+              <td>Bash, 터미널 명령어</td>
+              <td>데이터 처리, 테스트 실행, 빌드</td>
+            </tr>
+            <tr>
+              <td><strong>웹 검색/접근</strong></td>
+              <td>WebSearch, WebFetch</td>
+              <td>최신 정보 수집, 경쟁사 조사</td>
+            </tr>
+            <tr>
+              <td><strong>파일 탐색</strong></td>
+              <td>Glob, Grep</td>
+              <td>코드베이스 분석, 특정 패턴 탐색</td>
+            </tr>
+            <tr>
+              <td><strong>외부 서비스</strong></td>
+              <td>MCP 서버 연결</td>
+              <td>슬랙 전송, DB 조회, API 호출</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="tip-box">
+          <strong>💡 단일 에이전트가 가장 적합한 업무</strong><br>
+          ① 파일을 직접 읽고 수정해야 하는 작업 (코드 수정, 문서 업데이트)<br>
+          ② 결과를 보면서 다음 단계를 결정해야 하는 연속 작업<br>
+          ③ 아직 Sub Agent 설정이 번거롭고, 단일 세션으로 충분한 규모의 업무<br>
+          → Claude Code 또는 Gemini CLI를 열고 목표만 말하면 바로 시작할 수 있어요
+        </div>
 
         <!-- ===== 4. Sub Agent ===== -->
         <h2>🤖 Sub Agent — 오케스트레이터 + 전문가 팀</h2>
@@ -631,6 +746,14 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
             <div class="decision-row__a">Project</div>
           </div>
           <div class="decision-row">
+            <div class="decision-row__q">⚡ <strong>파일·코드·검색 등 도구를 써야 하는 업무</strong><br><small>엑셀 분석, 코드 수정, 문서 자동화, 반복 실행</small></div>
+            <div class="decision-row__a">단일 에이전트</div>
+          </div>
+          <div class="decision-row">
+            <div class="decision-row__q">⚡ <strong>결과를 보면서 다음을 결정하는 연속 작업</strong><br><small>테스트 → 오류 수정 → 재실행, 탐색적 데이터 분석</small></div>
+            <div class="decision-row__a">단일 에이전트</div>
+          </div>
+          <div class="decision-row">
             <div class="decision-row__q">🤖 <strong>복잡하고 여러 단계가 필요한 업무</strong><br><small>조사 → 분석 → 작성 → 검토 순서 처리</small></div>
             <div class="decision-row__a">Sub Agent</div>
           </div>
@@ -654,7 +777,7 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
           간단한 업무에 Agent Team을 쓰면 불필요한 비용만 올라가요.
           반대로 복잡한 전략 검토에 챗봇만 쓰면 결과 품질이 낮을 수 있어요.
           <br><br>
-          <strong>실무 추천 순서</strong>: 챗봇 → Project → Sub Agent → Agent Team 순으로 필요할 때만 단계를 올려가요.
+          <strong>실무 추천 순서</strong>: 챗봇 → Project → 단일 에이전트 → Sub Agent → Agent Team 순으로 필요할 때만 단계를 올려가요.
         </div>
 
         <!-- ===== 체크리스트 ===== -->
@@ -667,11 +790,15 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
           </label>
           <label class="checklist__item">
             <input type="checkbox" class="checklist__checkbox">
-            <span>그 업무에 여러 단계(조사→분석→작성)가 있다 → Sub Agent 고려</span>
+            <span>그 업무에 파일 읽기·코드 실행 등 도구가 필요하다 → 단일 에이전트 고려</span>
           </label>
           <label class="checklist__item">
             <input type="checkbox" class="checklist__checkbox">
-            <span>Claude Code 또는 Gemini CLI를 설치해봤다</span>
+            <span>그 업무에 여러 역할(조사·분석·작성)을 나눌 수 있다 → Sub Agent 고려</span>
+          </label>
+          <label class="checklist__item">
+            <input type="checkbox" class="checklist__checkbox">
+            <span>Claude Code 또는 Gemini CLI를 설치하고 단일 에이전트로 업무 하나를 실행해봤다</span>
           </label>
           <label class="checklist__item">
             <input type="checkbox" class="checklist__checkbox">
