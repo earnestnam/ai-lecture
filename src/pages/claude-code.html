@@ -298,12 +298,155 @@
           </div>
         </div>
 
+        <!-- Context Window 성능 경고 섹션 -->
+        <h2>⚠️ 꼭 필요한 것만 켜두세요 — 컨텍스트 윈도우 관리</h2>
+        <p>
+          Claude의 기억 공간(컨텍스트 윈도우)은 유한해요.
+          MCP와 Skills는 시작할 때 이 공간의 일부를 미리 차지하기 때문에,
+          불필요하게 많이 연결해두면 실제로 대화하고 작업할 공간이 줄어들어요.
+          수치로 직접 확인해볼게요.
+        </p>
+
+        <!-- 바 차트 비교 -->
+        <div style="background:var(--color-bg-alt); border-radius:12px; padding:1.5rem; margin:1.5rem 0;">
+          <h3 style="margin-top:0; font-size:1rem;">📊 실측: MCP 없을 때 vs 다수 연결했을 때 (200k 컨텍스트 기준)</h3>
+
+          <!-- 기본 세션 -->
+          <div style="margin-bottom:1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <span style="font-size:0.875rem; font-weight:600;">🟢 기본 세션 (MCP 없음)</span>
+              <span style="font-size:0.875rem; color:var(--color-text-muted);">17k / 200k 사용 <strong style="color:#22c55e;">(8.5%)</strong></span>
+            </div>
+            <div style="background:var(--color-bg-section); border-radius:6px; height:28px; overflow:hidden; display:flex;">
+              <div style="width:1.6%; background:#22c55e;" title="System prompt 3.2k"></div>
+              <div style="width:5.8%; background:#4ade80;" title="System tools 11.6k"></div>
+              <div style="width:0.4%; background:#818cf8;" title="Memory 0.7k"></div>
+              <div style="width:6.5%; background:#fb923c;" title="Autocompact 13k"></div>
+              <div style="flex:1; background:rgba(128,128,128,0.15);" title="여유 공간 183k"></div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem; font-size:0.75rem;">
+              <span><span style="display:inline-block; width:10px; height:10px; background:#22c55e; border-radius:2px; margin-right:3px;"></span>System prompt 3.2k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#4ade80; border-radius:2px; margin-right:3px;"></span>System tools 11.6k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#818cf8; border-radius:2px; margin-right:3px;"></span>Memory 0.7k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#fb923c; border-radius:2px; margin-right:3px;"></span>Autocompact ~13k</span>
+              <span style="color:var(--color-text-muted);">여유 공간 183k (91.6%)</span>
+            </div>
+          </div>
+
+          <!-- MCP 다수 세션 -->
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+              <span style="font-size:0.875rem; font-weight:600;">🔴 MCP 다수 연결 세션</span>
+              <span style="font-size:0.875rem; color:var(--color-text-muted);">101k / 200k 사용 <strong style="color:#ef4444;">(51%)</strong></span>
+            </div>
+            <div style="background:var(--color-bg-section); border-radius:6px; height:28px; overflow:hidden; display:flex;">
+              <div style="width:1.6%; background:#22c55e;" title="System prompt 3.1k"></div>
+              <div style="width:9.9%; background:#4ade80;" title="System tools 19.8k"></div>
+              <div style="width:13.3%; background:#ef4444;" title="MCP tools 26.5k ⚠️"></div>
+              <div style="width:1.4%; background:#818cf8;" title="Agents 2.8k"></div>
+              <div style="width:2%; background:#a78bfa;" title="Memory 4k"></div>
+              <div style="width:22.5%; background:#fb923c;" title="Autocompact ~45k"></div>
+              <div style="flex:1; background:rgba(128,128,128,0.15);" title="여유 공간 99k"></div>
+            </div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.5rem; font-size:0.75rem;">
+              <span><span style="display:inline-block; width:10px; height:10px; background:#22c55e; border-radius:2px; margin-right:3px;"></span>System prompt 3.1k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#4ade80; border-radius:2px; margin-right:3px;"></span>System tools 19.8k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px; margin-right:3px;"></span>⚠️ MCP tools 26.5k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#818cf8; border-radius:2px; margin-right:3px;"></span>Agents 2.8k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#a78bfa; border-radius:2px; margin-right:3px;"></span>Memory 4k</span>
+              <span><span style="display:inline-block; width:10px; height:10px; background:#fb923c; border-radius:2px; margin-right:3px;"></span>Autocompact ~45k</span>
+              <span style="color:var(--color-text-muted);">여유 공간 99k (49.4%)</span>
+            </div>
+          </div>
+
+          <div style="margin-top:1.25rem; padding:0.75rem 1rem; background:rgba(239,68,68,0.08); border-left:3px solid #ef4444; border-radius:4px; font-size:0.875rem;">
+            MCP 연결만으로 여유 공간이 <strong>183k → 99k</strong>로 절반 가까이 줄었어요.
+            대화가 길어질수록 이 차이가 고스란히 응답 품질 저하로 이어져요.
+          </div>
+        </div>
+
+        <!-- 영역별 설명 테이블 -->
+        <h3 style="font-size:1rem;">각 영역이 차지하는 공간</h3>
+        <div style="overflow-x:auto; margin-bottom:1.5rem;">
+          <table style="width:100%; border-collapse:collapse; font-size:0.875rem;">
+            <thead>
+              <tr style="background:var(--color-bg-alt);">
+                <th style="padding:0.6rem; text-align:left; border:1px solid var(--color-border);">영역</th>
+                <th style="padding:0.6rem; text-align:left; border:1px solid var(--color-border);">내용</th>
+                <th style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">일반 규모</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#22c55e; border-radius:2px; margin-right:6px;"></span>System prompt</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">Claude의 행동 지침, 역할 정의</td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">2~4k</td>
+              </tr>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#4ade80; border-radius:2px; margin-right:6px;"></span>System tools</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">기본 내장 도구 정의 (파일읽기, bash, 검색 등)</td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">10~20k</td>
+              </tr>
+              <tr>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#ef4444; border-radius:2px; margin-right:6px;"></span>MCP tools</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">연결된 MCP 서버의 툴 정의 — <strong>서버 수에 비례</strong></td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);"><strong style="color:#ef4444;">0~30k+</strong></td>
+              </tr>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#818cf8; border-radius:2px; margin-right:6px;"></span>Agents / Skills</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">서브에이전트 정의 + Skills 메타데이터</td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">0.1~3k</td>
+              </tr>
+              <tr>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#a78bfa; border-radius:2px; margin-right:6px;"></span>Memory files</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">CLAUDE.md · 호출된 SKILL.md 본문</td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">0.3~10k</td>
+              </tr>
+              <tr style="background:var(--color-bg-alt);">
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#94a3b8; border-radius:2px; margin-right:6px;"></span>Messages</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">대화 히스토리 — 대화할수록 급증</td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">0 → 수십k</td>
+              </tr>
+              <tr>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);"><span style="display:inline-block; width:10px; height:10px; background:#fb923c; border-radius:2px; margin-right:6px;"></span>Autocompact buffer</td>
+                <td style="padding:0.6rem; border:1px solid var(--color-border);">자동 압축용 예비 공간 — 줄이기 불가</td>
+                <td style="padding:0.6rem; text-align:right; border:1px solid var(--color-border);">~13~45k</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Skills 예산 메커니즘 -->
+        <h3 style="font-size:1rem;">Skills가 MCP보다 효율적인 이유</h3>
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:0.75rem; margin-bottom:1rem;">
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; text-align:center;">
+            <div style="font-size:1.75rem; font-weight:700; color:var(--color-primary);">1%</div>
+            <div style="font-size:0.8rem; margin-top:0.25rem;">Skills 전체 예산<br><small style="color:var(--color-text-muted);">200k 기준 ~16,000자</small></div>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; text-align:center;">
+            <div style="font-size:1.75rem; font-weight:700; color:var(--color-secondary);">250자</div>
+            <div style="font-size:0.8rem; margin-top:0.25rem;">스킬 1개당 description 상한<br><small style="color:var(--color-text-muted);">초과분은 잘림</small></div>
+          </div>
+          <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; text-align:center;">
+            <div style="font-size:1.75rem; font-weight:700; color:var(--color-accent);">≤32개</div>
+            <div style="font-size:0.8rem; margin-top:0.25rem;">스킬 전부 표시 가능<br><small style="color:var(--color-text-muted);">33개 이상부터 description 잘림</small></div>
+          </div>
+        </div>
+
+        <div style="background:var(--color-bg-alt); border-radius:8px; padding:1rem; font-size:0.875rem; margin-bottom:1.5rem;">
+          <strong>📌 핵심 차이:</strong> MCP는 연결하는 순간부터 도구 전체 정의가 항상 올라가지만,
+          Skills는 <strong>name + description(메타데이터)만</strong> 올라가고 실제 레시피 본문은 호출할 때만 로드돼요.
+          MCP 서버 1개 평균 <strong>600~1,000 토큰</strong> 소비(15개 기준 약 10k)인 반면,
+          Skills는 스킬 1개당 description 250자 수준으로 훨씬 가볍게 관리돼요.
+        </div>
+
         <div class="warning-box">
-          <strong>⚠️ 알아두세요: 너무 많이 연결하면 성능이 떨어져요</strong><br>
-          MCP는 시작할 때 연결된 서비스 목록과 설명을 모두 Claude의 기억 공간(컨텍스트 윈도우)에 올려놔요.
-          사용하지 않는 MCP가 많이 연결되어 있으면 기억 공간이 줄어들어
-          <strong>응답이 느려지고 품질이 떨어질 수 있어요</strong>.
-          필요한 서비스만 선택적으로 연결하는 게 좋아요.
+          <strong>⚠️ 실천 가이드: 대화 시작 전부터 50%가 사라지지 않으려면</strong>
+          <ul style="margin:0.75rem 0 0 0; padding-left:1.25rem; font-size:0.9rem;">
+            <li>지금 이 작업에 <strong>실제로 쓸 MCP만</strong> 연결하고 나머지는 비활성화</li>
+            <li>자주 쓰는 작업 패턴은 MCP 대신 <strong>Skills로 전환</strong>하면 컨텍스트 부담을 줄일 수 있어요</li>
+            <li>스킬은 32개 이하로 유지 — 그 이상이면 description이 잘려 자동 매칭 정확도가 떨어져요</li>
+          </ul>
         </div>
 
         <h2>💡 바이브 코딩 성공 팁</h2>
