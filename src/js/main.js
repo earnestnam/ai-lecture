@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initActiveNavLink();
   initCopyButtons();
+  initScrollUI();
 });
 
 /**
@@ -272,4 +273,36 @@ function initActiveNavLink() {
       link.style.fontWeight = '700';
     }
   });
+}
+
+/**
+ * 스크롤 진행 바 + 맨 위로 버튼 (콘텐츠 페이지 전용)
+ */
+function initScrollUI() {
+  if (!document.querySelector('main.content-page')) return;
+
+  // 스크롤 진행 바
+  const bar = document.createElement('div');
+  bar.className = 'scroll-progress';
+  document.body.appendChild(bar);
+
+  // 맨 위로 버튼
+  const btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.setAttribute('aria-label', '맨 위로');
+  btn.innerHTML = '↑';
+  document.body.appendChild(btn);
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', () => {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    bar.style.width = progress + '%';
+    btn.classList.toggle('is-visible', scrollTop > 400);
+  }, { passive: true });
 }

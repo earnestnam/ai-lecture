@@ -207,8 +207,21 @@
           <strong>💡 이 페이지를 읽고 나면</strong> 5가지 방식의 차이를 설명할 수 있고, 내 업무에 어떤 방식이 맞는지 스스로 판단할 수 있어요. 단일 에이전트의 작동 원리, Claude Code와 Gemini CLI에서 Sub Agent를 직접 설정하는 코드도 포함돼 있어요.
         </div>
 
+        <nav class="page-toc" aria-label="페이지 목차">
+          <p class="page-toc__title">이 페이지에서 다루는 내용</p>
+          <ul class="page-toc__list">
+            <li><a href="#compare">📊 5가지 방식 비교</a></li>
+            <li><a href="#project">🗂️ Project / GPTs / Gems</a></li>
+            <li><a href="#single-agent">⚡ 단일 에이전트</a></li>
+            <li><a href="#sub-agent">🤖 Sub Agent</a></li>
+            <li><a href="#agent-team">👥 Agent Team</a></li>
+            <li><a href="#harness">🔧 하네스 엔지니어링</a></li>
+            <li><a href="#selection-guide">🗺️ 선택 가이드</a></li>
+          </ul>
+        </nav>
+
         <!-- ===== 2. 5가지 방식 비교 ===== -->
-        <h2>📊 5가지 방식 한눈에 보기</h2>
+        <h2 id="compare">📊 5가지 방식 한눈에 보기</h2>
 
         <div class="method-steps">
 
@@ -455,7 +468,7 @@
         </div>
 
         <!-- ===== 3. Project 설명 보충 ===== -->
-        <h2>🗂️ Project / GPTs / Gems 이란?</h2>
+        <h2 id="project">🗂️ Project / GPTs / Gems 이란?</h2>
         <p>
           Claude의 <strong>Project</strong>, ChatGPT의 <strong>GPTs</strong>, Gemini의 <strong>Gems</strong>는 모두 같은 개념이에요.
           대화를 시작하기 전에 AI에게 미리 역할, 지침, 배경 정보를 "등록"해두는 기능이에요.
@@ -481,7 +494,7 @@
         </table>
 
         <!-- ===== 3. 단일 에이전트 ===== -->
-        <h2>⚡ 단일 에이전트 — 도구를 들고 혼자 일하는 AI</h2>
+        <h2 id="single-agent">⚡ 단일 에이전트 — 도구를 들고 혼자 일하는 AI</h2>
         <p>
           챗봇과 에이전트의 결정적 차이는 <strong>"도구를 쓸 수 있느냐"</strong>예요.
           챗봇은 텍스트로 대화하는 게 전부지만, 단일 에이전트는 파일을 읽고, 코드를 실행하고, 웹을 검색하고, 터미널 명령어를 직접 실행할 수 있어요.
@@ -568,7 +581,7 @@
         </div>
 
         <!-- ===== 4. Sub Agent ===== -->
-        <h2>🤖 Sub Agent — 오케스트레이터 + 전문가 팀</h2>
+        <h2 id="sub-agent">🤖 Sub Agent — 오케스트레이터 + 전문가 팀</h2>
         <p>
           Sub Agent는 <strong>지휘자(오케스트레이터)가 전문가 에이전트들에게 업무를 위임</strong>하는 구조예요.
           각 에이전트는 독립된 컨텍스트 창에서 자기 업무만 처리하고 결과를 지휘자에게 보내요.
@@ -775,7 +788,7 @@ description: 리서치 전문 에이전트. 주제 조사, 최신 동향 파악,
         </div>
 
         <!-- ===== 5. Agent Team ===== -->
-        <h2>👥 Agent Team — 에이전트들의 진짜 팀워크</h2>
+        <h2 id="agent-team">👥 Agent Team — 에이전트들의 진짜 팀워크</h2>
 
         <div class="warning-box">
           <strong>⚠️ Agent Team은 현재 실험 기능이에요 (Claude Code v2.1.32+)</strong><br>
@@ -940,7 +953,7 @@ git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git \
         </div>
 
         <!-- ===== 6. 하네스 엔지니어링 ===== -->
-        <h2>🔧 하네스 엔지니어링이란?</h2>
+        <h2 id="harness">🔧 하네스 엔지니어링이란?</h2>
         <p>
           AI를 어떻게 쓸지 결정하는 게 <strong>도구 선택</strong>이라면,
           그 도구들을 연결하고 최적화하는 구조를 만드는 게 <strong>하네스 엔지니어링(Harness Engineering)</strong>이에요.
@@ -1071,7 +1084,18 @@ git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git \
         </table>
 
         <!-- ===== 7. 선택 가이드 ===== -->
-        <h2>🗺️ 어떤 방식을 선택할까?</h2>
+        <div class="key-summary">
+          <p class="key-summary__title">📌 핵심 정리 — 5가지 방식 한 줄 요약</p>
+          <ul class="key-summary__list">
+            <li><strong>챗봇</strong>: 텍스트 대화만. 도구 없음. 일회성 질문에 적합</li>
+            <li><strong>Project / GPTs / Gems</strong>: 역할·지침·파일 사전 등록. 반복 업무용 전용 어시스턴트</li>
+            <li><strong>단일 에이전트</strong>: 파일·코드·검색 등 도구를 직접 쓰며 다단계 자율 실행. 대부분의 실무 자동화에 적합</li>
+            <li><strong>Sub Agent</strong>: 오케스트레이터가 전문 에이전트에게 업무 위임. 병렬 처리 + 컨텍스트 분리가 필요할 때</li>
+            <li><strong>Agent Team</strong>: 에이전트끼리 직접 소통하며 협업. 현재 실험 기능, 복잡한 탐구·검증 작업에 유효</li>
+          </ul>
+        </div>
+
+        <h2 id="selection-guide">🗺️ 어떤 방식을 선택할까?</h2>
         <p>상황에 따른 빠른 판단 가이드예요.</p>
 
         <div class="decision-flow">
