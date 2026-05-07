@@ -28,6 +28,12 @@ class Quiz {
   }
 
   init() {
+    // 다시 진단하기 버튼 — 결과 화면 진입 경로와 무관하게 항상 등록
+    const retakeBtn = document.getElementById('retakeQuiz');
+    if (retakeBtn) {
+      retakeBtn.addEventListener('click', () => this.reset());
+    }
+
     // 저장된 결과 확인
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -37,12 +43,6 @@ class Quiz {
     }
 
     this.renderQuestion();
-
-    // 다시 진단하기 버튼
-    const retakeBtn = document.getElementById('retakeQuiz');
-    if (retakeBtn) {
-      retakeBtn.addEventListener('click', () => this.reset());
-    }
   }
 
   renderQuestion() {
